@@ -204,57 +204,63 @@ const Navbar = () => {
                       </div>
 
                       <div className="mega-menu-content">
-                        <div className="content-grid-3">
+                        <div className="content-grid-2">
                           <div className="content-col">
-                            <h4 className="col-heading">{currentTestPrepDataObj.titles?.col1 || 'Exam Prep'}</h4>
-                            <ul className="content-list">
-                              {currentTestPrepContent.exams?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="content-section mb-6">
+                              <h4 className="col-heading">{currentTestPrepDataObj.titles?.col1 || 'Exam Prep'}</h4>
+                              <ul className="content-list">
+                                {currentTestPrepContent.exams?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="content-section">
+                              <h4 className="col-heading">{currentTestPrepDataObj.titles?.col3_1 || 'Previous Papers'}</h4>
+                              <ul className="content-list">
+                                {currentTestPrepContent.predictors?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
 
                           <div className="content-col">
-                            <h4 className="col-heading">{currentTestPrepDataObj.titles?.col2 || 'Mock Tests'}</h4>
-                            <ul className="content-list">
-                              {currentTestPrepContent.colleges?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className="content-link">
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                            <div className="content-section mb-6">
+                              <h4 className="col-heading">{currentTestPrepDataObj.titles?.col2 || 'Mock Tests'}</h4>
+                              <ul className="content-list">
+                                {currentTestPrepContent.colleges?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="content-link">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                          <div className="content-col">
-                            <h4 className="col-heading">{currentTestPrepDataObj.titles?.col3_1 || 'Previous Papers'}</h4>
-                            <ul className="content-list mb-4">
-                              {currentTestPrepContent.predictors?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="content-section">
+                              <h4 className="col-heading">{currentTestPrepDataObj.titles?.col3_2 || 'Resources'}</h4>
+                              <ul className="content-list">
+                                {currentTestPrepContent.resources?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="content-link">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                            <h4 className="col-heading">{currentTestPrepDataObj.titles?.col3_2 || 'Resources'}</h4>
-                            <ul className="content-list">
-                              {currentTestPrepContent.resources?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className="content-link">
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-
-                            <div className="app-download-banner">
+                            <div className="app-download-banner mt-6">
                               <FaDownload /> Download App
                             </div>
                           </div>
@@ -288,57 +294,63 @@ const Navbar = () => {
                       </div>
 
                       <div className="mega-menu-content">
-                        <div className="content-grid-3">
+                        <div className="content-grid-2">
                           <div className="content-col">
-                            <h4 className="col-heading">{currentCollegeDataObj.titles?.col1 || 'Section 1'}</h4>
-                            <ul className="content-list">
-                              {currentCollegeContent.exams?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="content-section mb-6">
+                              <h4 className="col-heading">{currentCollegeDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <ul className="content-list">
+                                {currentCollegeContent.exams?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="content-section">
+                              <h4 className="col-heading">{currentCollegeDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <ul className="content-list">
+                                {currentCollegeContent.predictors?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
 
                           <div className="content-col">
-                            <h4 className="col-heading">{currentCollegeDataObj.titles?.col2 || 'Section 2'}</h4>
-                            <ul className="content-list">
-                              {currentCollegeContent.colleges?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className="content-link">
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                            <div className="content-section mb-6">
+                              <h4 className="col-heading">{currentCollegeDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <ul className="content-list">
+                                {currentCollegeContent.colleges?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="content-link">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                          <div className="content-col">
-                            <h4 className="col-heading">{currentCollegeDataObj.titles?.col3_1 || 'Section 3'}</h4>
-                            <ul className="content-list mb-4">
-                              {currentCollegeContent.predictors?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="content-section">
+                              <h4 className="col-heading">{currentCollegeDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <ul className="content-list">
+                                {currentCollegeContent.resources?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="content-link">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                            <h4 className="col-heading">{currentCollegeDataObj.titles?.col3_2 || 'Section 4'}</h4>
-                            <ul className="content-list">
-                              {currentCollegeContent.resources?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className="content-link">
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-
-                            <div className="app-download-banner">
+                            <div className="app-download-banner mt-6">
                               <FaDownload /> Download App
                             </div>
                           </div>
@@ -347,8 +359,6 @@ const Navbar = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-
-
 
                 {/* Exams Mega Menu */}
                 <AnimatePresence>
@@ -374,57 +384,63 @@ const Navbar = () => {
                       </div>
 
                       <div className="mega-menu-content">
-                        <div className="content-grid-3">
+                        <div className="content-grid-2">
                           <div className="content-col">
-                            <h4 className="col-heading">{currentExamDataObj.titles?.col1 || 'Section 1'}</h4>
-                            <ul className="content-list">
-                              {currentExamContent.exams?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="content-section mb-6">
+                              <h4 className="col-heading">{currentExamDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <ul className="content-list">
+                                {currentExamContent.exams?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="content-section">
+                              <h4 className="col-heading">{currentExamDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <ul className="content-list">
+                                {currentExamContent.predictors?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
 
                           <div className="content-col">
-                            <h4 className="col-heading">{currentExamDataObj.titles?.col2 || 'Section 2'}</h4>
-                            <ul className="content-list">
-                              {currentExamContent.colleges?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className="content-link">
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                            <div className="content-section mb-6">
+                              <h4 className="col-heading">{currentExamDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <ul className="content-list">
+                                {currentExamContent.colleges?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="content-link">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                          <div className="content-col">
-                            <h4 className="col-heading">{currentExamDataObj.titles?.col3_1 || 'Section 3'}</h4>
-                            <ul className="content-list mb-4">
-                              {currentExamContent.predictors?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="content-section">
+                              <h4 className="col-heading">{currentExamDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <ul className="content-list">
+                                {currentExamContent.resources?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="content-link">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                            <h4 className="col-heading">{currentExamDataObj.titles?.col3_2 || 'Section 4'}</h4>
-                            <ul className="content-list">
-                              {currentExamContent.resources?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className="content-link">
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-
-                            <div className="app-download-banner">
+                            <div className="app-download-banner mt-6">
                               <FaDownload /> Download App
                             </div>
                           </div>
@@ -458,57 +474,63 @@ const Navbar = () => {
                       </div>
 
                       <div className="mega-menu-content">
-                        <div className="content-grid-3">
+                        <div className="content-grid-2">
                           <div className="content-col">
-                            <h4 className="col-heading">{currentCourseDataObj.titles?.col1 || 'Section 1'}</h4>
-                            <ul className="content-list">
-                              {currentCourseContent.exams?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="content-section mb-6">
+                              <h4 className="col-heading">{currentCourseDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <ul className="content-list">
+                                {currentCourseContent.exams?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="content-section">
+                              <h4 className="col-heading">{currentCourseDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <ul className="content-list">
+                                {currentCourseContent.predictors?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
 
                           <div className="content-col">
-                            <h4 className="col-heading">{currentCourseDataObj.titles?.col2 || 'Section 2'}</h4>
-                            <ul className="content-list">
-                              {currentCourseContent.colleges?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className="content-link">
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                            <div className="content-section mb-6">
+                              <h4 className="col-heading">{currentCourseDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <ul className="content-list">
+                                {currentCourseContent.colleges?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="content-link">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                          <div className="content-col">
-                            <h4 className="col-heading">{currentCourseDataObj.titles?.col3_1 || 'Section 3'}</h4>
-                            <ul className="content-list mb-4">
-                              {currentCourseContent.predictors?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className={`content-link ${item.isLink ? 'highlight' : ''}`}>
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="content-section">
+                              <h4 className="col-heading">{currentCourseDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <ul className="content-list">
+                                {currentCourseContent.resources?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="content-link">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
 
-                            <h4 className="col-heading">{currentCourseDataObj.titles?.col3_2 || 'Section 4'}</h4>
-                            <ul className="content-list">
-                              {currentCourseContent.resources?.map((item, idx) => (
-                                <li key={idx}>
-                                  <a href={item.href} className="content-link">
-                                    {item.title}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-
-                            <div className="app-download-banner">
+                            <div className="app-download-banner mt-6">
                               <FaDownload /> Download App
                             </div>
                           </div>
