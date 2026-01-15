@@ -9,37 +9,38 @@ const Counselling = ({ items, onOpenAskModal }) => {
           {items.map((item, index) => (
             <div 
               key={index} 
-              className={`rounded-2xl p-8 flex flex-col md:flex-row items-center gap-6 relative overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-gray-100 ${item.color}`}
+              className="rounded-3xl p-0 flex flex-col md:flex-row items-center relative overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl bg-white border border-gray-100 shadow-lg"
             >
-              <div className="flex-1 z-10">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600 mb-6">{item.description}</p>
+              <div className="absolute inset-0 bg-gradient-to-r from-white via-white to-transparent z-10"></div>
+              <div className={`absolute right-0 top-0 bottom-0 w-1/2 ${item.color} opacity-20`}></div>
+              
+              <div className="flex-1 z-20 p-8 md:pr-0">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-orange transition-colors">{item.title}</h3>
+                <p className="text-gray-600 mb-8 leading-relaxed">{item.description}</p>
                 {item.cta === "Ask Now" ? (
                   <button 
                     onClick={onOpenAskModal}
-                    className="inline-flex items-center gap-2 font-bold text-brand-orange hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-orange text-white text-sm font-bold shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:gap-3 transition-all"
                   >
                     {item.cta} <FaArrowRight />
                   </button>
                 ) : (
                   <a 
                     href={item.link} 
-                    className="inline-flex items-center gap-2 font-bold text-brand-orange hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-orange border border-brand-orange text-sm font-bold shadow-md hover:bg-orange-50 hover:gap-3 transition-all"
                   >
                     {item.cta} <FaArrowRight />
                   </a>
                 )}
               </div>
-              <div className="w-full md:w-1/3 h-40 md:h-auto relative z-10 flex items-center justify-center">
-                 {/* Placeholder for image or icon if actual image fails */}
-                 <div className="text-6xl text-brand-blue opacity-20">
-                    {index === 0 ? <FaUserMd /> : <FaQuestionCircle />}
-                 </div>
+              
+              <div className="w-full md:w-1/2 h-48 md:h-64 relative z-0">
                  <img 
                     src={item.image} 
                     alt={item.title} 
-                    className="absolute inset-0 w-full h-full object-cover rounded-xl opacity-80 mix-blend-multiply"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                  />
+                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-white md:via-white/20"></div>
               </div>
             </div>
           ))}

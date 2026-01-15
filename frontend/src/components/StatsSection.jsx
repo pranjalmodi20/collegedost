@@ -10,19 +10,22 @@ const iconMap = {
 
 const StatsSection = ({ items }) => {
   return (
-    <section className="bg-brand-blue py-12 mb-16 text-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <section className="relative py-16 mb-16 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-indigo-900 z-0"></div>
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 z-0 mix-blend-overlay"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map((item, index) => {
             const Icon = iconMap[item.icon] || FaUniversity;
             return (
-              <div key={index} className="flex items-center justify-center gap-4 border-r last:border-r-0 border-white/10">
-                <div className="text-4xl text-brand-orange opacity-80">
+              <div key={index} className="flex items-center gap-5 p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-2xl text-white shadow-lg shadow-orange-500/30">
                   <Icon />
                 </div>
                 <div className="text-left">
-                  <h3 className="text-2xl md:text-3xl font-bold leading-none mb-1">{item.count}</h3>
-                  <p className="text-sm text-white/70 uppercase tracking-wider">{item.label}</p>
+                  <h3 className="text-3xl font-bold leading-none mb-1 text-white">{item.count}</h3>
+                  <p className="text-xs text-white/70 uppercase tracking-wider font-semibold">{item.label}</p>
                 </div>
               </div>
             );
