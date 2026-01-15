@@ -39,7 +39,10 @@ const HomePage = ({ onOpenAskModal }) => {
         <PillSection title="Top Rankings" items={homeRankingsData} color="border-gray-200" />
         <PillSection title="Popular Exams" items={homeExamsData} color="border-gray-200" />
         
-        <PredictorsSection data={homePredictorsData} />
+        <PredictorsSection 
+          data={homePredictorsData} 
+          illustration="/predictor-illustration-v2.png"
+        />
         
         <PredictorsSection 
           title="Online Courses" 
