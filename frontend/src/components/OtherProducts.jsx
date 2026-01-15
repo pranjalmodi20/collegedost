@@ -5,7 +5,6 @@ import {
   FaBalanceScale, FaChartLine, FaDraftingCompass, FaGlobeAmericas,
   FaListUl, FaRegComments
 } from 'react-icons/fa';
-import './OtherProducts.css';
 
 const otherProducts = [
   { id: 1, title: 'College Compare', icon: <FaBalanceScale />, color: '#4a90e2' },
@@ -18,29 +17,29 @@ const otherProducts = [
 
 const OtherProducts = () => {
   return (
-    <section className="other-products-section">
-      <div className="container">
-        <div className="section-header-center">
-          <h2 className="section-title">Other Products</h2>
+    <section className="py-20 bg-slate-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-brand-blue">Other Products</h2>
         </div>
         
-        <div className="products-grid">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {otherProducts.map((product, index) => (
             <motion.div 
               key={product.id}
-              className="product-card"
+              className="bg-white rounded-xl p-6 flex flex-col items-center justify-center gap-4 text-center border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer h-full group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
               <div 
-                className="product-icon-wrapper" 
+                className="text-4xl mb-2 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" 
                 style={{ color: product.color }}
               >
                 {product.icon}
               </div>
-              <h3 className="product-title">{product.title}</h3>
+              <h3 className="text-sm font-bold text-gray-800 group-hover:text-brand-blue transition-colors">{product.title}</h3>
             </motion.div>
           ))}
         </div>

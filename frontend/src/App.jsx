@@ -5,17 +5,15 @@ import OtherProducts from './components/OtherProducts';
 import Section from './components/Section';
 import Footer from './components/Footer';
 import { featuredColleges, examCategories } from './data';
-import './App.css'; 
 
 function App() {
   return (
-    <div className="app">
+    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 font-sans">
       <Navbar />
       <Hero />
       <NewsSection />
-
       
-      <div className="main-content">
+      <div className="container mx-auto px-4 py-12 flex-grow space-y-16">
         <Section 
           title="Explore by Category" 
           items={examCategories} 
