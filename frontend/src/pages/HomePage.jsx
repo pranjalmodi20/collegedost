@@ -8,7 +8,7 @@ import Counselling from '../components/Counselling';
 import StatsSection from '../components/StatsSection';
 import PillSection from '../components/PillSection';
 import PredictorsSection from '../components/PredictorsSection';
-import CommunityBanner from '../components/CommunityBanner';
+
 import { featuredColleges, examCategories, homeCounsellingData, homeStatsData, homeRankingsData, homeExamsData, homePredictorsData, homeCoursesData } from '../data';
 
 const HomePage = ({ onOpenAskModal }) => {
@@ -53,7 +53,7 @@ const HomePage = ({ onOpenAskModal }) => {
         />
       </div>
 
-      <CommunityBanner />
+
       
       <OtherProducts />
     </>
