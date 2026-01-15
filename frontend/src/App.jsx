@@ -4,7 +4,12 @@ import NewsSection from './components/NewsSection';
 import OtherProducts from './components/OtherProducts';
 import Section from './components/Section';
 import Footer from './components/Footer';
-import { featuredColleges, examCategories } from './data';
+import Counselling from './components/Counselling';
+import StatsSection from './components/StatsSection';
+import PillSection from './components/PillSection';
+import PredictorsSection from './components/PredictorsSection';
+import CommunityBanner from './components/CommunityBanner';
+import { featuredColleges, examCategories, homeCounsellingData, homeStatsData, homeRankingsData, homeExamsData, homePredictorsData, homeCoursesData } from './data';
 
 function App() {
   return (
@@ -13,12 +18,14 @@ function App() {
       <Hero />
       <NewsSection />
       
-      <div className="container mx-auto px-4 py-12 flex-grow space-y-16">
+      <div className="container mx-auto px-4 py-12 flex-grow flex flex-col gap-16">
         <Section 
           title="Explore by Category" 
           items={examCategories} 
           type="category" 
         />
+        
+        <Counselling items={homeCounsellingData} />
         
         <Section 
           title="Featured Colleges" 
@@ -26,6 +33,25 @@ function App() {
           type="card" 
         />
       </div>
+
+      <StatsSection items={homeStatsData} />
+
+      <div className="container mx-auto px-4 py-8 flex-grow flex flex-col gap-16">
+        <PillSection title="Top Rankings" items={homeRankingsData} color="border-gray-200" />
+        <PillSection title="Popular Exams" items={homeExamsData} color="border-gray-200" />
+        
+        <PredictorsSection data={homePredictorsData} />
+        
+        <PredictorsSection 
+          title="Online Courses" 
+          mainTitle="Boost Your Career"
+          subText="Learn from the best. Trending courses and certifications."
+          data={homeCoursesData}
+          illustration="https://img.freepik.com/free-vector/online-tutorials-concept_52683-37480.jpg"
+        />
+      </div>
+
+      <CommunityBanner />
       
       <OtherProducts />
       

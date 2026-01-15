@@ -1312,7 +1312,7 @@ export const examCategories = [
 ];
 
 export const latestNews = [
-  "JEE Main 2026 Admit Card Released: Download now at jeemain.nta.nic.in",
+  "JEE Main 2026 Admit Card Released: Available at jeemain.nta.nic.in",
   "NEET PG 2025 Counselling Round 3 Schedule Revised - Check updates",
   "Top 10 Engineering Colleges in India 2026: IIT Madras Tops the list again",
   "GATE 2026 Hall Ticket Available for Download - Exam from Feb 3rd",
@@ -1360,4 +1360,90 @@ export const featuredColleges = [
     fees: "₹ 7.8L Total Fees",
     placement: "₹ 8.5L Avg Package"
   }
+];
+
+
+
+export const homePredictorsData = [
+  {
+    title: "College Predictor",
+    items: [
+      { name: "JEE Main College Predictor", link: "#" },
+      { name: "NEET College Predictor", link: "#" },
+      { name: "CAT College Predictor", link: "#" },
+      { name: "GATE College Predictor", link: "#" },
+      { name: "BITSAT College Predictor", link: "#" },
+      { name: "NIFT College Predictor", link: "#" }
+    ]
+  },
+  {
+    title: "Rank Predictor",
+    items: [
+      { name: "JEE Main Rank Predictor", link: "#" },
+      { name: "NEET Rank Predictor", link: "#" },
+      { name: "KCET Rank Predictor", link: "#" },
+      { name: "AP EAMCET Rank Predictor", link: "#" },
+      { name: "TS EAMCET Rank Predictor", link: "#" },
+      { name: "KEAM Rank Predictor", link: "#" }
+    ]
+  }
+];
+
+export const homeCoursesData = [
+  {
+    title: "Trending Specializations",
+    items: ["Data Science", "Artificial Intelligence", "Machine Learning", "Digital Marketing", "Cyber Security", "Cloud Computing"]
+  },
+  {
+    title: "Trending Courses",
+    items: ["Python", "Java", "C++", "React", "Node.js", "SQL"]
+  }
+];
+
+export const homeCounsellingData = [
+  {
+    title: "Expert Counselling",
+    description: "Get personalized advice from our expert counsellors.",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    cta: "Book Session",
+    link: "#",
+    color: "bg-blue-50"
+  },
+  {
+    title: "Ask Q&A",
+    description: "Have questions? Ask our community of students and experts.",
+    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    cta: "Ask Now",
+    link: "#",
+    color: "bg-orange-50"
+  }
+];
+
+export const homeStatsData = [
+  { count: "30000+", label: "Colleges", icon: "FaUniversity" },
+  { count: "500+", label: "Exams", icon: "FaBookOpen" },
+  { count: "1000+", label: "E-Books", icon: "FaTabletAlt" },
+  { count: "1 Million+", label: "Monthly Visits", icon: "FaUsers" }
+];
+
+export const homeRankingsData = [
+  { name: "Top Engineering Colleges in India", link: "#" },
+  { name: "Top MBA Colleges in India", link: "#" },
+  { name: "Top Medical Colleges in India", link: "#" },
+  { name: "Top Law Colleges in India", link: "#" },
+  { name: "Top Universities in India", link: "#" },
+  { name: "Top BBA Colleges in India", link: "#" },
+  { name: "Top Pharmacy Colleges in India", link: "#" },
+  { name: "Top Architecture Colleges", link: "#" }
+];
+
+export const homeExamsData = [
+  { name: "JEE Main 2025", link: "#" },
+  { name: "GATE 2025", link: "#" },
+  { name: "CAT 2024", link: "#" },
+  { name: "NEET 2025", link: "#" },
+  { name: "BITSAT 2025", link: "#" },
+  { name: "XAT 2025", link: "#" },
+  { name: "CLAT 2025", link: "#" },
+  { name: "MAT 2025", link: "#" }
 ];

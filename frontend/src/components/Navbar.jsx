@@ -161,7 +161,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentStreamContent.colleges.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -174,7 +174,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentStreamContent.resources.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -249,7 +249,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentTestPrepContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -262,7 +262,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentTestPrepContent.resources?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -337,7 +337,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentCollegeContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -350,7 +350,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentCollegeContent.resources?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -425,7 +425,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentExamContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -438,7 +438,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentExamContent.resources?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -513,7 +513,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentCourseContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -526,7 +526,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentCourseContent.resources?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -601,7 +601,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentPredictorContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -614,7 +614,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentPredictorContent.resources?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -689,7 +689,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentCounsellingContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -702,7 +702,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentCounsellingContent.resources?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -777,7 +777,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentRankingContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
@@ -790,7 +790,7 @@ const Navbar = () => {
                               <ul className="flex flex-col gap-3">
                                 {currentRankingContent.resources?.map((item, idx) => (
                                   <li key={idx}>
-                                    <a href={item.href} className="content-link">
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
                                       {item.title}
                                     </a>
                                   </li>
