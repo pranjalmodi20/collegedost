@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { navLinks, browseByStreamData, testPrepData, collegesData, examsData, coursesData, predictorsData, rankingsData, counsellingData } from '../data';
-import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaDownload } from 'react-icons/fa';
+import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaDownload, FaQuestion, FaShareAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
@@ -78,6 +78,14 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-6 text-gray-600">
+              <a href="#" className="flex items-center gap-1.5 hover:text-brand-orange transition-colors font-medium text-sm">
+                <FaQuestion className="text-gray-400" /> <span>Ask</span>
+              </a>
+              <a href="#" className="flex items-center gap-1.5 hover:text-brand-orange transition-colors font-medium text-sm">
+                <FaShareAlt className="text-gray-400" /> <span>Share</span>
+              </a>
+            </div>
             <a href="#" className="flex items-center gap-2 bg-brand-orange text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-0.5 transition-all duration-300">
               <FaUser className="text-xs" /> <span>Login / Register</span>
             </a>
