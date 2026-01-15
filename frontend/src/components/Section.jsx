@@ -26,21 +26,28 @@ const Section = ({ title, items, type = 'card' }) => {
               className="h-full"
             >
               {type === 'category' ? (
-                <div 
-                  className="bg-white border border-gray-100 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg flex flex-col items-center justify-center relative overflow-hidden group h-full cursor-pointer"
-                  style={{ '--hover-color': item.color }}
-                >
-                  <div className="absolute inset-0 rounded-2xl border-2 border-[var(--hover-color)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                  
-                  <div 
-                    className="w-16 h-16 rounded-full flex items-center justify-center text-3xl mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" 
-                    style={{ background: `${item.color}15`, color: item.color }}
-                  >
-                    <item.icon />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">{item.title}</h3>
-                  {item.subtext && <p className="text-xs text-gray-500">{item.subtext}</p>}
-                </div>
+                (() => {
+                  const Component = item.link ? 'a' : 'div';
+                  const props = item.link ? { href: item.link } : {};
+                  return (
+                    <Component 
+                      className="bg-white border border-gray-100 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg flex flex-col items-center justify-center relative overflow-hidden group h-full cursor-pointer"
+                      style={{ '--hover-color': item.color }}
+                      {...props}
+                    >
+                      <div className="absolute inset-0 rounded-2xl border-2 border-[var(--hover-color)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                      
+                      <div 
+                        className="w-16 h-16 rounded-full flex items-center justify-center text-3xl mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" 
+                        style={{ background: `${item.color}15`, color: item.color }}
+                      >
+                        <item.icon />
+                      </div>
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{item.title}</h3>
+                      {item.subtext && <p className="text-xs text-gray-500">{item.subtext}</p>}
+                    </Component>
+                  );
+                })()
               ) : (
                 <div className="bg-white rounded-xl overflow-hidden h-full flex flex-col border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-transparent group">
                   <div className="p-5 flex gap-4 items-start relative">

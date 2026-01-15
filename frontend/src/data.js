@@ -18,7 +18,8 @@ export const collegesData = [
         { title: 'Top Engineering Colleges', href: '#' },
         { title: 'Top MBA Colleges', href: '#' },
         { title: 'Top Medical Colleges', href: '#' },
-        { title: 'Top Law Colleges', href: '#' }
+        { title: 'Top Law Colleges', href: '/law' },
+        { title: 'Top Pharmacy Colleges', href: '/pharmacy' }
       ],
       colleges: [
         { title: 'Colleges with Best ROI', href: '#' },
@@ -1306,8 +1307,8 @@ export const examCategories = [
   { id: 1, title: 'Engineering', subtext: 'JEE Main, GATE', icon: FaLaptopCode, color: '#4CAF50' },
   { id: 2, title: 'Medical', subtext: 'NEET, AIIMS', icon: FaStethoscope, color: '#2196F3' },
   { id: 3, title: 'MBA', subtext: 'CAT, XAT, MAT', icon: FaChartLine, color: '#FF9800' },
-  { id: 4, title: 'Law', subtext: 'CLAT, AILET', icon: FaBalanceScale, color: '#9C27B0' },
-  { id: 5, title: 'Pharmacy', subtext: 'GPAT, NIPER', icon: FaBookOpen, color: '#f44336' },
+  { id: 4, title: 'Law', subtext: 'CLAT, AILET', icon: FaBalanceScale, color: '#9C27B0', link: '/law' },
+  { id: 5, title: 'Pharmacy', subtext: 'GPAT, NIPER', icon: FaBookOpen, color: '#f44336', link: '/pharmacy' },
   { id: 6, title: 'Universities', subtext: 'CUET, DUET', icon: FaUniversity, color: '#607D8B' },
   { id: 7, title: 'Design', subtext: 'NIFT, NID', icon: FaDraftingCompass, color: '#E91E63' },
   { id: 8, title: 'Study Abroad', subtext: 'GRE, GMAT', icon: FaGlobeAmericas, color: '#3F51B5' },
@@ -1450,10 +1451,10 @@ export const homeRankingsData = [
   { name: "Top Engineering Colleges in India", link: "#" },
   { name: "Top MBA Colleges in India", link: "#" },
   { name: "Top Medical Colleges in India", link: "#" },
-  { name: "Top Law Colleges in India", link: "#" },
+  { name: "Top Law Colleges in India", link: "/law" },
   { name: "Top Universities in India", link: "#" },
   { name: "Top BBA Colleges in India", link: "#" },
-  { name: "Top Pharmacy Colleges in India", link: "#" },
+  { name: "Top Pharmacy Colleges in India", link: "/pharmacy" },
   { name: "Top Architecture Colleges", link: "#" }
 ];
 

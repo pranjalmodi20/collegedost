@@ -2,14 +2,24 @@ import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-const Hero = () => {
+const Hero = ({ 
+  title = <>Empowering Students. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Building Futures.</span></>,
+  subtitle = "Explore 30,000+ Colleges, exams, and courses to make the informed career choice.",
+  bgImage = "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=85",
+  trending = [
+    { text: "JEE Main 2026", link: "#" },
+    { text: "NEET PG", link: "#" },
+    { text: "IIM Ahmedabad", link: "#" },
+    { text: "Computer Science", link: "#" }
+  ]
+}) => {
 
   return (
     <section className="relative h-[580px] flex items-center justify-center text-center text-white overflow-hidden mb-12 pt-32">
        {/* Background Element */}
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=85')" }}
+        style={{ backgroundImage: `url('${bgImage}')` }}
       ></div>
       <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/95 to-blue-900/90 z-10"></div>
 
@@ -21,11 +31,10 @@ const Hero = () => {
           className="mb-10"
         >
           <h1 className="font-heading text-4xl md:text-6xl font-bold mb-4 leading-tight tracking-tight">
-            Empowering Students. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Building Futures.</span>
+            {title}
           </h1>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-light">
-            Explore 30,000+ Colleges, exams, and courses to make the informed career choice.
+            {subtitle}
           </p>
         </motion.div>
         
@@ -51,10 +60,11 @@ const Hero = () => {
           
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-sm text-white/90">
              <span className="text-white/60 font-medium mr-1">Trending:</span> 
-             <a href="#" className="bg-white/10 px-3 py-1 rounded-full hover:bg-white/25 hover:text-white transition-colors border border-white/10">JEE Main 2026</a>
-             <a href="#" className="bg-white/10 px-3 py-1 rounded-full hover:bg-white/25 hover:text-white transition-colors border border-white/10">NEET PG</a>
-             <a href="#" className="bg-white/10 px-3 py-1 rounded-full hover:bg-white/25 hover:text-white transition-colors border border-white/10">IIM Ahmedabad</a>
-             <a href="#" className="bg-white/10 px-3 py-1 rounded-full hover:bg-white/25 hover:text-white transition-colors border border-white/10">Computer Science</a>
+             {trending.map((item, index) => (
+                <a key={index} href={item.link} className="bg-white/10 px-3 py-1 rounded-full hover:bg-white/25 hover:text-white transition-colors border border-white/10">
+                  {item.text}
+                </a>
+             ))}
           </div>
         </motion.div>
       </div>

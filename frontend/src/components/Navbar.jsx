@@ -18,6 +18,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
   const [activeCounsellingStream, setActiveCounsellingStream] = useState('engineering');
   const [activeCareerStream, setActiveCareerStream] = useState('stream');
   const [activeMoreStream, setActiveMoreStream] = useState('learn');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,13 +81,23 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-gray-100 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-white'}`}>
       <div className="py-3 border-b border-gray-100 bg-white">
         <div className="container mx-auto px-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-brand-orange text-white font-bold text-sm shadow-lg shadow-orange-500/30">
-              <span className="text-lg">CD</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-heading font-bold text-xl text-brand-blue leading-tight tracking-tight">Collegedost</span>
-              <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">The Education Hub</span>
+          <div className="flex items-center gap-4">
+             {/* Mobile Menu Toggle */}
+            <button 
+              className="lg:hidden text-gray-700 text-xl"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <FaBars />
+            </button>
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-brand-orange text-white font-bold text-sm shadow-lg shadow-orange-500/30">
+                <span className="text-lg">CD</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-heading font-bold text-xl text-brand-blue leading-tight tracking-tight">Collegedost</span>
+                <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">The Education Hub</span>
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -99,13 +110,13 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
               </button>
             </div>
             <a href="#" className="flex items-center gap-2 bg-brand-orange text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-0.5 transition-all duration-300">
-              <FaUser className="text-xs" /> <span>Login / Signup</span>
+              <FaUser className="text-xs" /> <span className="hidden sm:inline">Login / Signup</span>
             </a>
           </div>
         </div>
       </div>
 
-      <div className="relative bg-white h-[52px]">
+      <div className="relative bg-white h-[52px] hidden lg:block">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <ul className="flex items-center gap-1 h-full">
             {navLinks.map((link, index) => (
@@ -826,6 +837,152 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
                   )}
                 </AnimatePresence>
 
+                {/* Careers Mega Menu */}
+                <AnimatePresence>
+                  {link.title === 'Careers' && activeDropdown === 'Careers' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
+                    >
+                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                        {careersData.map((stream) => (
+                          <div
+                            key={stream.id}
+                            className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer ${activeCareerStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
+                            onMouseEnter={() => setActiveCareerStream(stream.id)}
+                          >
+                            {stream.label}
+                            <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex-1 bg-slate-50 p-10 overflow-y-auto">
+                        <div className="grid grid-cols-2 gap-16">
+                          <div className="flex flex-col">
+                            <div className="mb-8">
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">By Stream / Option</h4>
+                              <ul className="flex flex-col gap-3">
+                                {currentCareerContent.col1?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-blue font-semibold' : 'text-gray-600 hover:text-brand-orange'}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="content-section">
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Resources</h4>
+                              <ul className="flex flex-col gap-3">
+                                {currentCareerContent.col3_1?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-blue font-semibold' : 'text-gray-600 hover:text-brand-orange'}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col">
+                            <div className="mb-8">
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Other Options</h4>
+                              <ul className="flex flex-col gap-3">
+                                {currentCareerContent.col2?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+               {/* More Mega Menu */}
+                <AnimatePresence>
+                  {link.title === 'More' && activeDropdown === 'More' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
+                    >
+                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                        {moreData.map((stream) => (
+                          <div
+                            key={stream.id}
+                            className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer ${activeMoreStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
+                            onMouseEnter={() => setActiveMoreStream(stream.id)}
+                          >
+                            {stream.label}
+                            <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex-1 bg-slate-50 p-10 overflow-y-auto">
+                        <div className="grid grid-cols-2 gap-16">
+                          <div className="flex flex-col">
+                            <div className="mb-8">
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Learn & Study</h4>
+                              <ul className="flex flex-col gap-3">
+                                {currentMoreContent.col1?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-blue font-semibold' : 'text-gray-600 hover:text-brand-orange'}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="content-section">
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Services</h4>
+                              <ul className="flex flex-col gap-3">
+                                {currentMoreContent.col3_1?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-blue font-semibold' : 'text-gray-600 hover:text-brand-orange'}`}>
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col">
+                            <div className="mb-8">
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Resources</h4>
+                              <ul className="flex flex-col gap-3">
+                                {currentMoreContent.col2?.map((item, idx) => (
+                                  <li key={idx}>
+                                    <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
+                                      {item.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
                 {/* Generic Dropdown for others (simpler) */}
                 {link.title !== 'Browse by Stream' && link.title !== 'Test Prep' && link.title !== 'Colleges' && link.title !== 'Exams' && link.title !== 'Courses' && link.title !== 'Rankings' && link.title !== 'Predictors' && link.title !== 'Counselling' && link.title !== 'Careers' && link.title !== 'More' && link.hasDropdown && activeDropdown === link.title && (
                   <div className="simple-dropdown">
@@ -838,8 +995,71 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
           </ul>
         </div>
       </div>
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-[60] lg:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className="fixed top-0 left-0 h-full w-[280px] bg-white z-[70] shadow-2xl overflow-y-auto lg:hidden"
+            >
+              <div className="p-4 border-b border-gray-100 flex items-center justify-between">
+                <span className="font-heading font-bold text-xl text-brand-blue">Menu</span>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <div className="p-4">
+                <div className="flex gap-4 mb-6">
+                  <button onClick={onOpenAskModal} className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-slate-50 text-gray-700 font-medium text-sm hover:bg-slate-100 border border-gray-200">
+                    <FaQuestion className="text-brand-orange" /> Ask
+                  </button>
+                  <button onClick={onOpenShareModal} className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-slate-50 text-gray-700 font-medium text-sm hover:bg-slate-100 border border-gray-200">
+                    <FaShareAlt className="text-brand-orange" /> Share
+                  </button>
+                </div>
+
+                <ul className="flex flex-col space-y-2">
+                  {navLinks.map((link, index) => (
+                    <li key={index} className="border-b border-gray-50 last:border-0">
+                      <div className="py-3">
+                         <a 
+                            href={link.href} 
+                            className="flex items-center justify-between text-gray-700 font-medium hover:text-brand-orange"
+                            onClick={() => !link.hasDropdown && setIsMobileMenuOpen(false)}
+                          >
+                          {link.title}
+                          {link.hasDropdown && <FaChevronDown className="text-xs text-gray-400" />}
+                        </a>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
+
 
 export default Navbar;
