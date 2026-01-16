@@ -1,0 +1,41 @@
+const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const connectDB = require('./config/db');
+
+// Load env vars
+dotenv.config();
+
+// Connect to database (Optional: if DB is down, we use file-based fallback for predictor)
+// connectDB();
+const startDB = async () => {
+    try {
+        await connectDB();
+    } catch (e) {
+        console.log("MongoDB connection failed, running in Offline Mode (File-based)");
+    }
+}
+// startDB(); // Commented out to force file-mode stability if user has no DB
+// Or better, let's just accept that we aren't using DB for this feature.
+// But to be safe if user fixes DB later:
+connectDB().catch(err => console.log("DB Failed"));
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+app.use(cors());
+
+// Import Routes
+const predictorRoutes = require('./routes/predictor.routes');
+const authRoutes = require('./routes/auth.routes');
+
+// Mount Routes
+app.use('/api/predictor', predictorRoutes);
+app.use('/api/auth', authRoutes);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

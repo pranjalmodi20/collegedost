@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const PharmacyPage = lazy(() => import('./pages/PharmacyPage'));
 const LawPage = lazy(() => import('./pages/LawPage'));
+const JEEMainPredictor = lazy(() => import('./pages/JEEMainPredictor'));
 
 function App() {
   const [isAskModalOpen, setIsAskModalOpen] = useState(false);
@@ -24,19 +25,20 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 font-sans">
-        <Navbar 
+        <Navbar
           onOpenAskModal={() => setIsAskModalOpen(true)}
           onOpenShareModal={() => setIsShareModalOpen(true)}
         />
-        
+
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<HomePage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
             <Route path="/pharmacy" element={<PharmacyPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
             <Route path="/law" element={<LawPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+            <Route path="/jee-main-predictor" element={<JEEMainPredictor />} />
           </Routes>
         </Suspense>
-        
+
         <Footer />
         <AskModal isOpen={isAskModalOpen} onClose={() => setIsAskModalOpen(false)} />
         <ShareModal isOpen={isShareModalOpen} onClose={() => setIsShareModalOpen(false)} />

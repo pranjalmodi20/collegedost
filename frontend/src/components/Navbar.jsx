@@ -4,10 +4,13 @@ import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaQuestion
 import { motion, AnimatePresence } from 'framer-motion';
 
 
+import AuthModal from './AuthModal';
+
 const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
 
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [activeStream, setActiveStream] = useState('engineering'); // Default active stream
   const [activeTestPrepStream, setActiveTestPrepStream] = useState('engineering-prep');
   const [activeCollegeStream, setActiveCollegeStream] = useState('top-colleges');
@@ -109,9 +112,9 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
                 <FaShareAlt className="text-gray-400" /> <span>Share</span>
               </button>
             </div>
-            <a href="#" className="flex items-center gap-2 bg-brand-orange text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-0.5 transition-all duration-300">
+            <button onClick={() => setIsAuthModalOpen(true)} className="flex items-center gap-2 bg-brand-orange text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-0.5 transition-all duration-300">
               <FaUser className="text-xs" /> <span className="hidden sm:inline">Login / Signup</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -1074,6 +1077,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
           </>
         )}
       </AnimatePresence>
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </nav>
   );
 };

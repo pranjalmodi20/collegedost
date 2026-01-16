@@ -210,7 +210,7 @@ export const browseByStreamData = [
         { title: 'Top IIITs in India', href: '#' }
       ],
       predictors: [
-        { title: 'JEE Main College Predictor', href: '#' },
+        { title: 'JEE Main College Predictor', href: '/jee-main-predictor' },
         { title: 'JEE Main Rank Predictor', href: '#' },
         { title: 'MHT CET College Predictor', href: '#' },
         { title: 'AP EAMCET College Predictor', href: '#' },
@@ -1143,7 +1143,7 @@ export const rankingsData = [
   {
     id: 'engineering',
     label: 'Engineering',
-    titles: { col1: 'NIRF Ranking', col2: 'Careers360 Ranking', col3_1: 'By Placement', col3_2: 'International' },
+    titles: { col1: 'NIRF Ranking', col2: 'CollegeDost Ranking', col3_1: 'By Placement', col3_2: 'International' },
     content: {
       exams: [
         { title: 'Top Engineering Colleges (NIRF)', href: '#' },
