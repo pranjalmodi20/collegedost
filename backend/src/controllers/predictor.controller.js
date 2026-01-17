@@ -1,170 +1,119 @@
-const fs = require('fs');
-const path = require('path');
-
-// Load colleges from JSON file
-const loadCollegesFromFile = () => {
-  try {
-    // Navigate up from src/controllers -> src -> backend -> root
-    const jsonPath = path.join(__dirname, '../../../careers360_colleges.json');
-    console.log("Loading colleges from:", jsonPath);
-    
-    if (!fs.existsSync(jsonPath)) {
-        console.error("JSON file not found at:", jsonPath);
-        return [];
-    }
-    
-    const jsonData = fs.readFileSync(jsonPath, 'utf-8');
-    const rawColleges = JSON.parse(jsonData).colleges;
-    console.log(`Successfully loaded ${rawColleges.length} colleges from file.`);
-
-    // Transform and add Dummy Cutoffs just like the import script
-    return rawColleges.map((college, index) => {
-       // Parse Location
-       let city = 'Unknown';
-       let state = 'India';
-       if (college.location) {
-           const parts = college.location.split(',');
-           if (parts.length > 1) {
-               city = parts[0].trim();
-               state = parts[1].trim();
-           } else {
-               state = parts[0].trim();
-           }
-       }
-
-       // Generate Dummy Cutoffs
-       const isGovt = college.ownership && (college.ownership.includes('Govt') || college.ownership.includes('Public'));
-       const basePercentile = isGovt ? 90 : 70;
-       
-       const generateCutoff = (branch, category, base) => {
-         // Use a deterministic "random" based on name length to keep it consistent across reloads
-         const seed = (college.name.length + branch.length + category.length) % 10;
-         let p = base + seed; 
-         if (category === 'OBC') p -= 2;
-         if (category === 'SC') p -= 10;
-         if (category === 'ST') p -= 15;
-         return Math.min(99.9, Math.max(40, parseFloat(p.toFixed(2))));
-       };
-
-       const branches = ["Computer Science", "Information Technology", "Electronics", "Mechanical", "Civil"];
-       const categories = ["General", "OBC", "SC", "ST"];
-       const cutoffs = [];
-
-       branches.forEach(branch => {
-           // Deterministic "has branch"
-           if ((college.name.length + branch.length) % 3 !== 0) { 
-               categories.forEach(cat => {
-                   cutoffs.push({
-                       exam: "JEE Main",
-                       year: 2025,
-                       branch: branch,
-                       category: cat,
-                       closingPercentile: generateCutoff(branch, cat, basePercentile)
-                   });
-               });
-           }
-       });
-
-       return {
-           _id: `json_${index}`, // Fake ID
-           name: college.name,
-           location: { city, state },
-           nirfRank: college.rating ? parseInt(college.rating.split('/')[0]) * 20 : Math.floor(Math.random() * 200),
-           type: college.ownership || 'Private',
-           cutoff: cutoffs
-       };
-    });
-  } catch (err) {
-    console.error("Error loading JSON data:", err);
-    return [];
-  }
-};
-
-// Cache the data in memory
-const cachedColleges = loadCollegesFromFile();
+const College = require('../models/College.model');
 
 // @desc    Predict colleges based on JEE Main percentile
 // @route   POST /api/predictor/jee-main
 // @access  Public
 exports.predictColleges = async (req, res) => {
-  try {
-    const { percentile, category, homeState, gender, isPwd } = req.body;
+    try {
+        const { percentile, category, homeState, gender, isPwd } = req.body;
 
-    if (!percentile) {
-        return res.status(400).json({ success: false, message: 'Please provide percentile' });
+        if (!percentile || !category) {
+            return res.status(400).json({ success: false, message: 'Please provide percentile and category' });
+        }
+
+        const rawUserPercentile = parseFloat(percentile);
+        
+        // Fetch specific colleges from DB
+        // For optimization, we could filter at query level, but given the complex logic, we fetch all for now
+        // or we could at least limit fields
+        const allColleges = await College.find({}).lean(); // .lean() for performance
+
+        const predictedColleges = [];
+
+        for (const college of allColleges) {
+            // Apply Quota Logic
+            let effectiveUserPercentile = rawUserPercentile;
+
+            // Home State Quota
+            if (homeState && college.location && college.location.state && 
+                college.location.state.toLowerCase() === homeState.toLowerCase()) {
+                effectiveUserPercentile += 2.0; 
+            }
+
+            // Gender Quota 
+            if (gender === 'Female') {
+                effectiveUserPercentile += 1.0;
+            }
+
+            // PWD Quota
+            if (isPwd === 'Yes') {
+                effectiveUserPercentile += 15.0; 
+            }
+
+            effectiveUserPercentile = Math.min(100, effectiveUserPercentile);
+
+            // Find matching branches
+            const matchedBranches = [];
+
+            if (college.cutoff && Array.isArray(college.cutoff)) {
+                for (const cut of college.cutoff) {
+                    if (cut.category === category || cut.category === 'General') {
+                         if (cut.closingPercentile <= effectiveUserPercentile) {
+                             matchedBranches.push({
+                                 branch: cut.branch,
+                                 closingPercentile: cut.closingPercentile,
+                                 category: cut.category,
+                                 year: cut.year
+                             });
+                         }
+                    }
+                }
+            }
+
+            if (matchedBranches.length > 0) {
+                // Deduplicate branches (keep best/lowest cutoff match?) 
+                // Actually displaying multiple options for same branch (different years/categories) is fine, 
+                // but usually we just show unique branches.
+                const uniqueBranches = [];
+                const seen = new Set();
+                matchedBranches.forEach(b => {
+                    if (!seen.has(b.branch)) {
+                        seen.add(b.branch);
+                        uniqueBranches.push(b);
+                    }
+                });
+
+                predictedColleges.push({
+                    name: college.name,
+                    location: college.location,
+                    type: college.type,
+                    nirfRank: college.nirfRank || 999,
+                    matchedBranches: uniqueBranches,
+                    chance: calculateChance(effectiveUserPercentile, matchedBranches)
+                });
+            }
+        }
+
+        // Sort by Chance (Low/Medium/High) or Rank
+        // Let's sort by Rank
+        predictedColleges.sort((a, b) => a.nirfRank - b.nirfRank);
+
+        res.status(200).json({
+            success: true,
+            count: predictedColleges.length,
+            colleges: predictedColleges
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
     }
-
-    const rawUserPercentile = parseFloat(percentile);
-    const userCategory = category || 'General';
-
-    console.log(`Prediction Req: ${rawUserPercentile}% | ${userCategory} | ${homeState} | ${gender} | PWD:${isPwd}`);
-
-    // Logic: Find colleges where the closing percentile is <= user's percentile
-    const results = cachedColleges.reduce((acc, college) => {
-       // specific bonus for this college
-       let effectiveUserPercentile = rawUserPercentile;
-
-       // Home State Quota Simulation
-       if (homeState && college.location.state && 
-           college.location.state.toLowerCase().includes(homeState.toLowerCase())) {
-           effectiveUserPercentile += 2.0; // Bonus for HS
-       }
-
-       // Gender Simulation (Female Supernumerary)
-       if (gender === 'Female') {
-           effectiveUserPercentile += 1.0;
-       }
-
-       // PWD Simulation
-       if (isPwd === 'Yes') {
-           effectiveUserPercentile += 15.0; // Huge bonus for PWD
-       }
-       
-       // Ensure max 100
-       effectiveUserPercentile = Math.min(100, effectiveUserPercentile);
-
-       const qualifyingBranches = college.cutoff.filter(c => 
-          c.exam === 'JEE Main' && 
-          c.category === userCategory && 
-          c.closingPercentile <= effectiveUserPercentile
-       );
-
-       if (qualifyingBranches.length > 0) {
-           acc.push({
-             _id: college._id,
-             name: college.name,
-             location: college.location,
-             nirfRank: college.nirfRank,
-             type: college.type,
-             branches: qualifyingBranches.map(b => ({
-                name: b.branch,
-                closingPercentile: b.closingPercentile,
-                chance: (effectiveUserPercentile - b.closingPercentile) > 5 ? "High" : "Medium"
-             }))
-           });
-       }
-       return acc;
-    }, []);
-
-    // Pagination/Limit to avoid huge payload
-    const limitedResults = results.slice(0, 50);
-
-    res.status(200).json({
-       success: true,
-       count: limitedResults.length,
-       data: limitedResults
-    });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Server Error' });
-  }
 };
 
-// @desc    Seed dummy data for testing
-// @route   POST /api/predictor/seed
-// @access  Public
+// Seed colleges is deprecated in favor of scraper script
 exports.seedColleges = async (req, res) => {
-    // No-op since we are using file
-    res.json({ message: "Using File-based data source. Seeding not required." });
+    res.status(200).json({ message: "Use the scraper script to seed data." });
+};
+
+// Helper to calculate "High/Medium/Low" chance - simplified
+const calculateChance = (userP, branches) => {
+    // If userP is > closing + 5, High
+    // If userP > closing + 1, Medium
+    // Else Low
+    // We take the average branch closing
+    const avgClosing = branches.reduce((sum, b) => sum + b.closingPercentile, 0) / branches.length;
+    const diff = userP - avgClosing;
+    if (diff > 5) return 'High';
+    if (diff > 1) return 'Medium';
+    return 'Low';
 };
