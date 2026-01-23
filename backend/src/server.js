@@ -33,6 +33,7 @@ const authRoutes = require('./routes/auth.routes');
 // Mount Routes
 app.use('/api/predictor', predictorRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/users', require('./routes/user.routes'));
 
 const PORT = process.env.PORT || 5000;
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes, FaCheckCircle, FaGoogle } from 'react-icons/fa';
 import axios from 'axios';
+import { GoogleLogin } from '@react-oauth/google';
 
 const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
   const [activeTab, setActiveTab] = useState(initialTab); // 'login' or 'signup'
@@ -68,6 +69,27 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
         }
     } catch (err) {
         setError(err.response?.data?.message || 'Authentication failed');
+    } finally {
+        setLoading(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+        setLoading(true);
+        const res = await axios.post('http://localhost:5000/api/auth/google', {
+            token: credentialResponse.credential
+        });
+        
+        if (res.data.success) {
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+            onClose();
+            window.location.reload();
+        }
+    } catch (err) {
+        console.error("Google Login Error", err);
+        setError('Google Login Failed');
     } finally {
         setLoading(false);
     }
@@ -147,10 +169,14 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
                         {activeTab === 'login' && <div className="absolute bottom-0 left-0 w-full h-1 bg-brand-orange rounded-t-full"></div>}
                     </button>
 
+
                     <div className="ml-auto">
-                        <button className="flex items-center gap-2 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
-                            <FaGoogle className="text-red-500" /> Continue with Google
-                        </button>
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={() => setError('Google Login Failed')}
+                            useOneTap
+                            shape="pill"
+                        />
                     </div>
                 </div>
 

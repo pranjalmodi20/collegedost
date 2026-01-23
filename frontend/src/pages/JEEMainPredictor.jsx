@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaUniversity, FaSearch, FaTrophy, FaMapMarkerAlt, FaFilter } from 'react-icons/fa';
 import axios from 'axios';
 
-const JEEMainPredictor = () => {
+const JEEMainPredictor = ({ onOpenAuthModal }) => {
     const [percentile, setPercentile] = useState('');
     const [category, setCategory] = useState('General');
     const [homeState, setHomeState] = useState('');
@@ -25,8 +25,16 @@ const JEEMainPredictor = () => {
 
     const handlePredict = async (e) => {
         e.preventDefault();
+
+        // Check Auth
+        const token = localStorage.getItem('token');
+        if (!token) {
+            onOpenAuthModal();
+            return;
+        }
+
         if (!percentile || percentile < 0 || percentile > 100) {
-            setError('Please enter a valid percentile between 0 and 100');
+            setError('Please enter a valid JEE Main Percentile (0-100)');
             return;
         }
         if (!homeState) {
@@ -42,15 +50,21 @@ const JEEMainPredictor = () => {
              return;
         }
 
-
         setLoading(true);
         setError('');
         setColleges(null);
 
+        // Convert Percentile to Rank
+        // Formula: Rank = (100 - P) * Total_Candidates / 100
+        // Approx Total Candidates = 14,00,000 for 2024-25
+        const totalCandidates = 1400000;
+        const calculatedRank = ((100 - parseFloat(percentile)) * totalCandidates) / 100;
+        const rank = Math.floor(calculatedRank);
+
         try {
             // Assuming backend is on localhost:5000
             const response = await axios.post('http://localhost:5000/api/predictor/jee-main', {
-                percentile,
+                rank: rank, // Send calculated rank to backend
                 category,
                 homeState,
                 gender,
@@ -58,7 +72,7 @@ const JEEMainPredictor = () => {
             });
 
             if (response.data.success) {
-                setColleges(response.data.data);
+                setColleges(response.data.colleges);
             }
         } catch (err) {
             console.error(err);
@@ -76,7 +90,7 @@ const JEEMainPredictor = () => {
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 font-heading">JEE Main College Predictor 2026</h1>
                     <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-                        Enter your expected or actual percentile to find the best engineering colleges you can get into.
+                        Enter your JEE Main Percentile to find the best engineering colleges you can get into.
                     </p>
                 </div>
             </div>
@@ -99,7 +113,7 @@ const JEEMainPredictor = () => {
                                     <label className="block text-sm font-semibold text-gray-600 mb-2">JEE Main Paper-1 Percentile</label>
                                     <input
                                         type="number"
-                                        step="0.01"
+                                        step="0.0000001"
                                         min="0"
                                         max="100"
                                         placeholder="e.g. 96.89"
@@ -108,6 +122,7 @@ const JEEMainPredictor = () => {
                                         className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all font-medium text-lg text-gray-800"
                                         required
                                     />
+                                    <p className="text-xs text-gray-500 mt-1">We will convert this to an approximate Rank (Assuming ~14L candidates) for prediction.</p>
                                 </div>
 
                                 {/* Home State & Caste Group */}
@@ -237,8 +252,8 @@ const JEEMainPredictor = () => {
                                 </div>
                             ) : (
                                 <div className="grid gap-6">
-                                    {colleges.map((college) => (
-                                        <div key={college._id} className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                                    {colleges.map((college, idx) => (
+                                        <div key={idx} className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 group">
                                             <div className="p-6 md:flex gap-6">
                                                 <div className="w-16 h-16 bg-blue-50 text-brand-blue rounded-lg flex items-center justify-center text-3xl flex-shrink-0 group-hover:scale-110 transition-transform mb-4 md:mb-0">
                                                     <FaUniversity />
@@ -248,8 +263,10 @@ const JEEMainPredictor = () => {
                                                         <div>
                                                             <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand-blue transition-colors">{college.name}</h3>
                                                             <div className="flex items-center gap-4 text-sm text-gray-500 mt-1">
-                                                                <span className="flex items-center gap-1"><FaMapMarkerAlt className="text-brand-orange/60" /> {college.location.city}, {college.location.state}</span>
-                                                                <span className="flex items-center gap-1 bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded border border-yellow-100"><FaTrophy className="text-xs" /> NIRF: {college.nirfRank}</span>
+                                                                <div className="flex items-center gap-1"><FaMapMarkerAlt className="text-brand-orange/60" /> 
+                                                                    {college.location && college.location.city ? `${college.location.city}, ${college.location.state}` : 'Location NA'}
+                                                                </div>
+                                                                <span className="flex items-center gap-1 bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded border border-yellow-100"><FaTrophy className="text-xs" /> NIRF: {college.nirfRank || 'NA'}</span>
                                                                 <span className="px-2 py-0.5 bg-gray-100 rounded text-gray-600 font-medium text-xs">{college.type}</span>
                                                             </div>
                                                         </div>
@@ -261,12 +278,15 @@ const JEEMainPredictor = () => {
                                                     <div className="mt-6 pt-4 border-t border-gray-50">
                                                         <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Qualifying Branches</h4>
                                                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                                            {college.branches.map((branch, idx) => (
-                                                                <div key={idx} className={`p-3 rounded border text-sm flex justify-between items-center ${branch.chance === 'High' ? 'bg-green-50 border-green-100 text-green-800' : 'bg-yellow-50 border-yellow-100 text-yellow-800'}`}>
-                                                                    <span className="font-medium truncate mr-2" title={branch.name}>{branch.name}</span>
-                                                                    <div className="text-right flex-shrink-0">
-                                                                        <div className="text-xs opacity-70">Cutoff</div>
-                                                                        <div className="font-bold">{branch.closingPercentile}</div>
+                                                            {college.matchedBranches.map((branch, branchIdx) => (
+                                                                <div key={branchIdx} className={`p-3 rounded border text-sm flex flex-col justify-between ${branch.chance === 'High' ? 'bg-green-50 border-green-100 text-green-800' : 'bg-yellow-50 border-yellow-100 text-yellow-800'}`}>
+                                                                    <div className="flex justify-between w-full mb-1">
+                                                                        <span className="font-medium truncate mr-2" title={branch.branch}>{branch.branch}</span>
+                                                                        <span className="font-bold whitespace-nowrap">{branch.chance}</span>
+                                                                    </div>
+                                                                    <div className="flex justify-between items-end w-full text-xs opacity-80 mt-1">
+                                                                        <span>{branch.category}</span>
+                                                                        <span>Closing: {branch.closingRank}</span>
                                                                     </div>
                                                                 </div>
                                                             ))}

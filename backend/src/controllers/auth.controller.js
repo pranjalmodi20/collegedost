@@ -99,3 +99,67 @@ exports.login = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server Error' });
     }
 };
+
+const { OAuth2Client } = require('google-auth-library');
+// Note: If GOOGLE_CLIENT_ID is not set, this will fail verification if not handled carefully.
+// Ensure you set GOOGLE_CLIENT_ID in .env
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+// @desc    Google Login
+// @route   POST /api/auth/google
+// @access  Public
+exports.googleLogin = async (req, res) => {
+    try {
+        const { token } = req.body; // ID Token from frontend
+        
+        let payload;
+        try {
+             const ticket = await client.verifyIdToken({
+                 idToken: token,
+                 audience: process.env.GOOGLE_CLIENT_ID
+             });
+             payload = ticket.getPayload();
+        } catch (verifyError) {
+             console.error("Google verify error:", verifyError);
+             return res.status(401).json({ success: false, message: 'Invalid Google Token' });
+        }
+
+        const { name, email, sub: googleId } = payload;
+
+        let user = await User.findOne({ 
+             $or: [{ googleId }, { email }]
+        });
+
+        if (user) {
+            // Update googleId if missing
+            if (!user.googleId) {
+                user.googleId = googleId;
+                await user.save();
+            }
+        } else {
+            // Create user
+            // Note: Mobile is optional thanks to schema update
+            user = await User.create({
+                name,
+                email,
+                googleId
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Logged in successfully',
+            token: generateToken(user._id),
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                googleId: user.googleId
+            }
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};

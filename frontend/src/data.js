@@ -1289,6 +1289,7 @@ export const navLinks = [
   { title: 'Courses', href: '#', hasDropdown: true },
   { title: 'Predictors', href: '#', hasDropdown: true },
   { title: 'Rankings', href: '#', hasDropdown: true },
+  { title: 'International', href: '/international-colleges', hasDropdown: false },
   { title: 'Counselling', href: '#', hasDropdown: true },
   { title: 'Careers', href: '#', hasDropdown: true },
   { title: 'More', href: '#', hasDropdown: true }

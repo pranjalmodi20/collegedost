@@ -1,38 +1,69 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const collegeSchema = new mongoose.Schema({
+const collegeSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      trim: true
     },
-    location: {
-        city: String,
-        state: String
-    },
-    nirfRank: Number,
-    type: {
-        type: String, // e.g., IIT, NIT, IIIT, Private
-        enum: ['IIT', 'NIT', 'IIIT', 'GFTI', 'Private', 'Other']
-    },
-    cutoff: [{
-        exam: {
-            type: String, // e.g., "JEE Main", "JEE Advanced"
-            default: "JEE Main"
-        },
-        year: {
-            type: Number,
-            default: 2024
-        },
-        branch: String, // e.g., "Computer Science", "Electronics"
-        category: {
-            type: String, // e.g., "General", "OBC", "SC", "ST", "EWS"
-            default: "General"
-        },
-        closingPercentile: Number // The percentile required to get in (e.g., 98.5)
-    }]
-}, {
-    timestamps: true
-});
 
-module.exports = mongoose.model('College', collegeSchema);
+    location: {
+      city: String,
+      state: String,
+      country: {
+        type: String,
+        default: "India"
+      }
+    },
+
+    nirfRank: Number,
+    rank: Number, // For global or other rankings
+
+    type: {
+      type: String,
+      enum: ["IIT", "NIT", "IIIT", "GFTI", "Private", "International", "Other"]
+    },
+
+    cutoff: [
+      {
+        exam: {
+          type: String,
+          default: "JEE Main"
+        },
+
+        year: {
+          type: Number,
+          default: 2024
+        },
+
+        branch: {
+          type: String
+        },
+
+        category: {
+          type: String,
+          default: "General"
+        },
+
+        cutoffType: {
+          type: String,
+          enum: ["RANK", "PERCENTILE"],
+          default: "RANK"
+        },
+
+        opening: Number,
+        closing: Number
+      }
+    ]
+  },
+  { timestamps: true }
+);
+
+// Prevent duplicate college names in same state
+collegeSchema.index(
+  { name: 1, "location.state": 1 },
+  { unique: true }
+);
+
+module.exports = mongoose.model("College", collegeSchema);

@@ -4,13 +4,11 @@ import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaQuestion
 import { motion, AnimatePresence } from 'framer-motion';
 
 
-import AuthModal from './AuthModal';
 
-const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
 
+const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [activeStream, setActiveStream] = useState('engineering'); // Default active stream
   const [activeTestPrepStream, setActiveTestPrepStream] = useState('engineering-prep');
   const [activeCollegeStream, setActiveCollegeStream] = useState('top-colleges');
@@ -22,6 +20,24 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
   const [activeCareerStream, setActiveCareerStream] = useState('stream');
   const [activeMoreStream, setActiveMoreStream] = useState('learn');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+      // Check user
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+          setUser(JSON.parse(storedUser));
+      }
+  }, []);
+
+  const handleLogout = () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setUser(null);
+      setIsUserDropdownOpen(false);
+      window.location.href = '/';
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -112,9 +128,56 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
                 <FaShareAlt className="text-gray-400" /> <span>Share</span>
               </button>
             </div>
-            <button onClick={() => setIsAuthModalOpen(true)} className="flex items-center gap-2 bg-brand-orange text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-0.5 transition-all duration-300">
-              <FaUser className="text-xs" /> <span className="hidden sm:inline">Login / Signup</span>
-            </button>
+            {/* User Profile Logic */}
+            <div className={`relative ${isUserDropdownOpen ? 'z-50' : ''}`}> 
+              {!user ? (
+                <button onClick={onOpenAuthModal} className="flex items-center gap-2 bg-brand-orange text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-0.5 transition-all duration-300">
+                  <FaUser className="text-xs" /> <span className="hidden sm:inline">Login / Signup</span>
+                </button>
+              ) : (
+                <div className="relative">
+                    <button 
+                        onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                        className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:bg-gray-50 transition-colors"
+                    >
+                        <div className="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center font-bold text-sm">
+                            {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                        </div>
+                        <span className="text-sm font-medium text-gray-700 hidden md:block max-w-[100px] truncate">{user.name}</span>
+                        <FaChevronDown className="text-xs text-gray-400" />
+                    </button>
+
+                    {/* Dropdown */}
+                    <AnimatePresence>
+                        {isUserDropdownOpen && (
+                            <>
+                            <div className="fixed inset-0 z-40" onClick={() => setIsUserDropdownOpen(false)}></div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 10 }}
+                                className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 origin-top-right"
+                            >
+                                <div className="px-4 py-3 border-b border-gray-100">
+                                    <p className="text-sm font-bold text-gray-900 truncate">{user.name}</p>
+                                    <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                                </div>
+                                <a href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-orange transition-colors">
+                                    Profile Settings
+                                </a>
+                                <button 
+                                    onClick={handleLogout}
+                                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                                >
+                                    Logout
+                                </button>
+                            </motion.div>
+                            </>
+                        )}
+                    </AnimatePresence>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -1077,7 +1140,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal }) => {
           </>
         )}
       </AnimatePresence>
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+
     </nav>
   );
 };

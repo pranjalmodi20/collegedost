@@ -14,8 +14,9 @@ const userSchema = new mongoose.Schema({
   },
   mobile: {
     type: String,
-    required: [true, 'Please add a mobile number'],
-    unique: true
+    required: [function() { return !this.googleId; }, 'Please add a mobile number'],
+    unique: true,
+    sparse: true
   },
   currentClass: {
     type: String // 'Class 12th', 'Class 11th', etc.
@@ -26,14 +27,19 @@ const userSchema = new mongoose.Schema({
   city: {
     type: String
   },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
   password: {
     type: String,
-    required: [true, 'Please add a password'],
+    required: [function() { return !this.googleId; }, 'Please add a password'],
     select: false
   },
   isVerified: {
     type: Boolean,
-    default: true // Auto-verify with password/email
+    default: true
   }
 }, {
   timestamps: true
@@ -42,9 +48,9 @@ const userSchema = new mongoose.Schema({
 // Encrypt password using bcrypt
 const bcrypt = require('bcryptjs');
 
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) {
-    next();
+userSchema.pre('save', async function() {
+  if (!this.isModified('password') || !this.password) {
+    return;
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
