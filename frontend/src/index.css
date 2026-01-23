@@ -16,7 +16,7 @@
     background-attachment: fixed;
   }
 
-  /* Custom Scrollbar */
+
   ::-webkit-scrollbar {
     width: 6px;
   }

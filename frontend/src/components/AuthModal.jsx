@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaCheckCircle, FaGoogle, FaEnvelope, FaLock, FaUser, FaPhone, FaGraduationCap, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaTimes, FaCheckCircle, FaGoogle, FaEnvelope, FaLock, FaUser, FaPhone, FaGraduationCap, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa';
 import axios from 'axios';
 import { GoogleLogin } from '@react-oauth/google';
 
@@ -25,24 +25,14 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      setActiveTab(initialTab);
     } else {
       document.body.style.overflow = 'unset';
     }
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen]);
-
-  const benefits = [
-    "Exam And Admission Alerts",
-    "Mock Tests & Sample Papers",
-    "100+ Entrance Exam Preparation E-Books",
-    "AI-Based College/Rank Prediction Tools",
-    "College And Course Guides",
-    "Large Community Of Like Minded Students",
-    "Detailed Webinars And Online Sessions",
-    "1 On 1 Counselling From Experts"
-  ];
+  }, [isOpen, initialTab]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -117,7 +107,7 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-slate-900/70 backdrop-blur-md"
+            className="fixed inset-0 bg-slate-900/80 backdrop-blur-md"
           />
 
           {/* Scrollable Container */}
@@ -129,99 +119,100 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-                className="w-full max-w-5xl transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl relative flex flex-col md:flex-row my-8 border border-white/20"
+                className="w-full max-w-lg lg:max-w-4xl transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl relative flex flex-col md:flex-row my-8"
                 onClick={(e) => e.stopPropagation()}
               >
-                 {/* Close Button */}
-                 <button 
+                  {/* Close Button */}
+                  <button 
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm text-gray-500 hover:text-red-500 transition-all"
+                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/5 hover:bg-black/10 text-gray-400 hover:text-gray-600 transition-all"
                   >
                     <FaTimes />
                   </button>
 
-                  {/* Left Side: Marketing */}
-                  <div className="hidden md:flex md:w-5/12 bg-gradient-to-br from-orange-50 to-orange-100 p-10 flex-col justify-center relative overflow-hidden">
+                  {/* Left Side: Premium Theme Marketing (Hidden on Mobile) */}
+                  <div className="hidden md:flex md:w-5/12 bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#0f172a] text-white p-8 flex-col relative overflow-hidden">
                      {/* Decorative Elements */}
-                     <div className="absolute top-0 left-0 w-72 h-72 bg-brand-orange/20 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2"></div>
-                     <div className="absolute bottom-0 right-0 w-72 h-72 bg-brand-indigo/10 rounded-full blur-[80px] translate-x-1/2 translate-y-1/2"></div>
-                     <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-purple-500/5 rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2"></div>
+                     <div className="absolute top-0 left-0 w-64 h-64 bg-brand-cyan/20 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2"></div>
+                     <div className="absolute bottom-0 right-0 w-64 h-64 bg-brand-violet/20 rounded-full blur-[80px] translate-x-1/2 translate-y-1/2"></div>
+                     {/* Mesh */}
+                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
 
-                     <div className="relative z-10">
-                        <div className="mb-8">
-                            <h2 className="text-2xl font-black text-gray-800 tracking-tight">COLLEGE<span className="text-brand-orange">DOST</span></h2>
-                            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">The Education Portal</p>
+                     <div className="relative z-10 flex flex-col h-full">
+                        <div className="mb-auto">
+                            <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center text-brand-cyan font-bold text-xl mb-6 shadow-2xl border border-white/10">CD</div>
+                            <h2 className="text-3xl font-bold font-heading leading-tight mb-4">
+                                Unlock Your <br/>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-mint">Dream College</span>
+                            </h2>
+                            <p className="text-blue-200/80 text-sm leading-relaxed">
+                                Join 50,000+ students leveraging AI tools, premium counselling, and 100+ ebooks to get ahead.
+                            </p>
                         </div>
-                        
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4 leading-tight">Unlock Your Future with <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-red-500">Premium Access</span></h3>
-                        <p className="text-gray-600 mb-8 text-sm font-medium">Join 50,000+ students getting ahead in their career.</p>
 
-                        <ul className="space-y-3.5">
-                            {benefits.map((benefit, idx) => (
-                                <li key={idx} className="flex items-start gap-3 text-sm text-gray-700 group">
-                                    <div className="mt-0.5 w-5 h-5 rounded-full bg-white flex items-center justify-center shadow-sm text-brand-orange group-hover:bg-brand-orange group-hover:text-white transition-colors">
-                                        <FaCheckCircle className="text-[10px]" />
-                                    </div>
-                                    <span className="font-medium group-hover:text-gray-900 transition-colors">{benefit}</span>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="mt-8 space-y-4">
+                            <div className="bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                                <div className="text-brand-cyan text-xs font-bold uppercase tracking-wider mb-1">Premium Access</div>
+                                <div className="text-sm font-medium opacity-90">Get AI Rank Predictors & Exams Alerts</div>
+                            </div>
+                            <div className="bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                                <div className="text-brand-mint text-xs font-bold uppercase tracking-wider mb-1">Community</div>
+                                <div className="text-sm font-medium opacity-90">Connect with Toppers & Experts</div>
+                            </div>
+                        </div>
                      </div>
                   </div>
 
-              {/* Right Side: Form */}
-              <div className="w-full md:w-7/12 p-8 md:p-12 flex flex-col">
+              {/* Right Side: Form (Compact & Clean) */}
+              <div className="w-full md:w-7/12 p-6 md:p-10 flex flex-col bg-slate-50">
                 
-                {/* Tabs */}
-                <div className="flex gap-8 border-b border-gray-100 mb-8">
+                {/* Compact Tabs */}
+                <div className="flex bg-gray-200/80 p-1 rounded-xl mb-6 self-start w-full sm:w-auto">
                     <button 
-                        className={`pb-3 text-lg font-bold transition-colors relative ${activeTab === 'signup' ? 'text-brand-orange' : 'text-gray-500 hover:text-gray-700'}`}
+                        className={`flex-1 sm:flex-none px-6 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'signup' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                         onClick={() => setActiveTab('signup')}
                     >
                         Sign Up
-                        {activeTab === 'signup' && <div className="absolute bottom-0 left-0 w-full h-1 bg-brand-orange rounded-t-full"></div>}
                     </button>
                     <button 
-                        className={`pb-3 text-lg font-bold transition-colors relative ${activeTab === 'login' ? 'text-brand-orange' : 'text-gray-500 hover:text-gray-700'}`}
+                        className={`flex-1 sm:flex-none px-6 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === 'login' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                         onClick={() => setActiveTab('login')}
                     >
                         Login
-                        {activeTab === 'login' && <div className="absolute bottom-0 left-0 w-full h-1 bg-brand-orange rounded-t-full"></div>}
                     </button>
+                </div>
 
-                    <div className="ml-auto">
-                        <button className="flex items-center gap-2 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
-                            <FaGoogle className="text-red-500" /> Continue with Google
-                        </button>
-                    </div>
+                <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-gray-900">{activeTab === 'signup' ? 'Create Account' : 'Welcome Back'}</h3>
+                    <p className="text-sm text-gray-500 mt-1">{activeTab === 'signup' ? 'Get started for free today.' : 'Enter your details to access your account.'}</p>
                 </div>
 
                     {/* Content */}
-                    <form onSubmit={handleSubmit} className="space-y-5">
+                    <form onSubmit={handleSubmit} className="space-y-4">
                         {activeTab === 'signup' && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div className="space-y-1.5">
-                                    <label className="text-xs font-bold text-gray-500 ml-1 uppercase tracking-wide">Full Name</label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
                                     <div className="relative group">
-                                        <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-orange transition-colors" />
+                                        <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
                                         <input 
                                             type="text" 
                                             placeholder="John Doe" 
-                                            className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-gray-800 placeholder-gray-400"
+                                            className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
                                             value={formData.name}
                                             onChange={(e) => setFormData({...formData, name: e.target.value})}
                                             required
                                         />
                                     </div>
                                 </div>
-                                <div className="space-y-1.5">
-                                    <label className="text-xs font-bold text-gray-500 ml-1 uppercase tracking-wide">Email Address</label>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email</label>
                                     <div className="relative group">
-                                        <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-orange transition-colors" />
+                                        <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
                                         <input 
                                             type="email" 
                                             placeholder="john@example.com" 
-                                            className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-gray-800 placeholder-gray-400"
+                                            className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
                                             value={formData.email}
                                             onChange={(e) => setFormData({...formData, email: e.target.value})}
                                             required
@@ -231,14 +222,14 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
                             </div>
                         )}
 
-                        <div className="space-y-1.5">
-                            <label className="text-xs font-bold text-gray-500 ml-1 uppercase tracking-wide">Mobile Number</label>
+                        <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Mobile</label>
                             <div className="relative group">
-                                <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-orange transition-colors" />
+                                <FaPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
                                 <input 
                                     type="tel" 
                                     placeholder="+91 98765 43210" 
-                                    className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-gray-800 placeholder-gray-400"
+                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
                                     value={formData.mobile}
                                     onChange={(e) => setFormData({...formData, mobile: e.target.value})}
                                     required
@@ -246,14 +237,14 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
                             </div>
                         </div>
 
-                        <div className="space-y-1.5">
-                            <label className="text-xs font-bold text-gray-500 ml-1 uppercase tracking-wide">Password</label>
+                        <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Password</label>
                             <div className="relative group">
-                                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-orange transition-colors" />
+                                <FaLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
                                 <input 
                                     type="password" 
                                     placeholder="••••••••" 
-                                    className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-gray-800 placeholder-gray-400"
+                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
                                     value={formData.password}
                                     onChange={(e) => setFormData({...formData, password: e.target.value})}
                                     required
@@ -263,32 +254,31 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
 
                         {activeTab === 'signup' && (
                             <>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                    <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-500 ml-1 uppercase tracking-wide">Studying In</label>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Studying In</label>
                                         <div className="relative group">
-                                            <FaGraduationCap className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-orange transition-colors" />
+                                            <FaGraduationCap className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
                                             <select 
-                                                className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-gray-700 appearance-none"
+                                                className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-700 appearance-none"
                                                 value={formData.currentClass}
                                                 onChange={(e) => setFormData({...formData, currentClass: e.target.value})}
                                             >
                                                 <option value="">Select Class</option>
                                                 <option value="Class 12th">Class 12th</option>
                                                 <option value="Class 11th">Class 11th</option>
-                                                <option value="Class 10th">Class 10th</option>
                                                 <option value="Dropper">Dropper</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label className="text-xs font-bold text-gray-500 ml-1 uppercase tracking-wide">City</label>
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">City</label>
                                         <div className="relative group">
-                                            <FaMapMarkerAlt className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand-orange transition-colors" />
+                                            <FaMapMarkerAlt className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
                                             <input 
                                                 type="text" 
                                                 placeholder="Mumbai" 
-                                                className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-gray-800 placeholder-gray-400"
+                                                className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
                                                 value={formData.city}
                                                 onChange={(e) => setFormData({...formData, city: e.target.value})}
                                             />
@@ -296,68 +286,55 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-1.5">
-                                    <label className="text-xs font-bold text-gray-500 ml-1 uppercase tracking-wide">Goal / Interest</label>
-                                    <div className="relative group">
-                                        <select 
-                                            className="w-full p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-gray-700"
-                                            value={formData.interest}
-                                            onChange={(e) => setFormData({...formData, interest: e.target.value})}
-                                        >
-                                            <option value="">Select Course Interest</option>
-                                            <option value="B.E/B.Tech">Engineering (B.E/B.Tech)</option>
-                                            <option value="MBBS">Medical (MBBS/BDS)</option>
-                                            <option value="MBA">Management (MBA)</option>
-                                            <option value="Law">Law</option>
-                                            <option value="Design">Design</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3 mt-4 p-3 bg-gray-50 rounded-lg border border-gray-100">
-                                    <div className="relative flex items-center h-5">
-                                        <input 
-                                            type="checkbox" 
-                                            id="agree" 
-                                            className="w-5 h-5 text-brand-orange border-gray-300 rounded focus:ring-brand-orange focus:ring-2 cursor-pointer"
-                                            checked={formData.agree}
-                                            onChange={(e) => setFormData({...formData, agree: e.target.checked})}
-                                        />
-                                    </div>
-                                    <label htmlFor="agree" className="text-xs text-gray-600 leading-snug cursor-pointer">
-                                        I agree to the <a href="#" className="text-brand-indigo font-bold hover:underline">Privacy Policy</a> & <a href="#" className="text-brand-indigo font-bold hover:underline">Terms</a>. I consent to receive updates via Email/SMS/WhatsApp.
+                                <div className="flex items-start gap-2 mt-2">
+                                    <input 
+                                        type="checkbox" 
+                                        id="agree" 
+                                        className="mt-1 w-4 h-4 text-brand-blue border-gray-300 rounded focus:ring-brand-blue cursor-pointer"
+                                        checked={formData.agree}
+                                        onChange={(e) => setFormData({...formData, agree: e.target.checked})}
+                                    />
+                                    <label htmlFor="agree" className="text-xs text-gray-500 leading-tight cursor-pointer">
+                                        I agree to <span className="text-brand-blue font-bold">Privacy Policy</span> & <span className="text-brand-blue font-bold">Terms</span>.
                                     </label>
                                 </div>
                             </>
                         )}
                         
                         {error && (
-                            <div className="bg-red-50 text-red-500 text-sm px-4 py-3 rounded-lg flex items-center gap-2">
-                                <FaCheckCircle className="rotate-45" /> {error}
+                            <div className="bg-red-50 text-red-600 text-xs font-medium px-3 py-2 rounded-lg flex items-center gap-2">
+                                <FaTimes className="" /> {error}
                             </div>
                         )}
 
                         <button 
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-gradient-to-r from-brand-orange to-red-500 text-white hover:shadow-lg hover:shadow-brand-orange/30 font-bold py-4 rounded-xl transition-all transform hover:-translate-y-0.5 mt-4"
+                            className="w-full bg-brand-deep-bg hover:bg-brand-blue-dark text-white shadow-lg shadow-brand-blue/30 font-bold py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
                         >
                             {loading ? (
-                                <span className="flex items-center justify-center gap-2">
-                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Processing...
-                                </span>
+                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                             ) : (
-                                activeTab === 'signup' ? 'Create Account' : 'Login Securely'
+                                <>
+                                    {activeTab === 'signup' ? 'Create Account' : 'Login'} <FaArrowRight className="text-xs" />
+                                </>
                             )}
                         </button>
+                        
+                        <div className="relative flex py-2 items-center justify-center">
+                            <span className="flex-shrink-0 mx-4 text-gray-400 text-xs">Or continue with</span>
+                        </div>
 
-                        {/* Footer Switch */}
-                        <div className="text-center mt-6 text-sm text-gray-500 font-medium">
-                            {activeTab === 'login' ? (
-                                <>Don't have an account? <button type="button" onClick={() => setActiveTab('signup')} className="text-brand-indigo font-bold hover:underline">Sign Up Now</button></>
-                            ) : (
-                                <>Already have an account? <button type="button" onClick={() => setActiveTab('login')} className="text-brand-indigo font-bold hover:underline">Login Here</button></>
-                            )}
+                         <div className="flex justify-center">
+                            <GoogleLogin 
+                                onSuccess={handleGoogleSuccess}
+                                onError={() => setError('Google Login Failed')}
+                                type="standard"
+                                theme="outline"
+                                size="large"
+                                shape="pill"
+                                text="continue_with"
+                            />
                         </div>
                     </form>
                   </div>

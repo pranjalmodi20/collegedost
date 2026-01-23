@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { navLinks, browseByStreamData, testPrepData, collegesData, examsData, coursesData, predictorsData, rankingsData, counsellingData, careersData, moreData } from '../data';
 import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaQuestion, FaShareAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 
 
@@ -97,8 +98,8 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
   const currentMoreContent = currentMoreDataObj.content || { col1: [], col2: [], col3_1: [] };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/10 ${scrolled ? 'glass' : 'bg-white/90 backdrop-blur-md shadow-sm'}`}>
-      <div className="py-3 border-b border-gray-100 bg-white">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass' : 'bg-white/90 backdrop-blur-md'}`}>
+      <div className="py-3 bg-white">
         <div className="container mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             {/* Mobile Menu Toggle */}
@@ -109,7 +110,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
               <FaBars />
             </button>
 
-            <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3">
               <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-brand-orange text-white font-bold text-sm shadow-lg shadow-orange-500/30">
                 <span className="text-lg">CD</span>
               </div>
@@ -117,7 +118,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                 <span className="font-heading font-bold text-xl text-brand-indigo leading-tight tracking-tight">Collegedost</span>
                 <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">The Education Hub</span>
               </div>
-            </div>
+            </Link>
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-6 text-gray-600">
@@ -207,8 +208,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="fixed inset-0 top-[110px] bg-black/40 backdrop-blur-[2px] z-[55]"
-                        style={{ height: 'calc(100vh - 110px)' }}
+                        className="fixed inset-0 bg-black/40 z-[-1] pointer-events-none"
                       />
 
                       {/* Pop-up Menu Container */}
@@ -217,11 +217,11 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.99 }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl shadow-premium-hover rounded-b-2xl border-t border-white/20 z-[60] overflow-hidden flex"
+                        className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl shadow-premium-hover rounded-b-2xl z-[60] overflow-hidden flex"
                         style={{ height: 'calc(100vh - 120px)' }}
                       >
                         {/* Sidebar */}
-                        <div className="w-80 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto h-full scrollbar-thin scrollbar-thumb-gray-200">
+                        <div className="w-80 bg-white flex-shrink-0 py-4 overflow-y-auto h-full scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-gray-200">
                           {browseByStreamData.map((stream) => (
                             <div
                               key={stream.id}
@@ -238,7 +238,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         </div>
 
                         {/* Content Area */}
-                        <div className="flex-1 bg-white p-10 overflow-y-auto h-full scrollbar-thin scrollbar-thumb-gray-200">
+                        <div className="flex-1 bg-white p-10 overflow-y-auto h-full scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-gray-200">
                           <div className="grid grid-cols-2 gap-x-20 gap-y-12 pb-20">
                             {/* Column 1: Exams & Predictors */}
                             <div className="flex flex-col gap-10">
@@ -314,7 +314,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {testPrepData.map((stream) => (
                           <div
                             key={stream.id}
@@ -331,7 +331,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentTestPrepDataObj.titles?.col1 || 'Exam Prep'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentTestPrepDataObj.titles?.col1 || 'Exam Prep'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentTestPrepContent.exams?.map((item, idx) => (
                                   <li key={idx}>
@@ -344,7 +344,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentTestPrepDataObj.titles?.col3_1 || 'Previous Papers'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentTestPrepDataObj.titles?.col3_1 || 'Previous Papers'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentTestPrepContent.predictors?.map((item, idx) => (
                                   <li key={idx}>
@@ -359,7 +359,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
 
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentTestPrepDataObj.titles?.col2 || 'Mock Tests'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentTestPrepDataObj.titles?.col2 || 'Mock Tests'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentTestPrepContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
@@ -372,7 +372,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentTestPrepDataObj.titles?.col3_2 || 'Resources'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentTestPrepDataObj.titles?.col3_2 || 'Resources'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentTestPrepContent.resources?.map((item, idx) => (
                                   <li key={idx}>
@@ -402,7 +402,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {collegesData.map((stream) => (
                           <div
                             key={stream.id}
@@ -419,7 +419,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCollegeDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCollegeDataObj.titles?.col1 || 'Section 1'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCollegeContent.exams?.map((item, idx) => (
                                   <li key={idx}>
@@ -432,7 +432,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCollegeDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCollegeDataObj.titles?.col3_1 || 'Section 3'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCollegeContent.predictors?.map((item, idx) => (
                                   <li key={idx}>
@@ -447,7 +447,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
 
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCollegeDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCollegeDataObj.titles?.col2 || 'Section 2'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCollegeContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
@@ -460,7 +460,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCollegeDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCollegeDataObj.titles?.col3_2 || 'Section 4'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCollegeContent.resources?.map((item, idx) => (
                                   <li key={idx}>
@@ -490,7 +490,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {examsData.map((stream) => (
                           <div
                             key={stream.id}
@@ -507,7 +507,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentExamDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentExamDataObj.titles?.col1 || 'Section 1'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentExamContent.exams?.map((item, idx) => (
                                   <li key={idx}>
@@ -520,7 +520,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentExamDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentExamDataObj.titles?.col3_1 || 'Section 3'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentExamContent.predictors?.map((item, idx) => (
                                   <li key={idx}>
@@ -535,7 +535,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
 
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentExamDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentExamDataObj.titles?.col2 || 'Section 2'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentExamContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
@@ -548,7 +548,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentExamDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentExamDataObj.titles?.col3_2 || 'Section 4'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentExamContent.resources?.map((item, idx) => (
                                   <li key={idx}>
@@ -578,7 +578,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {coursesData.map((stream) => (
                           <div
                             key={stream.id}
@@ -595,7 +595,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCourseDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCourseDataObj.titles?.col1 || 'Section 1'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCourseContent.exams?.map((item, idx) => (
                                   <li key={idx}>
@@ -608,7 +608,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCourseDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCourseDataObj.titles?.col3_1 || 'Section 3'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCourseContent.predictors?.map((item, idx) => (
                                   <li key={idx}>
@@ -623,7 +623,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
 
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCourseDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCourseDataObj.titles?.col2 || 'Section 2'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCourseContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
@@ -636,7 +636,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCourseDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCourseDataObj.titles?.col3_2 || 'Section 4'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCourseContent.resources?.map((item, idx) => (
                                   <li key={idx}>
@@ -666,7 +666,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {predictorsData.map((stream) => (
                           <div
                             key={stream.id}
@@ -683,7 +683,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentPredictorDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentPredictorDataObj.titles?.col1 || 'Section 1'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentPredictorContent.exams?.map((item, idx) => (
                                   <li key={idx}>
@@ -696,7 +696,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentPredictorDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentPredictorDataObj.titles?.col3_1 || 'Section 3'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentPredictorContent.predictors?.map((item, idx) => (
                                   <li key={idx}>
@@ -711,7 +711,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
 
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentPredictorDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentPredictorDataObj.titles?.col2 || 'Section 2'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentPredictorContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
@@ -724,7 +724,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentPredictorDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentPredictorDataObj.titles?.col3_2 || 'Section 4'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentPredictorContent.resources?.map((item, idx) => (
                                   <li key={idx}>
@@ -754,7 +754,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {counsellingData.map((stream) => (
                           <div
                             key={stream.id}
@@ -771,7 +771,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCounsellingDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCounsellingDataObj.titles?.col1 || 'Section 1'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCounsellingContent.exams?.map((item, idx) => (
                                   <li key={idx}>
@@ -784,7 +784,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCounsellingDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCounsellingDataObj.titles?.col3_1 || 'Section 3'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCounsellingContent.predictors?.map((item, idx) => (
                                   <li key={idx}>
@@ -799,7 +799,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
 
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCounsellingDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCounsellingDataObj.titles?.col2 || 'Section 2'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCounsellingContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
@@ -812,7 +812,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentCounsellingDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCounsellingDataObj.titles?.col3_2 || 'Section 4'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCounsellingContent.resources?.map((item, idx) => (
                                   <li key={idx}>
@@ -842,7 +842,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {rankingsData.map((stream) => (
                           <div
                             key={stream.id}
@@ -859,7 +859,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentRankingDataObj.titles?.col1 || 'Section 1'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentRankingDataObj.titles?.col1 || 'Section 1'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentRankingContent.exams?.map((item, idx) => (
                                   <li key={idx}>
@@ -872,7 +872,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentRankingDataObj.titles?.col3_1 || 'Section 3'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentRankingDataObj.titles?.col3_1 || 'Section 3'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentRankingContent.predictors?.map((item, idx) => (
                                   <li key={idx}>
@@ -887,7 +887,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
 
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentRankingDataObj.titles?.col2 || 'Section 2'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentRankingDataObj.titles?.col2 || 'Section 2'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentRankingContent.colleges?.map((item, idx) => (
                                   <li key={idx}>
@@ -900,7 +900,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">{currentRankingDataObj.titles?.col3_2 || 'Section 4'}</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentRankingDataObj.titles?.col3_2 || 'Section 4'}</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentRankingContent.resources?.map((item, idx) => (
                                   <li key={idx}>
@@ -930,7 +930,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {careersData.map((stream) => (
                           <div
                             key={stream.id}
@@ -947,7 +947,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">By Stream / Option</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">By Stream / Option</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCareerContent.col1?.map((item, idx) => (
                                   <li key={idx}>
@@ -960,7 +960,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Resources</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">Resources</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCareerContent.col3_1?.map((item, idx) => (
                                   <li key={idx}>
@@ -975,7 +975,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
 
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Other Options</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">Other Options</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentCareerContent.col2?.map((item, idx) => (
                                   <li key={idx}>
@@ -1003,7 +1003,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 w-full bg-white shadow-xl rounded-b-xl border-t border-gray-100 z-[60] overflow-hidden flex"
                     >
-                      <div className="w-72 bg-white border-r border-gray-100 flex-shrink-0 py-4 overflow-y-auto">
+                      <div className="w-72 bg-white flex-shrink-0 py-4 overflow-y-auto">
                         {moreData.map((stream) => (
                           <div
                             key={stream.id}
@@ -1020,7 +1020,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         <div className="grid grid-cols-2 gap-16">
                           <div className="flex flex-col">
                             <div className="mb-8">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Learn & Study</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">Learn & Study</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentMoreContent.col1?.map((item, idx) => (
                                   <li key={idx}>
@@ -1033,7 +1033,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                             </div>
 
                             <div className="content-section">
-                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Services</h4>
+                              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">Services</h4>
                               <ul className="flex flex-col gap-3">
                                 {currentMoreContent.col3_1?.map((item, idx) => (
                                   <li key={idx}>

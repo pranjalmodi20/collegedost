@@ -60,13 +60,7 @@ const AskModal = ({ isOpen, onClose }) => {
               {/* Body */}
               <form onSubmit={handleSubmit} className="p-8">
                 <div className="mb-6">
-                    <div className="flex items-center gap-2 mb-4 text-xs font-bold text-emerald-700 bg-emerald-50 px-4 py-2.5 rounded-full border border-emerald-100 shadow-sm w-fit">
-                        <span className="relative flex h-2.5 w-2.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                        </span>
-                        <span>1 Million+ Questions answered within 24 hours</span>
-                    </div>
+
                     
                     <label className="block text-gray-700 text-sm font-bold mb-2 ml-1">Your Question</label>
                     <textarea 
