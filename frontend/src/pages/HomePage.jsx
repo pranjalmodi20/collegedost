@@ -123,9 +123,7 @@ const HomePage = ({ onOpenAskModal }) => {
         </motion.div>
       </div>
 
-      <motion.div variants={itemVariants}>
-        <StatsSection items={homeStatsData} />
-      </motion.div>
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 flex-grow flex flex-col gap-10 md:gap-20">
         <motion.div variants={itemVariants}>
@@ -151,9 +149,7 @@ const HomePage = ({ onOpenAskModal }) => {
         </motion.div>
       </div>
 
-      <motion.div variants={itemVariants}>
-        <Testimonials />
-      </motion.div>
+
     </motion.div>
   );
 };

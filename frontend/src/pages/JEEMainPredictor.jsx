@@ -8,7 +8,7 @@ const JEEMainPredictor = ({ onOpenAuthModal }) => {
     const [category, setCategory] = useState('General');
     const [homeState, setHomeState] = useState('');
     const [gender, setGender] = useState('');
-    const [isPwd, setIsPwd] = useState('No');
+    const [isPwd, setIsPwd] = useState('');
     const [mobile, setMobile] = useState('');
     
     const [loading, setLoading] = useState(false);
@@ -40,9 +40,10 @@ const JEEMainPredictor = ({ onOpenAuthModal }) => {
         }
         if (!homeState) setError('Please select your Home State');
         if (!gender) setError('Please select your Gender');
+        if (!isPwd) setError('Please select Specially Abled status');
         if (!mobile || mobile.length < 10) setError('Please enter a valid mobile number');
         
-        if (!homeState || !gender || !mobile || mobile.length < 10) return;
+        if (!homeState || !gender || !isPwd || !mobile || mobile.length < 10) return;
 
         setLoading(true);
         setError('');
