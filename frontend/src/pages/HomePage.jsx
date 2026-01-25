@@ -32,7 +32,7 @@ const HomePage = ({ onOpenAskModal }) => {
      const fetchData = async () => {
          try {
              // Fetch Colleges
-             const collegesRes = await axios.get('http://localhost:5000/api/colleges');
+             const collegesRes = await axios.get('http://localhost:5001/api/colleges');
              if (collegesRes.data.success && collegesRes.data.data.length > 0) {
                  // Map to required format
                  const mappedColleges = collegesRes.data.data.slice(0, 8).map(col => ({
@@ -50,7 +50,7 @@ const HomePage = ({ onOpenAskModal }) => {
              }
 
              // Fetch News
-             const newsRes = await axios.get('http://localhost:5000/api/articles');
+             const newsRes = await axios.get('http://localhost:5001/api/articles');
              if (newsRes.data.success) {
                  setNews(newsRes.data.data);
              }
