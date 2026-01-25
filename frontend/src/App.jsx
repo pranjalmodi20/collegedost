@@ -8,8 +8,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Lazy load pages for performance
 const HomePage = lazy(() => import('./pages/HomePage'));
+const EngineeringPage = lazy(() => import('./pages/EngineeringPage'));
 const PharmacyPage = lazy(() => import('./pages/PharmacyPage'));
 const LawPage = lazy(() => import('./pages/LawPage'));
+const ManagementPage = lazy(() => import('./pages/ManagementPage'));
+const MedicinePage = lazy(() => import('./pages/MedicinePage'));
 const JEEMainPredictor = lazy(() => import('./pages/JEEMainPredictor'));
 const JEEMainRankPredictor = lazy(() => import('./pages/JEEMainRankPredictor'));
 const InternationalColleges = lazy(() => import('./pages/InternationalColleges'));
@@ -31,6 +34,17 @@ const AdminColleges = lazy(() => import('./pages/admin/AdminColleges'));
 const AdminUsers = lazy(() => import('./pages/admin/AdminUsers'));
 const AddCollege = lazy(() => import('./pages/admin/AddCollege'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
+const AllCategoriesPage = lazy(() => import('./pages/AllCategoriesPage'));
+const UniversitiesPage = lazy(() => import('./pages/UniversitiesPage'));
+const DesignPage = lazy(() => import('./pages/DesignPage'));
+const HospitalityPage = lazy(() => import('./pages/HospitalityPage'));
+const MediaPage = lazy(() => import('./pages/MediaPage'));
+const CommercePage = lazy(() => import('./pages/CommercePage'));
+const SciencePage = lazy(() => import('./pages/SciencePage'));
+const ArtsPage = lazy(() => import('./pages/ArtsPage'));
+const EducationPage = lazy(() => import('./pages/EducationPage'));
+const ComputerPage = lazy(() => import('./pages/ComputerPage'));
+const StudyAbroadPage = lazy(() => import('./pages/StudyAbroadPage'));
 
 
 import { HelmetProvider } from 'react-helmet-async';
@@ -63,8 +77,11 @@ function App() {
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<HomePage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/engineering" element={<EngineeringPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
               <Route path="/pharmacy" element={<PharmacyPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
               <Route path="/law" element={<LawPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/management" element={<ManagementPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/medicine" element={<MedicinePage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
               <Route path="/jee-main-predictor" element={<JEEMainPredictor onOpenAuthModal={openAuthModal} />} />
               <Route path="/jee-main-rank-predictor" element={<JEEMainRankPredictor onOpenAuthModal={openAuthModal} />} />
               <Route path="/international-colleges" element={<InternationalColleges />} />
@@ -93,6 +110,17 @@ function App() {
 
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+              <Route path="/categories" element={<AllCategoriesPage />} />
+              <Route path="/universities" element={<UniversitiesPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/design" element={<DesignPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/hospitality" element={<HospitalityPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/media" element={<MediaPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/commerce" element={<CommercePage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/science" element={<SciencePage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/arts" element={<ArtsPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/education" element={<EducationPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/computer-applications" element={<ComputerPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/study-abroad" element={<StudyAbroadPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
             </Routes>
           </Suspense>
 
