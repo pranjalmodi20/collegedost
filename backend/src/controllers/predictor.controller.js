@@ -284,16 +284,32 @@ exports.predictRank = async (req, res) => {
             return inputScore > 300 ? 100 : 0;
         };
 
-        if (percentile) {
+        console.log(`Predictor Request - Type: Rank, Score: ${score}, Percentile: ${percentile}, Shift: ${shift}`);
+
+        const isProvided = (val) => val !== undefined && val !== null && val !== '';
+
+        if (isProvided(percentile)) {
             // Mode 2: Input is Percentile -> Output Rank
             predictedPercentile = parseFloat(percentile);
+            
+            // Validate number
+            if (isNaN(predictedPercentile)) {
+                 return res.status(400).json({ success: false, message: 'Invalid percentile format' });
+            }
+
             if (predictedPercentile > 100) predictedPercentile = 100;
             if (predictedPercentile < 0) predictedPercentile = 0;
 
             predictedRank = Math.floor(((100 - predictedPercentile) * TOTAL_CANDIDATES) / 100) + 1;
-        } else if (score) {
+        } else if (isProvided(score)) {
             // Mode 1: Input is Score -> Output Percentile (and Rank)
             const s = parseFloat(score);
+            
+             // Validate number
+            if (isNaN(s)) {
+                 return res.status(400).json({ success: false, message: 'Invalid score format' });
+            }
+
             predictedPercentile = interpolatePercentile(s);
             // Limit decimals
             predictedPercentile = Math.round(predictedPercentile * 10000000) / 10000000;

@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from '../components/Hero';
 import NewsSection from '../components/NewsSection';
 import OtherProducts from '../components/OtherProducts';
@@ -10,10 +9,61 @@ import PillSection from '../components/PillSection';
 import PredictorsSection from '../components/PredictorsSection';
 import Testimonials from '../components/Testimonials';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import SEO from '../components/SEO';
 
-import { featuredColleges, examCategories, homeCounsellingData, homeStatsData, homeRankingsData, homeExamsData, homePredictorsData, homeCoursesData } from '../data';
+import { 
+    examCategories, 
+    homeCounsellingData, 
+    homeStatsData, 
+    homeRankingsData, 
+    homeExamsData, 
+    homePredictorsData, 
+    homeCoursesData,
+    featuredColleges as staticFeaturedColleges 
+} from '../data';
 
 const HomePage = ({ onOpenAskModal }) => {
+  const [featuredColleges, setFeaturedColleges] = useState(staticFeaturedColleges);
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+     const fetchData = async () => {
+         try {
+             // Fetch Colleges
+             const collegesRes = await axios.get('http://localhost:5000/api/colleges');
+             if (collegesRes.data.success && collegesRes.data.data.length > 0) {
+                 // Map to required format
+                 const mappedColleges = collegesRes.data.data.slice(0, 8).map(col => ({
+                     id: col._id,
+                     name: col.name,
+                     location: `${col.location.city}, ${col.location.state}`,
+                     rating: col.nirfRank ? `NIRF #${col.nirfRank}` : "AAAA",
+                     logo: col.logo || "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", // Fallback
+                     tags: [col.type, "Top Ranked"],
+                     fees: col.fees?.tuition ? `₹ ${col.fees.tuition/100000}L Total` : "Check Fee",
+                     placement: col.placements?.averagePackage ? `₹ ${col.placements.averagePackage}` : "Best ROI",
+                     link: `/colleges/${col.slug}`
+                 }));
+                 setFeaturedColleges(mappedColleges);
+             }
+
+             // Fetch News
+             const newsRes = await axios.get('http://localhost:5000/api/articles');
+             if (newsRes.data.success) {
+                 setNews(newsRes.data.data);
+             }
+         } catch (err) {
+             console.error("Failed to fetch homepage data", err);
+         } finally {
+             setLoading(false);
+         }
+     };
+
+     fetchData();
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -36,8 +86,13 @@ const HomePage = ({ onOpenAskModal }) => {
       variants={containerVariants}
       className="overflow-x-hidden"
     >
+      <SEO 
+        title="Home" 
+        description="India's leading education portal for college admissions, exams, results, and career counselling."
+        keywords="college admission, engineering, medical, mba, study abroad, entrance exams, university rankings"
+      />
       <Hero />
-      <NewsSection />
+      <NewsSection items={news} />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 flex-grow flex flex-col gap-10 md:gap-20">
         <motion.div variants={itemVariants}>

@@ -15,11 +15,11 @@ export const collegesData = [
     titles: { col1: 'Top Ranked', col2: 'By Placement', col3_1: 'By City', col3_2: 'By State' },
     content: {
       exams: [
-        { title: 'Top Engineering Colleges', href: '#' },
-        { title: 'Top MBA Colleges', href: '#' },
-        { title: 'Top Medical Colleges', href: '#' },
-        { title: 'Top Law Colleges', href: '/law' },
-        { title: 'Top Pharmacy Colleges', href: '/pharmacy' }
+        { title: 'Top Engineering Colleges', href: '/colleges?search=Engineering' },
+        { title: 'Top MBA Colleges', href: '/colleges?search=MBA' },
+        { title: 'Top Medical Colleges', href: '/colleges?search=Medical' },
+        { title: 'Top Law Colleges', href: '/colleges?search=Law' },
+        { title: 'Top Pharmacy Colleges', href: '/colleges?search=Pharmacy' }
       ],
       colleges: [
         { title: 'Colleges with Best ROI', href: '#' },
@@ -27,14 +27,14 @@ export const collegesData = [
         { title: 'Highest Package Colleges', href: '#' }
       ],
       predictors: [
-        { title: 'Colleges in Delhi NCR', href: '#' },
-        { title: 'Colleges in Bangalore', href: '#' },
-        { title: 'Colleges in Mumbai', href: '#' }
+        { title: 'Colleges in Delhi NCR', href: '/colleges?state=Delhi' },
+        { title: 'Colleges in Bangalore', href: '/colleges?search=Bangalore' },
+        { title: 'Colleges in Mumbai', href: '/colleges?search=Mumbai' }
       ],
       resources: [
-        { title: 'Colleges in Uttar Pradesh', href: '#' },
-        { title: 'Colleges in Maharashtra', href: '#' },
-        { title: 'Colleges in Karnataka', href: '#' }
+        { title: 'Colleges in Uttar Pradesh', href: '/colleges?search=Uttar Pradesh' },
+        { title: 'Colleges in Maharashtra', href: '/colleges?state=Maharashtra' },
+        { title: 'Colleges in Karnataka', href: '/colleges?state=Karnataka' }
       ]
     }
   },
@@ -44,22 +44,22 @@ export const collegesData = [
     titles: { col1: 'North India', col2: 'South India', col3_1: 'East India', col3_2: 'West India' },
     content: {
       exams: [
-        { title: 'Delhi', href: '#' },
-        { title: 'Uttar Pradesh', href: '#' },
-        { title: 'Punjab', href: '#' }
+        { title: 'Delhi', href: '/colleges?state=Delhi' },
+        { title: 'Uttar Pradesh', href: '/colleges?search=Uttar Pradesh' },
+        { title: 'Punjab', href: '/colleges?search=Punjab' }
       ],
       colleges: [
-        { title: 'Tamil Nadu', href: '#' },
-        { title: 'Karnataka', href: '#' },
-        { title: 'Kerala', href: '#' }
+        { title: 'Tamil Nadu', href: '/colleges?state=Tamil Nadu' },
+        { title: 'Karnataka', href: '/colleges?state=Karnataka' },
+        { title: 'Kerala', href: '/colleges?search=Kerala' }
       ],
       predictors: [
-        { title: 'West Bengal', href: '#' },
-        { title: 'Bihar', href: '#' }
+        { title: 'West Bengal', href: '/colleges?search=West Bengal' },
+        { title: 'Bihar', href: '/colleges?search=Bihar' }
       ],
       resources: [
-        { title: 'Maharashtra', href: '#' },
-        { title: 'Gujarat', href: '#' }
+        { title: 'Maharashtra', href: '/colleges?state=Maharashtra' },
+        { title: 'Gujarat', href: '/colleges?search=Gujarat' }
       ]
     }
   },
@@ -190,7 +190,7 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'JEE Main Exam', href: '#' },
+        { title: 'JEE Main Exam', href: '/exams/jee-main' },
         { title: 'BITSAT Exam', href: '#' },
         { title: 'JEE Advanced Exam', href: '#' },
         { title: 'VITEEE Exam', href: '#' },
@@ -211,7 +211,7 @@ export const browseByStreamData = [
       ],
       predictors: [
         { title: 'JEE Main College Predictor', href: '/jee-main-predictor' },
-        { title: 'JEE Main Rank Predictor', href: '#' },
+        { title: 'JEE Main Rank Predictor', href: '/jee-main-rank-predictor' },
         { title: 'MHT CET College Predictor', href: '#' },
         { title: 'AP EAMCET College Predictor', href: '#' },
         { title: 'GATE College Predictor', href: '#' },
@@ -289,7 +289,7 @@ export const browseByStreamData = [
     titles: { col1: 'Exams', col2: 'Colleges', col3_1: 'Predictors', col3_2: 'Resources' },
     content: {
       exams: [
-        { title: 'NEET', href: '#' },
+        { title: 'NEET', href: '/exams/neet-ug' },
         { title: 'NEET PG', href: '#' },
         { title: 'NEET MDS', href: '#' },
         { title: 'FMGE', href: '#' },
@@ -928,12 +928,12 @@ export const examsData = [
         { title: 'BITSAT', href: '#' }
       ],
       colleges: [
-        { title: 'JEE Main 2026 Dates', href: '#' },
-        { title: 'Application Process', href: '#' },
+        { title: 'JEE Main 2026 Dates', href: '/exams/jee-main?tab=dates' },
+        { title: 'Application Process', href: '/exams/jee-main?tab=application' },
         { title: 'Exam Centers', href: '#' }
       ],
       predictors: [
-        { title: 'Syllabus', href: '#' },
+        { title: 'Syllabus', href: '/exams/jee-main?tab=syllabus' },
         { title: 'Mock Tests', href: '#' },
         { title: 'Previous Papers', href: '#' }
       ],
@@ -998,16 +998,16 @@ export const coursesData = [
     titles: { col1: 'Bachelors', col2: 'Masters', col3_1: 'Doctoral', col3_2: 'Popular' },
     content: {
       exams: [
-        { title: 'B.Tech', href: '#' },
-        { title: 'B.Sc', href: '#' },
-        { title: 'B.Com', href: '#' },
-        { title: 'B.A', href: '#' }
+        { title: 'B.Tech', href: '/courses/bachelor-of-technology-computer-science' },
+        { title: 'B.Sc', href: '/courses?search=B.Sc' },
+        { title: 'B.Com', href: '/courses?search=B.Com' },
+        { title: 'B.A', href: '/courses?search=B.A' }
       ],
       colleges: [
-        { title: 'M.Tech', href: '#' },
-        { title: 'M.Sc', href: '#' },
-        { title: 'MBA', href: '#' },
-        { title: 'M.A', href: '#' }
+        { title: 'M.Tech', href: '/courses?search=M.Tech' },
+        { title: 'M.Sc', href: '/courses?search=M.Sc' },
+        { title: 'MBA', href: '/courses/master-of-business-administration' },
+        { title: 'M.A', href: '/courses?search=M.A' }
       ],
       predictors: [
         { title: 'Ph.D in Engineering', href: '#' },
@@ -1074,23 +1074,23 @@ export const predictorsData = [
     titles: { col1: 'Jee Main', col2: 'Advanced & BIT', col3_1: 'State Level', col3_2: 'Others' },
     content: {
       exams: [
-        { title: 'JEE Main College Predictor', href: '#' },
-        { title: 'JEE Main Rank Predictor', href: '#' },
+        { title: 'JEE Main College Predictor', href: '/jee-main-college-predictor' },
+        { title: 'JEE Main Rank Predictor', href: '/jee-main-rank-predictor' },
         { title: 'JEE Main B.Arch Predictor', href: '#' }
       ],
       colleges: [
-        { title: 'JEE Advanced College Predictor', href: '#' },
-        { title: 'BITSAT College Predictor', href: '#' }
+        { title: 'JEE Advanced College Predictor', href: '/predict-colleges?exam=JEE+Advanced' },
+        { title: 'BITSAT College Predictor', href: '/predict-colleges?exam=BITSAT' }
       ],
       predictors: [
-        { title: 'MHT CET College Predictor', href: '#' },
-        { title: 'AP EAMCET College Predictor', href: '#' },
-        { title: 'TS EAMCET College Predictor', href: '#' },
-        { title: 'KCET College Predictor', href: '#' }
+        { title: 'MHT CET College Predictor', href: '/predict-colleges?exam=MHT+CET' },
+        { title: 'AP EAMCET College Predictor', href: '/predict-colleges?exam=AP+EAMCET' },
+        { title: 'TS EAMCET College Predictor', href: '/predict-colleges?exam=TS+EAMCET' },
+        { title: 'KCET College Predictor', href: '/predict-colleges?exam=KCET' }
       ],
       resources: [
-        { title: 'VITEEE College Predictor', href: '#' },
-        { title: 'SRMJEEE College Predictor', href: '#' }
+        { title: 'VITEEE College Predictor', href: '/predict-colleges?exam=VITEEE' },
+        { title: 'SRMJEEE College Predictor', href: '/predict-colleges?exam=SRMJEEE' }
       ]
     }
   },
@@ -1100,18 +1100,18 @@ export const predictorsData = [
     titles: { col1: 'NEET', col2: 'AIIMS', col3_1: 'State Quota', col3_2: 'Others' },
     content: {
       exams: [
-        { title: 'NEET College Predictor', href: '#' },
-        { title: 'NEET Rank Predictor', href: '#' }
+        { title: 'NEET College Predictor', href: '/predict-colleges?exam=NEET' },
+        { title: 'NEET Rank Predictor', href: '/rank-predictor?exam=NEET' }
       ],
       colleges: [
-        { title: 'AIIMS College Predictor', href: '#' }
+        { title: 'AIIMS College Predictor', href: '/predict-colleges?exam=AIIMS' }
       ],
       predictors: [
-        { title: 'Maharashtra NEET Predictor', href: '#' },
-        { title: 'Karnataka NEET Predictor', href: '#' }
+        { title: 'Maharashtra NEET Predictor', href: '/predict-colleges?exam=NEET&state=Maharashtra' },
+        { title: 'Karnataka NEET Predictor', href: '/predict-colleges?exam=NEET&state=Karnataka' }
       ],
       resources: [
-        { title: 'AFMC College Predictor', href: '#' }
+        { title: 'AFMC College Predictor', href: '/predict-colleges?exam=AFMC' }
       ]
     }
   },
@@ -1121,19 +1121,19 @@ export const predictorsData = [
     titles: { col1: 'CAT', col2: 'XAT & CMAT', col3_1: 'MAT', col3_2: 'Others' },
     content: {
       exams: [
-        { title: 'CAT Percentile Predictor', href: '#' },
-        { title: 'CAT College Predictor', href: '#' }
+        { title: 'CAT Percentile Predictor', href: '/rank-predictor?exam=CAT' },
+        { title: 'CAT College Predictor', href: '/predict-colleges?exam=CAT' }
       ],
       colleges: [
-        { title: 'XAT College Predictor', href: '#' },
-        { title: 'CMAT College Predictor', href: '#' }
+        { title: 'XAT College Predictor', href: '/predict-colleges?exam=XAT' },
+        { title: 'CMAT College Predictor', href: '/predict-colleges?exam=CMAT' }
       ],
       predictors: [
-        { title: 'MAT College Predictor', href: '#' },
-        { title: 'NMAT College Predictor', href: '#' }
+        { title: 'MAT College Predictor', href: '/predict-colleges?exam=MAT' },
+        { title: 'NMAT College Predictor', href: '/predict-colleges?exam=NMAT' }
       ],
       resources: [
-        { title: 'SNAP College Predictor', href: '#' }
+        { title: 'SNAP College Predictor', href: '/predict-colleges?exam=SNAP' }
       ]
     }
   }
@@ -1284,10 +1284,10 @@ export const counsellingData = [
 export const navLinks = [
   { title: 'Browse by Stream', href: '#', hasDropdown: true },
   { title: 'Test Prep', href: '#', hasDropdown: true },
-  { title: 'Colleges', href: '#', hasDropdown: true },
+  { title: 'Colleges', href: '/colleges', hasDropdown: true },
   { title: 'Exams', href: '#', hasDropdown: true },
-  { title: 'Courses', href: '#', hasDropdown: true },
-  { title: 'Predictors', href: '#', hasDropdown: true },
+  { title: 'Courses', href: '/courses', hasDropdown: true },
+  { title: 'News', href: '/news', hasDropdown: false },
   { title: 'Rankings', href: '#', hasDropdown: true },
   { title: 'International', href: '/international-colleges', hasDropdown: false },
   { title: 'Counselling', href: '#', hasDropdown: true },
@@ -1372,23 +1372,23 @@ export const homePredictorsData = [
   {
     title: "College Predictor",
     items: [
-      { name: "JEE Main College Predictor", link: "#" },
-      { name: "NEET College Predictor", link: "#" },
-      { name: "CAT College Predictor", link: "#" },
-      { name: "GATE College Predictor", link: "#" },
-      { name: "BITSAT College Predictor", link: "#" },
-      { name: "NIFT College Predictor", link: "#" }
+      { name: "JEE Main College Predictor", link: "/jee-main-college-predictor" },
+      { name: "NEET College Predictor", link: "/predict-colleges?exam=NEET" },
+      { name: "CAT College Predictor", link: "/predict-colleges" },
+      { name: "GATE College Predictor", link: "/predict-colleges" },
+      { name: "BITSAT College Predictor", link: "/predict-colleges" },
+      { name: "NIFT College Predictor", link: "/predict-colleges" }
     ]
   },
   {
     title: "Rank Predictor",
     items: [
-      { name: "JEE Main Rank Predictor", link: "#" },
-      { name: "NEET Rank Predictor", link: "#" },
-      { name: "KCET Rank Predictor", link: "#" },
-      { name: "AP EAMCET Rank Predictor", link: "#" },
-      { name: "TS EAMCET Rank Predictor", link: "#" },
-      { name: "KEAM Rank Predictor", link: "#" }
+      { name: "JEE Main Rank Predictor", link: "/jee-main-rank-predictor" },
+      { name: "NEET Rank Predictor", link: "/rank-predictor?exam=NEET" },
+      { name: "KCET Rank Predictor", link: "/rank-predictor?exam=KCET" },
+      { name: "AP EAMCET Rank Predictor", link: "/rank-predictor?exam=AP+EAMCET" },
+      { name: "TS EAMCET Rank Predictor", link: "/rank-predictor?exam=TS+EAMCET" },
+      { name: "KEAM Rank Predictor", link: "/rank-predictor?exam=KEAM" }
     ]
   }
 ];

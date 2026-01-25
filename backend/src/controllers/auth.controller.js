@@ -40,7 +40,8 @@ exports.register = async (req, res) => {
                     id: user._id,
                     name: user.name,
                     mobile: user.mobile,
-                    email: user.email
+                    email: user.email,
+                    role: user.role
                 }
             });
         } else {
@@ -61,15 +62,15 @@ exports.register = async (req, res) => {
 // @access  Public
 exports.login = async (req, res) => {
     try {
-        const { mobile, password } = req.body;
+        const { email, password } = req.body;
 
         // Validate
-        if (!mobile || !password) {
-            return res.status(400).json({ success: false, message: 'Please provide mobile and password' });
+        if (!email || !password) {
+            return res.status(400).json({ success: false, message: 'Please provide email and password' });
         }
 
         // Check for user
-        const user = await User.findOne({ mobile }).select('+password');
+        const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
              return res.status(401).json({ success: false, message: 'Invalid credentials' });
@@ -90,7 +91,8 @@ exports.login = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 mobile: user.mobile,
-                email: user.email
+                email: user.email,
+                role: user.role
             }
         });
 
@@ -154,7 +156,8 @@ exports.googleLogin = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                googleId: user.googleId
+                googleId: user.googleId,
+                role: user.role
             }
         });
 

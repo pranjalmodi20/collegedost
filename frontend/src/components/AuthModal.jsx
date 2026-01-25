@@ -57,7 +57,7 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
 
         const payload = activeTab === 'signup' 
             ? formData 
-            : { mobile: formData.mobile, password: formData.password };
+            : { email: formData.email, password: formData.password };
 
         const response = await axios.post(endpoint, payload);
 
@@ -190,52 +190,53 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
                     {/* Content */}
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {activeTab === 'signup' && (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
-                                    <div className="relative group">
-                                        <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                        <input 
-                                            type="text" 
-                                            placeholder="John Doe" 
-                                            className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-1">
-                                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email</label>
-                                    <div className="relative group">
-                                        <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                        <input 
-                                            type="email" 
-                                            placeholder="john@example.com" 
-                                            className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                            required
-                                        />
-                                    </div>
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
+                                <div className="relative group">
+                                    <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+                                    <input 
+                                        type="text" 
+                                        placeholder="John Doe" 
+                                        className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                        required
+                                    />
                                 </div>
                             </div>
                         )}
 
                         <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Mobile</label>
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email</label>
                             <div className="relative group">
-                                <FaPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+                                <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
                                 <input 
-                                    type="tel" 
-                                    placeholder="+91 98765 43210" 
+                                    type="email" 
+                                    placeholder="john@example.com" 
                                     className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                    value={formData.mobile}
-                                    onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({...formData, email: e.target.value})}
                                     required
                                 />
                             </div>
                         </div>
+
+                        {activeTab === 'signup' && (
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Mobile</label>
+                                <div className="relative group">
+                                    <FaPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+                                    <input 
+                                        type="tel" 
+                                        placeholder="+91 98765 43210" 
+                                        className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
+                                        value={formData.mobile}
+                                        onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                                        required
+                                    />
+                                </div>
+                            </div>
+                        )}
 
                         <div className="space-y-1">
                             <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Password</label>

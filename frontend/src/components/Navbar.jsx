@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { navLinks, browseByStreamData, testPrepData, collegesData, examsData, coursesData, predictorsData, rankingsData, counsellingData, careersData, moreData } from '../data';
-import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaQuestion, FaShareAlt } from 'react-icons/fa';
+import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaQuestion, FaShareAlt, FaBookOpen, FaChartPie, FaUniversity, FaNewspaper, FaUserShield, FaArrowLeft } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 
 
 const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
+  const location = useLocation();
+  const isAdminMode = location.pathname.startsWith('/admin');
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [activeStream, setActiveStream] = useState('engineering'); // Default active stream
@@ -97,9 +99,16 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
   const currentMoreDataObj = moreData.find(s => s.id === activeMoreStream) || {};
   const currentMoreContent = currentMoreDataObj.content || { col1: [], col2: [], col3_1: [] };
 
+  const adminLinks = [
+    { title: 'Dashboard', href: '/admin', icon: FaChartPie },
+    { title: 'Colleges', href: '/admin/colleges', icon: FaUniversity },
+    { title: 'Articles', href: '/admin/articles', icon: FaNewspaper },
+    { title: 'Users', href: '/admin/users', icon: FaUserShield },
+  ];
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass' : 'bg-white/90 backdrop-blur-md'}`}>
-      <div className="py-3 bg-white">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isAdminMode ? 'bg-gray-900 border-b border-gray-800' : (scrolled ? 'glass' : 'bg-white/90 backdrop-blur-md')}`}>
+      <div className={`py-3 ${isAdminMode ? 'bg-gray-900 text-white' : 'bg-white'}`}>
         <div className="container mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             {/* Mobile Menu Toggle */}
@@ -110,25 +119,41 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
               <FaBars />
             </button>
 
-            <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-brand-orange text-white font-bold text-sm shadow-lg shadow-orange-500/30">
-                <span className="text-lg">CD</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold text-xl text-brand-indigo leading-tight tracking-tight">Collegedost</span>
-                <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">The Education Hub</span>
-              </div>
+            <Link to={isAdminMode ? "/" : "/"} className="flex items-center gap-3">
+              {isAdminMode ? (
+                  <div className="flex items-center gap-3 group">
+                      <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-gray-400 group-hover:bg-brand-orange group-hover:text-white transition-all">
+                          <FaArrowLeft />
+                      </div>
+                      <div className="flex flex-col">
+                          <span className="font-heading font-bold text-xl text-white leading-tight tracking-tight">Admin Panel</span>
+                          <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wider group-hover:text-brand-orange transition-colors">Back to Site</span>
+                      </div>
+                  </div>
+              ) : (
+                  <>
+                    <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-brand-orange text-white font-bold text-sm shadow-lg shadow-orange-500/30">
+                        <span className="text-lg">CD</span>
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="font-heading font-bold text-xl text-brand-indigo leading-tight tracking-tight">Collegedost</span>
+                        <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">The Education Hub</span>
+                    </div>
+                  </>
+              )}
             </Link>
           </div>
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-6 text-gray-600">
-              <button onClick={onOpenAskModal} className="flex items-center gap-1.5 hover:text-brand-orange transition-colors font-medium text-sm">
-                <FaQuestion className="text-gray-400" /> <span>Ask</span>
-              </button>
-              <button onClick={onOpenShareModal} className="flex items-center gap-1.5 hover:text-brand-orange transition-colors font-medium text-sm">
-                <FaShareAlt className="text-gray-400" /> <span>Share</span>
-              </button>
-            </div>
+            {!isAdminMode && (
+                <div className="hidden md:flex items-center gap-6 text-gray-600">
+                <button onClick={onOpenAskModal} className="flex items-center gap-1.5 hover:text-brand-orange transition-colors font-medium text-sm">
+                    <FaQuestion className="text-gray-400" /> <span>Ask</span>
+                </button>
+                <button onClick={onOpenShareModal} className="flex items-center gap-1.5 hover:text-brand-orange transition-colors font-medium text-sm">
+                    <FaShareAlt className="text-gray-400" /> <span>Share</span>
+                </button>
+                </div>
+            )}
             {/* User Profile Logic */}
             <div className={`relative ${isUserDropdownOpen ? 'z-50' : ''}`}> 
               {!user ? (
@@ -166,6 +191,11 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                                 <a href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-orange transition-colors">
                                     Profile Settings
                                 </a>
+                                {user.role === 'admin' && (
+                                    <Link to="/admin" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-orange transition-colors">
+                                        Admin Panel
+                                    </Link>
+                                )}
                                 <button 
                                     onClick={handleLogout}
                                     className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
@@ -183,10 +213,26 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
         </div>
       </div>
 
-      <div className="relative bg-white h-[52px] hidden lg:block">
+      <div className={`relative h-[52px] hidden lg:block ${isAdminMode ? 'bg-gray-800 border-t border-gray-700' : 'bg-white'}`}>
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <ul className="flex items-center gap-1 h-full">
-            {navLinks.map((link, index) => (
+            {isAdminMode ? (
+                // ADMIN LINKS
+                adminLinks.map((link, index) => (
+                    <li key={index} className="h-full">
+                        <Link to={link.href} className={`flex items-center gap-2 h-full px-4 text-sm font-medium border-b-2 border-transparent transition-all duration-200 ${
+                            (link.href === '/admin' ? location.pathname === '/admin' : location.pathname.startsWith(link.href))
+                            ? 'text-brand-orange border-brand-orange bg-gray-900/30' 
+                            : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
+                        }`}>
+                            <link.icon className="text-lg" />
+                            {link.title}
+                        </Link>
+                    </li>
+                ))
+            ) : (
+                // PUBLIC LINKS
+                navLinks.map((link, index) => (
               <li
                 key={index}
                 className="h-full group"
@@ -1073,7 +1119,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                   </div>
                 )}
               </li>
-            ))}
+            )))}
 
           </ul>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaStar, FaMapMarkerAlt, FaLocationArrow, FaArrowRight, FaDownload, FaPaperPlane } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Section = ({ title, items, type = 'card' }) => {
   return (
@@ -16,9 +17,9 @@ const Section = ({ title, items, type = 'card' }) => {
              <div className="h-8 w-1 bg-brand-orange rounded-full"></div>
              <h2 className="text-2xl md:text-3xl font-heading font-bold text-gray-900">{title}</h2>
           </div>
-          <a href="#" className="flex items-center gap-2 text-sm font-bold text-brand-indigo hover:text-brand-orange transition-colors group">
+          <Link to={title.includes('Colleges') ? '/colleges' : '#'} className="flex items-center gap-2 text-sm font-bold text-brand-indigo hover:text-brand-orange transition-colors group">
             View All <span className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center group-hover:bg-brand-orange group-hover:text-white transition-all"><FaArrowRight className="text-xs" /></span>
-          </a>
+          </Link>
         </div>
         
         <div className={`grid gap-6 ${type === 'category' 
@@ -35,8 +36,8 @@ const Section = ({ title, items, type = 'card' }) => {
             >
               {type === 'category' ? (
                 (() => {
-                  const Component = item.link ? 'a' : 'div';
-                  const props = item.link ? { href: item.link } : {};
+                  const Component = item.link ? Link : 'div';
+                  const props = item.link ? { to: item.link } : {};
                   return (
                     <Component 
                       className="glass-card rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center relative overflow-hidden group cursor-pointer"
@@ -75,7 +76,9 @@ const Section = ({ title, items, type = 'card' }) => {
                        <img src={item.logo} alt={item.name} className="w-full h-full rounded-lg object-contain" />
                     </div>
                     <div className="relative z-10 flex-1 min-w-0">
-                      <h3 className="text-base font-bold mb-2 text-gray-900 line-clamp-2 leading-tight group-hover:text-brand-indigo transition-colors font-heading">{item.name}</h3>
+                      <h3 className="text-base font-bold mb-2 text-gray-900 line-clamp-2 leading-tight group-hover:text-brand-indigo transition-colors font-heading">
+                          <Link to={item.link || '#'}>{item.name}</Link>
+                      </h3>
                       <div className="text-xs flex items-center gap-1.5 text-gray-500 font-medium">
                         <FaMapMarkerAlt className="text-brand-orange/80" /> <span className="truncate">{item.location}</span>
                       </div>
@@ -108,9 +111,9 @@ const Section = ({ title, items, type = 'card' }) => {
                     <button className="flex-1 py-3 rounded-xl text-xs font-bold border border-gray-200 text-gray-600 hover:text-brand-indigo hover:border-brand-indigo hover:bg-indigo-50 transition-all flex items-center justify-center gap-2">
                        <FaDownload /> Brochure
                     </button>
-                    <button className="flex-1 py-3 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-orange-600 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all flex items-center justify-center gap-2">
+                    <Link to={item.link || '#'} className="flex-1 py-3 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-orange-600 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all flex items-center justify-center gap-2">
                        Apply Now <FaPaperPlane />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               )}

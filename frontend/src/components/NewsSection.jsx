@@ -1,8 +1,9 @@
 import React from 'react';
-import { latestNews } from '../data';
 import { FaBolt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-const NewsSection = () => {
+const NewsSection = ({ items = [] }) => {
+  const newsList = items.length > 0 ? items : ["Welcome to CollegeDost", "Stay updated with latest news"];
   return (
     <div className="bg-brand-dark border-y border-white/5 py-3 overflow-hidden relative">
       <div className="container mx-auto px-4 flex items-center">
@@ -11,11 +12,11 @@ const NewsSection = () => {
         </div>
         <div className="flex-1 overflow-hidden relative">
           <div className="flex gap-12 animate-scroll w-max hover:paused">
-            {[...latestNews, ...latestNews].map((news, idx) => (
-              <a href="#" key={idx} className="text-sm text-gray-400 font-medium flex items-center gap-3 hover:text-white transition-colors whitespace-nowrap">
+            {[...newsList, ...newsList].map((news, idx) => (
+              <Link to={news.slug ? `/news/${news.slug}` : '#'} key={idx} className="text-sm text-gray-400 font-medium flex items-center gap-3 hover:text-white transition-colors whitespace-nowrap">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan"></span>
-                {news}
-              </a>
+                {news.title || news}
+              </Link>
             ))}
           </div>
         </div>

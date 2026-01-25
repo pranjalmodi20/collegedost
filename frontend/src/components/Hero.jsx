@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaSearch, FaUniversity, FaGraduationCap, FaChartLine, FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = ({ 
   title = "Empowering Students. Building Futures.",
   subtitle = "Explore 30,000+ Colleges, exams, and courses to make the informed career choice.",
   trending = [
-    { text: "JEE Main 2026", link: "#" },
-    { text: "NEET PG", link: "#" },
+    { text: "JEE Main 2026", link: "/exams/jee-main" },
+    { text: "NEET UG", link: "/exams/neet-ug" },
     { text: "IIT Bombay", link: "#" },
     { text: "Computer Science", link: "#" }
   ]
 }) => {
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (search.trim()) {
+        // Simple search redirection to exams page for now (or a general search page)
+        // Since we only really have exams implemented, let's look there first
+        navigate(`/exams?search=${encodeURIComponent(search)}`);
+    }
+  };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -76,7 +87,6 @@ const Hero = ({
 
             {/* Premium Glass Search Bar */}
             <div className="relative w-full max-w-3xl mx-auto group">
-                {/* Glow behind */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-violet rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 pointer-events-none"></div>
                 
                 <div className="relative flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-full p-2 shadow-2xl transition-all focus-within:bg-white/15 focus-within:border-white/30 focus-within:ring-1 focus-within:ring-white/20">
@@ -87,16 +97,25 @@ const Hero = ({
                     
                     <input 
                         type="text" 
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                         className="flex-1 w-full bg-transparent border-none py-4 text-lg text-white placeholder-blue-200/50 outline-none font-medium"
                         placeholder="Search specific colleges, exams, courses..." 
                     />
                     
-                    <button className="hidden md:flex items-center gap-2 bg-white text-brand-blue-dark px-8 py-3.5 rounded-full font-bold text-sm uppercase tracking-wide hover:bg-blue-50 transition-all shadow-lg transform hover:scale-105 active:scale-95">
+                    <button 
+                        onClick={handleSearch}
+                        className="hidden md:flex items-center gap-2 bg-white text-brand-blue-dark px-8 py-3.5 rounded-full font-bold text-sm uppercase tracking-wide hover:bg-blue-50 transition-all shadow-lg transform hover:scale-105 active:scale-95"
+                    >
                         Search
                     </button>
                     
                     {/* Mobile Search Button icon only */}
-                    <button className="md:hidden p-3 bg-white text-brand-blue-dark rounded-full mr-1">
+                    <button 
+                        onClick={handleSearch}
+                        className="md:hidden p-3 bg-white text-brand-blue-dark rounded-full mr-1"
+                    >
                         <FaArrowRight />
                     </button>
                 </div>

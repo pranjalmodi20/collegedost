@@ -13,9 +13,27 @@ const LawPage = lazy(() => import('./pages/LawPage'));
 const JEEMainPredictor = lazy(() => import('./pages/JEEMainPredictor'));
 const JEEMainRankPredictor = lazy(() => import('./pages/JEEMainRankPredictor'));
 const InternationalColleges = lazy(() => import('./pages/InternationalColleges'));
+const ExamsPage = lazy(() => import('./pages/ExamsPage'));
+const ExamDetailPage = lazy(() => import('./pages/ExamDetailPage'));
+const CollegesPage = lazy(() => import('./pages/CollegesPage'));
+const CollegeDetailPage = lazy(() => import('./pages/CollegeDetailPage'));
+const CoursesPage = lazy(() => import('./pages/CoursesPage'));
+const CourseDetailPage = lazy(() => import('./pages/CourseDetailPage'));
+const CollegePredictor = lazy(() => import('./pages/CollegePredictor'));
+const GenericRankPredictor = lazy(() => import('./pages/GenericRankPredictor'));
+const NewsPage = lazy(() => import('./pages/NewsPage'));
+const NewsDetailPage = lazy(() => import('./pages/NewsDetailPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const AdminArticles = lazy(() => import('./pages/admin/AdminArticles'));
+const PostArticle = lazy(() => import('./pages/admin/PostArticle'));
+const AdminColleges = lazy(() => import('./pages/admin/AdminColleges'));
+const AdminUsers = lazy(() => import('./pages/admin/AdminUsers'));
+const AddCollege = lazy(() => import('./pages/admin/AddCollege'));
 
 
+import { HelmetProvider } from 'react-helmet-async';
+import AdminRoute from './components/AdminRoute';
 
 function App() {
   const [isAskModalOpen, setIsAskModalOpen] = useState(false);
@@ -30,32 +48,57 @@ function App() {
   );
 
   return (
-    <Router>
-      <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 font-sans">
-        <Navbar
-          onOpenAskModal={() => setIsAskModalOpen(true)}
-          onOpenShareModal={() => setIsShareModalOpen(true)}
-          onOpenAuthModal={() => setIsAuthModalOpen(true)}
-        />
+    <HelmetProvider>
+      <Router>
+        <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 font-sans">
+          <Navbar
+            onOpenAskModal={() => setIsAskModalOpen(true)}
+            onOpenShareModal={() => setIsShareModalOpen(true)}
+            onOpenAuthModal={() => setIsAuthModalOpen(true)}
+          />
 
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<HomePage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
-            <Route path="/pharmacy" element={<PharmacyPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
-            <Route path="/law" element={<LawPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
-            <Route path="/jee-main-predictor" element={<JEEMainPredictor onOpenAuthModal={() => setIsAuthModalOpen(true)} />} />
-            <Route path="/jee-main-rank-predictor" element={<JEEMainRankPredictor onOpenAuthModal={() => setIsAuthModalOpen(true)} />} />
-            <Route path="/international-colleges" element={<InternationalColleges />} />
-            <Route path="/profile" element={<ProfilePage />} />
-          </Routes>
-        </Suspense>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<HomePage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/pharmacy" element={<PharmacyPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/law" element={<LawPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/jee-main-predictor" element={<JEEMainPredictor onOpenAuthModal={() => setIsAuthModalOpen(true)} />} />
+              <Route path="/jee-main-rank-predictor" element={<JEEMainRankPredictor onOpenAuthModal={() => setIsAuthModalOpen(true)} />} />
+              <Route path="/international-colleges" element={<InternationalColleges />} />
+              <Route path="/exams" element={<ExamsPage />} />
+              <Route path="/exams/:slug" element={<ExamDetailPage />} />
+              <Route path="/colleges" element={<CollegesPage />} />
+              <Route path="/colleges/:slug" element={<CollegeDetailPage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/courses/:slug" element={<CourseDetailPage />} />
+              <Route path="/predict-colleges" element={<CollegePredictor />} />
+              <Route path="/jee-main-college-predictor" element={<JEEMainPredictor onOpenAuthModal={() => setIsAuthModalOpen(true)} />} />
+              <Route path="/jee-main-rank-predictor" element={<JEEMainRankPredictor onOpenAuthModal={() => setIsAuthModalOpen(true)} />} />
+              <Route path="/rank-predictor" element={<GenericRankPredictor />} />
+              <Route path="/news" element={<NewsPage />} />
+              <Route path="/news/:slug" element={<NewsDetailPage />} />
+              
+              {/* Protected Admin Routes */}
+              <Route element={<AdminRoute />}>
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/articles" element={<AdminArticles />} />
+                <Route path="/admin/articles/new" element={<PostArticle />} />
+                <Route path="/admin/colleges" element={<AdminColleges />} />
+                <Route path="/admin/colleges/new" element={<AddCollege />} />
+                <Route path="/admin/users" element={<AdminUsers />} />
+              </Route>
 
-        <Footer />
-        <AskModal isOpen={isAskModalOpen} onClose={() => setIsAskModalOpen(false)} />
-        <ShareModal isOpen={isShareModalOpen} onClose={() => setIsShareModalOpen(false)} />
-        <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
-      </div>
-    </Router>
+              <Route path="/profile" element={<ProfilePage />} />
+            </Routes>
+          </Suspense>
+
+          <Footer />
+          <AskModal isOpen={isAskModalOpen} onClose={() => setIsAskModalOpen(false)} />
+          <ShareModal isOpen={isShareModalOpen} onClose={() => setIsShareModalOpen(false)} />
+          <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+        </div>
+      </Router>
+    </HelmetProvider>
   )
 }
 

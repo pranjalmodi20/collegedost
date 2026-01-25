@@ -20,30 +20,41 @@ const JEEMainRankPredictor = ({ onOpenAuthModal }) => {
 
     const handlePredict = async (e) => {
         e.preventDefault();
+        console.log('Predicting...', { mode, score, percentile, mobile });
         setError('');
         setResult(null);
 
-        // Auth Check
+        // Auth Check - Temporarily Disabled to allow easier access
+        /*
         const token = localStorage.getItem('token');
         if (!token) {
             onOpenAuthModal();
             return;
         }
+        */
 
         if (mode === 'score') {
-            if (!score || score < 0 || score > 300) {
-                setError('Please enter a valid score (0-300)');
+            const val = parseFloat(score);
+            if (!score || isNaN(val) || val < 0 || val > 300) {
+                const msg = 'Please enter a valid score (0-300)';
+                setError(msg);
+                alert(msg); // Force visibility
                 return;
             }
         } else {
-             if (!percentile || percentile < 0 || percentile > 100) {
-                setError('Please enter a valid percentile (0-100)');
+             const val = parseFloat(percentile);
+             if (!percentile || isNaN(val) || val < 0 || val > 100) {
+                const msg = 'Please enter a valid percentile (0-100)';
+                setError(msg);
+                alert(msg); // Force visibility
                 return;
             }
         }
 
         if (!mobile || mobile.length < 10) {
-            setError('Please enter a valid mobile number');
+            const msg = 'Please enter a valid 10-digit mobile number';
+            setError(msg);
+            alert(msg); // Force visibility
             return;
         }
 
@@ -51,20 +62,28 @@ const JEEMainRankPredictor = ({ onOpenAuthModal }) => {
 
         try {
             const payload = {
-                shift: session,
+                shift: session || 'Jan 27 Shift 1', // Default if empty
                 score: mode === 'score' ? score : undefined,
-                percentile: mode === 'percentile' ? percentile : undefined
+                percentile: mode === 'percentile' ? percentile : undefined,
+                mobile: mobile
             };
 
+            console.log('Sending payload:', payload);
+
             const response = await axios.post('http://localhost:5000/api/predictor/jee-main-rank', payload);
+            console.log('Response:', response.data);
 
             if (response.data.success) {
                 setResult(response.data.data);
+            } else {
+                setError('API returned success: false');
             }
 
         } catch (err) {
-            console.error(err);
-            setError('Prediction failed. Please try again.');
+            console.error('Prediction Error:', err);
+            const msg = err.response?.data?.message || 'Prediction failed. Is the backend running?';
+            setError(msg);
+            alert(msg);
         } finally {
             setLoading(false);
         }
@@ -201,7 +220,7 @@ const JEEMainRankPredictor = ({ onOpenAuthModal }) => {
                                             placeholder="Enter 10 digit mobile number"
                                             value={mobile}
                                             onChange={(e) => setMobile(e.target.value)}
-                                            className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all"
+                                            className="w-full pl-28 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all"
                                          />
                                           <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 border-r border-gray-300 pr-2 pl-1">
                                              <img src="https://flagcdn.com/w20/in.png" alt="IN" className="h-3 w-5" />
@@ -247,7 +266,7 @@ const JEEMainRankPredictor = ({ onOpenAuthModal }) => {
 
                 {/* Result Display */}
                 {result && (
-                    <div className="mt-8 animate-fade-in">
+                    <div className="mt-8">
                         {/* Report Header */}
                         <div className="text-center mb-8">
                              <div className="flex items-center justify-center gap-2 text-yellow-500 mb-2">
