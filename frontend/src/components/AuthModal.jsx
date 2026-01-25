@@ -150,7 +150,7 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="relative z-[100]">
+        <div className="relative z-[200]">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
