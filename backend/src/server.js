@@ -25,17 +25,8 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-const whitelist = [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'].filter(Boolean);
-
 const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || whitelist.indexOf(origin) !== -1 || origin.startsWith('http://localhost:')) {
-            callback(null, true);
-        } else {
-            console.log("CORS Blocked:", origin);
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: true, // Allow any origin
     credentials: true
 };
 app.use(cors(corsOptions));
