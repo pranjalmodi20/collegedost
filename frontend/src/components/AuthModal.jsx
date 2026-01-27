@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes, FaCheckCircle, FaGoogle, FaEnvelope, FaLock, FaUser, FaPhone, FaGraduationCap, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa';
-import axios from 'axios';
+// import axios from 'axios'; // Removed as we use centralized api
 import { GoogleLogin } from '@react-oauth/google';
+import api from '../api/axios'; // Import centralized api instance
 import { useAuth } from '../context/AuthContext';
 
 const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
@@ -41,20 +42,19 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
     };
   }, [isOpen, initialTab]);
 
-  // Multi-step verification removed
+  // Replace the manual apiCall function with the shared instance
+  // import api from '../api/axios'; // REMOVED duplicate nested import
+
+
   const apiCall = async (method, endpoint, data = {}) => {
-      const BASE_URL = import.meta.env.VITE_API_BASE_URL || `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api`;
-      const url = `${BASE_URL}${endpoint}`;
-      const token = localStorage.getItem('token');
+      // Use the centralized 'api' instance which has the correct Base URL logic
+      // and interceptors for headers/auth tokens.
       const config = {
-          withCredentials: true,
-          headers: {
-              'Content-Type': 'application/json',
-              ...(token && { Authorization: `Bearer ${token}` })
-          }
+          method,
+          url: endpoint,
+          data
       };
-      
-      return axios({ method, url, data, ...config });
+      return api(config);
   };
 
   const handleSubmit = async (e) => {

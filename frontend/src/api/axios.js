@@ -8,20 +8,25 @@ import axios from 'axios';
 const getCurrentBackendUrl = () => {
   const hostname = window.location.hostname;
 
-  // Local development
+  // 1. Strict Localhost Check: Only use localhost if the BROWSER itself is localhost
+  // This invalidates bad Env Vars on deployed sites
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return import.meta.env.VITE_API_BASE_URL
-      ? `${import.meta.env.VITE_API_BASE_URL}/api`
-      : 'http://localhost:5001/api';
+      // Check if Env Var exists and is valid, otherwise default to 5001
+      return import.meta.env.VITE_API_BASE_URL 
+          ? `${import.meta.env.VITE_API_BASE_URL}/api`
+          : 'http://localhost:5001/api';
   }
 
-  // Production (Vercel)
+  // 2. Production Fallback (Vercel/Render)
+  // If we are NOT on localhost, we MUST use the public backend.
+  // We ignore VITE_API_BASE_URL here if it points to localhost (common misconfig).
   const envUrl = import.meta.env.VITE_API_BASE_URL;
-  if (envUrl && !envUrl.includes('localhost')) {
-    return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
+  if (envUrl && !envUrl.includes('localhost') && envUrl.startsWith('http')) {
+       return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
   }
-
-  // Final fallback (Render backend)
+  
+  // 3. Absolute Fallback: If all else fails, use the hardcoded production URL.
+  // This guarantees that a Vercel deployment NEVER tries to hit localhost.
   return 'https://collegedost-929n.onrender.com/api';
 };
 
