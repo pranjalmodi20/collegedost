@@ -9,7 +9,8 @@ const getCurrentBackendUrl = () => {
   const hostname = window.location.hostname;
 
   // 1. Strict Localhost Check: Only use localhost if the BROWSER itself is localhost
-  // This invalidates bad Env Vars on deployed sites
+  // This invalidates bad Env Vars on deployed sites.
+  // FORCE REBUILD: Updated Strict Logic
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
       // Check if Env Var exists and is valid, otherwise default to 5001
       return import.meta.env.VITE_API_BASE_URL 

@@ -9,7 +9,13 @@ const connectDB = require('./config/db');
 dotenv.config();
 
 // Connect to MongoDB
-connectDB().catch(err => console.log('MongoDB connection failed'));
+// Connect to MongoDB
+connectDB()
+  .then(() => console.log('✅ MongoDB Connected Successfully'))
+  .catch(err => {
+    console.error('❌ MongoDB Connection Failed:', err.message);
+    // process.exit(1); // Optional: Exit if you want Render to restart, but maybe keep running for debug
+  });
 
 const app = express();
 
