@@ -28,7 +28,7 @@ const InternationalColleges = () => {
     try {
       setLoading(true);
       // Query specific Country (default USA) + Search Query
-      const url = `http://localhost:5001/api/colleges?country=${country}&search=${searchTerm}&page=${page}&limit=${limit}`;
+      const url = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges?country=${country}&search=${searchTerm}&page=${page}&limit=${limit}`;
       const res = await axios.get(url);
       
       if (res.data.success) {

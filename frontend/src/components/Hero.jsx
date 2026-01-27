@@ -27,7 +27,7 @@ const Hero = ({
         if (search.length >= 2) {
             try {
                 // Use full URL or import configured axios instance. Using direct URL for safety in component.
-                const res = await axios.get(`http://localhost:5001/api/colleges/search?q=${search}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges/search?q=${search}`);
                 if (res.data.success) {
                     setSuggestions(res.data.data);
                     setShowSuggestions(true);

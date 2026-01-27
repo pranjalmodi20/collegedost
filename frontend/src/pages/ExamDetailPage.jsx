@@ -20,7 +20,7 @@ const ExamDetailPage = () => {
     useEffect(() => {
         const fetchExam = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/api/exams/${slug}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/exams/${slug}`);
                 if (res.data.success) {
                     setExam(res.data.data);
                 }

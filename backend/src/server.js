@@ -29,7 +29,10 @@ const whitelist = [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://lo
 
 const corsOptions = {
     origin: function (origin, callback) {
-        if (!origin || whitelist.indexOf(origin) !== -1 || origin.startsWith('http://localhost:')) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        if (whitelist.indexOf(origin) !== -1 || origin.startsWith('http://localhost:') || origin.endsWith('.vercel.app')) {
             callback(null, true);
         } else {
             console.log("CORS Blocked:", origin);

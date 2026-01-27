@@ -12,7 +12,7 @@ const CourseDetailPage = () => {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/api/courses/${slug}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/courses/${slug}`);
                 if (res.data.success) {
                     setCourse(res.data.data);
                     setColleges(res.data.colleges || []);

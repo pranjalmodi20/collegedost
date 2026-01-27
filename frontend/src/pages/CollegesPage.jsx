@@ -72,7 +72,7 @@ const CollegesPage = () => {
         const timer = setTimeout(async () => {
             if (query.length >= 2) {
                 try {
-                    const res = await axios.get(`http://localhost:5001/api/colleges/search?q=${query}`);
+                    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges/search?q=${query}`);
                     if (res.data.success) {
                         setSuggestions(res.data.data);
                         setShowSuggestions(true);
@@ -100,7 +100,7 @@ const CollegesPage = () => {
             params.append('page', page);
             params.append('limit', LIMIT);
 
-            const res = await axios.get(`http://localhost:5001/api/colleges?${params.toString()}`);
+            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges?${params.toString()}`);
             if (res.data.success) {
                 setColleges(res.data.data);
                 // Update Pagination Info from Backend
