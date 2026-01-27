@@ -1,18 +1,42 @@
 import axios from 'axios';
 
 // Create a configured axios instance
-// Determine backend URL dynamically if env var is missing
-const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const defaultBackend = isLocal ? 'http://localhost:5001' : 'https://collegedost-backend.vercel.app';
+// Logic: Determine backend URL based on the current browser URL (window.location)
+// This ensures that if you are on the deployed site, you usage the deployed backend.
+// If you are on localhost, you use the local backend.
+
+const getCurrentBackendUrl = () => {
+    const hostname = window.location.hostname;
+    
+    // 1. If running locally (dev or preview)
+    // We trust localhost env vars or default to 5001
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return import.meta.env.VITE_API_BASE_URL 
+            ? `${import.meta.env.VITE_API_BASE_URL}/api`
+            : 'http://localhost:5001/api';
+    }
+    
+    // 2. If running on Vercel (Production)
+    // We prefer the Env Var if it exists and is NOT localhost (prevent bad config)
+    const envUrl = import.meta.env.VITE_API_BASE_URL;
+    if (envUrl && !envUrl.includes('localhost')) {
+         return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
+    }
+    
+    // 3. Fallback for Production (if Env Var is missing or points to localhost)
+    // Hardcoded production backend to guarantee connectivity
+    return 'https://collegedost-backend.vercel.app/api';
+};
 
 const api = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL || defaultBackend}/api`,
+    baseURL: getCurrentBackendUrl(),
     withCredentials: true 
 });
 
-// Fallback: If we contain 'undefined' or fail, we log.
-if (!import.meta.env.VITE_API_BASE_URL && import.meta.env.MODE === 'production') {
-    console.warn("⚠️ VITE_API_BASE_URL is missing! Defaulting to presumed backend URL. If this fails, set the variable in Vercel.");
+// Logs for debugging (will show in browser console)
+console.log('API Base URL:', getCurrentBackendUrl());
+if (!import.meta.env.VITE_GOOGLE_CLIENT_ID) {
+    console.error('Missing VITE_GOOGLE_CLIENT_ID in Environment Variables! Google Login will fail.');
 }
 
 // Add a request interceptor to attach auth token
