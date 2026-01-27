@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { FaMapMarkerAlt, FaUniversity, FaAward, FaRupeeSign, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 
 const CollegeDetailPage = () => {
@@ -11,7 +11,7 @@ const CollegeDetailPage = () => {
     useEffect(() => {
         const fetchCollege = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges/${slug}`);
+                const res = await api.get(`/colleges/${slug}`);
                 if (res.data.success) {
                     setCollege(res.data.data);
                 }
