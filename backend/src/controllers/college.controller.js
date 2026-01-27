@@ -5,38 +5,70 @@ const College = require('../models/College.model');
 // @access  Public
 exports.getColleges = async (req, res) => {
     try {
-        const { state, city, type, exam, course, search } = req.query;
+        const { state, city, type, exam, course, search, branch, minFees, maxFees, sort, country, nirfCategory, page = 1, limit = 20 } = req.query;
+        const pageNum = parseInt(page);
+        const limitNum = parseInt(limit);
+        const skip = (pageNum - 1) * limitNum;
+
+        // --- EXISTING FILTER LOGIC ---
         let query = {};
         
-        if (state) query['location.state'] = state;
-        if (city) query['location.city'] = city;
-        if (type) query.type = type;
+        // Use anchored Regex (^...$) for dropdowns to use Indexes efficiently
+        if (state) query['location.state'] = { $regex: new RegExp(`^${state}`, 'i') }; 
+        if (city) query['location.city'] = { $regex: new RegExp(`^${city}`, 'i') };
         
-        // Filter by Cutoff Exam (Accepted Exam)
-        if (exam) {
-            query['cutoff.exam'] = exam;
+        if (country) {
+            query['location.country'] = { $regex: new RegExp(`^${country}`, 'i') }; 
+        } else {
+            // Default to India to keep sections separate (User Request)
+            query['location.country'] = 'India';
         }
 
-        // Filter by Courses (using regex on the 'coursesOffered' array)
-        if (course) {
-             query['coursesOffered.courseName'] = { $regex: course, $options: 'i' };
+        if (type) query.type = { $regex: new RegExp(`^${type}`, 'i') };
+        
+        // Exam & Branch
+        if (exam) query['cutoff.exam'] = exam;
+        if (branch) query.streams = { $regex: branch, $options: 'i' }; 
+        if (course) query['coursesOffered.courseName'] = { $regex: course, $options: 'i' };
+
+        // Fees Range
+        if (minFees || maxFees) {
+            query['fees.tuition'] = {};
+            if (minFees) query['fees.tuition'].$gte = Number(minFees);
+            if (maxFees) query['fees.tuition'].$lte = Number(maxFees);
         }
 
+        // Global Search
         if (search) {
              query.$or = [
                  { name: { $regex: search, $options: 'i' } },
-                 { type: { $regex: search, $options: 'i' } },
                  { 'location.city': { $regex: search, $options: 'i' } },
-                 { 'location.state': { $regex: search, $options: 'i' } },
-                 { 'coursesOffered.courseName': { $regex: search, $options: 'i' } }
+                 { 'location.state': { $regex: search, $options: 'i' } }
              ];
         }
 
-        const colleges = await College.find(query).sort({ nirfRank: 1 });
+        // Sorting Logic
+        let sortOption = { nirfRank: 1 };
+        if (sort === 'fees_low') sortOption = { 'fees.tuition': 1 };
+        if (sort === 'fees_high') sortOption = { 'fees.tuition': -1 };
+        if (sort === 'rank') sortOption = { nirfRank: 1 };
+
+        const colleges = await College.find(query)
+            .sort(sortOption)
+            .skip(skip)
+            .limit(limitNum)
+            .lean();
+
+        const total = await College.countDocuments(query);
 
         res.status(200).json({
             success: true,
             count: colleges.length,
+            pagination: {
+                total,
+                page: pageNum,
+                pages: Math.ceil(total / limitNum)
+            },
             data: colleges
         });
     } catch (error) {
@@ -121,6 +153,31 @@ exports.predictColleges = async (req, res) => {
     }
 };
 
+// @desc    Live Search Suggestions (Autocomplete)
+// @route   GET /api/colleges/search?q=...
+exports.searchColleges = async (req, res) => {
+    try {
+        const { q } = req.query;
+        if (!q || q.length < 2) {
+             return res.status(200).json({ success: true, data: [] });
+        }
+
+        const colleges = await College.find({
+            $or: [
+                { name: { $regex: q, $options: 'i' } },
+                { 'location.city': { $regex: q, $options: 'i' } }
+            ]
+        })
+        .select('name slug location.city type nirfRank')
+        .limit(8);
+
+        res.status(200).json({ success: true, count: colleges.length, data: colleges });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
 // @desc    Create new college
 // @route   POST /api/colleges
 // @access  Private (Admin)
@@ -133,3 +190,91 @@ exports.createCollege = async (req, res) => {
         res.status(400).json({ success: false, message: error.message });
     }
 };
+
+// @desc    Get Top Ranked Colleges by Category (using Aggregation)
+// @route   GET /api/colleges/top/:category
+exports.getTopColleges = async (req, res) => {
+    try {
+        const { category } = req.params; // e.g. "Engineering"
+        
+        // Use Aggregation to filter ranking array and sort
+        const colleges = await College.aggregate([
+            { $match: { 
+                "rankings": { 
+                    $elemMatch: { source: "NIRF", category: category } 
+                } 
+            }},
+            { $addFields: {
+                specificRankObj: {
+                    $filter: {
+                        input: "$rankings",
+                        as: "r",
+                        cond: { 
+                            $and: [
+                                { $eq: ["$$r.source", "NIRF"] },
+                                { $eq: ["$$r.category", category] }
+                            ]
+                        }
+                    }
+                }
+            }},
+            { $addFields: { sortRank: { $arrayElemAt: ["$specificRankObj.rank", 0] } } },
+            { $sort: { sortRank: 1 } },
+            { $limit: 20 }
+        ]);
+
+        res.status(200).json({ success: true, count: colleges.length, data: colleges });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+// @desc    Get Colleges by State
+// @route   GET /api/colleges/state/:state
+exports.getCollegesByState = async (req, res) => {
+    try {
+        const { state } = req.params;
+        const colleges = await College.find({
+            "location.state": { $regex: new RegExp(`^${state}$`, "i") } 
+        }).limit(50);
+        res.status(200).json({ success: true, count: colleges.length, data: colleges });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+// @desc    Get Colleges by City
+// @route   GET /api/colleges/city/:city
+exports.getCollegesByCity = async (req, res) => {
+    try {
+        const { city } = req.params;
+        const colleges = await College.find({
+            "location.city": { $regex: new RegExp(`^${city}$`, "i") }
+        }).limit(50);
+        res.status(200).json({ success: true, count: colleges.length, data: colleges });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+// @desc    Get Best ROI (Placement %)
+// @route   GET /api/colleges/best-roi
+exports.getBestROI = async (req, res) => {
+    try {
+        // Proxy ROI with Placement Percentage for now
+        const colleges = await College.find({
+            "placements.placementPercentage": { $exists: true, $ne: null }
+        })
+        .sort({ "placements.placementPercentage": -1 })
+        .limit(20);
+        res.status(200).json({ success: true, count: colleges.length, data: colleges });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+
