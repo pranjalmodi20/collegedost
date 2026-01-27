@@ -1,116 +1,119 @@
 const mongoose = require("mongoose");
+const slugify = require('slugify');
 
 const collegeSchema = new mongoose.Schema(
   {
+    // --- CORE IDENTITY ---
     name: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      index: true
     },
     slug: {
         type: String,
-        unique: true
+        unique: true,
+        index: true
     },
+    aliases: [String], // e.g. ["IITB", "IIT Bombay"] - Critical for de-duplication
+    
+    // --- LOCATION (Global Standard) ---
     location: {
       city: String,
-      state: String,
-      pinCode: String,
+      state: String, // State/Province
+      zip: String,   // Zip/Pin Code
       country: {
         type: String,
-        default: "India"
+        required: true,
+        default: "India",
+        index: true
+      },
+      address: String,
+      coordinates: {
+        lat: Number,
+        lng: Number
       },
       mapUrl: String
     },
-    approvals: [{
-        type: String // e.g., "AICTE", "UGC", "NBA"
-    }],
-    
-    // Establishing "Institute of National Importance", etc.
+
+    // --- META & CLASSIFICATION ---
     type: {
       type: String,
-      enum: ["IIT", "NIT", "IIIT", "GFTI", "Private", "International", "Other", "Government"]
+      enum: ["Public", "Private", "Deemed", "Consortium", "Government", "IGO", "Other"],
+      default: "Other"
     },
-
     estYear: Number,
     website: String,
     
-    campusSize: String, // e.g. "500 Acres"
+    // --- ACADEMIC ---
+    approvals: [{ type: String }], // "AICTE", "UGC", "ABET"
+    accreditation: {
+        body: String, // "NAAC"
+        grade: String // "A++"
+    },
+    streams: [String], // ["Engineering", "Arts"]
 
-    // Detailed Rankings
-    rankings: [{
-        source: String, // e.g. "NIRF", "The Week"
-        year: Number,
-        rank: Number,
-        category: String // "Engineering", "Overall"
+    // --- SOURCE TRACKING (Strategy Requirement) ---
+    // Tracks where this data came from: "AISHE_2024", "IPEDS_CSV"
+    dataSources: [{
+        sourceName: String,
+        sourceId: String,   // ID in the external system (e.g. OPEID)
+        fetchedAt: { type: Date, default: Date.now }
     }],
 
-    // Keeping simple nirfRank for sorting ease
-    nirfRank: Number, 
-    
+    // --- METRICS ---
+    rankings: [{
+        source: String, // "NIRF", "QS", "USNews"
+        year: Number,
+        rank: Number,
+        category: String
+    }],
+    nirfRank: Number, // Legacy support for sorting
+
     fees: {
-        tuition: Number, // Annual
-        hostel: Number,
-        mess: Number,
-        currency: { type: String, default: 'INR' }
+        tuition: Number,
+        currency: { type: String, default: 'INR' },
+        note: String
     },
 
     placements: {
-        highestPackage: String, // "1.2 Cr"
-        averagePackage: String, // "18 LPA"
-        placementPercentage: Number,
-        topRecruiters: [String]
+        averagePackage: String,
+        placementPercentage: Number
     },
 
+    // --- DETAILED DATA (Can be populated later) ---
     coursesOffered: [{
         courseName: String, 
         duration: String,
         fee: Number 
     }],
 
-    cutoff: [
-      {
-        exam: {
-          type: String,
-          default: "JEE Main"
-        },
-        year: {
-          type: Number
-        },
+    // For predictors
+    cutoff: [{
+        exam: { type: String, default: "JEE Main" },
+        year: Number,
         round: Number,
-        branch: {
-          type: String
-        },
-        category: {
-          type: String,
-          default: "General"
-        },
-        cutoffType: {
-          type: String,
-          enum: ["RANK", "PERCENTILE"],
-          default: "RANK"
-        },
+        branch: String,
+        category: { type: String, default: "General" },
+        cutoffType: { type: String, enum: ["RANK", "PERCENTILE"], default: "RANK" },
         opening: Number,
         closing: Number,
-        quota: String // HS, OS, AI
-      }
-    ]
+        quota: String
+    }]
   },
   { timestamps: true }
 );
 
-// Slugify logic if needed, or handle in controller
-const slugify = require('slugify');
+// Auto-Slugify
 collegeSchema.pre('save', function(next) {
     if (!this.slug && this.name) {
-        this.slug = slugify(this.name, { lower: true });
+        this.slug = slugify(this.name, { lower: true, strict: true }) + '-' + (Math.floor(Math.random() * 1000));
+        // Append random number to avoid collision on "Saint Mary's College" (exists in every country)
     }
     next();
 });
 
-// Prevent duplicate college names in same state
-collegeSchema.index(
-  { name: 1, "location.state": 1 },
-  { unique: true }
-);
+// Composite Index for Uniqueness in Region
+collegeSchema.index({ name: 1, "location.country": 1, "location.state": 1 }, { unique: true });
 
 module.exports = mongoose.model("College", collegeSchema);

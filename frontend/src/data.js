@@ -36,11 +36,11 @@ export const collegesData = [
     titles: { col1: 'Top Ranked', col2: 'By Placement', col3_1: 'By City', col3_2: 'By State' },
     content: {
       exams: [
-        { title: 'Top Engineering Colleges', href: '/colleges?search=Engineering' },
-        { title: 'Top MBA Colleges', href: '/colleges?search=MBA' },
-        { title: 'Top Medical Colleges', href: '/colleges?search=Medical' },
-        { title: 'Top Law Colleges', href: '/colleges?search=Law' },
-        { title: 'Top Pharmacy Colleges', href: '/colleges?search=Pharmacy' }
+        { title: 'Top Engineering Colleges', href: '/colleges?nirfCategory=Engineering' },
+        { title: 'Top MBA Colleges', href: '/colleges?nirfCategory=Management' },
+        { title: 'Top Medical Colleges', href: '/colleges?nirfCategory=Medical' },
+        { title: 'Top Law Colleges', href: '/colleges?nirfCategory=Law' },
+        { title: 'Top Pharmacy Colleges', href: '/colleges?nirfCategory=Pharmacy' }
       ],
       colleges: [
         { title: 'Colleges with Best ROI', href: '#' },
@@ -109,6 +109,31 @@ export const collegesData = [
         { title: 'Indore', href: '#' },
         { title: 'Bhopal', href: '#' },
         { title: 'Nagpur', href: '#' }
+      ]
+    }
+  },
+  {
+    id: 'international',
+    label: 'International',
+    titles: { col1: 'Top Countries', col2: 'Popular Destinations', col3_1: 'Check Now', col3_2: 'Resources' },
+    content: {
+      exams: [
+        { title: 'Study in USA', href: '/international-colleges?country=USA' },
+        { title: 'Study in UK', href: '/international-colleges?country=UK' },
+        { title: 'Study in Canada', href: '/international-colleges?country=Canada' },
+        { title: 'Study in Australia', href: '/international-colleges?country=Australia' }
+      ],
+      colleges: [
+        { title: 'Colleges in USA', href: '/international-colleges?country=USA' },
+        { title: 'Colleges in London', href: '/international-colleges?city=London' },
+        { title: 'Colleges in New York', href: '/international-colleges?city=New York' }
+      ],
+      predictors: [
+        { title: 'View All International Colleges', href: '/international-colleges', isLink: true }
+      ],
+      resources: [
+         { title: 'Student Visa Guide', href: '#' },
+         { title: 'Scholarships', href: '#' }
       ]
     }
   }
@@ -1316,7 +1341,6 @@ export const navLinks = [
   { title: 'Courses', href: '/courses', hasDropdown: true },
   { title: 'News', href: '/news', hasDropdown: false },
   { title: 'Rankings', href: '#', hasDropdown: true },
-  { title: 'International', href: '/international-colleges', hasDropdown: false },
   { title: 'Counselling', href: '#', hasDropdown: true },
   { title: 'Careers', href: '#', hasDropdown: true },
   { title: 'More', href: '#', hasDropdown: true }
