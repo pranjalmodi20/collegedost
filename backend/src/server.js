@@ -42,7 +42,7 @@ app.use(
       // Check for Vercel Preview Deployments (Dynamic)
       // Matches https://<project>-<hash>-<user>.vercel.app
       if (origin.endsWith('.vercel.app')) {
-          return callback(null, true);
+        return callback(null, true);
       }
 
       console.warn(`🚫 CORS blocked for origin: ${origin}`);
@@ -70,6 +70,7 @@ app.use('/api/articles', require('./routes/article.routes'));
 app.use('/api/ask', require('./routes/ask.routes'));
 app.use('/api/verification', require('./routes/verification.routes'));
 app.use('/api/predictor', require('./routes/predictor.routes'));
+app.use('/api/test-prep', require('./routes/testPrep.routes'));
 
 
 require('./automation/nirfIngestion').initCron();
