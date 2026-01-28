@@ -227,7 +227,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                         {browseByStreamData.map((stream) => (
                           <div
                             key={stream.id}
-                            className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer ${activeStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
+                            className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer text-left ${activeStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
                             onMouseEnter={() => setActiveStream(stream.id)}
                             onClick={() => {
                                 if (stream.link) {
@@ -236,8 +236,8 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                                 }
                               }}
                           >
-                            {stream.label}
-                            <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <span className="flex-1 text-left pr-2">{stream.label}</span>
+                            <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                           </div>
                         ))}
                       </div>
@@ -516,7 +516,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed top-0 left-0 h-screen w-[85%] max-w-[400px] bg-white z-[1000] overflow-y-auto lg:hidden shadow-2xl flex flex-col"
+              className="fixed top-0 left-0 h-screen w-[85%] max-w-[400px] bg-white z-[1000] lg:hidden shadow-2xl flex flex-col"
             >
               
               {/* 1. Header */}
@@ -535,7 +535,7 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                  </button>
               </div>
 
-              <div className="p-4 space-y-6 pb-20">
+              <div className="flex-1 overflow-y-auto p-4 space-y-6">
                 
                 
 
@@ -546,16 +546,8 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                    <div className="flex flex-col pb-24">
                       {[
                         { name: 'Browse by Stream', data: browseByStreamData, icon: FaTh },
-                        { name: 'Test Prep', data: testPrepData, icon: FaLaptopCode },
                         { name: 'Colleges', data: collegesData, icon: FaUniversity },
-                        { name: 'Exams', data: examsData, icon: FaNewspaper },
-                        { name: 'Courses', data: coursesData, icon: FaBookOpen },
                         { name: 'News', link: '/news', icon: FaNewspaper },
-                        { name: 'Rankings', data: rankingsData, icon: FaTrophy },
-                        { name: 'International', link: '/international-colleges', icon: FaGlobeAmericas },
-                        { name: 'Counselling', data: counsellingData, icon: FaUserShield },
-                        { name: 'Careers', data: careersData, icon: FaBriefcase },
-                        { name: 'More', data: moreData, icon: FaEllipsisH },
                       ].map((section, idx) => {
                          const isSectionExpanded = expandedSection === section.name;
                          
@@ -594,9 +586,9 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                                                     <div key={subIdx} className="border-t border-gray-100">
                                                         <button 
                                                            onClick={() => setExpandedCategory(isCategoryExpanded ? null : subItem.label)}
-                                                           className="w-full flex items-center justify-between py-3 px-8 hover:bg-gray-100 transition-colors"
+                                                           className="w-full flex items-center justify-between py-3 px-8 hover:bg-gray-100 transition-colors text-left"
                                                         >
-                                                            <span className={`text-sm ${isCategoryExpanded ? 'text-brand-orange font-medium' : 'text-gray-600'}`}>{subItem.label}</span>
+                                                            <span className={`text-sm flex-1 text-left pr-2 ${isCategoryExpanded ? 'text-brand-orange font-medium' : 'text-gray-600'}`}>{subItem.label}</span>
                                                             {isCategoryExpanded ? <FaChevronDown className="text-[10px] text-brand-orange" /> : <FaChevronRight className="text-[10px] text-gray-300" />}
                                                         </button>
                                                         
@@ -650,26 +642,26 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                    </div>
                 </div>
                 
-                {/* 4. Bottom User Section */}
-                <div className="pt-4">
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-1">You</h4>
-                    {user ? (
-                        <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 px-2 py-3 bg-gray-50 rounded-lg">
-                            <div className="w-10 h-10 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold">
-                                {user.name?.[0] || 'U'}
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="font-bold text-gray-800 text-sm">{user.name}</span>
-                                <span className="text-xs text-gray-500">View Profile</span>
-                            </div>
-                        </Link>
-                    ) : (
-                        <button onClick={() => { onOpenAuthModal(); setIsMobileMenuOpen(false); }} className="w-full flex items-center justify-center gap-2 bg-brand-orange text-white py-3 rounded-lg font-bold shadow-lg shadow-orange-500/30 active:scale-95 transition-transform">
-                             <FaUser /> Login / Register
-                        </button>
-                    )}
-                </div>
+              </div>
 
+              {/* 4. Bottom User Section - Fixed Bottom */}
+              <div className="p-4 border-t border-gray-100 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-20">
+                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-1">You</h4>
+                  {user ? (
+                      <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 px-2 py-3 bg-gray-50 rounded-lg border border-gray-100">
+                          <div className="w-10 h-10 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold">
+                              {user.name?.[0] || 'U'}
+                          </div>
+                          <div className="flex flex-col">
+                              <span className="font-bold text-gray-800 text-sm">{user.name}</span>
+                              <span className="text-xs text-gray-500">View Profile</span>
+                          </div>
+                      </Link>
+                  ) : (
+                      <button onClick={() => { onOpenAuthModal(); setIsMobileMenuOpen(false); }} className="w-full flex items-center justify-center gap-2 bg-brand-orange text-white py-3 rounded-lg font-bold shadow-lg shadow-orange-500/30 active:scale-95 transition-transform">
+                           <FaUser /> Login / Register
+                      </button>
+                  )}
               </div>
             </motion.div>
           </>

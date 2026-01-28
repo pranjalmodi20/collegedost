@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -14,6 +14,34 @@ const ExamDetailPage = () => {
     const [refreshing, setRefreshing] = useState(false);
     const [activeTab, setActiveTab] = useState('Overview');
     const { user } = useAuth();
+    const location = useLocation();
+
+    const tabs = ['Overview', 'Important Dates', 'Syllabus', 'Exam Pattern', 'Application', 'News'];
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const tabParam = params.get('tab');
+        if (tabParam) {
+            // Map url-friendly slug to Tab Name if needed, or exact match
+            // Simple mapping for now: 'mock-test' -> 'Preparation' (if exists) or fallback
+            // But let's support exact names first or mapped ones
+            const tabMap = {
+                'dates': 'Important Dates',
+                'syllabus': 'Syllabus',
+                'pattern': 'Exam Pattern',
+                'application': 'Application',
+                'news': 'News',
+                'resources': 'Overview', // or specific resource tab if added
+                'mock-test': 'Overview', // or new tab
+                'previous-papers': 'Overview'
+            };
+            
+            const targetTab = tabMap[tabParam] || tabParam;
+             if (tabs.includes(targetTab)) {
+                setActiveTab(targetTab);
+            }
+        }
+    }, [location.search]);
 
     useEffect(() => {
         const fetchExam = async () => {
@@ -50,8 +78,6 @@ const ExamDetailPage = () => {
 
     if (loading) return <div className="min-h-screen pt-24 flex justify-center"><div className="animate-spin h-10 w-10 border-2 border-brand-orange rounded-full border-t-transparent"></div></div>;
     if (!exam) return <div className="min-h-screen pt-24 text-center">Exam Not Found</div>;
-
-    const tabs = ['Overview', 'Important Dates', 'Syllabus', 'Exam Pattern', 'Application', 'News'];
 
     return (
         <div className="bg-gray-50 min-h-screen pt-24 pb-12">

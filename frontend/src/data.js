@@ -419,6 +419,7 @@ export const browseByStreamData = [
       ]
     }
   },
+
   {
     id: 'animation',
     label: 'Animation and Design',
@@ -600,6 +601,7 @@ export const browseByStreamData = [
       ]
     }
   },
+
   {
     id: 'pharmacy',
     label: 'Pharmacy',
@@ -641,6 +643,9 @@ export const browseByStreamData = [
       resources: []
     }
   },
+
+
+
   {
     id: 'hospitality',
     label: 'Hospitality and Tourism',

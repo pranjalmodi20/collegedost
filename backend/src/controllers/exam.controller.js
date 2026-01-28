@@ -12,7 +12,7 @@ exports.getExams = async (req, res) => {
 
         // Logic to support Category filtering via 'level' param (backward compatible)
         const knownCategories = ['Engineering', 'Medical', 'Management', 'Law', 'Pharmacy', 'Finance', 'Computer Application and IT', 'Media'];
-        
+
         if (level) {
             if (knownCategories.includes(level)) {
                 query.category = level;
@@ -116,7 +116,7 @@ exports.refreshExamNews = async (req, res) => {
 
         try {
             const feed = await parser.parseURL(exam.rssFeedUrl);
-            
+
             // Map items to schema
             // We take top 10 items
             const newsItems = feed.items.slice(0, 10).map(item => ({
@@ -130,7 +130,7 @@ exports.refreshExamNews = async (req, res) => {
             // Merge or Replace? Let's Replace for now to keep it fresh and simple, 
             // or prepend new ones. Replacing is safer to avoid duplicates without complex check.
             exam.news = newsItems;
-            
+
             await exam.save();
 
             res.status(200).json({
@@ -185,7 +185,7 @@ const POPULAR_EXAMS = [
     { name: 'NMIMS NPAT', authority: 'NMIMS', level: 'University', website: 'https://npat.in/', rss: 'https://news.google.com/rss/search?q=NMIMS+NPAT&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'XGMT', authority: 'XIM University', level: 'University', website: 'https://xim.edu.in/', rss: 'https://news.google.com/rss/search?q=XGMT+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'SPJIMR Profile-based', authority: 'SPJIMR', level: 'Institute', website: 'https://www.spjimr.org/', rss: 'https://news.google.com/rss/search?q=SPJIMR+Admission&hl=en-IN&gl=IN&ceid=IN:en' },
-    
+
     // --- MBA State Level ---
     { name: 'MAH MBA CET', authority: 'State CET Cell, Maharashtra', level: 'State', website: 'https://cetcell.mahacet.org/', rss: 'https://news.google.com/rss/search?q=MAH+MBA+CET&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'MHT CET', authority: 'State Common Entrance Test Cell, Maharashtra', level: 'State', website: 'https://cetcell.mahacet.org/', rss: 'https://news.google.com/rss/search?q=MHT+CET+Exam&hl=en-IN&gl=IN&ceid=IN:en' }, // Kept compatible
@@ -206,6 +206,9 @@ const POPULAR_EXAMS = [
     { name: 'KIITEE Management', authority: 'KIIT', level: 'University', website: 'https://ksom.ac.in/', rss: 'https://news.google.com/rss/search?q=KIITEE+Management&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'UPESMET', authority: 'UPES', level: 'University', website: 'https://www.upes.ac.in/', rss: 'https://news.google.com/rss/search?q=UPESMET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'Christ University MBA', authority: 'Christ University', level: 'University', website: 'https://christuniversity.in/', rss: 'https://news.google.com/rss/search?q=Christ+University+MBA+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+
+
+
 
     // --- UG Medical & Allied ---
     // NEET UG is already top of list
@@ -232,9 +235,9 @@ const POPULAR_EXAMS = [
 const scrapeMetaDescription = async (url) => {
     try {
         const { data } = await axios.get(url, {
-             headers: { 'User-Agent': 'Mozilla/5.0' },
-             timeout: 5000,
-             httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false })
+            headers: { 'User-Agent': 'Mozilla/5.0' },
+            timeout: 5000,
+            httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false })
         });
         const $ = cheerio.load(data);
         const metaDesc = $('meta[name="description"]').attr('content') || '';
@@ -271,7 +274,7 @@ exports.autoIngestExams = async (req, res) => {
 
             // 3. Upsert
             const slug = slugify(examData.name, { lower: true });
-            
+
             const exam = await Exam.findOneAndUpdate(
                 { examName: examData.name },
                 {
@@ -284,7 +287,7 @@ exports.autoIngestExams = async (req, res) => {
                     rssFeedUrl: examData.rss,
                     description: description,
                     news: newsItems,
-                    logoUrl: `https://ui-avatars.com/api/?name=${slugify(examData.name, {replacement:'+'})}&background=random&size=200`
+                    logoUrl: `https://ui-avatars.com/api/?name=${slugify(examData.name, { replacement: '+' })}&background=random&size=200`
                 },
                 { upsert: true, new: true, setDefaultsOnInsert: true }
             );
