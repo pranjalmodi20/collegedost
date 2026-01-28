@@ -2,6 +2,87 @@ const College = require('../models/College.model');
 const NirfRanking = require('../models/NirfRanking.model');
 const { runIngestion } = require('../automation/nirfIngestion');
 
+const FILTER_MAP = {
+  btech_applications: {
+    filter: { 
+      $or: [
+        { "coursesOffered.courseName": { $regex: "B\\.Tech", $options: "i" } },
+        { streams: "Engineering" }
+      ]
+    },
+    sort: { updatedAt: -1 } // Show recently updated/active colleges
+  },
+  
+  top_engineering: {
+    filter: { 
+      streams: "Engineering", 
+      nirfRank: { $exists: true, $ne: null } 
+    },
+    sort: { nirfRank: 1 }
+  },
+
+  engineering_india: {
+    filter: { 
+      streams: "Engineering", 
+      "location.country": "India" 
+    },
+    sort: { nirfRank: 1 }
+  },
+
+  engineering_tn: {
+    filter: {
+      streams: "Engineering",
+      "location.state": "Tamil Nadu"
+    },
+    sort: { nirfRank: 1 }
+  },
+
+  jee_main: {
+    filter: {
+      streams: "Engineering",
+      $or: [
+        { "coursesOffered.examAccepted": { $regex: "JEE Main", $options: "i" } },
+        { "cutoff.exam": "JEE Main" }
+      ]
+    },
+    sort: { nirfRank: 1 }
+  },
+
+  top_iits: {
+    filter: {
+      $or: [
+        { type: "IIT" }, // Works if your DB has this type
+        // Regex fallback for Name matching (System Proof)
+        { name: { $regex: "^Indian Institute of Technology", $options: "i" } },
+        { aliases: { $in: ["IIT"] } }
+      ]
+    },
+    sort: { nirfRank: 1 }
+  },
+
+  top_nits: {
+    filter: {
+      $or: [
+        { type: "NIT" },
+        { name: { $regex: "^National Institute of Technology", $options: "i" } },
+        { aliases: { $in: ["NIT"] } }
+      ]
+    },
+    sort: { nirfRank: 1 }
+  },
+
+  top_iiits: {
+    filter: {
+      $or: [
+        { type: "IIIT" },
+        { name: { $regex: "^Indian Institute of Information Technology", $options: "i" } },
+        { aliases: { $in: ["IIIT"] } }
+      ]
+    },
+    sort: { nirfRank: 1 }
+  }
+};
+
 // @desc    Get all colleges
 // @route   GET /api/colleges
 // @access  Public
@@ -72,43 +153,89 @@ exports.getColleges = async (req, res) => {
 
         // --- 2. STANDARD FILTER MODE ---
         
-        let query = {};
+        // --- ROBUST FILTER CONSTRUCTION ---
+        // We accumulate all conditions in an array and use $and at the end.
+        // This avoids conflicts between different filters trying to set query.$or.
         
-        // Use anchored Regex for dropdowns
-        if (state) query['location.state'] = { $regex: new RegExp(`^${state}`, 'i') }; 
-        if (city) query['location.city'] = { $regex: new RegExp(`^${city}`, 'i') };
-        
-        // --- SEPARATION LOGIC ---
-        // If 'country' is NOT provided, Default to 'India'.
-        // This ensures the "Main" list is India only.
-        // User must explicitly request country='USA' etc.
+        let conditions = [];
+
+        // 1. Geography
         if (country) {
-            query['location.country'] = { $regex: new RegExp(`^${country}`, 'i') }; 
+            conditions.push({ 'location.country': { $regex: new RegExp(`^${country}`, 'i') } });
         } else {
-            query['location.country'] = 'India';
+            conditions.push({ 'location.country': 'India' });
         }
-
-        if (type) query.type = { $regex: new RegExp(`^${type}`, 'i') };
         
-        // Exam & Branch
-        if (exam) query['cutoff.exam'] = exam;
-        if (branch) query.streams = { $regex: branch, $options: 'i' }; 
-        if (course) query['coursesOffered.courseName'] = { $regex: course, $options: 'i' };
+        if (state && state !== 'All States') conditions.push({ 'location.state': { $regex: new RegExp(`^${state}`, 'i') } });
+        if (city) conditions.push({ 'location.city': { $regex: new RegExp(`^${city}`, 'i') } });
 
-        // Fees Range
-        if (minFees || maxFees) {
-            query['fees.tuition'] = {};
-            if (minFees) query['fees.tuition'].$gte = Number(minFees);
-            if (maxFees) query['fees.tuition'].$lte = Number(maxFees);
+        // 2. Classification
+        if (type && type !== 'All') conditions.push({ type: { $regex: new RegExp(`^${type}`, 'i') } });
+        
+        // Branch/Stream Filter - Robust Check
+        if (branch) {
+            const branchRegex = new RegExp(branch, 'i');
+            const branchConditions = [
+                { streams: branchRegex },
+                { 'coursesOffered.courseName': branchRegex }
+            ];
+            
+            // Smart Alias: If searching for 'Engineering', also look for 'B.Tech'/'B.E'
+            if (/engineering/i.test(branch)) {
+                 branchConditions.push({ 'coursesOffered.courseName': { $regex: 'B\\.Tech', $options: 'i' } });
+                 branchConditions.push({ 'coursesOffered.courseName': { $regex: 'B\\.E', $options: 'i' } });
+            }
+            // Smart Alias: If searching for 'Medical', look for 'MBBS'
+            if (/medical/i.test(branch)) {
+                 branchConditions.push({ 'coursesOffered.courseName': { $regex: 'MBBS', $options: 'i' } });
+            }
+
+            conditions.push({ $or: branchConditions });
         }
 
-        // Global Search
+        if (course) conditions.push({ 'coursesOffered.courseName': { $regex: course, $options: 'i' } });
+
+        // 3. Exam (Crucial Fix: Check BOTH cutoff table AND coursesOffered + Fuzzy)
+        if (exam) {
+             // Escape special chars just in case, but allow flexible spacing
+             // e.g. "JEE Main" should match "JEE-Main" or "JEE Main"
+             const safeExam = exam.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\s*[-]?\\s*');
+             const examRegex = new RegExp(safeExam, 'i');
+             
+             conditions.push({
+                 $or: [
+                     { 'cutoff.exam': examRegex },
+                     { 'coursesOffered.examAccepted': examRegex },
+                     { 'coursesOffered.eligibility': examRegex } // Sometimes hidden in eligibility text
+                 ]
+             });
+        }
+
+        // 4. Fees
+        if (minFees || maxFees) {
+            let feeQuery = {};
+            if (minFees) feeQuery.$gte = Number(minFees);
+            if (maxFees) feeQuery.$lte = Number(maxFees);
+            if (Object.keys(feeQuery).length > 0) {
+                 conditions.push({ 'fees.tuition': feeQuery });
+            }
+        }
+
+        // 5. Global Search (Name, City, State)
         if (search) {
-             query.$or = [
-                 { name: { $regex: search, $options: 'i' } },
-                 { 'location.city': { $regex: search, $options: 'i' } },
-                 { 'location.state': { $regex: search, $options: 'i' } }
-             ];
+             conditions.push({
+                 $or: [
+                     { name: { $regex: search, $options: 'i' } },
+                     { 'location.city': { $regex: search, $options: 'i' } },
+                     { 'location.state': { $regex: search, $options: 'i' } }
+                 ]
+             });
+        }
+
+        // Combine all conditions
+        let query = {};
+        if (conditions.length > 0) {
+            query = { $and: conditions };
         }
 
         // Sorting Logic
@@ -485,3 +612,32 @@ exports.syncColleges = async (req, res) => {
     }
 };
 
+// @desc    Get College Section (Generic API)
+// @route   GET /api/colleges/sections/:key
+exports.getCollegeSection = async (req, res) => {
+    try {
+        const { key } = req.params;
+        const { limit = 10 } = req.query; 
+        
+        const config = FILTER_MAP[key];
+
+        if (!config) {
+            return res.status(400).json({ success: false, message: "Invalid section key" });
+        }
+
+        const colleges = await College.find(config.filter)
+            .sort(config.sort)
+            .select("name location nirfRank logo type") 
+            .limit(parseInt(limit));
+
+        res.status(200).json({
+            success: true,
+            data: colleges,
+            section: key
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};

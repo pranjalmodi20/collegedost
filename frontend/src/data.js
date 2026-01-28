@@ -249,12 +249,9 @@ export const browseByStreamData = [
       colleges: [
         { title: 'Colleges Accepting B.Tech Applications', href: '/colleges?course=B.Tech' },
         { title: 'Top Engineering Colleges in India', href: '/colleges?nirfCategory=Engineering' },
-        { title: 'Engineering Colleges in India', href: '/colleges?branch=Engineering' },
-        { title: 'Engineering Colleges in Tamil Nadu', href: '/colleges?branch=Engineering&state=Tamil Nadu' },
         { title: 'Engineering Colleges Accepting JEE Main', href: '/colleges?branch=Engineering&exam=JEE Main' },
         { title: 'Top IITs in India', href: '/colleges?search=IIT' },
-        { title: 'Top NITs in India', href: '/colleges?search=NIT' },
-        { title: 'Top IIITs in India', href: '/colleges?search=IIIT' }
+        { title: 'Top NITs in India', href: '/colleges?search=NIT' }
       ],
       predictors: [
         { title: 'JEE Main College Predictor', href: '/jee-main-predictor' },

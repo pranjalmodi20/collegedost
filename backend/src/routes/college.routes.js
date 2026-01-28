@@ -11,7 +11,8 @@ const {
     getBestROI,
     searchColleges,
     seedNirfData,
-    syncColleges
+    syncColleges,
+    getCollegeSection
 } = require('../controllers/college.controller');
 const { protect, admin } = require('../middleware/authMiddleware');
 
@@ -24,6 +25,7 @@ router.get('/state/:state', getCollegesByState);
 router.get('/city/:city', getCollegesByCity);
 router.get('/best-roi', getBestROI);
 router.get('/seed-nirf', seedNirfData);
+router.get('/sections/:key', getCollegeSection);
 
 router.get('/', getColleges);
 router.get('/:slug', getCollegeBySlug);
