@@ -132,8 +132,8 @@ export const collegesData = [
         { title: 'View All International Colleges', href: '/international-colleges', isLink: true }
       ],
       resources: [
-         { title: 'Student Visa Guide', href: '#' },
-         { title: 'Scholarships', href: '#' }
+        { title: 'Student Visa Guide', href: '#' },
+        { title: 'Scholarships', href: '#' }
       ]
     }
   }
@@ -146,26 +146,26 @@ export const testPrepData = [
     titles: { col1: 'Exam Prep', col2: 'Mock Tests', col3_1: 'Previous Papers', col3_2: 'Resources' },
     content: {
       exams: [
-        { title: 'JEE Main Preparation', href: '#' },
-        { title: 'JEE Advanced Preparation', href: '#' },
-        { title: 'BITSAT Preparation', href: '#' },
-        { title: 'VITEEE Preparation', href: '#' }
+        { title: 'JEE Main Preparation', href: '/exams/jee-main' },
+        { title: 'JEE Advanced Preparation', href: '/test-prep/engineering/jee-advanced/preparation' },
+        { title: 'BITSAT Preparation', href: '/test-prep/engineering/bitsat/preparation' },
+        { title: 'VITEEE Preparation', href: '/test-prep/engineering/viteee/preparation' }
       ],
       colleges: [
-        { title: 'JEE Main Mock Test', href: '#' },
-        { title: 'JEE Advanced Mock Test', href: '#' },
-        { title: 'BITSAT Mock Test', href: '#' },
-        { title: 'VITEEE Mock Test', href: '#' }
+        { title: 'JEE Main Mock Test', href: '/exams/jee-main?tab=mock-test' },
+        { title: 'JEE Advanced Mock Test', href: '/test-prep/engineering/jee-advanced/mock-test' },
+        { title: 'BITSAT Mock Test', href: '/test-prep/engineering/bitsat/mock-test' },
+        { title: 'VITEEE Mock Test', href: '/test-prep/engineering/viteee/mock-test' }
       ],
       predictors: [
-        { title: 'JEE Main 2025 Paper', href: '#' },
-        { title: 'JEE Advanced 2024 Paper', href: '#' },
-        { title: 'BITSAT Previous Papers', href: '#' }
+        { title: 'JEE Main 2025 Paper', href: '/exams/jee-main?tab=previous-papers' },
+        { title: 'JEE Advanced 2024 Paper', href: '/test-prep/engineering/jee-advanced/previous-paper' },
+        { title: 'BITSAT Previous Papers', href: '/test-prep/engineering/bitsat/previous-paper' }
       ],
       resources: [
-        { title: 'Engineering Study Material', href: '#' },
-        { title: 'Toppers Strategy', href: '#' },
-        { title: 'Important Topics', href: '#' }
+        { title: 'Engineering Study Material', href: '/exams/jee-main?tab=resources' },
+        { title: 'Toppers Strategy', href: '/exams/jee-main?tab=resources' },
+        { title: 'Important Topics', href: '/exams/jee-main?tab=resources' }
       ]
     }
   },
@@ -485,12 +485,9 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'IIMC Entrance Exam', href: '/exams/iimc-entrance-exam' },
-        { title: 'JMI Mass Comm', href: '/exams/jmi-mass-comm' },
-        { title: 'XIC OET', href: '/exams/xic-oet' },
-        { title: 'FTII JET', href: '/exams/ftii-jet' },
-        { title: 'NMIMS NPAT', href: '/exams/nmims-npat' },
-        { title: 'View All', href: '/exams?level=Media', isLink: true }
+        { title: 'IIMC Entrance Exam 2025', href: '#' },
+        { title: 'NPAT 2025', href: '#' },
+        { title: 'View All', href: '#', isLink: true }
       ],
       colleges: [
         { title: 'Compare Colleges', href: '#' },
@@ -522,16 +519,14 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CA Foundation', href: '/exams/ca-foundation' },
-        { title: 'CA Intermediate', href: '/exams/ca-intermediate' },
-        { title: 'CA Final', href: '/exams/ca-final' },
-        { title: 'CS CSEET', href: '/exams/cs-cseet' },
-        { title: 'CS Executive', href: '/exams/cs-executive' },
-        { title: 'CS Professional', href: '/exams/cs-professional' },
-        { title: 'CFA Level 1', href: '/exams/cfa-level-1' },
-        { title: 'ACCA', href: '/exams/acca' },
-        { title: 'ACET', href: '/exams/acet' },
-        { title: 'View All', href: '/exams?level=Finance', isLink: true }
+        { title: 'CA Intermediate', href: '#' },
+        { title: 'CA Foundation', href: '#' },
+        { title: 'CA Final', href: '#' },
+        { title: 'CS Executive', href: '#' },
+        { title: 'CS Professional', href: '#' },
+        { title: 'CFA Exam', href: '#' },
+        { title: 'CSEET', href: '#' },
+        { title: 'ACET', href: '#' }
       ],
       colleges: [
         { title: 'Difference between CA and CS', href: '#' },

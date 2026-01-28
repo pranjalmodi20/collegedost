@@ -10,6 +10,7 @@ import PredictorsSection from '../components/PredictorsSection';
 import Testimonials from '../components/Testimonials';
 import { motion } from 'framer-motion';
 import api from '../api/axios';
+import TestPrepExamsSection from '../components/TestPrepExamsSection';
 import SEO from '../components/SEO';
 
 import { 
@@ -135,8 +136,14 @@ const HomePage = ({ onOpenAskModal }) => {
           <PillSection title="Top Rankings" items={homeRankingsData} color="border-gray-200" />
         </motion.div>
         
+
+
         <motion.div variants={itemVariants}>
           <PillSection title="Popular Exams" items={homeExamsData} color="border-gray-200" />
+        </motion.div>
+        
+        <motion.div variants={itemVariants}>
+           <TestPrepExamsSection />
         </motion.div>
         
         <motion.div variants={itemVariants}>

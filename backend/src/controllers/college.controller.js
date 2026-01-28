@@ -461,26 +461,3 @@ exports.seedNirfData = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-
-// @desc    Trigger College Sync (NIRF Ingestion)
-// @route   POST /api/colleges/sync
-// @access  Private/Admin
-exports.syncColleges = async (req, res) => {
-    try {
-        console.log('Manual sync triggered via Admin Panel');
-        
-        runIngestion().then(() => {
-            console.log('Manual Sync Completed Successfully');
-        }).catch(err => {
-            console.error('Manual Sync Failed:', err);
-        });
-
-        res.status(200).json({ 
-            success: true, 
-            message: 'College synchronization started in the background.' 
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Server Error' });
-    }
-};

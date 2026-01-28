@@ -45,6 +45,12 @@ const ArtsPage = lazy(() => import('./pages/ArtsPage'));
 const EducationPage = lazy(() => import('./pages/EducationPage'));
 const ComputerPage = lazy(() => import('./pages/ComputerPage'));
 const StudyAbroadPage = lazy(() => import('./pages/StudyAbroadPage'));
+// ... (existing imports)
+const TestPrepDetailPage = lazy(() => import('./pages/TestPrepDetailPage'));
+const TestPrepViewPage = lazy(() => import('./pages/TestPrepViewPage'));
+
+
+
 
 
 import { HelmetProvider } from 'react-helmet-async';
@@ -120,6 +126,8 @@ function App() {
               <Route path="/arts" element={<ArtsPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
               <Route path="/education" element={<EducationPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
               <Route path="/computer-applications" element={<ComputerPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
+              <Route path="/test-prep/:stream/:exam/:type" element={<TestPrepDetailPage />} />
+              <Route path="/test-prep/view/:slug" element={<TestPrepViewPage />} />
               <Route path="/study-abroad" element={<StudyAbroadPage onOpenAskModal={() => setIsAskModalOpen(true)} />} />
             </Routes>
           </Suspense>
