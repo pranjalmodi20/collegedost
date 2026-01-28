@@ -460,3 +460,20 @@ exports.seedNirfData = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
+// @desc    Sync College Data (Manual Trigger)
+// @route   POST /api/colleges/sync
+// @access  Private (Admin)
+exports.syncColleges = async (req, res) => {
+    try {
+        const { ingestColleges } = require('../automation/ingestColleges');
+        console.log("Admin Trigger: Starting College Data Sync...");
+        
+        await ingestColleges();
+        
+        res.status(200).json({ success: true, message: 'College data synchronization completed successfully.' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Sync failed: ' + error.message });
+    }
+};

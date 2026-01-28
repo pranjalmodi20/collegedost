@@ -19,6 +19,14 @@ const initExamCron = () => {
     });
 
     console.log('🕒 Exam News Auto-Update Scheduled (Every 12 Hours)');
+
+    // Run College Ingestion Weekly (Sunday at 2 AM)
+    const { ingestColleges } = require('../automation/ingestColleges');
+    cron.schedule('0 2 * * 0', async () => {
+        console.log('⏳ Running Weekly College Data Sync...');
+        await ingestColleges();
+    });
+    console.log('📅 College Data Auto-Sync Scheduled (Weekly)');
 };
 
 module.exports = initExamCron;

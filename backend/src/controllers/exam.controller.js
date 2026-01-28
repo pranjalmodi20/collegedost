@@ -217,8 +217,47 @@ const POPULAR_EXAMS = [
     { name: 'NEET SS', authority: 'NBEMS', level: 'National', website: 'https://nbe.edu.in/', rss: 'https://news.google.com/rss/search?q=NEET+SS+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'INI SS', authority: 'AIIMS', level: 'National', website: 'https://www.aiimsexams.ac.in/', rss: 'https://news.google.com/rss/search?q=INI+SS+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'FMGE', authority: 'NBEMS', level: 'International', website: 'https://nbe.edu.in/', rss: 'https://news.google.com/rss/search?q=FMGE+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
-    { name: 'NExT', authority: 'NMC', level: 'National', website: 'https://www.nmc.org.in/', rss: 'https://news.google.com/rss/search?q=National+Exit+Test+Medical+NExT&hl=en-IN&gl=IN&ceid=IN:en' }
-];
+    { name: 'NExT', authority: 'NMC', level: 'National', website: 'https://www.nmc.org.in/', rss: 'https://news.google.com/rss/search?q=National+Exit+Test+Medical+NExT&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Media & Journalism National ---
+    { name: 'IIMC Entrance Exam', authority: 'IIMC', level: 'National', website: 'http://iimc.nic.in/', rss: 'https://news.google.com/rss/search?q=IIMC+Entrance+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CUET-UG (Media)', authority: 'NTA', level: 'National', website: 'https://cuet.samarth.ac.in/', rss: 'https://news.google.com/rss/search?q=CUET+UG+Exam&hl=en-IN&gl=IN&ceid=IN:en' }, // Generic CUET RSS is better as specific might be empty
+    { name: 'CUET-PG (Media)', authority: 'NTA', level: 'National', website: 'https://pgcuet.samarth.ac.in/', rss: 'https://news.google.com/rss/search?q=CUET+PG+Journalism&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'UGC NET (Mass Comm)', authority: 'NTA', level: 'National', website: 'https://ugcnet.nta.nic.in/', rss: 'https://news.google.com/rss/search?q=UGC+NET+Mass+Communication&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'FTII JET', authority: 'FTII/SRFTI', level: 'National', website: 'https://applyadmission.net/jet2022/', rss: 'https://news.google.com/rss/search?q=FTII+JET+Entrance+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'SRFTI Entrance Exam', authority: 'SRFTI', level: 'National', website: 'http://srfti.ac.in/', rss: 'https://news.google.com/rss/search?q=SRFTI+Admission&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Media University / Institute ---
+    { name: 'XIC OET', authority: 'Xavier Institute', level: 'Institute', website: 'https://www.xaviercomm.org/', rss: 'https://news.google.com/rss/search?q=XIC+OET+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'SIMC MA(MC)', authority: 'Symbiosis', level: 'University', website: 'https://www.simc.edu/', rss: 'https://news.google.com/rss/search?q=SIMC+MA+Mass+Comm+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    // MICAT already in MBA list, assume shared or duplicate? Let's skip valid duplicate or keep if distinct enough context. It is same exam.
+    { name: 'Christ University Media', authority: 'Christ University', level: 'University', website: 'https://christuniversity.in/', rss: 'https://news.google.com/rss/search?q=Christ+University+Media+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'JMI Mass Comm', authority: 'Jamia Millia Islamia', level: 'University', website: 'https://www.jmi.ac.in/', rss: 'https://news.google.com/rss/search?q=Jamia+Millia+Islamia+Mass+Communication+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'AMU Mass Comm', authority: 'AMU', level: 'University', website: 'https://www.amucontrollerexams.com/', rss: 'https://news.google.com/rss/search?q=AMU+Mass+Communication+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'BHU Journalism', authority: 'BHU', level: 'University', website: 'https://bhu.ac.in/', rss: 'https://news.google.com/rss/search?q=BHU+Journalism+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'TISSNET (Media)', authority: 'TISS', level: 'Institute', website: 'https://tiss.edu/', rss: 'https://news.google.com/rss/search?q=TISSNET+Media+Cultural+Studies&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Private & Design Media ---
+    { name: 'NPAT Media', authority: 'NMIMS', level: 'University', website: 'https://npat.in/', rss: 'https://news.google.com/rss/search?q=NMIMS+NPAT+Media&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'IPU CET Media', authority: 'GGSIPU', level: 'University', website: 'http://www.ipu.ac.in/', rss: 'https://news.google.com/rss/search?q=IPU+CET+BJMC+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'UPES DAT', authority: 'UPES', level: 'University', website: 'https://www.upes.ac.in/', rss: 'https://news.google.com/rss/search?q=UPES+Design+Entrance+Test&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'LPU NEST Media', authority: 'LPU', level: 'University', website: 'https://nest.lpu.in/', rss: 'https://news.google.com/rss/search?q=LPU+NEST+Journalism&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'KIITEE Media', authority: 'KIIT', level: 'University', website: 'https://ksom.ac.in/', rss: 'https://news.google.com/rss/search?q=KIITEE+Mass+Communication&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'Manipal MET Media', authority: 'Manipal Academy', level: 'University', website: 'https://manipal.edu/', rss: 'https://news.google.com/rss/search?q=Manipal+MET+Media+Communication&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'Whistling Woods', authority: 'WWI', level: 'Institute', website: 'https://www.whistlingwoods.net/', rss: 'https://news.google.com/rss/search?q=Whistling+Woods+International+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'AAFT Entrance', authority: 'AAFT', level: 'Institute', website: 'https://aaft.com/', rss: 'https://news.google.com/rss/search?q=AAFT+Entrance+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'Pearl Academy', authority: 'Pearl Academy', level: 'Institute', website: 'https://pearlacademy.com/', rss: 'https://news.google.com/rss/search?q=Pearl+Academy+Entrance+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Finance & Accounts ---
+    { name: 'CA Foundation', authority: 'ICAI', level: 'National', website: 'https://www.icai.org/', rss: 'https://news.google.com/rss/search?q=CA+Foundation+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CA Intermediate', authority: 'ICAI', level: 'National', website: 'https://www.icai.org/', rss: 'https://news.google.com/rss/search?q=CA+Intermediate+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CA Final', authority: 'ICAI', level: 'National', website: 'https://www.icai.org/', rss: 'https://news.google.com/rss/search?q=CA+Final+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CSEET', authority: 'ICSI', level: 'National', website: 'https://www.icsi.edu/', rss: 'https://news.google.com/rss/search?q=CSEET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CS Executive', authority: 'ICSI', level: 'National', website: 'https://www.icsi.edu/', rss: 'https://news.google.com/rss/search?q=CS+Executive+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CS Professional', authority: 'ICSI', level: 'National', website: 'https://www.icsi.edu/', rss: 'https://news.google.com/rss/search?q=CS+Professional+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CFA Exam', authority: 'CFA Institute', level: 'International', website: 'https://www.cfainstitute.org/', rss: 'https://news.google.com/rss/search?q=CFA+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'ACET', authority: 'IAI', level: 'National', website: 'https://www.actuariesindia.org/', rss: 'https://news.google.com/rss/search?q=ACET+Exam&hl=en-IN&gl=IN&ceid=IN:en' }
+    ];
 
 const scrapeMetaDescription = async (url) => {
     try {

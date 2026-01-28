@@ -10,11 +10,13 @@ const {
     getCollegesByCity,
     getBestROI,
     searchColleges,
-    seedNirfData
+    seedNirfData,
+    syncColleges
 } = require('../controllers/college.controller');
-const { protect } = require('../middleware/authMiddleware');
+const { protect, admin } = require('../middleware/authMiddleware'); // Admin check recommended
 
 // Specific routes MUST come before /:slug
+router.post('/sync', protect, syncColleges); // Sync Route
 router.get('/predict', predictColleges);
 router.get('/search', searchColleges); // Autocomplete Route
 router.get('/top/:category', getTopColleges);

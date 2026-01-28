@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaUserGraduate, FaUniversity, FaNewspaper } from 'react-icons/fa';
+import { FaUserGraduate, FaUniversity, FaNewspaper, FaSync } from 'react-icons/fa';
 import api from '../../api/axios';
 
 const AdminDashboard = () => {
@@ -13,6 +13,25 @@ const AdminDashboard = () => {
     });
     const [recentUsers, setRecentUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [syncing, setSyncing] = useState(false);
+
+    const handleSync = async () => {
+        if (!window.confirm("This will start the college data synchronization process. It may take a minute. Continue?")) return;
+        setSyncing(true);
+        try {
+            const { data } = await api.post('/colleges/sync');
+            if(data.success) {
+                alert("Sync Complete: " + data.message);
+                // Refresh stats
+                window.location.reload(); 
+            }
+        } catch (error) {
+            console.error("Sync failed", error);
+            alert("Sync Failed: " + (error.response?.data?.message || error.message));
+        } finally {
+            setSyncing(false);
+        }
+    };
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -141,6 +160,12 @@ const AdminDashboard = () => {
                              </div>
                              <span className="text-sm font-bold">Post Article</span>
                         </Link>
+                        <button onClick={handleSync} disabled={syncing} className="p-4 bg-brand-light border border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-brand-blue hover:text-brand-blue transition-all group disabled:opacity-50">
+                             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                <FaSync className={`text-xl text-brand-blue ${syncing ? 'animate-spin' : ''}`} />
+                             </div>
+                             <span className="text-sm font-bold">{syncing ? 'Syncing...' : 'Sync Colleges'}</span>
+                        </button>
                     </div>
                 </motion.div>
             </div>

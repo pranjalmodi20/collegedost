@@ -485,9 +485,14 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'IIMC Entrance Exam 2025', href: '#' },
-        { title: 'NPAT 2025', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'IIMC Entrance Exam', href: '/exams/iimc-entrance-exam' },
+        { title: 'XIC OET', href: '/exams/xic-oet' },
+        { title: 'FTII JET', href: '/exams/ftii-jet' },
+        { title: 'NPAT (Media)', href: '/exams/npat-media' },
+        { title: 'SIMC MA(MC)', href: '/exams/simc-ma-mc' },
+        { title: 'IPU CET Media', href: '/exams/ipu-cet-media' },
+        { title: 'CUET-PG (Media)', href: '/exams/cuet-pg-media' },
+        { title: 'View All', href: '/exams?level=Media', isLink: true }
       ],
       colleges: [
         { title: 'Compare Colleges', href: '#' },
@@ -519,14 +524,15 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CA Intermediate', href: '#' },
-        { title: 'CA Foundation', href: '#' },
-        { title: 'CA Final', href: '#' },
-        { title: 'CS Executive', href: '#' },
-        { title: 'CS Professional', href: '#' },
-        { title: 'CFA Exam', href: '#' },
-        { title: 'CSEET', href: '#' },
-        { title: 'ACET', href: '#' }
+        { title: 'CA Intermediate', href: '/exams/ca-intermediate' },
+        { title: 'CA Foundation', href: '/exams/ca-foundation' },
+        { title: 'CA Final', href: '/exams/ca-final' },
+        { title: 'CS Executive', href: '/exams/cs-executive' },
+        { title: 'CS Professional', href: '/exams/cs-professional' },
+        { title: 'CFA Exam', href: '/exams/cfa-exam' },
+        { title: 'CSEET', href: '/exams/cseet' },
+        { title: 'ACET', href: '/exams/acet' },
+        { title: 'View All', href: '/exams?level=Finance', isLink: true }
       ],
       colleges: [
         { title: 'Difference between CA and CS', href: '#' },
