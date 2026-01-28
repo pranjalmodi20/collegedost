@@ -10,7 +10,16 @@ exports.getExams = async (req, res) => {
         const { level, authority } = req.query;
         let query = {};
 
-        if (level) query.examLevel = level;
+        // Logic to support Category filtering via 'level' param (backward compatible)
+        const knownCategories = ['Engineering', 'Medical', 'Management', 'Law', 'Pharmacy', 'Finance', 'Computer Application and IT', 'Media'];
+        
+        if (level) {
+            if (knownCategories.includes(level)) {
+                query.category = level;
+            } else {
+                query.examLevel = level;
+            }
+        }
         if (authority) query.conductingAuthority = { $regex: authority, $options: 'i' };
 
         const exams = await Exam.find(query).sort({ createdAt: -1 });
@@ -217,7 +226,40 @@ const POPULAR_EXAMS = [
     { name: 'NEET SS', authority: 'NBEMS', level: 'National', website: 'https://nbe.edu.in/', rss: 'https://news.google.com/rss/search?q=NEET+SS+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'INI SS', authority: 'AIIMS', level: 'National', website: 'https://www.aiimsexams.ac.in/', rss: 'https://news.google.com/rss/search?q=INI+SS+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'FMGE', authority: 'NBEMS', level: 'International', website: 'https://nbe.edu.in/', rss: 'https://news.google.com/rss/search?q=FMGE+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
-    { name: 'NExT', authority: 'NMC', level: 'National', website: 'https://www.nmc.org.in/', rss: 'https://news.google.com/rss/search?q=National+Exit+Test+Medical+NExT&hl=en-IN&gl=IN&ceid=IN:en' }
+    { name: 'NExT', authority: 'NMC', level: 'National', website: 'https://www.nmc.org.in/', rss: 'https://news.google.com/rss/search?q=National+Exit+Test+Medical+NExT&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Finance & Accounts ---
+    { name: 'CA Foundation', authority: 'ICAI', level: 'National', category: 'Finance', website: 'https://www.icai.org/', rss: 'https://news.google.com/rss/search?q=CA+Foundation+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CA Intermediate', authority: 'ICAI', level: 'National', category: 'Finance', website: 'https://www.icai.org/', rss: 'https://news.google.com/rss/search?q=CA+Intermediate+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CA Final', authority: 'ICAI', level: 'National', category: 'Finance', website: 'https://www.icai.org/', rss: 'https://news.google.com/rss/search?q=CA+Final+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CS CSEET', authority: 'ICSI', level: 'National', category: 'Finance', website: 'https://www.icsi.edu/', rss: 'https://news.google.com/rss/search?q=CS+CSEET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CS Executive', authority: 'ICSI', level: 'National', category: 'Finance', website: 'https://www.icsi.edu/', rss: 'https://news.google.com/rss/search?q=CS+Executive+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CS Professional', authority: 'ICSI', level: 'National', category: 'Finance', website: 'https://www.icsi.edu/', rss: 'https://news.google.com/rss/search?q=CS+Professional+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CMA Foundation', authority: 'ICMAI', level: 'National', category: 'Finance', website: 'https://icmai.in/', rss: 'https://news.google.com/rss/search?q=CMA+Foundation+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CMA Intermediate', authority: 'ICMAI', level: 'National', category: 'Finance', website: 'https://icmai.in/', rss: 'https://news.google.com/rss/search?q=CMA+Intermediate+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CMA Final', authority: 'ICMAI', level: 'National', category: 'Finance', website: 'https://icmai.in/', rss: 'https://news.google.com/rss/search?q=CMA+Final+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CFA Level 1', authority: 'CFA Institute', level: 'International', category: 'Finance', website: 'https://www.cfainstitute.org/', rss: 'https://news.google.com/rss/search?q=CFA+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'ACCA', authority: 'ACCA Global', level: 'International', category: 'Finance', website: 'https://www.accaglobal.com/', rss: 'https://news.google.com/rss/search?q=ACCA+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'ACET', authority: 'IAI', level: 'National', category: 'Finance', website: 'http://www.actuariesindia.org/', rss: 'https://news.google.com/rss/search?q=ACET+Exam+Actuarial&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Media & Journalism ---
+    { name: 'IIMC Entrance Exam', authority: 'IIMC', level: 'National', category: 'Media', website: 'http://iimc.nic.in/', rss: 'https://news.google.com/rss/search?q=IIMC+Entrance+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'JMI Mass Comm', authority: 'Jamia Millia Islamia', level: 'University', category: 'Media', website: 'https://www.jmi.ac.in/', rss: 'https://news.google.com/rss/search?q=Jamia+Mass+Communication+Entrance&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'XIC OET', authority: 'Xavier Institute', level: 'Institute', category: 'Media', website: 'https://www.xaviercomm.org/', rss: 'https://news.google.com/rss/search?q=XIC+OET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'FTII JET', authority: 'FTII/SRFTI', level: 'National', category: 'Media', website: 'https://ftii.ac.in/', rss: 'https://news.google.com/rss/search?q=FTII+JET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Computer Application & IT ---
+    { name: 'NIMCET', authority: 'NITs', level: 'National', category: 'Computer Application and IT', website: 'https://www.nimcet.in/', rss: 'https://news.google.com/rss/search?q=NIMCET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CUET-PG (MCA)', authority: 'NTA', level: 'National', category: 'Computer Application and IT', website: 'https://pgcuet.samarth.ac.in/', rss: 'https://news.google.com/rss/search?q=CUET+PG+MCA&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'MAH MCA CET', authority: 'State CET Cell, Maharashtra', level: 'State', category: 'Computer Application and IT', website: 'https://cetcell.mahacet.org/', rss: 'https://news.google.com/rss/search?q=MAH+MCA+CET&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'IPU CET (MCA)', authority: 'GGSIPU', level: 'University', category: 'Computer Application and IT', website: 'http://www.ipu.ac.in/', rss: 'https://news.google.com/rss/search?q=IPU+CET+MCA&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'VITMEE', authority: 'VIT', level: 'University', category: 'Computer Application and IT', website: 'https://vit.ac.in/', rss: 'https://news.google.com/rss/search?q=VITMEE+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'WB JECA', authority: 'WBJEEB', level: 'State', category: 'Computer Application and IT', website: 'https://wbjeeb.nic.in/jeca/', rss: 'https://news.google.com/rss/search?q=WB+JECA+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'TANCET (MCA)', authority: 'Anna University', level: 'State', category: 'Computer Application and IT', website: 'https://tancet.annauniv.edu/', rss: 'https://news.google.com/rss/search?q=TANCET+MCA&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'KMAT Kerala (MCA)', authority: 'CEE Kerala', level: 'State', category: 'Computer Application and IT', website: 'https://kmatkerala.in/', rss: 'https://news.google.com/rss/search?q=KMAT+Kerala+MCA&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'OJEE (MCA)', authority: 'OJEE Board', level: 'State', category: 'Computer Application and IT', website: 'https://ojee.nic.in/', rss: 'https://news.google.com/rss/search?q=OJEE+MCA&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'Karnataka PGCET (MCA)', authority: 'KEA', level: 'State', category: 'Computer Application and IT', website: 'https://cetonline.karnataka.gov.in/kea/', rss: 'https://news.google.com/rss/search?q=Karnataka+PGCET+MCA&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'BIT MCA', authority: 'BIT Mesra', level: 'University', category: 'Computer Application and IT', website: 'https://www.bitmesra.ac.in/', rss: 'https://news.google.com/rss/search?q=BIT+Mesra+MCA+Entrance&hl=en-IN&gl=IN&ceid=IN:en' }
 ];
 
 const scrapeMetaDescription = async (url) => {
@@ -270,6 +312,7 @@ exports.autoIngestExams = async (req, res) => {
                     examSlug: slug,
                     conductingAuthority: examData.authority,
                     examLevel: examData.level,
+                    category: examData.category || 'General',
                     registrationLink: examData.website,
                     rssFeedUrl: examData.rss,
                     description: description,

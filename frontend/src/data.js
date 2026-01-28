@@ -485,9 +485,12 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'IIMC Entrance Exam 2025', href: '#' },
-        { title: 'NPAT 2025', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'IIMC Entrance Exam', href: '/exams/iimc-entrance-exam' },
+        { title: 'JMI Mass Comm', href: '/exams/jmi-mass-comm' },
+        { title: 'XIC OET', href: '/exams/xic-oet' },
+        { title: 'FTII JET', href: '/exams/ftii-jet' },
+        { title: 'NMIMS NPAT', href: '/exams/nmims-npat' },
+        { title: 'View All', href: '/exams?level=Media', isLink: true }
       ],
       colleges: [
         { title: 'Compare Colleges', href: '#' },
@@ -519,14 +522,16 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CA Intermediate', href: '#' },
-        { title: 'CA Foundation', href: '#' },
-        { title: 'CA Final', href: '#' },
-        { title: 'CS Executive', href: '#' },
-        { title: 'CS Professional', href: '#' },
-        { title: 'CFA Exam', href: '#' },
-        { title: 'CSEET', href: '#' },
-        { title: 'ACET', href: '#' }
+        { title: 'CA Foundation', href: '/exams/ca-foundation' },
+        { title: 'CA Intermediate', href: '/exams/ca-intermediate' },
+        { title: 'CA Final', href: '/exams/ca-final' },
+        { title: 'CS CSEET', href: '/exams/cs-cseet' },
+        { title: 'CS Executive', href: '/exams/cs-executive' },
+        { title: 'CS Professional', href: '/exams/cs-professional' },
+        { title: 'CFA Level 1', href: '/exams/cfa-level-1' },
+        { title: 'ACCA', href: '/exams/acca' },
+        { title: 'ACET', href: '/exams/acet' },
+        { title: 'View All', href: '/exams?level=Finance', isLink: true }
       ],
       colleges: [
         { title: 'Difference between CA and CS', href: '#' },
@@ -568,8 +573,14 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'NIMCET', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'NIMCET', href: '/exams/nimcet' },
+        { title: 'CUET-PG (MCA)', href: '/exams/cuet-pg-mca' },
+        { title: 'MAH MCA CET', href: '/exams/mah-mca-cet' },
+        { title: 'IPU CET (MCA)', href: '/exams/ipu-cet-mca' },
+        { title: 'VITMEE', href: '/exams/vitmee' },
+        { title: 'WB JECA', href: '/exams/wb-jeca' },
+        { title: 'TANCET (MCA)', href: '/exams/tancet-mca' },
+        { title: 'View All', href: '/exams?level=Computer Application and IT', isLink: true }
       ],
       colleges: [
         { title: 'Compare Colleges', href: '#' },
@@ -1335,15 +1346,9 @@ export const counsellingData = [
 
 export const navLinks = [
   { title: 'Browse by Stream', href: '#', hasDropdown: true },
-  { title: 'Test Prep', href: '#', hasDropdown: true },
   { title: 'Colleges', href: '/colleges', hasDropdown: true },
   { title: 'Exams', href: '#', hasDropdown: true },
-  { title: 'Courses', href: '/courses', hasDropdown: true },
-  { title: 'News', href: '/news', hasDropdown: false },
-  { title: 'Rankings', href: '#', hasDropdown: true },
-  { title: 'Counselling', href: '#', hasDropdown: true },
-  { title: 'Careers', href: '#', hasDropdown: true },
-  { title: 'More', href: '#', hasDropdown: true }
+  { title: 'News', href: '/news', hasDropdown: false }
 ];
 
 export const heroTabs = [

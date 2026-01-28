@@ -22,6 +22,11 @@ const examSchema = new mongoose.Schema({
     enum: ['National', 'State', 'University', 'International'],
     default: 'National'
   },
+  category: {
+    type: String, // e.g. 'Engineering', 'Medical', 'Finance', 'Computer Application and IT'
+    default: 'General',
+    index: true
+  },
   description: {
     type: String, // Short summary for cards
     maxlength: 500
