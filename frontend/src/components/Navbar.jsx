@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { navLinks, browseByStreamData, collegesData, examsData } from '../data';
+import { navLinks, browseByStreamData } from '../data';
 import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaQuestion, FaShareAlt, FaBookOpen, FaChartPie, FaUniversity, FaNewspaper, FaUserShield, FaArrowLeft, FaTimes, FaGraduationCap, FaTrophy, FaBriefcase, FaEllipsisH, FaComments, FaHome, FaCompass, FaChartLine, FaStethoscope, FaLaptopCode, FaBalanceScale, FaPalette, FaMicrophone, FaCoins, FaDesktop, FaFlask, FaPlane, FaSchool, FaGlobeAmericas, FaChevronRight } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -16,8 +16,6 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
   const [expandedCategory, setExpandedCategory] = useState(null); // Mobile Accordion State (Level 2)
   const [expandedSection, setExpandedSection] = useState(null); // Mobile Main Section State (Level 1)
   const [activeStream, setActiveStream] = useState('engineering'); // Default active stream
-  const [activeCollegeStream, setActiveCollegeStream] = useState('top-colleges');
-  const [activeExamStream, setActiveExamStream] = useState('engineering');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   
@@ -45,14 +43,6 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
   // Find the active stream data
   const currentStreamDataObj = browseByStreamData.find(s => s.id === activeStream) || {};
   const currentStreamContent = currentStreamDataObj.content || { exams: [], colleges: [], predictors: [], resources: [] };
-
-  // Find active College data
-  const currentCollegeDataObj = collegesData.find(s => s.id === activeCollegeStream) || {};
-  const currentCollegeContent = currentCollegeDataObj.content || { exams: [], colleges: [], predictors: [], resources: [] };
-
-  // Find active Exam data
-  const currentExamDataObj = examsData.find(s => s.id === activeExamStream) || {};
-  const currentExamContent = currentExamDataObj.content || { exams: [], colleges: [], predictors: [], resources: [] };
 
   const adminLinks = [
     { title: 'Dashboard', href: '/admin', icon: FaChartPie },

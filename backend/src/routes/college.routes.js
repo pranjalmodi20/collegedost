@@ -13,9 +13,10 @@ const {
     seedNirfData,
     syncColleges
 } = require('../controllers/college.controller');
-const { protect } = require('../middleware/authMiddleware');
+const { protect, admin } = require('../middleware/authMiddleware');
 
 // Specific routes MUST come before /:slug
+router.post('/sync', protect, admin, syncColleges);
 router.get('/predict', predictColleges);
 router.get('/search', searchColleges); // Autocomplete Route
 router.get('/top/:category', getTopColleges);
