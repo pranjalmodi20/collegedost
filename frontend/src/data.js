@@ -132,8 +132,8 @@ export const collegesData = [
         { title: 'View All International Colleges', href: '/international-colleges', isLink: true }
       ],
       resources: [
-         { title: 'Student Visa Guide', href: '#' },
-         { title: 'Scholarships', href: '#' }
+        { title: 'Student Visa Guide', href: '#' },
+        { title: 'Scholarships', href: '#' }
       ]
     }
   }
@@ -146,26 +146,26 @@ export const testPrepData = [
     titles: { col1: 'Exam Prep', col2: 'Mock Tests', col3_1: 'Previous Papers', col3_2: 'Resources' },
     content: {
       exams: [
-        { title: 'JEE Main Preparation', href: '#' },
-        { title: 'JEE Advanced Preparation', href: '#' },
-        { title: 'BITSAT Preparation', href: '#' },
-        { title: 'VITEEE Preparation', href: '#' }
+        { title: 'JEE Main Preparation', href: '/test-prep/engineering/jee-main/preparation' },
+        { title: 'JEE Advanced Preparation', href: '/test-prep/engineering/jee-advanced/preparation' },
+        { title: 'BITSAT Preparation', href: '/test-prep/engineering/bitsat/preparation' },
+        { title: 'VITEEE Preparation', href: '/test-prep/engineering/viteee/preparation' }
       ],
       colleges: [
-        { title: 'JEE Main Mock Test', href: '#' },
-        { title: 'JEE Advanced Mock Test', href: '#' },
-        { title: 'BITSAT Mock Test', href: '#' },
-        { title: 'VITEEE Mock Test', href: '#' }
+        { title: 'JEE Main Mock Test', href: '/test-prep/engineering/jee-main/mock-test' },
+        { title: 'JEE Advanced Mock Test', href: '/test-prep/engineering/jee-advanced/mock-test' },
+        { title: 'BITSAT Mock Test', href: '/test-prep/engineering/bitsat/mock-test' },
+        { title: 'VITEEE Mock Test', href: '/test-prep/engineering/viteee/mock-test' }
       ],
       predictors: [
-        { title: 'JEE Main 2025 Paper', href: '#' },
-        { title: 'JEE Advanced 2024 Paper', href: '#' },
-        { title: 'BITSAT Previous Papers', href: '#' }
+        { title: 'JEE Main 2025 Paper', href: '/test-prep/engineering/jee-main/previous-paper' },
+        { title: 'JEE Advanced 2024 Paper', href: '/test-prep/engineering/jee-advanced/previous-paper' },
+        { title: 'BITSAT Previous Papers', href: '/test-prep/engineering/bitsat/previous-paper' }
       ],
       resources: [
-        { title: 'Engineering Study Material', href: '#' },
-        { title: 'Toppers Strategy', href: '#' },
-        { title: 'Important Topics', href: '#' }
+        { title: 'Engineering Study Material', href: '/test-prep/engineering/jee-main/resource' },
+        { title: 'Toppers Strategy', href: '/test-prep/engineering/jee-main/resource' },
+        { title: 'Important Topics', href: '/test-prep/engineering/jee-main/resource' }
       ]
     }
   },
