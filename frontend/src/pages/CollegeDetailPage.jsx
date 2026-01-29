@@ -220,6 +220,39 @@ const CollegeDetailPage = () => {
                                     </tbody>
                                 </table>
                             </div>
+
+                            {/* DETAILED FEE STRUCTURE (FROM Ingestion/JoSAA) */}
+                            {college.detailedFees && college.detailedFees.length > 0 && (
+                                <div className="mt-8">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                        <FaRupeeSign className="text-green-600"/> Detailed Fee Breakdown
+                                    </h3>
+                                    <div className="overflow-x-auto border border-gray-200 rounded-xl">
+                                        <table className="w-full text-left border-collapse">
+                                            <thead>
+                                                <tr className="bg-gray-50 border-b border-gray-200 text-xs uppercase text-gray-500">
+                                                    <th className="px-6 py-3 font-semibold">Course / Category</th>
+                                                    <th className="px-6 py-3 font-semibold">Year</th>
+                                                    <th className="px-6 py-3 font-semibold">Amount</th>
+                                                    <th className="px-6 py-3 font-semibold">Type</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-gray-100 bg-white">
+                                                {college.detailedFees.map((fee, idx) => (
+                                                    <tr key={idx} className="hover:bg-gray-50">
+                                                        <td className="px-6 py-3 font-medium text-gray-800">
+                                                            {fee.courseName} <span className="text-gray-400 text-xs">({fee.category})</span>
+                                                        </td>
+                                                        <td className="px-6 py-3 text-gray-600">{fee.year}</td>
+                                                        <td className="px-6 py-3 font-bold text-green-600">₹ {fee.amount.toLocaleString()}</td>
+                                                        <td className="px-6 py-3 text-gray-500 text-sm">{fee.type}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
 

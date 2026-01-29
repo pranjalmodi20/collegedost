@@ -33,6 +33,7 @@ const PostArticle = lazy(() => import('./pages/admin/PostArticle'));
 const AdminColleges = lazy(() => import('./pages/admin/AdminColleges'));
 const AdminUsers = lazy(() => import('./pages/admin/AdminUsers'));
 const AddCollege = lazy(() => import('./pages/admin/AddCollege'));
+const AdminIngestion = lazy(() => import('./pages/admin/AdminIngestion'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 const AllCategoriesPage = lazy(() => import('./pages/AllCategoriesPage'));
 const UniversitiesPage = lazy(() => import('./pages/UniversitiesPage'));
@@ -111,6 +112,7 @@ function App() {
                 <Route path="/admin/articles/new" element={<PostArticle />} />
                 <Route path="/admin/colleges" element={<AdminColleges />} />
                 <Route path="/admin/colleges/new" element={<AddCollege />} />
+                <Route path="/admin/ingestion" element={<AdminIngestion />} />
                 <Route path="/admin/users" element={<AdminUsers />} />
               </Route>
 

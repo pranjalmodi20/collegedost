@@ -157,12 +157,7 @@ const AdminDashboard = () => {
                              </div>
                              <span className="text-sm font-bold">Post Article</span>
                         </Link>
-                        <button onClick={handleSync} disabled={isSyncing} className="p-4 bg-brand-light border border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-brand-blue hover:text-brand-blue transition-all group">
-                             <div className={`w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform ${isSyncing ? 'animate-spin' : ''}`}>
-                                <FaSync className="text-xl text-brand-blue" />
-                             </div>
-                             <span className="text-sm font-bold">{isSyncing ? 'Syncing...' : 'Sync Colleges'}</span>
-                        </button>
+
                     </div>
                 </motion.div>
             </div>

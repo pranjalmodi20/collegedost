@@ -39,7 +39,6 @@ const collegeSchema = new mongoose.Schema(
     // --- META & CLASSIFICATION ---
     type: {
       type: String,
-      enum: ["Public", "Private", "Deemed", "Consortium", "Government", "IGO", "Other"],
       default: "Other"
     },
     estYear: Number,
@@ -55,6 +54,13 @@ const collegeSchema = new mongoose.Schema(
 
     // --- SOURCE TRACKING (Strategy Requirement) ---
     // Tracks where this data came from: "AISHE_2024", "IPEDS_CSV"
+    ingestionMetadata: {
+      aicteId: { type: String, index: true },
+      nirfId: { type: String, index: true }, // Institute ID from NIRF
+      aisheCode: { type: String, index: true },
+      matchConfidence: Number, // 0-100
+      lastEnrichedAt: Date
+    },
     dataSources: [{
       sourceName: String,
       sourceId: String,   // ID in the external system (e.g. OPEID)
@@ -66,9 +72,11 @@ const collegeSchema = new mongoose.Schema(
       source: String, // "NIRF", "QS", "USNews"
       year: Number,
       rank: Number,
-      category: String
+      category: String,
+      score: Number,
+      metricData: Map // Store extra JSON like "TLR": 80, "RPC": 60
     }],
-    nirfRank: Number, // Legacy support for sorting
+    nirfRank: { type: Number, index: true }, // Legacy support for sorting
 
     fees: {
       tuition: Number,
@@ -142,7 +150,14 @@ const collegeSchema = new mongoose.Schema(
       fee: Number,
       eligibility: String,
       seats: Number,
-      examAccepted: String
+      examAccepted: String,
+      // AICTE / Ingestion additions
+      level: String, // "UG", "PG", "Diploma"
+      aicteId: String, // "1-12345678"
+      intake: Number,
+      durationYear: Number,
+      isNbaAccredited: Boolean,
+      shift: { type: String, default: "Day" }
     }],
 
     // For predictors
@@ -168,7 +183,26 @@ collegeSchema.pre('save', async function () {
   }
 });
 
-// Composite Index for Uniqueness in Region
-collegeSchema.index({ name: 1, "location.country": 1, "location.state": 1 }, { unique: true });
+// Fuzzy Matching / Deduplication Strategy
+collegeSchema.statics.findByFuzzyName = async function (name, city = "", state = "") {
+  // 1. Exact Match on Name
+  let college = await this.findOne({ name: name });
+  if (college) return college;
+
+  // 2. Exact Match on Aliases
+  college = await this.findOne({ aliases: name });
+  if (college) return college;
+
+  // 3. Normalized Match (remove "Institute of", "College", spaces, etc)
+  // This is a simplified "canonical" logic. 
+  // Ideally, use a normalized text search or an aggregation pipeline for more complex logic.
+  // For now, we rely on the specific Ingestion Services to handle the heavy lifting (string-similarity).
+  // This helper is for quick lookups.
+  
+  return null;
+};
+
+// Composite Index for Uniqueness in Region - Removed unique: true to allow similar named colleges in different cities/districts
+collegeSchema.index({ name: 1, "location.country": 1, "location.state": 1 });
 
 module.exports = mongoose.model("College", collegeSchema);

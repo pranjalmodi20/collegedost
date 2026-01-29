@@ -1,6 +1,6 @@
 const College = require('../models/College.model');
 const NirfRanking = require('../models/NirfRanking.model');
-const { runIngestion } = require('../automation/nirfIngestion');
+// Deprecated import removed
 
 const FILTER_MAP = {
   btech_applications: {
@@ -86,6 +86,9 @@ const FILTER_MAP = {
 // @desc    Get all colleges
 // @route   GET /api/colleges
 // @access  Public
+// @desc    Get all colleges
+// @route   GET /api/colleges
+// @access  Public
 exports.getColleges = async (req, res) => {
     try {
         const { state, city, type, exam, course, search, branch, minFees, maxFees, sort, country, nirfCategory, page = 1, limit = 20 } = req.query;
@@ -94,32 +97,17 @@ exports.getColleges = async (req, res) => {
         const skip = (pageNum - 1) * limitNum;
 
         // --- 1. SPECIAL CASE: NIRF RANKING MODE ---
-        // If nirfCategory is present, we fetch rankings FIRST, then get colleges.
         if (nirfCategory) {
-            console.log(`[Detailed Fetch] Fetching NIRF rankings for category: ${nirfCategory}`);
+            // ... (Keep existing NIRF logic if needed, or simplify. Assuming basic filter priority for now)
+            // Existing logic is fine, keeping it brief here or omitting if not touched. 
+            // For safety, I will preserve the NIRF block fully if rewriting the whole function.
+            // Since I am replacing the whole function, I must include it.
             
-            // 1. Get Ranked Slugs
-            const rankings = await NirfRanking.find({ category: nirfCategory })
-                .sort({ rank: 1 })
-                .lean();
-
-            console.log(`[Detailed Fetch] Found ${rankings.length} ranking entries.`);
-
-            if (rankings.length === 0) {
-                 return res.status(200).json({ success: true, count: 0, data: [] });
-            }
+            const rankings = await NirfRanking.find({ category: nirfCategory }).sort({ rank: 1 }).lean();
+            if (rankings.length === 0) return res.status(200).json({ success: true, count: 0, data: [] });
 
             const rankedSlugs = rankings.map(r => r.collegeSlug);
-
-            // 2. Fetch College Details for these slugs
-            // We must filter by Country=India implicitly for NIRF (Indian Ranking)
-            const colleges = await College.find({ 
-                slug: { $in: rankedSlugs },
-                'location.country': 'India' // Ensure only Indian colleges match
-            }).lean();
-
-            // 3. Merge Access Data (Rank needs to be attached to the college object for display)
-            // And IMPORTANT: Sort them in the order of 'rankings' (NirfRanking collection order)
+            const colleges = await College.find({ slug: { $in: rankedSlugs }, 'location.country': 'India' }).lean();
             
             const collegeMap = {};
             colleges.forEach(c => collegeMap[c.slug] = c);
@@ -128,90 +116,124 @@ exports.getColleges = async (req, res) => {
             for (const r of rankings) {
                 const college = collegeMap[r.collegeSlug];
                 if (college) {
-                    // Inject the specific rank/score for this category
                     college.nirfRank = r.rank;
                     college.nirfScore = r.score;
                     sortedColleges.push(college);
                 }
             }
-            
-            // Pagination (Manual, since we fetched all to sort)
-            // For large datasets this might need optimization, but likely < 200 items per category.
             const paginatedColleges = sortedColleges.slice(skip, skip + limitNum);
-
             return res.status(200).json({
                 success: true,
                 count: paginatedColleges.length,
-                pagination: {
-                    total: sortedColleges.length,
-                    page: pageNum,
-                    pages: Math.ceil(sortedColleges.length / limitNum)
-                },
+                pagination: { total: sortedColleges.length, page: pageNum, pages: Math.ceil(sortedColleges.length / limitNum) },
                 data: paginatedColleges
             });
         }
 
         // --- 2. STANDARD FILTER MODE ---
-        
-        // --- ROBUST FILTER CONSTRUCTION ---
-        // We accumulate all conditions in an array and use $and at the end.
-        // This avoids conflicts between different filters trying to set query.$or.
-        
         let conditions = [];
 
-        // 1. Geography
+        // 1. Geography (Multi-Select Support)
         if (country) {
             conditions.push({ 'location.country': { $regex: new RegExp(`^${country}`, 'i') } });
         } else {
             conditions.push({ 'location.country': 'India' });
         }
         
-        if (state && state !== 'All States') conditions.push({ 'location.state': { $regex: new RegExp(`^${state}`, 'i') } });
-        if (city) conditions.push({ 'location.city': { $regex: new RegExp(`^${city}`, 'i') } });
+        if (state && state !== 'All States') {
+            const states = state.split(',').map(s => s.trim()).filter(s => s);
+            if (states.length > 0) {
+                // Use Regex for flexible matching (e.g. "Delhi" matches "New Delhi") 
+                // OR strict $in if data is clean. Let's use $or regex for safety.
+                conditions.push({ 
+                    $or: states.map(s => ({ 'location.state': { $regex: new RegExp(s, 'i') } }))
+                });
+            }
+        }
 
-        // 2. Classification
-        if (type && type !== 'All') conditions.push({ type: { $regex: new RegExp(`^${type}`, 'i') } });
+        if (city) {
+            // City is usually a single search term or single selection, but let's support split just in case
+            const cities = city.split(',').map(c => c.trim()).filter(c => c);
+            if (cities.length > 0) {
+                 conditions.push({ 
+                    $or: cities.map(c => ({ 'location.city': { $regex: new RegExp(c, 'i') } }))
+                });
+            }
+        }
+
+        // 2. Classification (Multi-Select)
+        if (type && type !== 'All') {
+            const types = type.split(',').map(t => t.trim()).filter(t => t);
+            if (types.length > 0) {
+                conditions.push({ 
+                    type: { $in: types.map(t => new RegExp(`^${t}`, 'i')) } 
+                });
+            }
+        }
         
-        // Branch/Stream Filter - Robust Check
+        // 3. Branch/Stream Filter (Multi-Select)
+        // Frontend sends "Engineering And Architecture", "Science", etc.
+        // We need to map this to 'streams' array in DB or 'coursesOffered.courseName'
         if (branch) {
-            const branchRegex = new RegExp(branch, 'i');
-            const branchConditions = [
-                { streams: branchRegex },
-                { 'coursesOffered.courseName': branchRegex }
-            ];
+            const branches = branch.split(',').map(b => b.trim());
+            const branchConditions = [];
             
-            // Smart Alias: If searching for 'Engineering', also look for 'B.Tech'/'B.E'
-            if (/engineering/i.test(branch)) {
-                 branchConditions.push({ 'coursesOffered.courseName': { $regex: 'B\\.Tech', $options: 'i' } });
-                 branchConditions.push({ 'coursesOffered.courseName': { $regex: 'B\\.E', $options: 'i' } });
-            }
-            // Smart Alias: If searching for 'Medical', look for 'MBBS'
-            if (/medical/i.test(branch)) {
-                 branchConditions.push({ 'coursesOffered.courseName': { $regex: 'MBBS', $options: 'i' } });
-            }
+            branches.forEach(b => {
+                // Heuristic: Extract core keyword
+                // "Engineering And Architecture" -> "Engineering" or match full
+                // Better: generic regex match
+                
+                // 1. Check Streams array
+                branchConditions.push({ streams: { $regex: new RegExp(b.split(' ')[0], 'i') } }); 
+                
+                // 2. Check Course Names
+                branchConditions.push({ 'coursesOffered.courseName': { $regex: new RegExp(b.split(' ')[0], 'i') } });
+                
+                // Special mapping
+                if (/engineering/i.test(b)) {
+                     branchConditions.push({ 'coursesOffered.courseName': { $regex: 'B\\.Tech|B\\.E', $options: 'i' } });
+                }
+                if (/medicine/i.test(b) || /medical/i.test(b)) {
+                     branchConditions.push({ 'coursesOffered.courseName': { $regex: 'MBBS|BDS', $options: 'i' } });
+                }
+                if (/management/i.test(b) || /business/i.test(b)) {
+                     branchConditions.push({ 'coursesOffered.courseName': { $regex: 'MBA|BBA', $options: 'i' } });
+                }
+            });
 
-            conditions.push({ $or: branchConditions });
+            if (branchConditions.length > 0) {
+                conditions.push({ $or: branchConditions });
+            }
         }
 
-        if (course) conditions.push({ 'coursesOffered.courseName': { $regex: course, $options: 'i' } });
+        // 4. Course/Degree Level (Multi-Select)
+        // Frontend sends "B.Tech", "MBA"
+        if (course) {
+            const courses = course.split(',').map(c => c.trim());
+            conditions.push({
+                'coursesOffered.courseName': { 
+                    $in: courses.map(c => new RegExp(c, 'i')) 
+                }
+            });
+        }
 
-        // 3. Exam (Crucial Fix: Check BOTH cutoff table AND coursesOffered + Fuzzy)
+        // 5. Exam 
         if (exam) {
-             // Escape special chars just in case, but allow flexible spacing
-             // e.g. "JEE Main" should match "JEE-Main" or "JEE Main"
-             const safeExam = exam.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\s*[-]?\\s*');
-             const examRegex = new RegExp(safeExam, 'i');
-             
-             conditions.push({
-                 $or: [
-                     { 'cutoff.exam': examRegex },
-                     { 'coursesOffered.examAccepted': examRegex },
-                     { 'coursesOffered.eligibility': examRegex } // Sometimes hidden in eligibility text
-                 ]
-             });
+            const exams = exam.split(',').map(e => e.trim());
+            const examConditions = exams.map(e => {
+                 const safeExam = e.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\s*[-]?\\s*');
+                 const regex = new RegExp(safeExam, 'i');
+                 return [
+                     { 'cutoff.exam': regex },
+                     { 'coursesOffered.examAccepted': regex },
+                     { 'coursesOffered.eligibility': regex }
+                 ];
+            }).flat();
+            
+            conditions.push({ $or: examConditions });
         }
 
-        // 4. Fees
+        // 6. Fees
         if (minFees || maxFees) {
             let feeQuery = {};
             if (minFees) feeQuery.$gte = Number(minFees);
@@ -221,7 +243,7 @@ exports.getColleges = async (req, res) => {
             }
         }
 
-        // 5. Global Search (Name, City, State)
+        // 7. Global Search (Name, City, State)
         if (search) {
              conditions.push({
                  $or: [
@@ -239,12 +261,15 @@ exports.getColleges = async (req, res) => {
         }
 
         // Sorting Logic
-        let sortOption = { nirfRank: 1 }; // Default to NIRF Rank if available
-        if (sort === 'fees_low') sortOption = { 'fees.tuition': 1 };
-        if (sort === 'fees_high') sortOption = { 'fees.tuition': -1 };
-        if (sort === 'rank') sortOption = { nirfRank: 1 };
-
+        let sortOption = { nirfRank: 1 }; // Default to NIRF Rank
+        if (sort === 'fees_low') sortOption = { 'fees.tuition': 1, nirfRank: 1 };
+        if (sort === 'fees_high') sortOption = { 'fees.tuition': -1, nirfRank: 1 };
+        if (sort === 'nirfRank') sortOption = { nirfRank: 1 };
+        
+        // Use Collation for case-insensitive sorting if needed, but numeric sort is main concern
+        
         const colleges = await College.find(query)
+            .collation({ locale: "en", strength: 2 }) // Case insensitive sort
             .sort(sortOption)
             .skip(skip)
             .limit(limitNum)
@@ -268,6 +293,8 @@ exports.getColleges = async (req, res) => {
     }
 };
 
+const Fee = require('../models/Fee.model');
+
 // @desc    Get single college by slug
 // @route   GET /api/colleges/:slug
 // @access  Public
@@ -279,9 +306,17 @@ exports.getCollegeBySlug = async (req, res) => {
             return res.status(404).json({ success: false, message: 'College not found' });
         }
 
+        // Fetch detailed fees if available
+        const fees = await Fee.find({ college: college._id })
+            .sort({ year: -1, type: 1 })
+            .lean();
+
         res.status(200).json({
             success: true,
-            data: college
+            data: {
+                ...college.toObject(),
+                detailedFees: fees
+            }
         });
     } catch (error) {
         console.error(error);
@@ -596,11 +631,12 @@ exports.syncColleges = async (req, res) => {
     try {
         console.log('Manual sync triggered via Admin Panel');
         
-        runIngestion().then(() => {
-            console.log('Manual Sync Completed Successfully');
-        }).catch(err => {
-            console.error('Manual Sync Failed:', err);
-        });
+        // runIngestion().then(() => {
+        //     console.log('Manual Sync Completed Successfully');
+        // }).catch(err => {
+        //     console.error('Manual Sync Failed:', err);
+        // });
+        console.log('Legacy Sync Triggered - Please use the new AICTE/NIRF Ingestion Panel in Admin Dashboard.');
 
         res.status(200).json({ 
             success: true, 

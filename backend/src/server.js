@@ -62,6 +62,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/admin', require('./routes/admin.routes'));
+app.use('/api/admin/ingest', require('./routes/admin.ingestion.routes'));
 app.use('/api/users', require('./routes/user.routes'));
 app.use('/api/exams', require('./routes/exam.routes'));
 app.use('/api/colleges', require('./routes/college.routes'));
@@ -73,7 +74,7 @@ app.use('/api/predictor', require('./routes/predictor.routes'));
 app.use('/api/test-prep', require('./routes/testPrep.routes'));
 
 
-require('./automation/nirfIngestion').initCron();
+require('./cron/scheduler').init();
 require('./cron/examCron')();
 
 
