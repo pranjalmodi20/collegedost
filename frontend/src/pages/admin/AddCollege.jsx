@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import { FaArrowLeft, FaSave, FaUniversity } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const AddCollege = () => {
+    const { id } = useParams();
+    const isEditMode = !!id;
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
@@ -16,6 +18,42 @@ const AddCollege = () => {
         website: '',
         images: [] 
     });
+
+    useEffect(() => {
+        if (isEditMode) {
+            fetchCollege();
+        }
+    }, [id]);
+
+    const fetchCollege = async () => {
+        try {
+            setLoading(true);
+            const token = localStorage.getItem('token');
+            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges/id/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (res.data.success) {
+                const college = res.data.data;
+                setFormData({
+                    name: college.name,
+                    slug: college.slug,
+                    location: {
+                        state: college.location?.state || '',
+                        city: college.location?.city || ''
+                    },
+                    type: college.type || 'Private',
+                    nirfRank: college.nirfRank || '',
+                    website: college.website || '',
+                    images: college.images?.[0] || '' // Handling single image for now
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching college:', error);
+            alert('Failed to fetch details');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,10 +79,18 @@ const AddCollege = () => {
                 images: formData.images ? [formData.images] : [] // quick hack for single image input
             };
             
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges`, payload, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            alert('College added successfully');
+            if (isEditMode) {
+                 await axios.put(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges/${id}`, payload, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                alert('College updated successfully');
+            } else {
+                await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges`, payload, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                alert('College added successfully');
+            }
+            
             navigate('/admin/colleges');
         } catch (error) {
             console.error(error);
@@ -62,7 +108,7 @@ const AddCollege = () => {
                         <Link to="/admin/colleges" className="text-gray-500 hover:text-gray-900 transition-colors">
                             <FaArrowLeft />
                         </Link>
-                        <h1 className="text-2xl font-bold text-gray-900">Add New College</h1>
+                        <h1 className="text-2xl font-bold text-gray-900">{isEditMode ? 'Edit College' : 'Add New College'}</h1>
                     </div>
                 </div>
 
@@ -160,7 +206,7 @@ const AddCollege = () => {
                                 disabled={loading}
                                 className={`bg-brand-orange text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transform hover:-translate-y-0.5 transition-all flex items-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
-                                {loading ? 'Saving...' : <><FaSave /> Save College</>}
+                                {loading ? 'Saving...' : <><FaSave /> {isEditMode ? 'Update College' : 'Save College'}</>}
                             </button>
                         </div>
                     </form>

@@ -30,17 +30,16 @@ const AdminUsers = () => {
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this user?')) {
+        if (window.confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
             try {
-                // Assuming delete endpoint exists, currently it may not
-                 alert("Delete functionality not yet enabled in backend for safety.");
-                 // const token = localStorage.getItem('token');
-                 // await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/users/${id}`, {
-                 //    headers: { Authorization: `Bearer ${token}` }
-                 // });
-                 // setUsers(users.filter(u => u._id !== id));
+                 const token = localStorage.getItem('token');
+                 await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/users/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                 });
+                 setUsers(users.filter(u => u._id !== id));
             } catch (error) {
                 console.error('Error deleting user:', error);
+                alert('Failed to delete user');
             }
         }
     };

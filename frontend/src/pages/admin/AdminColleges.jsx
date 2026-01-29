@@ -42,13 +42,17 @@ const AdminColleges = () => {
         }
     };
 
-    const handleDelete = async (slug) => {
+    const handleDelete = async (id) => {
         if(window.confirm('Are you sure you want to delete this college?')) {
              try {
-                 // Assuming endpoint exists or will exist
-                 alert("Delete functionality pending backend implementation");
+                 const token = localStorage.getItem('token');
+                 await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/colleges/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                 });
+                 setColleges(colleges.filter(c => c._id !== id));
              } catch (error) {
-                 console.error(error);
+                 console.error('Error deleting college:', error);
+                 alert('Failed to delete college');
              }
         }
     };
@@ -129,10 +133,10 @@ const AdminColleges = () => {
                                             {college.type}
                                         </span>
                                         <div className="flex gap-2">
-                                            <button className="p-2 text-gray-400 hover:text-brand-blue hover:bg-blue-50 rounded-full transition-colors">
+                                            <Link to={`/admin/colleges/edit/${college._id}`} className="p-2 text-gray-400 hover:text-brand-blue hover:bg-blue-50 rounded-full transition-colors">
                                                 <FaEdit />
-                                            </button>
-                                            <button onClick={() => handleDelete(college.slug)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors">
+                                            </Link>
+                                            <button onClick={() => handleDelete(college._id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors">
                                                 <FaTrash />
                                             </button>
                                         </div>

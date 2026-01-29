@@ -233,7 +233,7 @@ export const browseByStreamData = [
       col1: 'Exams',
       col2: 'Colleges',
       col3_1: 'Predictors',
-      col3_2: 'Resources'
+      col3_2: 'News & Resources'
     },
     content: {
       exams: [
@@ -264,14 +264,16 @@ export const browseByStreamData = [
         { title: 'View All College Predictors', href: '#', isLink: true }
       ],
       resources: [
-        { title: 'JEE Main Admit Card 2026', href: '#' },
-        { title: 'JEE Main Cutoff', href: '#' },
-        { title: 'GATE Admit Card 2026', href: '#' },
-        { title: 'JEE Main Syllabus 2026', href: '#' },
-        { title: 'Download E-Books and Sample Papers', href: '#' },
-        { title: 'Compare Colleges', href: '#' },
-        { title: 'B.Tech College Applications', href: '#' },
-        { title: 'JEE Main Question Papers', href: '#' }
+        { title: 'JEE Main Admit Card 2026', href: '/news/jee-main-admit-card-2026' },
+        { title: 'JEE Main Cutoff', href: '/exams/jee-main?tab=cutoffs' },
+        { title: 'GATE Admit Card 2026', href: '/news/gate-admit-card-2026' },
+        { title: 'JEE Main Syllabus 2026', href: '/exams/jee-main?tab=syllabus' },
+        { title: 'Compare Colleges', href: '/compare-colleges' },
+        { title: 'B.Tech College Applications', href: '/colleges?degree=B.E /B.Tech' },
+        { title: 'JEE Main Question Papers', href: '/exams/jee-main?tab=previous-papers' },
+        /* Added News Items */
+        { title: 'JEE Main 2026 Exam Dates Announced', href: '/news/jee-main-dates-2026', isNew: true },
+        { title: 'Top Engineering Colleges Ranking 2026', href: '/news/engineering-rankings-2026', isNew: true }
       ]
     }
   },
@@ -283,7 +285,7 @@ export const browseByStreamData = [
       col1: 'Exams',
       col2: 'Colleges & Courses',
       col3_1: 'Predictors',
-      col3_2: 'Resources'
+      col3_2: 'News & Resources'
     },
     content: {
       exams: [
@@ -317,14 +319,12 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       resources: [
-        { title: 'Top MBA Entrance Exams in India', href: '#' },
-        { title: 'CAT Result 2025', href: '#' },
-
-        { title: 'IBSAT Mock Test', href: '#' },
-        { title: 'Download Helpful Ebooks', href: '#' },
-        { title: 'List of Popular Branches', href: '#' },
-        { title: 'QnA - Get answers to your doubts', href: '#' },
-        { title: 'IIM Fees Structure', href: '#' }
+        { title: 'Top MBA Entrance Exams in India', href: '/exams?level=National' },
+        { title: 'CAT Result 2025', href: '/news/cat-result-2025' },
+        { title: 'IBSAT Mock Test', href: '/exams/ibsat?tab=mock-test' },
+        { title: 'IIM Fees Structure', href: '/colleges?search=IIM' },
+        { title: 'MBA Colleges Ranking 2025', href: '/news/mba-rankings-2025', isNew: true },
+        { title: 'CAT 2025 Registration Starts', href: '/news/cat-registration-2025', isNew: true }
       ]
     }
   },
@@ -332,7 +332,7 @@ export const browseByStreamData = [
     id: 'medical',
     label: 'Medicine and Allied Sciences',
     link: '/medicine',
-    titles: { col1: 'Exams', col2: 'Colleges', col3_1: 'Predictors', col3_2: 'Resources' },
+    titles: { col1: 'Exams', col2: 'Colleges', col3_1: 'Predictors', col3_2: 'News & Resources' },
     content: {
       exams: [
         { title: 'NEET UG', href: '/exams/neet-ug' },
@@ -362,12 +362,12 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       resources: [
-        { title: 'NEET Syllabus 2026', href: '#' },
-        { title: 'NEET Exam Date 2026', href: '#' },
-        { title: 'NEET Cut off', href: '#' },
-        { title: 'NEET Counselling 2025', href: '#' },
-        { title: 'Download Helpful E-books', href: '#' },
-        { title: 'QnA - Get answers to your doubts', href: '#' }
+        { title: 'NEET Syllabus 2026', href: '/exams/neet-ug?tab=syllabus' },
+        { title: 'NEET Exam Date 2026', href: '/news/neet-dates-2026' },
+        { title: 'NEET Cut off', href: '/exams/neet-ug?tab=cutoffs' },
+        { title: 'NEET Counselling 2025', href: '/news/neet-counselling-2025' },
+        { title: 'Top Medical Colleges Ranking', href: '/news/medical-rankings-2025', isNew: true },
+        { title: 'NEET UG 2026 Application', href: '/news/neet-application-2026', isNew: true }
       ]
     }
   },
@@ -379,7 +379,7 @@ export const browseByStreamData = [
       col1: 'Exams',
       col2: 'Colleges',
       col3_1: 'Predictors & E-Books',
-      col3_2: 'Resources'
+      col3_2: 'News & Resources'
     },
     content: {
       exams: [
@@ -411,11 +411,11 @@ export const browseByStreamData = [
         { title: 'CLAT Rank Predictor', href: '#' }
       ],
       resources: [
-        { title: 'Compare Law Collages', href: '#' },
-        { title: 'QnA - Get answers to your doubts', href: '#' },
-        { title: 'Collegedost Youtube Channel', href: '#' },
-        { title: 'CLAT Syllabus', href: '#' },
-        { title: 'Free CLAT Practice Test', href: '#' }
+        { title: 'Compare Law Colleges', href: '/compare-colleges' },
+        { title: 'CLAT Syllabus', href: '/exams/clat?tab=syllabus' },
+        { title: 'Free CLAT Practice Test', href: '/exams/clat?tab=mock-test' },
+        { title: 'CLAT 2026 Notification Out', href: '/news/clat-notification-2026', isNew: true },
+        { title: 'Top Law Colleges Ranking', href: '/news/law-rankings-2025', isNew: true }
       ]
     }
   },
@@ -427,7 +427,7 @@ export const browseByStreamData = [
       col1: 'Exams',
       col2: 'Colleges',
       col3_1: 'Predictors & Articles',
-      col3_2: 'Resources'
+      col3_2: 'News & Resources'
     },
     content: {
       exams: [
@@ -461,14 +461,11 @@ export const browseByStreamData = [
         { title: 'NID DAT Question Papers', href: '#' }
       ],
       resources: [
-        { title: 'NIFT Cutoff 2025', href: '#' },
+        { title: 'NIFT Cutoff 2025', href: '/exams/nift?tab=cutoffs' },
         { title: 'NID Cutoff 2025', href: '#' },
         { title: 'NIFT Fees Structure', href: '#' },
-        { title: 'Free Design Sample Papers', href: '#' },
-        { title: 'Free Design E-books', href: '#' },
-        { title: 'List of Branches', href: '#' },
-        { title: 'QnA - Get answers to your doubts', href: '#' },
-        { title: 'Collegedost Youtube channel', href: '#' }
+        { title: 'Design Colleges Ranking 2026', href: '/news/design-rankings-2026', isNew: true },
+        { title: 'NIFT 2026 Application', href: '/news/nift-application-2026', isNew: true }
       ]
     }
   },
@@ -478,7 +475,7 @@ export const browseByStreamData = [
     titles: {
       col1: 'Exams',
       col2: 'Colleges',
-      col3_1: 'Resources', /* Using first slot for Resources to match screenshot layout */
+      col3_1: 'News & Resources', /* Using first slot for Resources to match screenshot layout */
       col3_2: ' ' /* Hiding second header */
     },
     content: {
@@ -497,11 +494,9 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       predictors: [ /* Content placed here to appear under the top header of col 3 */
-        { title: 'Free Ebooks', href: '#' },
-        { title: 'Free Sample Papers', href: '#' },
-        { title: 'List of Popular Branches', href: '#' },
-        { title: 'QnA - Get answers to your doubts', href: '#' },
-        { title: 'Collegedost Youtube Channel', href: '#' }
+        { title: 'Compare Colleges', href: '/compare-colleges' },
+        { title: 'IIMC Entrance Exam Date', href: '/news/iimc-exam-date', isNew: true },
+        { title: 'Top Journalism Colleges Ranking', href: '/news/media-rankings-2025', isNew: true }
       ],
       resources: [] /* Empty second list */
     }
@@ -511,7 +506,7 @@ export const browseByStreamData = [
     label: 'Finance & Accounts',
     titles: {
       col1: 'Exams',
-      col2: 'Resources',
+      col2: 'News & Resources',
       col3_1: 'Top Courses & Careers',
       col3_2: 'Colleges'
     },
@@ -529,12 +524,8 @@ export const browseByStreamData = [
       colleges: [
         { title: 'Difference between CA and CS', href: '#' },
         { title: 'Difference between CA and CMA', href: '#' },
-        { title: 'CA Full form', href: '#' },
-        { title: 'CMA Full form', href: '#' },
-        { title: 'CS Full form', href: '#' },
-        { title: 'E-books and Sample Papers', href: '#' },
-        { title: 'Free Sample Papers', href: '#' },
-        { title: 'CA Salary In India', href: '#' }
+        { title: 'CA Exam Dates 2025', href: '/news/ca-exam-dates-2025', isNew: true },
+        { title: 'CS Executive Time Table', href: '/news/cs-time-table', isNew: true }
       ],
       predictors: [
         { title: 'Bachelor of Commerce (B.Com)', href: '#' },
@@ -561,7 +552,7 @@ export const browseByStreamData = [
     titles: {
       col1: 'Exams',
       col2: 'Colleges',
-      col3_1: 'Resources',
+      col3_1: 'News & Resources',
       col3_2: 'Quick Links'
     },
     content: {
@@ -585,10 +576,9 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       predictors: [
-        { title: 'Sample Papers', href: '#' },
-        { title: 'Free Ebooks', href: '#' },
-        { title: 'QnA - Get answers to your doubts', href: '#' },
-        { title: 'Collegedost Youtube Channel', href: '#' }
+        { title: 'NIMCET 2025 Notification', href: '/news/nimcet-notification-2025', isNew: true },
+        { title: 'Top MCA Colleges Ranking', href: '/news/mca-rankings-2025', isNew: true },
+        { title: 'BCA Course Details', href: '/courses/bachelor-of-computer-applications' }
       ],
       resources: [
         { title: 'MCA', href: '#' },
@@ -609,7 +599,7 @@ export const browseByStreamData = [
     titles: {
       col1: 'Exams',
       col2: 'Colleges',
-      col3_1: 'Resources',
+      col3_1: 'News & Resources',
       col3_2: ' '
     },
     content: {
@@ -631,10 +621,10 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       predictors: [
-        { title: 'GPAT Result', href: '#' },
-        { title: 'GPAT 2025 Admit Card', href: '#' },
-        { title: 'GPAT Question Papers', href: '#' },
-        { title: 'B. Pharma', href: '#' }
+        { title: 'GPAT Result', href: '/exams/gpat?tab=results' },
+        { title: 'GPAT 2025 Admit Card', href: '/news/gpat-admit-card-2025', isNew: true },
+        { title: 'Top Pharmacy Colleges', href: '/colleges?nirfCategory=Pharmacy', isNew: true },
+        { title: 'B. Pharma Course', href: '/courses/bachelor-of-pharmacy' }
       ],
       resources: []
     }
@@ -648,7 +638,7 @@ export const browseByStreamData = [
     titles: {
       col1: 'Exams',
       col2: 'Colleges',
-      col3_1: 'Resources',
+      col3_1: 'News & Resources',
       col3_2: 'Diploma Colleges'
     },
     content: {
@@ -669,11 +659,9 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       predictors: [
-        { title: 'Free Hospitality E-books', href: '#' },
-        { title: 'Free Hospitality Sample Papers', href: '#' },
-        { title: 'BHM Course', href: '#' },
-        { title: 'B.Sc Hotel Management', href: '#' },
-        { title: 'Hotel Management', href: '#' }
+        { title: 'NCHMCT JEE 2025 Date', href: '/news/nchmct-jee-date-2025', isNew: true },
+        { title: 'Top Hotel Management Colleges', href: '/colleges?course=BHM' },
+        { title: 'B.Sc Hotel Management', href: '/courses/bsc-hotel-management' }
       ],
       resources: [
         { title: 'Top Diploma Colleges in Maharashtra', href: '#' }
@@ -685,7 +673,7 @@ export const browseByStreamData = [
     label: 'Competition',
     titles: {
       col1: 'Exams',
-      col2: 'Resources',
+      col2: 'News & Resources',
       col3_1: 'Upcoming Events',
       col3_2: 'Other Exams'
     },
@@ -701,14 +689,10 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?category=Competition', isLink: true }
       ],
       colleges: [
+        { title: 'UPSC IAS Notification 2025', href: '/news/upsc-notification-2025', isNew: true },
+        { title: 'SSC CGL Exam Dates', href: '/news/ssc-dates-2025', isNew: true },
         { title: 'Previous Year Sample Papers', href: '#' },
-        { title: 'Free Competition E-books', href: '#' },
-        { title: 'Sarkari Result', href: '#' },
-        { title: 'QnA - Get answers to your doubts', href: '#' },
-        { title: 'UPSC Previous Year Sample Papers', href: '#' },
-        { title: 'CTET Previous Year Sample Papers', href: '#' },
-        { title: 'SBI Clerk Previous Year Sample Papers', href: '#' },
-        { title: 'NDA Previous Year Sample Papers', href: '#' }
+        { title: 'Sarkari Result', href: '#' }
       ],
       predictors: [
         { title: 'AFCAT 1 Result 2025', href: '#' },
@@ -738,7 +722,7 @@ export const browseByStreamData = [
     titles: {
       col1: 'Exams',
       col2: 'Top Schools',
-      col3_1: 'Products & Resources',
+      col3_1: 'News & Resources',
       col3_2: 'NCERT Study Material'
     },
     content: {
@@ -762,10 +746,9 @@ export const browseByStreamData = [
         { title: 'Top Schools in Bangalore', href: '#' }
       ],
       predictors: [
-        { title: 'JEE Main Knockout April', href: '#' },
-        { title: 'Free eBooks & Sample Papers', href: '#' },
-        { title: 'RD Sharma Solutions', href: '#' },
-        { title: 'State Boards Results 2025', href: '#' }
+        { title: 'CBSE Date Sheet 2025', href: '/news/cbse-datesheet-2025', isNew: true },
+        { title: 'State Boards Results 2025', href: '/news/board-results-2025', isNew: true },
+        { title: 'RD Sharma Solutions', href: '#' }
       ],
       resources: [
         { title: 'NCERT Notes', href: '#' },
@@ -786,7 +769,7 @@ export const browseByStreamData = [
       col1: 'Exams',
       col2: 'Colleges',
       col3_1: 'Top Countries',
-      col3_2: 'Resources'
+      col3_2: 'News & Resources'
     },
     content: {
       exams: [
@@ -820,14 +803,9 @@ export const browseByStreamData = [
         { title: 'Study in Europe', href: '#' }
       ],
       resources: [
-        { title: 'Student Visa Canada', href: '#' },
-        { title: 'Student Visa UK', href: '#' },
-        { title: 'Student Visa USA', href: '#' },
-        { title: 'Download E-books and Sample Papers', href: '#' },
-        { title: 'Free Exam Sample Papers', href: '#' },
-        { title: 'IELTS Reading Practice E-book', href: '#' },
-        { title: 'IELTS 2025 Writing Task 1 & Task 2', href: '#' },
-        { title: 'Know All About Education Loan', href: '#' }
+        { title: 'New UK Visa Rules 2025', href: '/news/uk-visa-rules-2025', isNew: true },
+        { title: 'Student Visa Guide USA', href: '#' },
+        { title: 'IELTS Reading Practice', href: '#' }
       ]
     }
   },
@@ -838,7 +816,7 @@ export const browseByStreamData = [
       col1: 'Exams',
       col2: 'Colleges',
       col3_1: 'Upcoming Events',
-      col3_2: 'Resources'
+      col3_2: 'News & Resources'
     },
     content: {
       exams: [
@@ -873,13 +851,12 @@ export const browseByStreamData = [
         { title: 'IGNOU Result', href: '#' }
       ],
       resources: [
-        { title: 'E-Books and Sample Papers', href: '#' },
         { title: 'CUET College Predictor', href: '#' },
-        { title: 'IIT JAM Exam Dates 2026', href: '#' },
+        { title: 'IIT JAM Exam Dates 2026', href: '/news/iit-jam-dates-2026', isNew: true },
+        { title: 'CUET 2026 Notification', href: '/news/cuet-notification-2026', isNew: true },
         { title: 'CUET PG Cut Off', href: '#' },
         { title: 'IGNOU Exam Form', href: '#' },
-        { title: 'CUET Syllabus', href: '#' },
-        { title: 'CUET Counselling', href: '#' }
+        { title: 'CUET Syllabus', href: '#' }
       ]
     }
   },

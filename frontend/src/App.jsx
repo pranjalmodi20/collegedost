@@ -26,6 +26,7 @@ const CollegePredictor = lazy(() => import('./pages/CollegePredictor'));
 const GenericRankPredictor = lazy(() => import('./pages/GenericRankPredictor'));
 const NewsPage = lazy(() => import('./pages/NewsPage'));
 const NewsDetailPage = lazy(() => import('./pages/NewsDetailPage'));
+const CompareColleges = lazy(() => import('./pages/CompareColleges'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const AdminArticles = lazy(() => import('./pages/admin/AdminArticles'));
@@ -104,14 +105,17 @@ function App() {
               <Route path="/rank-predictor" element={<GenericRankPredictor />} />
               <Route path="/news" element={<NewsPage />} />
               <Route path="/news/:slug" element={<NewsDetailPage />} />
+              <Route path="/compare-colleges" element={<CompareColleges />} />
               
               {/* Protected Admin Routes */}
               <Route element={<AdminRoute />}>
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/articles" element={<AdminArticles />} />
                 <Route path="/admin/articles/new" element={<PostArticle />} />
+                <Route path="/admin/articles/edit/:id" element={<PostArticle />} />
                 <Route path="/admin/colleges" element={<AdminColleges />} />
                 <Route path="/admin/colleges/new" element={<AddCollege />} />
+                <Route path="/admin/colleges/edit/:id" element={<AddCollege />} />
                 <Route path="/admin/ingestion" element={<AdminIngestion />} />
                 <Route path="/admin/users" element={<AdminUsers />} />
               </Route>

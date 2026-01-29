@@ -26,15 +26,14 @@ const AdminArticles = () => {
         }
     };
 
-    const handleDelete = async (slug) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this article?')) {
             try {
                 const token = localStorage.getItem('token');
-                // Assuming you have a delete endpoint, if not we need to create it
-                await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/articles/${slug}`, {
+                await axios.delete(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/articles/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                setArticles(articles.filter(a => a.slug !== slug));
+                setArticles(articles.filter(a => a._id !== id));
             } catch (error) {
                 console.error('Error deleting article:', error);
                 alert('Failed to delete article');
@@ -100,10 +99,10 @@ const AdminArticles = () => {
                                         <a href={`/news/${article.slug}`} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-brand-blue" title="View">
                                             <FaExternalLinkAlt />
                                         </a>
-                                        <button className="text-gray-400 hover:text-green-600" title="Edit">
+                                        <Link to={`/admin/articles/edit/${article._id}`} className="text-gray-400 hover:text-green-600" title="Edit">
                                             <FaEdit />
-                                        </button>
-                                        <button onClick={() => handleDelete(article.slug)} className="text-gray-400 hover:text-red-600" title="Delete">
+                                        </Link>
+                                        <button onClick={() => handleDelete(article._id)} className="text-gray-400 hover:text-red-600" title="Delete">
                                             <FaTrash />
                                         </button>
                                     </div>

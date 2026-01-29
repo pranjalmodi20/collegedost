@@ -291,8 +291,9 @@ const Navbar = ({ onOpenAskModal, onOpenShareModal, onOpenAuthModal }) => {
                               <ul className="flex flex-col gap-3">
                                 {currentStreamContent.resources.map((item, idx) => (
                                   <li key={idx}>
-                                    <Link to={item.href} onClick={() => setActiveDropdown(null)} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
-                                      {item.title}
+                                    <Link to={item.href} onClick={() => setActiveDropdown(null)} className="text-sm transition-colors flex items-center gap-2 text-gray-600 hover:text-brand-orange group">
+                                      <span>{item.title}</span>
+                                      {item.isNew && <span className="bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-sm">NEW</span>}
                                     </Link>
                                   </li>
                                 ))}

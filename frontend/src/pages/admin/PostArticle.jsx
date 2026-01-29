@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import { FaPlus, FaTrash, FaLink, FaSave, FaArrowLeft } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const PostArticle = () => {
+    const { id } = useParams();
+    const isEditMode = !!id;
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
@@ -19,6 +21,39 @@ const PostArticle = () => {
 
     // Helper for links input
     const [newLink, setNewLink] = useState({ title: '', url: '' });
+
+    useEffect(() => {
+        if (isEditMode) {
+            fetchArticle();
+        }
+    }, [id]);
+
+    const fetchArticle = async () => {
+        try {
+            setLoading(true);
+            const token = localStorage.getItem('token');
+            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/articles/id/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (res.data.success) {
+                const article = res.data.data;
+                setFormData({
+                    title: article.title,
+                    category: article.category,
+                    summary: article.summary,
+                    content: article.content,
+                    image: article.image || '',
+                    tags: article.tags ? article.tags.join(', ') : '',
+                    links: article.links || []
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching article:', error);
+            alert('Failed to fetch details');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,13 +86,19 @@ const PostArticle = () => {
                 tags: formData.tags.split(',').map(t => t.trim()).filter(t => t) // process tags
             };
             
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/articles`, dataToSubmit, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            
+            if (isEditMode) {
+                await axios.put(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/articles/${id}`, dataToSubmit, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                alert('Article updated successfully!');
+            } else {
+                await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'}/api/articles`, dataToSubmit, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                alert('Article posted successfully!');
+            }
 
-            alert('Article posted successfully!');
             navigate('/admin/articles');
         } catch (error) {
             console.error(error);
@@ -75,7 +116,7 @@ const PostArticle = () => {
                         <Link to="/admin/articles" className="text-gray-500 hover:text-gray-900 transition-colors">
                             <FaArrowLeft />
                         </Link>
-                        <h1 className="text-2xl font-bold text-gray-900">Post New Article</h1>
+                        <h1 className="text-2xl font-bold text-gray-900">{isEditMode ? 'Edit Article' : 'Post New Article'}</h1>
                     </div>
                 </div>
 
@@ -226,7 +267,7 @@ const PostArticle = () => {
                                 disabled={loading}
                                 className={`bg-brand-orange text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transform hover:-translate-y-0.5 transition-all flex items-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
-                                {loading ? 'Publishing...' : <><FaSave /> Publish Article</>}
+                                {loading ? 'Saving...' : <><FaSave /> {isEditMode ? 'Update Article' : 'Publish Article'}</>}
                             </button>
                         </div>
                     </form>

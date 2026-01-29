@@ -12,7 +12,10 @@ const {
     searchColleges,
     seedNirfData,
     syncColleges,
-    getCollegeSection
+    getCollegeSection,
+    getCollegeById,
+    updateCollege,
+    deleteCollege
 } = require('../controllers/college.controller');
 const { protect, admin } = require('../middleware/authMiddleware');
 
@@ -27,8 +30,15 @@ router.get('/best-roi', getBestROI);
 router.get('/seed-nirf', seedNirfData);
 router.get('/sections/:key', getCollegeSection);
 
+// Admin CRUD
+router.get('/id/:id', protect, admin, getCollegeById);
+router.post('/', protect, admin, createCollege);
+router.put('/:id', protect, admin, updateCollege);
+router.delete('/:id', protect, admin, deleteCollege);
+
+// Public General Routes
 router.get('/', getColleges);
 router.get('/:slug', getCollegeBySlug);
-router.post('/', protect, createCollege);
+
 
 module.exports = router;

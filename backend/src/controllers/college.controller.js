@@ -677,3 +677,62 @@ exports.getCollegeSection = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
+// @desc    Get Single College by ID (Admin)
+// @route   GET /api/colleges/id/:id
+// @access  Private/Admin
+exports.getCollegeById = async (req, res) => {
+    try {
+        const college = await College.findById(req.params.id);
+        if (!college) {
+            return res.status(404).json({ success: false, message: 'College not found' });
+        }
+        res.status(200).json({ success: true, data: college });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+// @desc    Update College
+// @route   PUT /api/colleges/:id
+// @access  Private/Admin
+exports.updateCollege = async (req, res) => {
+    try {
+        let college = await College.findById(req.params.id);
+
+        if (!college) {
+            return res.status(404).json({ success: false, message: 'College not found' });
+        }
+
+        college = await College.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
+
+        res.status(200).json({ success: true, data: college });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ success: false, message: error.message });
+    }
+};
+
+// @desc    Delete College
+// @route   DELETE /api/colleges/:id
+// @access  Private/Admin
+exports.deleteCollege = async (req, res) => {
+    try {
+        const college = await College.findById(req.params.id);
+
+        if (!college) {
+            return res.status(404).json({ success: false, message: 'College not found' });
+        }
+
+        await college.deleteOne();
+
+        res.status(200).json({ success: true, message: 'College deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
