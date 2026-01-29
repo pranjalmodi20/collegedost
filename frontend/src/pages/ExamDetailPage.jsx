@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import { FaCalendarAlt, FaNewspaper, FaExternalLinkAlt, FaSync, FaExclamationTriangle } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/axios'; // Use centralized api
+import { browseByStreamData } from '../data';
 
 const ExamDetailPage = () => {
     const { slug } = useParams();
@@ -254,9 +255,22 @@ const ExamDetailPage = () => {
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                        <h3 className="font-bold text-gray-900 mb-4 border-b pb-2">Related Exams</h3>
                        <ul className="space-y-3">
-                            <li className="text-sm text-gray-600 hover:text-brand-orange cursor-pointer transition">JEE Advanced</li>
-                            <li className="text-sm text-gray-600 hover:text-brand-orange cursor-pointer transition">BITSAT</li>
-                            <li className="text-sm text-gray-600 hover:text-brand-orange cursor-pointer transition">VITEEE</li>
+                            {(() => {
+                                // Default to engineering if no match, or try to match category
+                                // browseByStreamData uses lowercase ids
+                                const categoryId = exam.category ? exam.category.toLowerCase() : 'engineering';
+                                const categoryData = browseByStreamData.find(s => s.id === categoryId || s.label.toLowerCase().includes(categoryId));
+                                
+                                const relatedExams = categoryData ? categoryData.content.exams : [];
+                                
+                                return relatedExams.length > 0 ? relatedExams.map((item, idx) => (
+                                    <li key={idx}>
+                                        <Link to={item.href} className="text-sm text-gray-600 hover:text-brand-orange cursor-pointer transition block py-1">
+                                            {item.title}
+                                        </Link>
+                                    </li>
+                                )) : <p className="text-sm text-gray-500">No related exams found.</p>;
+                            })()}
                        </ul>
                     </div>
                 </div>

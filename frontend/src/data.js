@@ -614,12 +614,12 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'GPAT', href: '#' },
-        { title: 'RUHS Pharmacy Admission Test', href: '#' },
-        { title: 'KAHER-AIET', href: '#' },
-        { title: 'NIPER JEE', href: '#' },
-        { title: 'UPESPAT', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'GPAT', href: '/exams/gpat' },
+        { title: 'RUHS Pharmacy Admission Test', href: '/exams/ruhs-pharmacy-admission-test' },
+        { title: 'KAHER-AIET', href: '/exams/kaher-aiet' },
+        { title: 'NIPER JEE', href: '/exams/niper-jee' },
+        { title: 'UPESPAT', href: '/exams/upespat' },
+        { title: 'View All', href: '/exams?category=Pharmacy', isLink: true }
       ],
       colleges: [
         { title: 'Top Pharmacy Colleges in India', href: '#' },
@@ -634,11 +634,7 @@ export const browseByStreamData = [
         { title: 'GPAT Result', href: '#' },
         { title: 'GPAT 2025 Admit Card', href: '#' },
         { title: 'GPAT Question Papers', href: '#' },
-        { title: 'B. Pharma', href: '#' },
-        { title: 'M. Pharma', href: '#' },
-        { title: 'Free Ebooks', href: '#' },
-        { title: 'Free Sample Papers', href: '#' },
-        { title: 'Collegedost Youtube Channel', href: '#' }
+        { title: 'B. Pharma', href: '#' }
       ],
       resources: []
     }
@@ -657,12 +653,12 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'NCHMCT JEE 2025', href: '#' },
-        { title: 'Mah BHMCT CET', href: '#' },
-        { title: 'MAH HM CET', href: '#' },
-        { title: 'PUTHAT', href: '#' },
-        { title: 'IHM-A', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'NCHMCT JEE 2025', href: '/exams/nchmct-jee-2025' },
+        { title: 'Mah BHMCT CET', href: '/exams/mah-bhmct-cet' },
+        { title: 'MAH HM CET', href: '/exams/mah-hm-cet' },
+        { title: 'PUTHAT', href: '/exams/puthat' },
+        { title: 'IHM-A', href: '/exams/ihm-a' },
+        { title: 'View All', href: '/exams?category=Hospitality%20and%20Tourism', isLink: true }
       ],
       colleges: [
         { title: 'Top Hotel Management Colleges in Delhi', href: '#' },
@@ -677,9 +673,7 @@ export const browseByStreamData = [
         { title: 'Free Hospitality Sample Papers', href: '#' },
         { title: 'BHM Course', href: '#' },
         { title: 'B.Sc Hotel Management', href: '#' },
-        { title: 'Hotel Management', href: '#' },
-        { title: 'Diploma in Hotel Management and Catering Technology', href: '#' },
-        { title: 'List of Popular Branches', href: '#' }
+        { title: 'Hotel Management', href: '#' }
       ],
       resources: [
         { title: 'Top Diploma Colleges in Maharashtra', href: '#' }
@@ -697,14 +691,14 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'NDA Exam', href: '#' },
-        { title: 'UPSC IAS Exam', href: '#' },
-        { title: 'CDS Exam', href: '#' },
-        { title: 'AFCAT Exam', href: '#' },
-        { title: 'SSC CGL Exam', href: '#' },
-        { title: 'IBPS RRB Exam', href: '#' },
-        { title: 'CTET Exam', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'NDA Exam', href: '/exams/nda-exam' },
+        { title: 'UPSC IAS Exam', href: '/exams/upsc-ias-exam' },
+        { title: 'CDS Exam', href: '/exams/cds-exam' },
+        { title: 'AFCAT Exam', href: '/exams/afcat-exam' },
+        { title: 'SSC CGL Exam', href: '/exams/ssc-cgl-exam' },
+        { title: 'IBPS RRB Exam', href: '/exams/ibps-rrb-exam' },
+        { title: 'CTET Exam', href: '/exams/ctet-exam' },
+        { title: 'View All', href: '/exams?category=Competition', isLink: true }
       ],
       colleges: [
         { title: 'Previous Year Sample Papers', href: '#' },
@@ -749,13 +743,13 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CBSE Class 10th', href: '#' },
-        { title: 'CBSE Class 12th', href: '#' },
-        { title: 'UP Board 10th', href: '#' },
-        { title: 'UP Board 12th', href: '#' },
-        { title: 'Bihar Board 10th', href: '#' },
-        { title: 'Bihar Board 12th', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'CBSE Class 10th', href: '/exams/cbse-class-10th' },
+        { title: 'CBSE Class 12th', href: '/exams/cbse-class-12th' },
+        { title: 'UP Board 10th', href: '/exams/up-board-10th' },
+        { title: 'UP Board 12th', href: '/exams/up-board-12th' },
+        { title: 'Bihar Board 10th', href: '/exams/bihar-board-10th' },
+        { title: 'Bihar Board 12th', href: '/exams/bihar-board-12th' },
+        { title: 'View All', href: '/exams?category=School', isLink: true }
       ],
       colleges: [
         { title: 'Top Schools in India', href: '#' },
@@ -796,14 +790,14 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'TOEFL', href: '#' },
-        { title: 'PTE', href: '#' },
-        { title: 'IELTS', href: '#' },
-        { title: 'GMAT', href: '#' },
-        { title: 'GRE', href: '#' },
-        { title: 'SAT', href: '#' },
-        { title: 'LNAT UK', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'TOEFL', href: '/exams/toefl' },
+        { title: 'PTE', href: '/exams/pte' },
+        { title: 'IELTS', href: '/exams/ielts' },
+        { title: 'GMAT', href: '/exams/gmat' },
+        { title: 'GRE', href: '/exams/gre' },
+        { title: 'SAT', href: '/exams/sat' },
+        { title: 'LNAT UK', href: '/exams/lnat-uk' },
+        { title: 'View All', href: '/exams?category=Study%20Abroad', isLink: true }
       ],
       colleges: [
         { title: 'Top University in USA', href: '#' },
@@ -848,14 +842,15 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CUET Exam', href: '#' },
-        { title: 'CUET PG', href: '#' },
-        { title: 'NFAT', href: '#' },
-        { title: 'NEST', href: '#' },
-        { title: 'UP B.Ed JEE', href: '#' },
-        { title: 'TS EDCET Exam', href: '#' },
-        { title: 'IIT JAM', href: '#' },
-        { title: 'AP PGCET Exam', href: '#' }
+        { title: 'CUET Exam', href: '/exams/cuet-exam' },
+        { title: 'CUET PG', href: '/exams/cuet-pg' },
+        { title: 'NFAT', href: '/exams/nfat' },
+        { title: 'NEST', href: '/exams/nest' },
+        { title: 'UP BEd JEE', href: '/exams/up-bed-jee' },
+        { title: 'TS EDCET Exam', href: '/exams/ts-edcet-exam' },
+        { title: 'IIT JAM', href: '/exams/iit-jam' },
+        { title: 'AP PGCET Exam', href: '/exams/ap-pgcet-exam' },
+        { title: 'View All', href: '/exams?category=Arts%2C%20Commerce%20%26%20Sciences', isLink: true }
       ],
       colleges: [
         { title: 'Universities in India', href: '#' },

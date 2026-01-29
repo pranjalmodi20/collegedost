@@ -11,7 +11,7 @@ exports.getExams = async (req, res) => {
         let query = {};
 
         // Logic to support Category filtering via 'level' param (backward compatible)
-        const knownCategories = ['Engineering', 'Medical', 'Management', 'Law', 'Pharmacy', 'Finance', 'Computer Application and IT', 'Media'];
+        const knownCategories = ['Engineering', 'Medical', 'Management', 'Law', 'Pharmacy', 'Finance', 'Computer Application and IT', 'Media', 'Hospitality and Tourism', 'Competition', 'School', 'Study Abroad', 'Arts, Commerce & Sciences'];
 
         if (level) {
             if (knownCategories.includes(level)) {
@@ -210,6 +210,54 @@ const POPULAR_EXAMS = [
 
 
 
+    // --- Pharmacy ---
+    { name: 'NIPER JEE', authority: 'NIPER', level: 'National', category: 'Pharmacy', website: 'https://niperguwahati.ac.in/', rss: 'https://news.google.com/rss/search?q=NIPER+JEE+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'RUHS Pharmacy Admission Test', authority: 'RUHS', level: 'State', category: 'Pharmacy', website: 'https://ruhsraj.org/', rss: 'https://news.google.com/rss/search?q=RUHS+Pharmacy+Admission+Test&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'KAHER-AIET', authority: 'KAHER', level: 'University', category: 'Pharmacy', website: 'https://kledeemeduniversity.edu.in/', rss: 'https://news.google.com/rss/search?q=KAHER+AIET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'UPESPAT', authority: 'UPES', level: 'University', category: 'Pharmacy', website: 'https://www.upes.ac.in/', rss: 'https://news.google.com/rss/search?q=UPESPAT+Pharmacy+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Hospitality and Tourism ---
+    { name: 'NCHMCT JEE 2025', authority: 'NTA', level: 'National', category: 'Hospitality and Tourism', website: 'https://nchmjee.nta.nic.in/', rss: 'https://news.google.com/rss/search?q=NCHMCT+JEE+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'Mah BHMCT CET', authority: 'State CET Cell, Maharashtra', level: 'State', category: 'Hospitality and Tourism', website: 'https://cetcell.mahacet.org/', rss: 'https://news.google.com/rss/search?q=MAH+BHMCT+CET&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'MAH HM CET', authority: 'State CET Cell, Maharashtra', level: 'State', category: 'Hospitality and Tourism', website: 'https://cetcell.mahacet.org/', rss: 'https://news.google.com/rss/search?q=MAH+HM+CET&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'PUTHAT', authority: 'Panjab University', level: 'University', category: 'Hospitality and Tourism', website: 'https://puthat.puchd.ac.in/', rss: 'https://news.google.com/rss/search?q=PUTHAT+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'IHM-A', authority: 'IHM Aurangabad', level: 'Institute', category: 'Hospitality and Tourism', website: 'https://ihmaurangabad.ac.in/', rss: 'https://news.google.com/rss/search?q=IHM+Aurangabad+Admission&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Competition / Government Exams ---
+    { name: 'NDA Exam', authority: 'UPSC', level: 'National', category: 'Competition', website: 'https://upsc.gov.in/examinations/nda-na-examination', rss: 'https://news.google.com/rss/search?q=NDA+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'UPSC IAS Exam', authority: 'UPSC', level: 'National', category: 'Competition', website: 'https://upsc.gov.in/', rss: 'https://news.google.com/rss/search?q=UPSC+Civil+Services+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CDS Exam', authority: 'UPSC', level: 'National', category: 'Competition', website: 'https://upsc.gov.in/examinations/cds-examination', rss: 'https://news.google.com/rss/search?q=CDS+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'AFCAT Exam', authority: 'Indian Air Force', level: 'National', category: 'Competition', website: 'https://afcat.cdac.in/', rss: 'https://news.google.com/rss/search?q=AFCAT+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'SSC CGL Exam', authority: 'SSC', level: 'National', category: 'Competition', website: 'https://ssc.nic.in/', rss: 'https://news.google.com/rss/search?q=SSC+CGL+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'IBPS RRB Exam', authority: 'IBPS', level: 'National', category: 'Competition', website: 'https://www.ibps.in/', rss: 'https://news.google.com/rss/search?q=IBPS+RRB+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CTET Exam', authority: 'CBSE', level: 'National', category: 'Competition', website: 'https://ctet.nic.in/', rss: 'https://news.google.com/rss/search?q=CTET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- School / Board Exams ---
+    { name: 'CBSE Class 10th', authority: 'CBSE', level: 'National', category: 'School', website: 'https://cbse.gov.in/', rss: 'https://news.google.com/rss/search?q=CBSE+Class+10+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CBSE Class 12th', authority: 'CBSE', level: 'National', category: 'School', website: 'https://cbse.gov.in/', rss: 'https://news.google.com/rss/search?q=CBSE+Class+12+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'UP Board 10th', authority: 'UP Board', level: 'State', category: 'School', website: 'https://upmsp.edu.in/', rss: 'https://news.google.com/rss/search?q=UP+Board+Class+10+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'UP Board 12th', authority: 'UP Board', level: 'State', category: 'School', website: 'https://upmsp.edu.in/', rss: 'https://news.google.com/rss/search?q=UP+Board+Class+12+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'Bihar Board 10th', authority: 'BSEB', level: 'State', category: 'School', website: 'https://biharboardonline.bihar.gov.in/', rss: 'https://news.google.com/rss/search?q=Bihar+Board+Class+10+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'Bihar Board 12th', authority: 'BSEB', level: 'State', category: 'School', website: 'https://biharboardonline.bihar.gov.in/', rss: 'https://news.google.com/rss/search?q=Bihar+Board+Class+12+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Study Abroad / International Exams ---
+    { name: 'TOEFL', authority: 'ETS', level: 'International', category: 'Study Abroad', website: 'https://www.ets.org/toefl.html', rss: 'https://news.google.com/rss/search?q=TOEFL+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'PTE', authority: 'Pearson', level: 'International', category: 'Study Abroad', website: 'https://www.pearsonpte.com/', rss: 'https://news.google.com/rss/search?q=PTE+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'IELTS', authority: 'British Council', level: 'International', category: 'Study Abroad', website: 'https://www.ielts.org/', rss: 'https://news.google.com/rss/search?q=IELTS+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'GRE', authority: 'ETS', level: 'International', category: 'Study Abroad', website: 'https://www.ets.org/gre.html', rss: 'https://news.google.com/rss/search?q=GRE+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'SAT', authority: 'College Board', level: 'International', category: 'Study Abroad', website: 'https://collegereadiness.collegeboard.org/sat', rss: 'https://news.google.com/rss/search?q=SAT+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'LNAT UK', authority: 'LNAT Consortium', level: 'International', category: 'Study Abroad', website: 'https://www.lnat.ac.uk/', rss: 'https://news.google.com/rss/search?q=LNAT+UK+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+
+    // --- Arts, Commerce & Sciences ---
+    { name: 'CUET Exam', authority: 'NTA', level: 'National', category: 'Arts, Commerce & Sciences', website: 'https://cuet.samarth.ac.in/', rss: 'https://news.google.com/rss/search?q=CUET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'CUET PG', authority: 'NTA', level: 'National', category: 'Arts, Commerce & Sciences', website: 'https://pgcuet.samarth.ac.in/', rss: 'https://news.google.com/rss/search?q=CUET+PG+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'NFAT', authority: 'NTA', level: 'National', category: 'Arts, Commerce & Sciences', website: 'https://nfat.nta.nic.in/', rss: 'https://news.google.com/rss/search?q=NFAT+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'NEST', authority: 'NISER', level: 'National', category: 'Arts, Commerce & Sciences', website: 'https://www.nestexam.in/', rss: 'https://news.google.com/rss/search?q=NEST+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'UP BEd JEE', authority: 'LKOUNIV', level: 'State', category: 'Arts, Commerce & Sciences', website: 'https://lkouniv.ac.in/', rss: 'https://news.google.com/rss/search?q=UP+BEd+JEE+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'TS EDCET Exam', authority: 'Osmania University', level: 'State', category: 'Arts, Commerce & Sciences', website: 'https://tsedcet.org/', rss: 'https://news.google.com/rss/search?q=TS+EDCET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'IIT JAM', authority: 'IITs', level: 'National', category: 'Arts, Commerce & Sciences', website: 'https://jam.iitr.ac.in/', rss: 'https://news.google.com/rss/search?q=IIT+JAM+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'AP PGCET Exam', authority: 'Andhra University', level: 'State', category: 'Arts, Commerce & Sciences', website: 'https://sche.ap.gov.in/pgcet', rss: 'https://news.google.com/rss/search?q=AP+PGCET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+
     // --- UG Medical & Allied ---
     // NEET UG is already top of list
     { name: 'AIIMS BSc Nursing', authority: 'AIIMS', level: 'National', website: 'https://www.aiimsexams.ac.in/', rss: 'https://news.google.com/rss/search?q=AIIMS+BSc+Nursing+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
@@ -223,7 +271,7 @@ const POPULAR_EXAMS = [
     { name: 'INI CET', authority: 'AIIMS', level: 'National', website: 'https://www.aiimsexams.ac.in/', rss: 'https://news.google.com/rss/search?q=INI+CET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'AIAPGET', authority: 'NTA', level: 'National', website: 'https://aiapget.nta.nic.in/', rss: 'https://news.google.com/rss/search?q=AIAPGET+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
     { name: 'NEET MDS', authority: 'NBEMS', level: 'National', website: 'https://nbe.edu.in/', rss: 'https://news.google.com/rss/search?q=NEET+MDS+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
-    { name: 'GPAT', authority: 'NBEMS', level: 'National', website: 'https://natboard.edu.in/', rss: 'https://news.google.com/rss/search?q=GPAT+Pharmacy+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
+    { name: 'GPAT', authority: 'NBEMS', level: 'National', category: 'Pharmacy', website: 'https://natboard.edu.in/', rss: 'https://news.google.com/rss/search?q=GPAT+Pharmacy+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
 
     // --- Super Speciality & Foreign ---
     { name: 'NEET SS', authority: 'NBEMS', level: 'National', website: 'https://nbe.edu.in/', rss: 'https://news.google.com/rss/search?q=NEET+SS+Exam&hl=en-IN&gl=IN&ceid=IN:en' },
