@@ -45,9 +45,53 @@ const CollegesPage = () => {
 
     // Fetch on Filters or Page Change
     useEffect(() => {
+        // Sync URL with state
+        const params = {};
+        if (filters.search) params.search = filters.search;
+        if (filters.state.length) params.state = filters.state.join(',');
+        if (filters.city) params.city = filters.city;
+        if (filters.type) params.type = filters.type;
+        if (filters.stream.length) params.stream = filters.stream.join(',');
+        if (filters.degree.length) params.degree = filters.degree.join(',');
+        if (filters.targetYear.length) params.targetYear = filters.targetYear.join(',');
+        if (filters.goal.length) params.goal = filters.goal.join(',');
+        if (filters.sort) params.sort = filters.sort;
+        
+        // Only trigger setSearchParams if the new params are different from current URL
+        // Simple check to avoid infinite loops if setParams triggers re-render 
+        // Although react-router handles this well usually.
+        setSearchParams(params, { replace: true });
+
         fetchColleges();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [filters, page]); 
+
+    // Fetch Suggestions Debounced
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (query && query.length > 1 && query !== filters.search) {
+                fetchSuggestions(query);
+            } else {
+                setSuggestions([]);
+                setShowSuggestions(false);
+            }
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [query]);
+
+    // Handle click outside to close suggestions
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setShowSuggestions(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []); 
 
     // Handle Checkbox Change
     const handleCheckboxChange = (category, value) => {
@@ -94,6 +138,18 @@ const CollegesPage = () => {
             console.error(err);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const fetchSuggestions = async (searchTerm) => {
+        try {
+            const res = await api.get(`/colleges/search?q=${searchTerm}`);
+            if (res.data.success) {
+                setSuggestions(res.data.data);
+                setShowSuggestions(true);
+            }
+        } catch (error) {
+            console.error("Error fetching suggestions:", error);
         }
     };
 
@@ -239,16 +295,55 @@ const CollegesPage = () => {
                     
                     {/* Top Search Bar */}
                     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6 flex gap-4 items-center">
-                        <div className="flex-1 relative">
+                        <div className="flex-1 relative" ref={searchRef}>
                             <FaSearch className="absolute left-4 top-3.5 text-gray-400" />
                             <input 
                                 type="text"
                                 value={query}
-                                onChange={(e) => setQuery(e.target.value)}
+                                onChange={(e) => {
+                                    setQuery(e.target.value);
+                                    if(e.target.value.length === 0) {
+                                        setFilters({...filters, search: ''});
+                                        setShowSuggestions(false);
+                                    }
+                                }}
+                                onFocus={() => {
+                                    if(query.length > 1 && suggestions.length > 0) setShowSuggestions(true);
+                                }}
                                 onKeyDown={handleSearchSubmit} 
                                 placeholder="Search for colleges, exams, courses and more..." 
                                 className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-brand-blue outline-none"
                             />
+                            {/* Suggestions Dropdown */}
+                            {showSuggestions && suggestions.length > 0 && (
+                                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden max-h-80 overflow-y-auto">
+                                    {suggestions.map((item) => (
+                                        <div 
+                                            key={item._id}
+                                            onClick={() => {
+                                                setQuery(item.name);
+                                                setFilters({...filters, search: item.name}); // Or navigate directly `navigate('/colleges/' + item.slug)`
+                                                setPage(1);
+                                                setShowSuggestions(false);
+                                            }}
+                                            className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0 flex items-center justify-between group"
+                                        >
+                                            <div>
+                                                <div className="text-sm font-medium text-gray-800 group-hover:text-brand-blue">
+                                                    {item.name}
+                                                </div>
+                                                <div className="text-xs text-gray-500 flex items-center gap-1">
+                                                    {item.location?.city}, {item.location?.state}
+                                                    {item.type && <span className="px-1.5 py-0.5 bg-gray-100 rounded text-[10px]">{item.type}</span>}
+                                                </div>
+                                            </div>
+                                            <div className="text-gray-300 group-hover:text-brand-orange">
+                                                <FaChevronRight className="text-xs" />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                         <button className="bg-brand-orange text-white px-8 py-3 rounded-lg font-bold hover:bg-orange-600 transition shadow-lg">
                             Search

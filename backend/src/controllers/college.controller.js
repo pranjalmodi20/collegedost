@@ -244,12 +244,23 @@ exports.getColleges = async (req, res) => {
         }
 
         // 7. Global Search (Name, City, State)
+        // 7. Global Search (Name, City, State, Type, Aliases)
         if (search) {
+             // Escape special characters to prevent regex errors
+             const escapeRegex = (text) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+             const safeSearch = escapeRegex(search.trim());
+
+             // Use word boundary (\b) to prevent "nit" matching "Humanities" or "Monitoring"
+             const strictRegex = new RegExp(`\\b${safeSearch}`, 'i'); 
+
              conditions.push({
                  $or: [
-                     { name: { $regex: search, $options: 'i' } },
-                     { 'location.city': { $regex: search, $options: 'i' } },
-                     { 'location.state': { $regex: search, $options: 'i' } }
+                     { name: { $regex: strictRegex } },
+                     // For Type, often concise (IIT, NIT), allow direct match
+                     { type: { $regex: strictRegex } }, 
+                     { aliases: { $in: [strictRegex] } }, 
+                     { 'location.city': { $regex: strictRegex } },
+                     { 'location.state': { $regex: strictRegex } }
                  ]
              });
         }
@@ -388,10 +399,16 @@ exports.searchColleges = async (req, res) => {
              return res.status(200).json({ success: true, data: [] });
         }
 
+        const escapeRegex = (text) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        const safeSearch = escapeRegex(q.trim());
+        const strictRegex = new RegExp(`\\b${safeSearch}`, 'i');
+        
         const colleges = await College.find({
             $or: [
-                { name: { $regex: q, $options: 'i' } },
-                { 'location.city': { $regex: q, $options: 'i' } }
+                { name: { $regex: strictRegex } },
+                { type: { $regex: strictRegex } },
+                { aliases: { $in: [strictRegex] } },
+                { 'location.city': { $regex: strictRegex } }
             ]
         })
         .select('name slug location.city type nirfRank')
