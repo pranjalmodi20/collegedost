@@ -1,13 +1,13 @@
 
 export const engineeringRankings = [
-    { name: "Top Engineering Colleges in India", link: "#" },
-    { name: "Top IITs in India", link: "#" },
-    { name: "Top NITs in India", link: "#" },
-    { name: "Top IIITs in India", link: "#" },
-    { name: "Top Private Engineering Colleges", link: "#" },
-    { name: "Top Govt Engineering Colleges", link: "#" },
-    { name: "Colleges Accepting JEE Main", link: "#" },
-    { name: "NIRF Engineering Rankings 2025", link: "#" }
+    { name: "Top Engineering Colleges in India", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering" },
+    { name: "Top IITs in India", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&search=IIT" },
+    { name: "Top NITs in India", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&search=NIT" },
+    { name: "Top IIITs in India", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&search=IIIT" },
+    { name: "Top Private Engineering Colleges", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&type=Private" },
+    { name: "Top Govt Engineering Colleges", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&type=Government" },
+    { name: "Colleges Accepting JEE Main", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&branch=Engineering&exam=JEE Main" },
+    { name: "NIRF Engineering Rankings 2025", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering" }
 ];
 
 export const engineeringExams = [
@@ -117,12 +117,12 @@ export const engineeringCoursesData = [
 ];
 
 export const engineeringCities = [
-    { name: "Engineering Colleges in Delhi", link: "#" },
-    { name: "Engineering Colleges in Bangalore", link: "#" },
-    { name: "Engineering Colleges in Chennai", link: "#" },
-    { name: "Engineering Colleges in Mumbai", link: "#" },
-    { name: "Engineering Colleges in Pune", link: "#" },
-    { name: "Engineering Colleges in Hyderabad", link: "#" },
-    { name: "Engineering Colleges in Kolkata", link: "#" },
-    { name: "Engineering Colleges in Jaipur", link: "#" }
+    { name: "Engineering Colleges in Delhi", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&state=Delhi" },
+    { name: "Engineering Colleges in Bangalore", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&city=Bangalore" },
+    { name: "Engineering Colleges in Chennai", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&city=Chennai" },
+    { name: "Engineering Colleges in Mumbai", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&city=Mumbai" },
+    { name: "Engineering Colleges in Pune", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&city=Pune" },
+    { name: "Engineering Colleges in Hyderabad", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&city=Hyderabad" },
+    { name: "Engineering Colleges in Kolkata", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&city=Kolkata" },
+    { name: "Engineering Colleges in Jaipur", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&city=Jaipur" }
 ];

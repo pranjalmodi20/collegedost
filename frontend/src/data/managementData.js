@@ -1,24 +1,24 @@
 
 export const managementRankings = [
-    { name: "Top MBA Colleges in India", link: "#" },
-    { name: "Top IIMs in India", link: "#" },
-    { name: "Top BBA Colleges", link: "#" },
-    { name: "Top Government MBA Colleges", link: "#" },
-    { name: "Top Private MBA Colleges", link: "#" },
-    { name: "MBA Colleges with Best ROI", link: "#" },
-    { name: "Top Executive MBA Colleges", link: "#" },
-    { name: "Distance MBA Rankings", link: "#" }
+    { name: "Top MBA Colleges in India", link: "/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management" },
+    { name: "Top IIMs in India", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=IIM" },
+    { name: "Top BBA Colleges", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=BBA" },
+    { name: "Top Government MBA Colleges", link: "/colleges?goal=Colleges&stream=Management And Business Administration&type=Government&degree=MBA" },
+    { name: "Top Private MBA Colleges", link: "/colleges?goal=Colleges&stream=Management And Business Administration&type=Private&degree=MBA" },
+    { name: "MBA Colleges with Best ROI", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA" },
+    { name: "Top Executive MBA Colleges", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA" },
+    { name: "Distance MBA Rankings", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&type=Distance" }
 ];
 
 export const managementExams = [
-    { name: "CAT 2024", link: "#" },
-    { name: "XAT 2025", link: "#" },
-    { name: "MAT 2024", link: "#" },
-    { name: "SNAP 2024", link: "#" },
-    { name: "CMAT 2025", link: "#" },
-    { name: "NMAT by GMAC", link: "#" },
-    { name: "IBSAT", link: "#" },
-    { name: "MAH MBA CET", link: "#" }
+    { name: "CAT 2024", link: "/exams/cat" },
+    { name: "XAT 2025", link: "/exams/xat" },
+    { name: "MAT 2024", link: "/exams/mat" },
+    { name: "SNAP 2024", link: "/exams/snap" },
+    { name: "CMAT 2025", link: "/exams/cmat" },
+    { name: "NMAT by GMAC", link: "/exams/nmat-by-gmac" },
+    { name: "IBSAT", link: "/exams/ibsat" },
+    { name: "MAH MBA CET", link: "/exams/mah-mba-cet" }
 ];
 
 export const featuredManagementColleges = [
@@ -91,38 +91,38 @@ export const managementCoursesData = [
     {
         title: "Popular Specializations",
         items: [
-            { name: "MBA in Finance", link: "#" },
-            { name: "MBA in Marketing", link: "#" },
-            { name: "MBA in Business Analytics", link: "#" },
-            { name: "MBA in HR", link: "#" },
-            { name: "MBA in Operations", link: "#" },
-            { name: "International Business", link: "#" },
-            { name: "Supply Chain Mgmt", link: "#" },
-            { name: "Entrepreneurship", link: "#" }
+            { name: "MBA in Finance", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&search=Finance" },
+            { name: "MBA in Marketing", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&search=Marketing" },
+            { name: "MBA in Business Analytics", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&search=Analytics" },
+            { name: "MBA in HR", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&search=HR" },
+            { name: "MBA in Operations", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&search=Operations" },
+            { name: "International Business", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&search=International" },
+            { name: "Supply Chain Mgmt", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&search=Supply Chain" },
+            { name: "Entrepreneurship", link: "/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&search=Entrepreneurship" }
         ]
     },
     {
         title: "UG Courses",
         items: [
-            { name: "BBA General", link: "#" },
-            { name: "BBA in Digital Marketing", link: "#" },
-            { name: "Integrated MBA (BBA+MBA)", link: "#" },
-            { name: "Bachelor of Management Studies", link: "#" },
-            { name: "Hotel Management", link: "#" },
-            { name: "Hospital Administration", link: "#" },
-            { name: "Retail Management", link: "#" },
-            { name: "Sports Management", link: "#" }
+            { name: "BBA General", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=BBA" },
+            { name: "BBA in Digital Marketing", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=BBA Digital Marketing" },
+            { name: "Integrated MBA (BBA+MBA)", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=Integrated MBA" },
+            { name: "Bachelor of Management Studies", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=BMS" },
+            { name: "Hotel Management", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=Hotel Management" },
+            { name: "Hospital Administration", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=Hospital Administration" },
+            { name: "Retail Management", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=Retail" },
+            { name: "Sports Management", link: "/colleges?goal=Colleges&stream=Management And Business Administration&search=Sports" }
         ]
     }
 ];
 
 export const managementCities = [
-    { name: "MBA Colleges in Delhi", link: "#" },
-    { name: "MBA Colleges in Bangalore", link: "#" },
-    { name: "MBA Colleges in Mumbai", link: "#" },
-    { name: "MBA Colleges in Pune", link: "#" },
-    { name: "MBA Colleges in Hyderabad", link: "#" },
-    { name: "MBA Colleges in Chennai", link: "#" },
-    { name: "MBA Colleges in Kolkata", link: "#" },
-    { name: "MBA Colleges in Ahmedabad", link: "#" }
+    { name: "MBA Colleges in Delhi", link: "/colleges?goal=Colleges&stream=Management And Business Administration&state=Delhi&degree=MBA" },
+    { name: "MBA Colleges in Bangalore", link: "/colleges?goal=Colleges&stream=Management And Business Administration&city=Bangalore&degree=MBA" },
+    { name: "MBA Colleges in Mumbai", link: "/colleges?goal=Colleges&stream=Management And Business Administration&city=Mumbai&degree=MBA" },
+    { name: "MBA Colleges in Pune", link: "/colleges?goal=Colleges&stream=Management And Business Administration&city=Pune&degree=MBA" },
+    { name: "MBA Colleges in Hyderabad", link: "/colleges?goal=Colleges&stream=Management And Business Administration&city=Hyderabad&degree=MBA" },
+    { name: "MBA Colleges in Chennai", link: "/colleges?goal=Colleges&stream=Management And Business Administration&city=Chennai&degree=MBA" },
+    { name: "MBA Colleges in Kolkata", link: "/colleges?goal=Colleges&stream=Management And Business Administration&city=Kolkata&degree=MBA" },
+    { name: "MBA Colleges in Ahmedabad", link: "/colleges?goal=Colleges&stream=Management And Business Administration&city=Ahmedabad&degree=MBA" }
 ];

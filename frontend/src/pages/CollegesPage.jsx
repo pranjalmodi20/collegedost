@@ -113,6 +113,20 @@ const CollegesPage = () => {
     const fetchColleges = async () => {
         setLoading(true);
         try {
+            // GOAL-BASED FILTERING LOGIC:
+            // If a goal is selected but does NOT include "Colleges", don't fetch colleges
+            // This handles cases like "Study Abroad", "Exams", "Coaching" being selected alone
+            const hasGoalFilter = filters.goal.length > 0;
+            const includesCollegesGoal = filters.goal.includes('Colleges');
+            
+            // If user has selected goals but "Colleges" is NOT among them, show empty state
+            if (hasGoalFilter && !includesCollegesGoal) {
+                setColleges([]);
+                setTotalPages(1);
+                setLoading(false);
+                return;
+            }
+
             const params = new URLSearchParams();
             
             // Map our state arrays to comma separated URL params
@@ -461,15 +475,65 @@ const CollegesPage = () => {
                                 ))
                             ) : (
                                 <div className="text-center py-24 bg-white rounded-xl border border-dashed border-gray-300">
-                                    <div className="text-6xl mb-4">🔍</div>
-                                    <h3 className="text-xl font-bold text-gray-800 mb-2">No colleges found</h3>
-                                    <p className="text-gray-500">We couldn't find any results matching your filters.</p>
-                                    <button 
-                                        onClick={() => setFilters({search:'', state:[], city:'', type:'', stream:[], degree:[], targetYear:[], goal:[], sort:'nirfRank'})}
-                                        className="mt-6 text-brand-blue font-bold hover:underline"
-                                    >
-                                        Clear all filters
-                                    </button>
+                                    {/* Context-aware empty state based on selected goals */}
+                                    {filters.goal.includes('Study Abroad') && !filters.goal.includes('Colleges') ? (
+                                        <>
+                                            <div className="text-6xl mb-4">✈️</div>
+                                            <h3 className="text-xl font-bold text-gray-800 mb-2">Study Abroad Programs</h3>
+                                            <p className="text-gray-500 max-w-md mx-auto">
+                                                Study Abroad programs are not listed on this page.<br />
+                                                Select <strong>"Colleges"</strong> in the Goal filter to view college listings.
+                                            </p>
+                                            <button 
+                                                onClick={() => handleCheckboxChange('goal', 'Colleges')}
+                                                className="mt-6 bg-brand-blue text-white px-6 py-2.5 rounded-lg font-bold hover:bg-blue-700 transition"
+                                            >
+                                                Show Colleges Instead
+                                            </button>
+                                        </>
+                                    ) : filters.goal.includes('Exams') && !filters.goal.includes('Colleges') ? (
+                                        <>
+                                            <div className="text-6xl mb-4">📝</div>
+                                            <h3 className="text-xl font-bold text-gray-800 mb-2">Exams Information</h3>
+                                            <p className="text-gray-500 max-w-md mx-auto">
+                                                This page displays colleges only.<br />
+                                                Select <strong>"Colleges"</strong> in the Goal filter to view college listings.
+                                            </p>
+                                            <button 
+                                                onClick={() => handleCheckboxChange('goal', 'Colleges')}
+                                                className="mt-6 bg-brand-blue text-white px-6 py-2.5 rounded-lg font-bold hover:bg-blue-700 transition"
+                                            >
+                                                Show Colleges Instead
+                                            </button>
+                                        </>
+                                    ) : filters.goal.includes('Coachings') && !filters.goal.includes('Colleges') ? (
+                                        <>
+                                            <div className="text-6xl mb-4">🎓</div>
+                                            <h3 className="text-xl font-bold text-gray-800 mb-2">Coaching Institutes</h3>
+                                            <p className="text-gray-500 max-w-md mx-auto">
+                                                This page displays colleges only.<br />
+                                                Select <strong>"Colleges"</strong> in the Goal filter to view college listings.
+                                            </p>
+                                            <button 
+                                                onClick={() => handleCheckboxChange('goal', 'Colleges')}
+                                                className="mt-6 bg-brand-blue text-white px-6 py-2.5 rounded-lg font-bold hover:bg-blue-700 transition"
+                                            >
+                                                Show Colleges Instead
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className="text-6xl mb-4">🔍</div>
+                                            <h3 className="text-xl font-bold text-gray-800 mb-2">No colleges found</h3>
+                                            <p className="text-gray-500">We couldn't find any results matching your filters.</p>
+                                            <button 
+                                                onClick={() => setFilters({search:'', state:[], city:'', type:'', stream:[], degree:[], targetYear:[], goal:[], sort:'nirfRank'})}
+                                                className="mt-6 text-brand-blue font-bold hover:underline"
+                                            >
+                                                Clear all filters
+                                            </button>
+                                        </>
+                                    )}
                                 </div>
                             )}
                         </div>

@@ -36,8 +36,8 @@ export const collegesData = [
     titles: { col1: 'Top Ranked', col2: 'By Placement', col3_1: 'By City', col3_2: 'By State' },
     content: {
       exams: [
-        { title: 'Top Engineering Colleges', href: '/colleges?nirfCategory=Engineering' },
-        { title: 'Top MBA Colleges', href: '/colleges?nirfCategory=Management' },
+        { title: 'Top Engineering Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
+        { title: 'Top MBA Colleges', href: '/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' },
         { title: 'Top Medical Colleges', href: '/colleges?nirfCategory=Medical' },
         { title: 'Top Law Colleges', href: '/colleges?nirfCategory=Law' },
         { title: 'Top Pharmacy Colleges', href: '/colleges?nirfCategory=Pharmacy' }
@@ -247,11 +247,11 @@ export const browseByStreamData = [
         { title: 'View All Engineering Exams', href: '/exams?level=Engineering', isLink: true }
       ],
       colleges: [
-        { title: 'Colleges Accepting B.Tech Applications', href: '/colleges?course=B.Tech' },
-        { title: 'Top Engineering Colleges in India', href: '/colleges?nirfCategory=Engineering' },
-        { title: 'Engineering Colleges Accepting JEE Main', href: '/colleges?branch=Engineering&exam=JEE Main' },
-        { title: 'Top IITs in India', href: '/colleges?search=IIT' },
-        { title: 'Top NITs in India', href: '/colleges?search=NIT' }
+        { title: 'Colleges Accepting B.Tech Applications', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&course=B.Tech' },
+        { title: 'Top Engineering Colleges in India', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
+        { title: 'Engineering Colleges Accepting JEE Main', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&branch=Engineering&exam=JEE Main' },
+        { title: 'Top IITs in India', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&search=IIT' },
+        { title: 'Top NITs in India', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&search=NIT' }
       ],
       predictors: [
         { title: 'JEE Main College Predictor', href: '/jee-main-predictor' },
@@ -299,14 +299,14 @@ export const browseByStreamData = [
         { title: 'View All Management Exams', href: '/exams?level=National', isLink: true }
       ],
       colleges: [
-        { title: 'Top MBA Colleges in India', href: '#' },
-        { title: 'MBA College Admissions', href: '#' },
-        { title: 'MBA Colleges in India', href: '#' },
-        { title: 'Top IIMs Colleges in India', href: '#' },
-        { title: 'Top Online MBA Colleges in India', href: '#' },
-        { title: 'Online MBA', href: '#' },
-        { title: 'MBA Colleges Accepting XAT Score', href: '#' },
-        { title: 'BBA Colleges in India', href: '#' }
+        { title: 'Top MBA Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' },
+        { title: 'MBA College Admissions', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' },
+        { title: 'MBA Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' },
+        { title: 'Top IIMs Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&search=IIM' },
+        { title: 'Top Online MBA Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&type=Online' },
+        { title: 'Online MBA', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&type=Online' },
+        { title: 'MBA Colleges Accepting XAT Score', href: '/colleges?goal=Colleges&stream=Management And Business Administration&exam=XAT' },
+        { title: 'BBA Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&search=BBA' }
       ],
       predictors: [
         { title: 'XAT College Predictor 2026', href: '#' },
@@ -1178,20 +1178,20 @@ export const rankingsData = [
     titles: { col1: 'NIRF Ranking', col2: 'CollegeDost Ranking', col3_1: 'By Placement', col3_2: 'International' },
     content: {
       exams: [
-        { title: 'Top Engineering Colleges (NIRF)', href: '#' },
-        { title: 'Best Engineering Colleges India', href: '#' }
+        { title: 'Top Engineering Colleges (NIRF)', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
+        { title: 'Best Engineering Colleges India', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' }
       ],
       colleges: [
-        { title: 'Top Rated Engineering Colleges', href: '#' },
-        { title: 'AAA+ Rated Colleges', href: '#' }
+        { title: 'Top Rated Engineering Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' },
+        { title: 'AAA+ Rated Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' }
       ],
       predictors: [
-        { title: 'Best Placement Colleges', href: '#' },
-        { title: 'Best ROI Colleges', href: '#' }
+        { title: 'Best Placement Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' },
+        { title: 'Best ROI Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' }
       ],
       resources: [
-        { title: 'QS World University Rankings', href: '#' },
-        { title: 'THE World Rankings', href: '#' }
+        { title: 'QS World University Rankings', href: '/international-colleges' },
+        { title: 'THE World Rankings', href: '/international-colleges' }
       ]
     }
   },
@@ -1221,17 +1221,17 @@ export const rankingsData = [
     titles: { col1: 'IIMs', col2: 'Private B-Schools', col3_1: 'Executive MBA', col3_2: 'Global' },
     content: {
       exams: [
-        { title: 'Top IIMs in India', href: '#' },
-        { title: 'NIRF Management Ranking', href: '#' }
+        { title: 'Top IIMs in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&search=IIM' },
+        { title: 'NIRF Management Ranking', href: '/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' }
       ],
       colleges: [
-        { title: 'Top Private MBA Colleges', href: '#' }
+        { title: 'Top Private MBA Colleges', href: '/colleges?goal=Colleges&stream=Management And Business Administration&type=Private&degree=MBA' }
       ],
       predictors: [
-        { title: 'One Year MBA Ranking', href: '#' }
+        { title: 'One Year MBA Ranking', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' }
       ],
       resources: [
-        { title: 'FT Global MBA Ranking', href: '#' }
+        { title: 'FT Global MBA Ranking', href: '/international-colleges' }
       ]
     }
   }
@@ -1465,8 +1465,8 @@ export const homeStatsData = [
 ];
 
 export const homeRankingsData = [
-  { name: "Top Engineering Colleges in India", link: "#" },
-  { name: "Top MBA Colleges in India", link: "#" },
+  { name: "Top Engineering Colleges in India", link: "/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering" },
+  { name: "Top MBA Colleges in India", link: "/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management" },
   { name: "Top Medical Colleges in India", link: "#" },
   { name: "Top Law Colleges in India", link: "/law" },
   { name: "Top Universities in India", link: "#" },
