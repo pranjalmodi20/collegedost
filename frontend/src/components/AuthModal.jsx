@@ -163,6 +163,13 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
         setLoading(true);
+        setError(''); // Clear any previous errors
+        
+        if (!credentialResponse?.credential) {
+            setError('Google authentication failed. Please try again.');
+            return;
+        }
+
         const res = await apiCall('post', '/auth/google', {
             token: credentialResponse.credential
         });
@@ -170,10 +177,24 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
         if (res.data.success) {
              login(res.data.user, res.data.token);
              if (onClose) onClose();
+        } else {
+            setError(res.data.message || 'Google Login Failed');
         }
     } catch (err) {
-        console.error("Google Login Error", err);
-        setError('Google Login Failed');
+        console.error("Google Login Error:", err);
+        
+        // Determine specific error message
+        if (err.code === 'ERR_NETWORK' || err.message === 'Network Error') {
+            setError('Network error. Please check your connection.');
+        } else if (err.response?.status === 401) {
+            setError('Google authentication failed. Please try again.');
+        } else if (err.response?.status === 400) {
+            setError(err.response?.data?.message || 'Invalid request. Please try again.');
+        } else if (err.response?.data?.message) {
+            setError(err.response.data.message);
+        } else {
+            setError('Google Login Failed. Please try again.');
+        }
     } finally {
         setLoading(false);
     }
@@ -550,7 +571,10 @@ const AuthModal = ({ isOpen, onClose, initialTab = 'signup' }) => {
                          <div className="flex justify-center">
                             <GoogleLogin 
                                 onSuccess={handleGoogleSuccess}
-                                onError={() => setError('Google Login Failed')}
+                                onError={(error) => {
+                                    console.error('Google Login Button Error:', error);
+                                    setError('Google Sign-In popup was closed or blocked. Please try again.');
+                                }}
                                 type="standard"
                                 theme="outline"
                                 size="large"

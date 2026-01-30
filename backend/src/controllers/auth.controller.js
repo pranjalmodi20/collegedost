@@ -128,6 +128,18 @@ exports.googleLogin = async (req, res) => {
     try {
         const { token } = req.body; // ID Token from frontend
 
+        // Validate token presence
+        if (!token) {
+            console.error("Google Login Error: No token provided");
+            return res.status(400).json({ success: false, message: 'Google token is required' });
+        }
+
+        // Validate GOOGLE_CLIENT_ID
+        if (!process.env.GOOGLE_CLIENT_ID) {
+            console.error("Google Login Error: GOOGLE_CLIENT_ID not set in environment");
+            return res.status(500).json({ success: false, message: 'Server configuration error' });
+        }
+
         let payload;
         try {
             const ticket = await client.verifyIdToken({
@@ -136,31 +148,40 @@ exports.googleLogin = async (req, res) => {
             });
             payload = ticket.getPayload();
         } catch (verifyError) {
-            console.error("Google verify error:", verifyError);
-            return res.status(401).json({ success: false, message: 'Invalid Google Token' });
+            console.error("Google verify error:", verifyError.message);
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid Google Token. Please try again.'
+            });
         }
 
         const { name, email, sub: googleId } = payload;
+
+        if (!email) {
+            console.error("Google Login Error: No email in payload");
+            return res.status(400).json({ success: false, message: 'Email not provided by Google' });
+        }
 
         let user = await User.findOne({
             $or: [{ googleId }, { email }]
         });
 
         if (user) {
-            // Update googleId if missing
+            // Update googleId if missing (user registered with email first)
             if (!user.googleId) {
                 user.googleId = googleId;
-                await user.save();
+                await user.save({ validateBeforeSave: false });
             }
         } else {
-            // Create user
-            // Note: Mobile is optional thanks to schema update
+            // Create new user
             user = await User.create({
                 name,
                 email,
                 googleId
             });
         }
+
+        console.log(`Google Login Success: ${email}`);
 
         res.status(200).json({
             success: true,
@@ -176,8 +197,29 @@ exports.googleLogin = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Server Error' });
+        console.error("Google Login Server Error:", error);
+
+        // Handle MongoDB duplicate key error
+        if (error.code === 11000) {
+            const field = Object.keys(error.keyPattern || {})[0];
+            console.error(`Google Login Duplicate Key Error - Field: ${field}`);
+            return res.status(400).json({
+                success: false,
+                message: `An account with this ${field || 'email'} already exists. Please try logging in.`
+            });
+        }
+
+        // Handle MongoDB validation errors
+        if (error.name === 'ValidationError') {
+            const messages = Object.values(error.errors).map(err => err.message);
+            console.error("Google Login Validation Error:", messages);
+            return res.status(400).json({
+                success: false,
+                message: messages.join(', ')
+            });
+        }
+
+        res.status(500).json({ success: false, message: 'Server Error. Please try again.' });
     }
 };
 

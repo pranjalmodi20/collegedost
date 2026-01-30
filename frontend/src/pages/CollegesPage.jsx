@@ -12,7 +12,9 @@ const CollegesPage = () => {
     // Pagination State
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [hasMoreResults, setHasMoreResults] = useState(false); // Tracks if more results exist beyond MAX_PAGES
     const LIMIT = 20;
+    const MAX_PAGES = 5; // Strict pagination limit - never show more than 5 pages
 
     // Filter Logic: We use array based filters for checkboxes to support multiple selections
     // URL params will be comma separated strings
@@ -42,6 +44,15 @@ const CollegesPage = () => {
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const searchRef = useRef(null);
+
+    // Safe page setter that respects MAX_PAGES limit
+    const safeSetPage = (newPage) => {
+        if (typeof newPage === 'function') {
+            setPage(p => Math.min(MAX_PAGES, Math.max(1, newPage(p))));
+        } else {
+            setPage(Math.min(MAX_PAGES, Math.max(1, newPage)));
+        }
+    };
 
     // Fetch on Filters or Page Change
     useEffect(() => {
@@ -145,7 +156,12 @@ const CollegesPage = () => {
             if (res.data.success) {
                 setColleges(res.data.data);
                 if(res.data.pagination) {
-                    setTotalPages(res.data.pagination.pages);
+                    const actualTotalPages = res.data.pagination.pages;
+                    // STRICT 5-PAGE LIMIT: Cap displayable pages at MAX_PAGES
+                    const cappedPages = Math.min(actualTotalPages, MAX_PAGES);
+                    setTotalPages(cappedPages);
+                    // Track if more results exist beyond our limit
+                    setHasMoreResults(actualTotalPages > MAX_PAGES);
                 }
             }
         } catch (err) {
@@ -539,12 +555,67 @@ const CollegesPage = () => {
                         </div>
                     )}
                     
-                    {/* Pagination */}
-                    {!loading && colleges.length > 0 && (
-                        <div className="flex justify-center mt-8 gap-2">
-                             <button onClick={() => setPage(p => Math.max(1, p-1))} disabled={page===1} className="px-4 py-2 border rounded hover:bg-gray-50 disabled:opacity-50">Prev</button>
-                             <span className="px-4 py-2 bg-brand-blue text-white rounded">{page}</span>
-                             <button onClick={() => setPage(p => Math.min(totalPages, p+1))} disabled={page===totalPages} className="px-4 py-2 border rounded hover:bg-gray-50 disabled:opacity-50">Next</button>
+                    {/* Pagination - Strict 5-Page Limit */}
+                    {!loading && colleges.length > 0 && totalPages > 1 && (
+                        <div className="flex justify-center items-center mt-10 mb-4 gap-1">
+                            {/* Previous Button - Only show if not on first page */}
+                            {page > 1 && (
+                                <button 
+                                    onClick={() => safeSetPage(p => p - 1)} 
+                                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition-colors"
+                                >
+                                    ← Prev
+                                </button>
+                            )}
+                            
+                            {/* Page Numbers - Simple 1 to totalPages (max 5) */}
+                            <div className="flex items-center gap-1 mx-2">
+                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
+                                    <button
+                                        key={pageNum}
+                                        onClick={() => safeSetPage(pageNum)}
+                                        className={`w-10 h-10 flex items-center justify-center text-sm font-medium rounded-lg transition-all duration-200 ${
+                                            page === pageNum 
+                                                ? 'bg-brand-blue text-white shadow-md shadow-blue-200' 
+                                                : 'text-gray-600 hover:bg-gray-100 border border-gray-200'
+                                        }`}
+                                    >
+                                        {pageNum}
+                                    </button>
+                                ))}
+                            </div>
+                            
+                            {/* Next Button - Only show if not on last page */}
+                            {page < totalPages && (
+                                <button 
+                                    onClick={() => safeSetPage(p => p + 1)} 
+                                    className="px-4 py-2.5 text-sm font-semibold text-brand-blue border-2 border-brand-blue hover:bg-brand-blue hover:text-white rounded-lg transition-all duration-200 flex items-center gap-1"
+                                >
+                                    Next <span className="text-lg">→</span>
+                                </button>
+                            )}
+                        </div>
+                    )}
+                    
+                    {/* Message when more results exist beyond 5-page limit */}
+                    {!loading && hasMoreResults && (
+                        <div className="flex justify-center mt-4 mb-2">
+                            <div className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl text-sm">
+                                <span className="text-amber-600 text-lg">💡</span>
+                                <span className="text-amber-800 font-medium">
+                                    Showing top results only
+                                </span>
+                                <span className="text-amber-600">—</span>
+                                <span className="text-amber-700">
+                                    apply more filters to refine the list
+                                </span>
+                                <button 
+                                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                                    className="ml-2 text-amber-700 hover:text-amber-900 font-semibold flex items-center gap-1 hover:underline"
+                                >
+                                    <FaFilter className="text-xs" /> Filters ↑
+                                </button>
+                            </div>
                         </div>
                     )}
                 </div>
