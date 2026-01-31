@@ -90,25 +90,25 @@ export const collegesData = [
     titles: { col1: 'Metro Cities', col2: 'Education Hubs', col3_1: 'Tier 2 Cities', col3_2: 'Others' },
     content: {
       exams: [
-        { title: 'Delhi', href: '#' },
-        { title: 'Mumbai', href: '#' },
-        { title: 'Bangalore', href: '#' },
-        { title: 'Chennai', href: '#' }
+        { title: 'Delhi', href: '/colleges?city=Delhi' },
+        { title: 'Mumbai', href: '/colleges?city=Mumbai' },
+        { title: 'Bangalore', href: '/colleges?city=Bangalore' },
+        { title: 'Chennai', href: '/colleges?city=Chennai' }
       ],
       colleges: [
-        { title: 'Kota', href: '#' },
-        { title: 'Pune', href: '#' },
-        { title: 'Hyderabad', href: '#' }
+        { title: 'Kota', href: '/colleges?city=Kota' },
+        { title: 'Pune', href: '/colleges?city=Pune' },
+        { title: 'Hyderabad', href: '/colleges?city=Hyderabad' }
       ],
       predictors: [
-        { title: 'Lucknow', href: '#' },
-        { title: 'Jaipur', href: '#' },
-        { title: 'Chandigarh', href: '#' }
+        { title: 'Lucknow', href: '/colleges?city=Lucknow' },
+        { title: 'Jaipur', href: '/colleges?city=Jaipur' },
+        { title: 'Chandigarh', href: '/colleges?city=Chandigarh' }
       ],
       resources: [
-        { title: 'Indore', href: '#' },
-        { title: 'Bhopal', href: '#' },
-        { title: 'Nagpur', href: '#' }
+        { title: 'Indore', href: '/colleges?city=Indore' },
+        { title: 'Bhopal', href: '/colleges?city=Bhopal' },
+        { title: 'Nagpur', href: '/colleges?city=Nagpur' }
       ]
     }
   },
