@@ -9,7 +9,7 @@ const Hero = ({
   subtitle = "Explore 30,000+ Colleges, exams, and courses to make the informed career choice.",
   trending = [
     { text: "JEE Mains College Predictor", link: "/jee-main-predictor" },
-    { text: "NEET College Predictor", link: "/predict-colleges?exam=NEET" },
+    { text: "NEET College Predictor", link: "/neet-predictor" },
     { text: "Computer Science", link: "/colleges?branch=Computer Science" }
   ],
   showBadge = true

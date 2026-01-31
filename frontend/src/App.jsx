@@ -15,6 +15,7 @@ const ManagementPage = lazy(() => import('./pages/ManagementPage'));
 const MedicinePage = lazy(() => import('./pages/MedicinePage'));
 const JEEMainPredictor = lazy(() => import('./pages/JEEMainPredictor'));
 const JEEMainRankPredictor = lazy(() => import('./pages/JEEMainRankPredictor'));
+const NEETPredictor = lazy(() => import('./pages/NEETPredictor'));
 const InternationalColleges = lazy(() => import('./pages/InternationalColleges'));
 const ExamsPage = lazy(() => import('./pages/ExamsPage'));
 const ExamDetailPage = lazy(() => import('./pages/ExamDetailPage'));
@@ -109,6 +110,8 @@ function App() {
               <Route path="/predict-colleges" element={<CollegePredictor />} />
               <Route path="/jee-main-college-predictor" element={<JEEMainPredictor onOpenAuthModal={openAuthModal} />} />
               <Route path="/jee-main-rank-predictor" element={<JEEMainRankPredictor onOpenAuthModal={openAuthModal} />} />
+              <Route path="/neet-predictor" element={<NEETPredictor onOpenAuthModal={openAuthModal} />} />
+              <Route path="/neet-college-predictor" element={<NEETPredictor onOpenAuthModal={openAuthModal} />} />
               <Route path="/rank-predictor" element={<GenericRankPredictor />} />
               <Route path="/news" element={<NewsPage />} />
               <Route path="/news/:slug" element={<NewsDetailPage />} />

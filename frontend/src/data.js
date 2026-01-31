@@ -354,7 +354,7 @@ export const browseByStreamData = [
         { title: 'Medical Colleges in India Accepting NEET PG', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' }
       ],
       predictors: [
-        { title: 'NEET College Predictor', href: '#' },
+        { title: 'NEET College Predictor', href: '/neet-predictor' },
         { title: 'NEET PG College Predictor', href: '#' },
         { title: 'NEET MDS College Predictor', href: '#' },
         { title: 'NEET Rank Predictor', href: '#' },
@@ -1132,7 +1132,7 @@ export const predictorsData = [
     titles: { col1: 'NEET', col2: 'AIIMS', col3_1: 'State Quota', col3_2: 'Others' },
     content: {
       exams: [
-        { title: 'NEET College Predictor', href: '/predict-colleges?exam=NEET' },
+        { title: 'NEET College Predictor', href: '/neet-predictor' },
         { title: 'NEET Rank Predictor', href: '/rank-predictor?exam=NEET' }
       ],
       colleges: [
@@ -1389,7 +1389,7 @@ export const homePredictorsData = [
     title: "College Predictor",
     items: [
       { name: "JEE Main College Predictor", link: "/jee-main-college-predictor" },
-      { name: "NEET College Predictor", link: "/predict-colleges?exam=NEET" },
+      { name: "NEET College Predictor", link: "/neet-predictor" },
       { name: "CAT College Predictor", link: "/predict-colleges" },
       { name: "GATE College Predictor", link: "/predict-colleges" },
       { name: "BITSAT College Predictor", link: "/predict-colleges" },

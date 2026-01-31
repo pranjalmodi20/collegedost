@@ -9,13 +9,25 @@ const {
     getMyPredictions
 } = require('../controllers/predictor.controller');
 
+// NEET Predictor
+const { 
+    predictNEETColleges, 
+    getNEETPredictionById 
+} = require('../controllers/neetPredictor.controller');
+
+// JEE Main Routes
 router.post('/jee-main', predictColleges);
 router.post('/jee-main-rank', require('../controllers/predictor.controller').predictRank);
-router.post('/predict-by-percentile', predictByPercentile); // Enhanced predictor with DB storage
-router.get('/prediction/:id', getPredictionById); // Get single prediction by ID
+router.post('/predict-by-percentile', predictByPercentile); // Enhanced JEE predictor with DB storage
+router.get('/prediction/:id', getPredictionById); // Get single JEE prediction by ID
+
+// NEET Routes
+router.post('/neet-predict', predictNEETColleges); // NEET college predictor
+router.get('/neet-prediction/:id', getNEETPredictionById); // Get single NEET prediction by ID
+
+// Common Routes
 router.get('/my-predictions', protect, getMyPredictions); // Get user's prediction history
 router.get('/colleges', require('../controllers/predictor.controller').getColleges);
 router.post('/seed', seedColleges);
 
 module.exports = router;
-
