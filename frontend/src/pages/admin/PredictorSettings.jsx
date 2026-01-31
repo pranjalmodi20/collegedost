@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AdminLayout from '../../components/admin/AdminLayout';
 import { FaCog, FaKey, FaRobot, FaToggleOn, FaToggleOff, FaSave, FaPlay, FaTrash, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 import api from '../../api/axios';
 
@@ -118,14 +119,17 @@ const PredictorSettings = () => {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center p-8">
-                <div className="w-8 h-8 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></div>
-            </div>
+            <AdminLayout>
+                <div className="flex items-center justify-center p-8 min-h-[400px]">
+                    <div className="w-8 h-8 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            </AdminLayout>
         );
     }
 
     return (
-        <div className="space-y-6">
+        <AdminLayout>
+            <div className="space-y-6">
             {/* Header */}
             <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl text-white">
@@ -398,8 +402,10 @@ const PredictorSettings = () => {
                     </div>
                 )}
             </div>
-        </div>
+            </div>
+        </AdminLayout>
     );
 };
 
 export default PredictorSettings;
+
