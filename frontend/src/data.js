@@ -345,13 +345,13 @@ export const browseByStreamData = [
         { title: 'View All Medicine Exams', href: '/exams?level=Medical', isLink: true }
       ],
       colleges: [
-        { title: 'Top Medical Colleges in India', href: '#' },
-        { title: 'Top Medical Colleges in India accepting NEET Score', href: '#' },
-        { title: 'Medical Colleges accepting NEET', href: '#' },
-        { title: 'List of Medical Colleges in India', href: '#' },
-        { title: 'List of AIIMS Colleges in India', href: '#' },
-        { title: 'Medical Colleges in Maharashtra', href: '#' },
-        { title: 'Medical Colleges in India Accepting NEET PG', href: '#' }
+        { title: 'Top Medical Colleges in India', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'Top Medical Colleges in India accepting NEET Score', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'Medical Colleges accepting NEET', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'List of Medical Colleges in India', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'List of AIIMS Colleges in India', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences&search=AIIMS' },
+        { title: 'Medical Colleges in Maharashtra', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences&state=Maharashtra' },
+        { title: 'Medical Colleges in India Accepting NEET PG', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' }
       ],
       predictors: [
         { title: 'NEET College Predictor', href: '#' },
@@ -393,14 +393,14 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?level=Law', isLink: true }
       ],
       colleges: [
-        { title: 'Colleges Accepting Admissions', href: '#' },
-        { title: 'Top Law Colleges in India', href: '#' },
-        { title: 'Law College Accepting CLAT Score', href: '#' },
-        { title: 'List of Law Colleges in India', href: '#' },
-        { title: 'Top Law Colleges in Delhi', href: '#' },
-        { title: 'Top NLUs Colleges in India', href: '#' },
-        { title: 'Top Law Colleges in Chandigarh', href: '#' },
-        { title: 'Top Law Colleges in Lucknow', href: '#' }
+        { title: 'Colleges Accepting Admissions', href: '/colleges?goal=Colleges&stream=Law' },
+        { title: 'Top Law Colleges in India', href: '/colleges?goal=Colleges&stream=Law' },
+        { title: 'Law College Accepting CLAT Score', href: '/colleges?goal=Colleges&stream=Law&search=CLAT' },
+        { title: 'List of Law Colleges in India', href: '/colleges?goal=Colleges&stream=Law' },
+        { title: 'Top Law Colleges in Delhi', href: '/colleges?goal=Colleges&stream=Law&state=Delhi' },
+        { title: 'Top NLUs Colleges in India', href: '/colleges?goal=Colleges&stream=Law&search=NLU' },
+        { title: 'Top Law Colleges in Chandigarh', href: '/colleges?goal=Colleges&stream=Law&search=Chandigarh' },
+        { title: 'Top Law Colleges in Lucknow', href: '/colleges?goal=Colleges&stream=Law&search=Lucknow' }
       ],
       predictors: [
         { title: 'CLAT College Predictor', href: '#' },
@@ -441,14 +441,14 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?level=Design', isLink: true }
       ],
       colleges: [
-        { title: 'Design Colleges in India', href: '#' },
-        { title: 'Top Design Colleges in India', href: '#' },
-        { title: 'Top NIFT Colleges in India', href: '#' },
-        { title: 'Fashion Design Colleges in India', href: '#' },
-        { title: 'Top Interior Design Colleges in India', href: '#' },
-        { title: 'Top Graphic Designing Colleges in India', href: '#' },
-        { title: 'Fashion Design Colleges in Delhi', href: '#' },
-        { title: 'Fashion Design Colleges in Mumbai', href: '#' }
+        { title: 'Design Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design' },
+        { title: 'Top Design Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design' },
+        { title: 'Top NIFT Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design&search=NIFT' },
+        { title: 'Fashion Design Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design&search=Fashion' },
+        { title: 'Top Interior Design Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design&search=Interior' },
+        { title: 'Top Graphic Designing Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design&search=Graphic' },
+        { title: 'Fashion Design Colleges in Delhi', href: '/colleges?goal=Colleges&stream=Animation And Design&state=Delhi' },
+        { title: 'Fashion Design Colleges in Mumbai', href: '/colleges?goal=Colleges&stream=Animation And Design&search=Mumbai' }
       ],
       predictors: [
         { title: 'NIFT College Predictor', href: '#' },
@@ -485,13 +485,13 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       colleges: [
-        { title: 'Compare Colleges', href: '#' },
-        { title: 'Media & Journalism colleges in Delhi', href: '#' },
-        { title: 'Media & Journalism colleges in Bangalore', href: '#' },
-        { title: 'Media & Journalism colleges in Mumbai', href: '#' },
-        { title: 'Colleges Accepting Admissions', href: '#' },
-        { title: 'List of Media & Journalism Colleges in India', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'Compare Colleges', href: '/compare-colleges' },
+        { title: 'Media & Journalism colleges in Delhi', href: '/colleges?goal=Colleges&stream=Arts And Humanities&state=Delhi&search=Media' },
+        { title: 'Media & Journalism colleges in Bangalore', href: '/colleges?goal=Colleges&stream=Arts And Humanities&search=Bangalore Media' },
+        { title: 'Media & Journalism colleges in Mumbai', href: '/colleges?goal=Colleges&stream=Arts And Humanities&search=Mumbai Media' },
+        { title: 'Colleges Accepting Admissions', href: '/colleges?goal=Colleges&stream=Arts And Humanities' },
+        { title: 'List of Media & Journalism Colleges in India', href: '/colleges?goal=Colleges&stream=Arts And Humanities&search=Media Journalism' },
+        { title: 'View All', href: '/colleges?goal=Colleges&stream=Arts And Humanities', isLink: true }
       ],
       predictors: [ /* Content placed here to appear under the top header of col 3 */
         { title: 'Compare Colleges', href: '/compare-colleges' },
@@ -537,12 +537,12 @@ export const browseByStreamData = [
         { title: 'Financial Advisor', href: '#' }
       ],
       resources: [
-        { title: 'Top Commerce Colleges in India', href: '#' },
-        { title: 'Top Government Commerce Colleges in India', href: '#' },
-        { title: 'Top Private Commerce Colleges in India', href: '#' },
-        { title: 'Top M.Com Colleges in Mumbai', href: '#' },
-        { title: 'Top B.Com Colleges in India', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'Top Commerce Colleges in India', href: '/colleges?goal=Colleges&stream=Commerce' },
+        { title: 'Top Government Commerce Colleges in India', href: '/colleges?goal=Colleges&stream=Commerce&type=Government' },
+        { title: 'Top Private Commerce Colleges in India', href: '/colleges?goal=Colleges&stream=Commerce&type=Private' },
+        { title: 'Top M.Com Colleges in Mumbai', href: '/colleges?goal=Colleges&stream=Commerce&degree=M.Com&search=Mumbai' },
+        { title: 'Top B.Com Colleges in India', href: '/colleges?goal=Colleges&stream=Commerce&degree=B.Com' },
+        { title: 'View All', href: '/colleges?goal=Colleges&stream=Commerce', isLink: true }
       ]
     }
   },
@@ -567,13 +567,13 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?level=Computer Application and IT', isLink: true }
       ],
       colleges: [
-        { title: 'Compare Colleges', href: '#' },
-        { title: 'IT Colleges in Tamil Nadu', href: '#' },
-        { title: 'IT Colleges in Uttar Pradesh', href: '#' },
-        { title: 'Colleges Accepting Admissions', href: '#' },
-        { title: 'MCA Colleges in India', href: '#' },
-        { title: 'BCA Colleges in India', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'Compare Colleges', href: '/compare-colleges' },
+        { title: 'IT Colleges in Tamil Nadu', href: '/colleges?goal=Colleges&stream=Science&state=Tamil Nadu&search=IT' },
+        { title: 'IT Colleges in Uttar Pradesh', href: '/colleges?goal=Colleges&stream=Science&state=Uttar Pradesh&search=IT' },
+        { title: 'Colleges Accepting Admissions', href: '/colleges?goal=Colleges&stream=Science' },
+        { title: 'MCA Colleges in India', href: '/colleges?goal=Colleges&stream=Science&search=MCA' },
+        { title: 'BCA Colleges in India', href: '/colleges?goal=Colleges&stream=Science&search=BCA' },
+        { title: 'View All', href: '/colleges?goal=Colleges&stream=Science', isLink: true }
       ],
       predictors: [
         { title: 'NIMCET 2025 Notification', href: '/news/nimcet-notification-2025', isNew: true },
@@ -612,13 +612,13 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?category=Pharmacy', isLink: true }
       ],
       colleges: [
-        { title: 'Top Pharmacy Colleges in India', href: '#' },
-        { title: 'Pharmacy Colleges in Pune', href: '#' },
-        { title: 'Pharmacy Colleges in Mumbai', href: '#' },
-        { title: 'Colleges Accepting GPAT Score', href: '#' },
-        { title: 'Pharmacy Colleges in Lucknow', href: '#' },
-        { title: 'List of Pharmacy Colleges in Nagpur', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'Top Pharmacy Colleges in India', href: '/colleges?goal=Colleges&search=Pharmacy' },
+        { title: 'Pharmacy Colleges in Pune', href: '/colleges?goal=Colleges&search=Pharmacy Pune' },
+        { title: 'Pharmacy Colleges in Mumbai', href: '/colleges?goal=Colleges&search=Pharmacy Mumbai' },
+        { title: 'Colleges Accepting GPAT Score', href: '/colleges?goal=Colleges&search=Pharmacy GPAT' },
+        { title: 'Pharmacy Colleges in Lucknow', href: '/colleges?goal=Colleges&search=Pharmacy Lucknow' },
+        { title: 'List of Pharmacy Colleges in Nagpur', href: '/colleges?goal=Colleges&search=Pharmacy Nagpur' },
+        { title: 'View All', href: '/colleges?goal=Colleges&search=Pharmacy', isLink: true }
       ],
       predictors: [
         { title: 'GPAT Result', href: '/exams/gpat?tab=results' },
@@ -651,12 +651,12 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?category=Hospitality%20and%20Tourism', isLink: true }
       ],
       colleges: [
-        { title: 'Top Hotel Management Colleges in Delhi', href: '#' },
-        { title: 'Top Hotel Management Colleges in Hyderabad', href: '#' },
-        { title: 'Top Hotel Management Colleges in Mumbai', href: '#' },
-        { title: 'Top Hotel Management Colleges in Tamil Nadu', href: '#' },
-        { title: 'Top Hotel Management Colleges in Maharashtra', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'Top Hotel Management Colleges in Delhi', href: '/colleges?goal=Colleges&state=Delhi&search=Hotel Management' },
+        { title: 'Top Hotel Management Colleges in Hyderabad', href: '/colleges?goal=Colleges&search=Hotel Management Hyderabad' },
+        { title: 'Top Hotel Management Colleges in Mumbai', href: '/colleges?goal=Colleges&search=Hotel Management Mumbai' },
+        { title: 'Top Hotel Management Colleges in Tamil Nadu', href: '/colleges?goal=Colleges&state=Tamil Nadu&search=Hotel Management' },
+        { title: 'Top Hotel Management Colleges in Maharashtra', href: '/colleges?goal=Colleges&state=Maharashtra&search=Hotel Management' },
+        { title: 'View All', href: '/colleges?goal=Colleges&search=Hotel Management', isLink: true }
       ],
       predictors: [
         { title: 'NCHMCT JEE 2025 Date', href: '/news/nchmct-jee-date-2025', isNew: true },
@@ -736,14 +736,14 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?category=School', isLink: true }
       ],
       colleges: [
-        { title: 'Top Schools in India', href: '#' },
-        { title: 'Top Schools in Delhi', href: '#' },
-        { title: 'Top Schools in Mumbai', href: '#' },
-        { title: 'Top Schools in Chennai', href: '#' },
-        { title: 'Top Schools in Hyderabad', href: '#' },
-        { title: 'Top Schools in Kolkata', href: '#' },
-        { title: 'Top Schools in Pune', href: '#' },
-        { title: 'Top Schools in Bangalore', href: '#' }
+        { title: 'Top Schools in India', href: '/colleges?goal=Colleges&search=School' },
+        { title: 'Top Schools in Delhi', href: '/colleges?goal=Colleges&state=Delhi&search=School' },
+        { title: 'Top Schools in Mumbai', href: '/colleges?goal=Colleges&search=School Mumbai' },
+        { title: 'Top Schools in Chennai', href: '/colleges?goal=Colleges&search=School Chennai' },
+        { title: 'Top Schools in Hyderabad', href: '/colleges?goal=Colleges&search=School Hyderabad' },
+        { title: 'Top Schools in Kolkata', href: '/colleges?goal=Colleges&search=School Kolkata' },
+        { title: 'Top Schools in Pune', href: '/colleges?goal=Colleges&search=School Pune' },
+        { title: 'Top Schools in Bangalore', href: '/colleges?goal=Colleges&search=School Bangalore' }
       ],
       predictors: [
         { title: 'CBSE Date Sheet 2025', href: '/news/cbse-datesheet-2025', isNew: true },
@@ -783,14 +783,14 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?category=Study%20Abroad', isLink: true }
       ],
       colleges: [
-        { title: 'Top University in USA', href: '#' },
-        { title: 'Top University in Canada', href: '#' },
-        { title: 'Top University in Ireland', href: '#' },
-        { title: 'Top Universities in UK', href: '#' },
-        { title: 'Top Universities in Australia', href: '#' },
-        { title: 'Best MBA Colleges in Abroad', href: '#' },
-        { title: 'Business Management Studies Colleges', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
+        { title: 'Top University in USA', href: '/international-colleges?country=USA' },
+        { title: 'Top University in Canada', href: '/international-colleges?country=Canada' },
+        { title: 'Top University in Ireland', href: '/international-colleges?country=Ireland' },
+        { title: 'Top Universities in UK', href: '/international-colleges?country=UK' },
+        { title: 'Top Universities in Australia', href: '/international-colleges?country=Australia' },
+        { title: 'Best MBA Colleges in Abroad', href: '/international-colleges?search=MBA' },
+        { title: 'Business Management Studies Colleges', href: '/international-colleges?search=Business Management' },
+        { title: 'View All', href: '/international-colleges', isLink: true }
       ],
       predictors: [
         { title: 'Study in USA', href: '#' },
