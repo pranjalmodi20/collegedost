@@ -1,24 +1,24 @@
 
 export const pharmacyRankings = [
-    { name: "Top Pharmacy Colleges in India", link: "#" },
-    { name: "Best Pharmacy Colleges in Delhi", link: "#" },
-    { name: "Top Government Pharmacy Colleges", link: "#" },
-    { name: "Private Pharmacy Colleges with Low Fees", link: "#" },
-    { name: "Top B.Pharma Colleges", link: "#" },
-    { name: "D.Pharma Colleges in India", link: "#" },
-    { name: "M.Pharma Colleges in India", link: "#" },
-    { name: "NIRF Ranked Pharmacy Colleges", link: "#" }
+    { name: "Top Pharmacy Colleges in India", link: "/colleges?goal=Colleges&stream=Pharmacy" },
+    { name: "Best Pharmacy Colleges in Delhi", link: "/colleges?goal=Colleges&stream=Pharmacy&state=Delhi" },
+    { name: "Top Government Pharmacy Colleges", link: "/colleges?goal=Colleges&stream=Pharmacy&type=Government" },
+    { name: "Private Pharmacy Colleges with Low Fees", link: "/colleges?goal=Colleges&stream=Pharmacy&type=Private" },
+    { name: "Top B.Pharma Colleges", link: "/colleges?goal=Colleges&stream=Pharmacy&degree=B.Pharma" },
+    { name: "D.Pharma Colleges in India", link: "/colleges?goal=Colleges&stream=Pharmacy&degree=D.Pharma" },
+    { name: "M.Pharma Colleges in India", link: "/colleges?goal=Colleges&stream=Pharmacy&degree=M.Pharma" },
+    { name: "NIRF Ranked Pharmacy Colleges", link: "/colleges?goal=Colleges&stream=Pharmacy&nirfCategory=Pharmacy" }
 ];
 
 export const pharmacyExams = [
-    { name: "GPAT 2025", link: "#" },
-    { name: "NIPER JEE 2025", link: "#" },
-    { name: "BITSAT 2025 (B.Pharm)", link: "#" },
-    { name: "WBJEE Pharmacy", link: "#" },
-    { name: "MHT CET Pharmacy", link: "#" },
-    { name: "OJEE Pharmacy", link: "#" },
-    { name: "RUHS Pharmacy", link: "#" },
-    { name: "TS EAMCET Pharmacy", link: "#" }
+    { name: "GPAT 2025", link: "/exams/gpat" },
+    { name: "NIPER JEE 2025", link: "/exams/niper-jee" },
+    { name: "BITSAT 2025 (B.Pharm)", link: "/exams/bitsat" },
+    { name: "WBJEE Pharmacy", link: "/exams/wbjee" },
+    { name: "MHT CET Pharmacy", link: "/exams/mht-cet" },
+    { name: "OJEE Pharmacy", link: "/exams/ojee" },
+    { name: "RUHS Pharmacy", link: "/exams/ruhs-pharmacy-admission-test" },
+    { name: "TS EAMCET Pharmacy", link: "/exams/ts-eamcet" }
 ];
 
 export const featuredPharmacyColleges = [
@@ -30,7 +30,7 @@ export const featuredPharmacyColleges = [
         tags: ["Public", "Research"],
         fees: "₹ 1.54L Total Fees",
         placement: "₹ 8.5L Avg Package",
-        link: "#"
+        link: "/colleges?goal=Colleges&stream=Pharmacy&search=NIPER Mohali"
     },
     {
         name: "Jamia Hamdard",
@@ -40,7 +40,7 @@ export const featuredPharmacyColleges = [
         tags: ["Deemed", "Research"],
         fees: "₹ 5.8L Total Fees",
         placement: "₹ 4.5L Avg Package",
-        link: "#"
+        link: "/colleges?goal=Colleges&stream=Pharmacy&search=Jamia Hamdard"
     },
     {
         name: "Panjab University",
@@ -50,7 +50,7 @@ export const featuredPharmacyColleges = [
         tags: ["Public", "University"],
         fees: "₹ 60K Total Fees",
         placement: "₹ 5.5L Avg Package",
-        link: "#"
+        link: "/colleges?goal=Colleges&stream=Pharmacy&search=Panjab University"
     },
     {
         name: "ICT Mumbai",
@@ -60,7 +60,7 @@ export const featuredPharmacyColleges = [
         tags: ["Deemed", "Engineering"],
         fees: "₹ 3.5L Total Fees",
         placement: "₹ 7.0L Avg Package",
-        link: "#"
+        link: "/colleges?goal=Colleges&stream=Pharmacy&search=ICT Mumbai"
     }
 ];
 

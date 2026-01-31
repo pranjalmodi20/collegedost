@@ -38,8 +38,8 @@ const CollegesPage = () => {
     const [filters, setFilters] = useState(() => parseFiltersFromParams(searchParams));
 
     // Checkbox Options Data
-    const streamsList = ["Engineering And Architecture", "Management And Business Administration", "Medicine And Allied Sciences", "Law", "Animation And Design", "Arts And Humanities", "Science", "Commerce"];
-    const degreesList = ["Diploma", "B.E /B.Tech", "B.Arch", "B.Plan", "Other Bachelors", "MBA", "MBBS", "B.Sc", "B.Com", "B.A"];
+    const streamsList = ["Engineering And Architecture", "Management And Business Administration", "Medicine And Allied Sciences", "Law", "Animation And Design", "Pharmacy", "Arts And Humanities", "Science", "Commerce"];
+    const degreesList = ["Diploma", "B.E /B.Tech", "B.Arch", "B.Plan", "Other Bachelors", "MBA", "MBBS", "B.Sc", "B.Com", "B.A", "B.Pharma", "M.Pharma", "D.Pharma"];
     const statesList = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Delhi", "Gujarat", "Haryana", "Karnataka", "Kerala", "Maharashtra", "Madhya Pradesh", "Odisha", "Punjab", "Rajasthan", "Tamil Nadu", "Telangana", "Uttar Pradesh", "West Bengal"];
 
     const [searchTermStream, setSearchTermStream] = useState("");

@@ -38,9 +38,9 @@ export const collegesData = [
       exams: [
         { title: 'Top Engineering Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
         { title: 'Top MBA Colleges', href: '/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' },
-        { title: 'Top Medical Colleges', href: '/colleges?nirfCategory=Medical' },
-        { title: 'Top Law Colleges', href: '/colleges?nirfCategory=Law' },
-        { title: 'Top Pharmacy Colleges', href: '/colleges?nirfCategory=Pharmacy' }
+        { title: 'Top Medical Colleges', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'Top Law Colleges', href: '/colleges?goal=Colleges&stream=Law' },
+        { title: 'Top Pharmacy Colleges', href: '/colleges?goal=Colleges&stream=Pharmacy' }
       ],
       colleges: [
         { title: 'Colleges with Best ROI', href: '#' },
@@ -48,9 +48,9 @@ export const collegesData = [
         { title: 'Highest Package Colleges', href: '#' }
       ],
       predictors: [
-        { title: 'Colleges in Delhi NCR', href: '/colleges?state=Delhi' },
-        { title: 'Colleges in Bangalore', href: '/colleges?search=Bangalore' },
-        { title: 'Colleges in Mumbai', href: '/colleges?search=Mumbai' }
+        { title: 'Colleges in Delhi NCR', href: '/colleges?goal=Colleges&state=Delhi' },
+        { title: 'Colleges in Bangalore', href: '/colleges?goal=Colleges&city=Bangalore' },
+        { title: 'Colleges in Mumbai', href: '/colleges?goal=Colleges&search=Mumbai' }
       ],
       resources: [
         { title: 'Colleges in Uttar Pradesh', href: '/colleges?search=Uttar Pradesh' },
@@ -65,22 +65,22 @@ export const collegesData = [
     titles: { col1: 'North India', col2: 'South India', col3_1: 'East India', col3_2: 'West India' },
     content: {
       exams: [
-        { title: 'Delhi', href: '/colleges?state=Delhi' },
-        { title: 'Uttar Pradesh', href: '/colleges?search=Uttar Pradesh' },
-        { title: 'Punjab', href: '/colleges?search=Punjab' }
+        { title: 'Delhi', href: '/colleges?goal=Colleges&state=Delhi' },
+        { title: 'Uttar Pradesh', href: '/colleges?goal=Colleges&state=Uttar Pradesh' },
+        { title: 'Punjab', href: '/colleges?goal=Colleges&state=Punjab' }
       ],
       colleges: [
-        { title: 'Tamil Nadu', href: '/colleges?state=Tamil Nadu' },
-        { title: 'Karnataka', href: '/colleges?state=Karnataka' },
-        { title: 'Kerala', href: '/colleges?search=Kerala' }
+        { title: 'Tamil Nadu', href: '/colleges?goal=Colleges&state=Tamil Nadu' },
+        { title: 'Karnataka', href: '/colleges?goal=Colleges&state=Karnataka' },
+        { title: 'Kerala', href: '/colleges?goal=Colleges&state=Kerala' }
       ],
       predictors: [
-        { title: 'West Bengal', href: '/colleges?search=West Bengal' },
-        { title: 'Bihar', href: '/colleges?search=Bihar' }
+        { title: 'West Bengal', href: '/colleges?goal=Colleges&state=West Bengal' },
+        { title: 'Bihar', href: '/colleges?goal=Colleges&state=Bihar' }
       ],
       resources: [
-        { title: 'Maharashtra', href: '/colleges?state=Maharashtra' },
-        { title: 'Gujarat', href: '/colleges?search=Gujarat' }
+        { title: 'Maharashtra', href: '/colleges?goal=Colleges&state=Maharashtra' },
+        { title: 'Gujarat', href: '/colleges?goal=Colleges&state=Gujarat' }
       ]
     }
   },
@@ -612,18 +612,18 @@ export const browseByStreamData = [
         { title: 'View All', href: '/exams?category=Pharmacy', isLink: true }
       ],
       colleges: [
-        { title: 'Top Pharmacy Colleges in India', href: '/colleges?goal=Colleges&search=Pharmacy' },
-        { title: 'Pharmacy Colleges in Pune', href: '/colleges?goal=Colleges&search=Pharmacy Pune' },
-        { title: 'Pharmacy Colleges in Mumbai', href: '/colleges?goal=Colleges&search=Pharmacy Mumbai' },
-        { title: 'Colleges Accepting GPAT Score', href: '/colleges?goal=Colleges&search=Pharmacy GPAT' },
-        { title: 'Pharmacy Colleges in Lucknow', href: '/colleges?goal=Colleges&search=Pharmacy Lucknow' },
-        { title: 'List of Pharmacy Colleges in Nagpur', href: '/colleges?goal=Colleges&search=Pharmacy Nagpur' },
-        { title: 'View All', href: '/colleges?goal=Colleges&search=Pharmacy', isLink: true }
+        { title: 'Top Pharmacy Colleges in India', href: '/colleges?goal=Colleges&stream=Pharmacy' },
+        { title: 'Pharmacy Colleges in Pune', href: '/colleges?goal=Colleges&stream=Pharmacy&search=Pune' },
+        { title: 'Pharmacy Colleges in Mumbai', href: '/colleges?goal=Colleges&stream=Pharmacy&search=Mumbai' },
+        { title: 'Colleges Accepting GPAT Score', href: '/colleges?goal=Colleges&stream=Pharmacy&exam=GPAT' },
+        { title: 'Pharmacy Colleges in Lucknow', href: '/colleges?goal=Colleges&stream=Pharmacy&search=Lucknow' },
+        { title: 'List of Pharmacy Colleges in Nagpur', href: '/colleges?goal=Colleges&stream=Pharmacy&search=Nagpur' },
+        { title: 'View All', href: '/colleges?goal=Colleges&stream=Pharmacy', isLink: true }
       ],
       predictors: [
         { title: 'GPAT Result', href: '/exams/gpat?tab=results' },
         { title: 'GPAT 2025 Admit Card', href: '/news/gpat-admit-card-2025', isNew: true },
-        { title: 'Top Pharmacy Colleges', href: '/colleges?nirfCategory=Pharmacy', isNew: true },
+        { title: 'Top Pharmacy Colleges', href: '/colleges?goal=Colleges&stream=Pharmacy&nirfCategory=Pharmacy', isNew: true },
         { title: 'B. Pharma Course', href: '/courses/bachelor-of-pharmacy' }
       ],
       resources: []
