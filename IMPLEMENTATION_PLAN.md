@@ -94,6 +94,7 @@
 
 ## 3. Immediate Roadmap
 
-1. **Fix Seeder**: Ensure `Exam` data is populated.
-2. **Colleges Update**: Update Schema and seeding for Colleges.
-3. **News Module**: Implement RSS fetching.
+1. **Fix Seeder**: [COMPLETED] Ensure `Exam` data is populated.
+2. **Colleges Update**: [COMPLETED] Update Schema and seeding for Colleges. (Added fees, placements, facilities)
+3. **News Module**: [COMPLETED] Implement RSS fetching (Cron job added).
+4. **Next**: Implement College Filtering API and Predictor Logic.

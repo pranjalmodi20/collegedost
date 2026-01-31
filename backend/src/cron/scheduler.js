@@ -1,5 +1,6 @@
 const cron = require('node-cron');
 const IngestionService = require('../services/ingestion.service');
+const fetchAndStoreNews = require('../utils/newsFetcher');
 
 const init = () => {
     // 1. NIRF Check (Monthly - 1st of every month at 2 AM)
@@ -23,7 +24,13 @@ const init = () => {
         // Similar predictable URL check logic
     });
 
-    console.log('✅ Ingestion Scheduler Initialized (NIRF, JoSAA)');
+    // 3. News Ingestion (Every 6 hours)
+    cron.schedule('0 */6 * * *', async () => {
+        console.log('[CRON] Starting News Ingestion...');
+        await fetchAndStoreNews();
+    });
+
+    console.log('✅ Ingestion Scheduler Initialized (NIRF, JoSAA, News)');
 };
 
 module.exports = { init };

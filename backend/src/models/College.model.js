@@ -51,6 +51,7 @@ const collegeSchema = new mongoose.Schema(
       grade: String // "A++"
     },
     streams: [String], // ["Engineering", "Arts"]
+    facilities: [String], // ["Hostel", "Wifi", "Library"]
 
     // --- SOURCE TRACKING (Strategy Requirement) ---
     // Tracks where this data came from: "AISHE_2024", "IPEDS_CSV"
@@ -80,12 +81,14 @@ const collegeSchema = new mongoose.Schema(
 
     fees: {
       tuition: Number,
+      hostel: Number,
       currency: { type: String, default: 'INR' },
       note: String
     },
 
     placements: {
       averagePackage: String,
+      highestPackage: String,
       placementPercentage: Number
     },
 
@@ -198,7 +201,7 @@ collegeSchema.statics.findByFuzzyName = async function (name, city = "", state =
   // Ideally, use a normalized text search or an aggregation pipeline for more complex logic.
   // For now, we rely on the specific Ingestion Services to handle the heavy lifting (string-similarity).
   // This helper is for quick lookups.
-  
+
   return null;
 };
 
