@@ -334,3 +334,188 @@ exports.predictRank = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server Error' });
     }
 };
+
+// Import the new predictor service
+const { predictColleges: predictCollegesService } = require('../services/collegePredictorService');
+const { predictWithAI } = require('../services/aiPredictorService');
+const PredictorSettings = require('../models/PredictorSettings.model');
+
+// @desc    Predict colleges based on JEE Main Percentile (Enhanced)
+// @route   POST /api/predictor/predict-by-percentile
+// @access  Public
+exports.predictByPercentile = async (req, res) => {
+    try {
+        const { percentile, category, homeState, gender } = req.body;
+
+        // Validation
+        if (!percentile) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Percentile is required' 
+            });
+        }
+
+        const pct = parseFloat(percentile);
+        if (isNaN(pct) || pct < 0 || pct > 100) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Percentile must be between 0 and 100' 
+            });
+        }
+
+        // Default values
+        const cat = category || 'General';
+        const state = homeState || 'Other';
+        const gen = gender || 'Male';
+
+        // Check settings
+        const settings = await PredictorSettings.getSettings();
+
+        if (!settings.isEnabled) {
+            return res.status(503).json({
+                success: false,
+                message: 'College predictor is currently disabled. Please try again later.'
+            });
+        }
+
+        let prediction;
+
+        // Use AI if enabled and configured
+        if (settings.useAI && settings.hasApiKey()) {
+            try {
+                prediction = await predictWithAI(pct, cat, state, gen);
+            } catch (aiError) {
+                console.error('AI Prediction failed, falling back to local:', aiError.message);
+                // Fallback to local algorithm
+                prediction = predictCollegesService(pct, cat, state, gen);
+                prediction.predictor_status = {
+                    enabled: true,
+                    model: 'local-algorithm',
+                    powered_by: 'CollegeDost',
+                    note: 'AI unavailable, using local predictions'
+                };
+            }
+        } else {
+            // Use local algorithm
+            prediction = predictCollegesService(pct, cat, state, gen);
+            prediction.predictor_status = {
+                enabled: true,
+                model: 'local-algorithm',
+                powered_by: 'CollegeDost'
+            };
+        }
+
+        // Add IIT eligibility info
+        const rank = Math.round((100 - pct) * 1200000 / 100);
+        prediction.iit_eligibility = {
+            eligible_for_jee_advanced: rank <= 250000,
+            note: rank <= 250000 
+                ? `With AIR ~${rank}, you qualify to appear for JEE Advanced (top 2.5 lakh). IIT admissions depend on JEE Advanced rank.`
+                : `AIR ~${rank} is outside top 2.5 lakh. Focus on NITs, IIITs, and GFTIs through JoSAA.`
+        };
+
+        // Save prediction to database
+        const PredictionResult = require('../models/PredictionResult.model');
+        
+        const savedPrediction = await PredictionResult.create({
+            user: req.user?._id || null,
+            sessionId: req.headers['x-session-id'] || null,
+            input: {
+                percentile: pct,
+                category: cat,
+                homeState: state,
+                gender: gen
+            },
+            estimatedRank: prediction.estimated_rank || rank,
+            iitEligibility: {
+                eligibleForJeeAdvanced: prediction.iit_eligibility.eligible_for_jee_advanced,
+                note: prediction.iit_eligibility.note
+            },
+            summary: {
+                goodChances: prediction.summary?.good_chances || 0,
+                mayGet: prediction.summary?.may_get || 0,
+                toughChances: prediction.summary?.tough_chances || 0
+            },
+            results: prediction.results,
+            predictorStatus: {
+                enabled: prediction.predictor_status?.enabled,
+                model: prediction.predictor_status?.model,
+                poweredBy: prediction.predictor_status?.powered_by
+            }
+        });
+
+        res.status(200).json({
+            success: true,
+            predictionId: savedPrediction._id,
+            ...prediction
+        });
+
+    } catch (error) {
+        console.error('Prediction Error:', error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+// @desc    Get prediction by ID
+// @route   GET /api/predictor/prediction/:id
+// @access  Public
+exports.getPredictionById = async (req, res) => {
+    try {
+        const PredictionResult = require('../models/PredictionResult.model');
+        const prediction = await PredictionResult.findById(req.params.id);
+        
+        if (!prediction) {
+            return res.status(404).json({ success: false, message: 'Prediction not found' });
+        }
+
+        // Transform back to API response format
+        res.status(200).json({
+            success: true,
+            predictionId: prediction._id,
+            input: prediction.input,
+            estimated_rank: prediction.estimatedRank,
+            iit_eligibility: {
+                eligible_for_jee_advanced: prediction.iitEligibility?.eligibleForJeeAdvanced,
+                note: prediction.iitEligibility?.note
+            },
+            summary: {
+                good_chances: prediction.summary?.goodChances,
+                may_get: prediction.summary?.mayGet,
+                tough_chances: prediction.summary?.toughChances
+            },
+            results: prediction.results,
+            predictor_status: {
+                enabled: prediction.predictorStatus?.enabled,
+                model: prediction.predictorStatus?.model,
+                powered_by: prediction.predictorStatus?.poweredBy
+            },
+            createdAt: prediction.createdAt
+        });
+    } catch (error) {
+        console.error('Get Prediction Error:', error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+// @desc    Get user's prediction history
+// @route   GET /api/predictor/my-predictions
+// @access  Private (requires auth)
+exports.getMyPredictions = async (req, res) => {
+    try {
+        const PredictionResult = require('../models/PredictionResult.model');
+        
+        const predictions = await PredictionResult.find({ user: req.user._id })
+            .sort({ createdAt: -1 })
+            .limit(10)
+            .select('input estimatedRank summary createdAt');
+
+        res.status(200).json({
+            success: true,
+            count: predictions.length,
+            predictions
+        });
+    } catch (error) {
+        console.error('Get My Predictions Error:', error);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};

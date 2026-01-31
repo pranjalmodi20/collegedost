@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaUserGraduate, FaUniversity, FaNewspaper, FaSync } from 'react-icons/fa';
+import { FaUserGraduate, FaUniversity, FaNewspaper, FaSync, FaRobot } from 'react-icons/fa';
 import api from '../../api/axios';
 
 const AdminDashboard = () => {
@@ -187,6 +187,15 @@ const AdminDashboard = () => {
                                  <p className="text-xs text-gray-500">Refresh content from ingestion</p>
                              </div>
                         </button>
+                        <Link to="/admin/predictor-settings" className="p-4 bg-gradient-to-br from-purple-50 to-indigo-50 hover:from-purple-100 hover:to-indigo-100 border border-purple-200 hover:border-purple-300 rounded-xl flex items-center gap-4 transition-all group">
+                             <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm text-purple-600 group-hover:scale-110 transition-transform">
+                                <FaRobot className="text-lg" />
+                             </div>
+                             <div>
+                                 <h4 className="text-sm font-bold text-gray-800 group-hover:text-purple-700 transition-colors">AI Predictor</h4>
+                                 <p className="text-xs text-gray-500">Configure college predictor</p>
+                             </div>
+                        </Link>
                     </div>
                 </motion.div>
             </div>
