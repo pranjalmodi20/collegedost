@@ -80,7 +80,7 @@ const AdminDashboard = () => {
             <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Dashboard Overview</h2>
-                    <p className="text-gray-500 text-sm mt-1">Welcome back, Admin. Here's what's happening today.</p>
+                    <p className="text-gray-500 text-sm mt-1">Welcome back, Admin. Here&apos;s what&apos;s happening today.</p>
                 </div>
                 <div className="flex gap-2">
                      <button 

@@ -207,7 +207,7 @@ const Hero: React.FC<HeroProps> = ({
                                         onClick={handleSearch}
                                         className="px-6 py-3 bg-gray-50 text-center text-brand-blue font-bold text-sm cursor-pointer hover:bg-gray-100"
                                     >
-                                        View all results for "{search}"
+                                        View all results for &quot;{search}&quot;
                                     </div>
                                 </motion.div>
                             )}

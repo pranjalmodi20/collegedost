@@ -158,7 +158,7 @@ const AdminArticles = () => {
                         {articles.length === 0 && (
                             <tr>
                                 <td colSpan="4" className="px-6 py-12 text-center text-gray-500">
-                                    No articles found. Click "Post Article" to create one.
+                                    No articles found. Click &quot;Post Article&quot; to create one.
                                 </td>
                             </tr>
                         )}

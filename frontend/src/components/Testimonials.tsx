@@ -110,7 +110,7 @@ const Testimonials = () => {
                                 <div className="glass-card p-8 md:p-14 rounded-[2.5rem] relative mx-auto backdrop-blur-2xl bg-white/40 border-t border-white/60 shadow-2xl h-full flex flex-col md:flex-row items-center gap-10">
 
                                     {/* Decorative Quote Icon behind */}
-                                    <div className="absolute top-10 right-10 text-9xl text-brand-indigo/5 font-serif pointer-events-none leading-none select-none">"</div>
+                                    <div className="absolute top-10 right-10 text-9xl text-brand-indigo/5 font-serif pointer-events-none leading-none select-none">&quot;</div>
 
                                     {/* Left Side: Image & Profile */}
                                     <div className="flex-shrink-0 flex flex-col items-center md:items-start text-center md:text-left z-10 w-full md:w-auto">
@@ -137,7 +137,7 @@ const Testimonials = () => {
                                     {/* Right Side: content */}
                                     <div className="flex-1 z-10 text-center md:text-left">
                                         <p className="text-xl md:text-2xl text-gray-700 italic font-medium leading-relaxed tracking-wide">
-                                            "{testimonials[currentIndex].quote}"
+                                            &quot;{testimonials[currentIndex].quote}&quot;
                                         </p>
                                     </div>
                                 </div>

@@ -13,7 +13,7 @@ const CommunityBanner = () => {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Join the Community</h2>
               <p className="text-gray-600 max-w-xl">
-                Be part of India's largest student community. Ask questions, get answers, and connect with peers and experts.
+                Be part of India&apos;s largest student community. Ask questions, get answers, and connect with peers and experts.
               </p>
             </div>
           </div>
