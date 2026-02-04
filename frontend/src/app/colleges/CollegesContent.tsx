@@ -535,7 +535,7 @@ const CollegesContent = () => {
                                             <h3 className="text-xl font-bold text-gray-800 mb-2">Study Abroad Programs</h3>
                                             <p className="text-gray-500 max-w-md mx-auto">
                                                 Study Abroad programs are not listed on this page.<br />
-                                                Select <strong>"Colleges"</strong> in the Goal filter to view college listings.
+                                                Select <strong>&quot;Colleges&quot;</strong> in the Goal filter to view college listings.
                                             </p>
                                             <button
                                                 onClick={() => handleCheckboxChange('goal', 'Colleges')}
@@ -548,7 +548,7 @@ const CollegesContent = () => {
                                         <>
                                             <div className="text-6xl mb-4">🔍</div>
                                             <h3 className="text-xl font-bold text-gray-800 mb-2">No colleges found</h3>
-                                            <p className="text-gray-500">We couldn't find any results matching your filters.</p>
+                                            <p className="text-gray-500">We couldn&apos;t find any results matching your filters.</p>
                                             <button
                                                 onClick={() => setFilters({ search: '', state: [], city: '', type: '', stream: [], degree: [], targetYear: [], goal: [], sort: 'nirfRank' })}
                                                 className="mt-6 text-brand-blue font-bold hover:underline"

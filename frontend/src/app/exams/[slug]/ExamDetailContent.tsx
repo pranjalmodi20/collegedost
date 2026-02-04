@@ -98,7 +98,7 @@ const ExamDetailContent = () => {
                     <FaExclamationTriangle className="text-6xl text-amber-500 mx-auto mb-6" />
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">Exam Not Found</h1>
                     <p className="text-gray-600 mb-8">
-                        The exam "{slug}" you're looking for doesn't exist in our database yet.
+                        The exam &quot;{slug}&quot; you&apos;re looking for doesn&apos;t exist in our database yet.
                         It may be added soon!
                     </p>
                     <Link href="/exams" className="inline-block px-6 py-3 bg-brand-orange text-white font-bold rounded-lg hover:bg-orange-600 transition">
