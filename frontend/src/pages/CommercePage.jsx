@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
@@ -5,13 +6,16 @@ import Counselling from '../components/Counselling';
 import PillSection from '../components/PillSection';
 import PredictorsSection from '../components/PredictorsSection';
 import SEO from '../components/SEO';
-import { browseByStreamData } from '../data';
+import { 
+  commerceRankings, 
+  commerceExams, 
+  featuredCommerceColleges, 
+  commerceCounsellingData, 
+  commerceCoursesData,
+  commerceCities
+} from '../data/commerceData';
 
 const CommercePage = ({ onOpenAskModal }) => {
-  const data = browseByStreamData.find(d => d.id === 'finance');
-
-  if (!data) return <div>Loading...</div>;
-
   return (
     <>
       <SEO 
@@ -20,36 +24,43 @@ const CommercePage = ({ onOpenAskModal }) => {
         keywords="Commerce, B.Com, CA, CS, Finance, Accounting"
       />
       <Hero 
-        title={<>Mastering Numbers. <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">Leading Finance.</span></>}
-        subtitle="Explore top Commerce Colleges, Professional Exams like CA/CS, and Banking Careers."
+        title={<><span className="block whitespace-nowrap">Mastering Numbers.</span> <span className="block mt-3 text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500 whitespace-nowrap">Leading Finance.</span></>}
+        subtitle="Your gateway to top Commerce Colleges, CA/CS exams, and finance careers."
+        showBadge={true}
         bgImage="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=85"
-        trending={[]}
-        showBadge={false}
+        trending={[
+          { text: "CA Foundation 2026", link: "#" },
+          { text: "CS Executive", link: "#" },
+          { text: "B.Com Honors", link: "#" },
+          { text: "CFA", link: "#" }
+        ]}
       />
       
       <div className="container mx-auto px-4 py-12 flex-grow flex flex-col gap-16">
         
-        <PillSection title="Professional Exams" items={data.content.exams} color="border-gray-200" />
+        <PillSection title="Top Commerce Rankings" items={commerceRankings} color="border-gray-200" />
         
         <Section 
-          title="Top Commerce Colleges" 
-          items={data.content.resources} // Using resources as it has colleges list in data.js
+          title="Featured Commerce Colleges" 
+          items={featuredCommerceColleges} 
           type="card" 
         />
 
-        <Counselling items={[]} onOpenAskModal={onOpenAskModal} />
+        <Counselling items={commerceCounsellingData} onOpenAskModal={onOpenAskModal} />
         
-        <PillSection title="Career Profiles" items={data.content.predictors} color="border-gray-200" />
+        <PillSection title="Top Commerce Hubs" items={commerceCities} color="border-gray-200" />
 
       </div>
 
       <div className="bg-gray-50 py-12">
         <div className="container mx-auto px-4 flex-grow flex flex-col gap-16">
-             <PredictorsSection 
+            <PillSection title="Professional Exams" items={commerceExams} color="border-gray-200" />
+            
+            <PredictorsSection 
               title="Commerce Courses" 
               mainTitle="Accounting & Finance"
               subText="Become a CA, CS, or Finance professional with the right guidance."
-              data={[]} 
+              data={commerceCoursesData}
               illustration="https://img.freepik.com/free-vector/investor-with-laptop-monitoring-growth-dividends-trader-sitting-stack-money-investing-fund-money-transferring-vector-illustration-finance-stock-market-investment_74855-8432.jpg"
             />
         </div>

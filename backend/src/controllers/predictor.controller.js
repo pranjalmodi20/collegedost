@@ -25,7 +25,7 @@ exports.predictColleges = async (req, res) => {
         // Fetch all colleges suitable for prediction
         let allColleges = [];
         try {
-            allColleges = await College.find({}).lean(); 
+            allColleges = await College.find({}).lean();
         } catch (dbErr) {
             console.log("DB Query failed (Offline Mode?), trying local file fallback...");
         }
@@ -36,11 +36,11 @@ exports.predictColleges = async (req, res) => {
             if (fs.existsSync(masterFile)) {
                 try {
                     allColleges = JSON.parse(fs.readFileSync(masterFile, 'utf-8'));
-                } catch(fileErr) {
+                } catch (fileErr) {
                     console.error("Failed to read local data file:", fileErr);
                 }
             }
-        } 
+        }
 
         const predictedColleges = [];
 
@@ -52,8 +52,8 @@ exports.predictColleges = async (req, res) => {
             // Determine if User is Home State for this college
             // Normalize state names slightly (remove spaces/case)
             const collegeState = college.location?.state ? college.location.state.toLowerCase().trim() : '';
-            const isHomeState = userHomeState && collegeState && 
-                                (collegeState.includes(userHomeState) || userHomeState.includes(collegeState));
+            const isHomeState = userHomeState && collegeState &&
+                (collegeState.includes(userHomeState) || userHomeState.includes(collegeState));
 
             for (const cut of college.cutoff) {
                 // 1. Quota Check (HS vs OS vs AI)
@@ -61,9 +61,9 @@ exports.predictColleges = async (req, res) => {
                 // If it contains (HS), user MUST be Home State.
                 // If it contains (OS), user MUST NOT be Home State (usually).
                 // If it contains (AI) or nothing, everyone is eligible.
-                
+
                 const cutCatLower = cut.category ? cut.category.toLowerCase() : '';
-                
+
                 // Parse Quota from string
                 const isHSQuota = cutCatLower.includes('(hs)') || cutCatLower.includes('home state');
                 const isOSQuota = cutCatLower.includes('(os)') || cutCatLower.includes('other state');
@@ -71,7 +71,7 @@ exports.predictColleges = async (req, res) => {
 
                 if (isHSQuota && !isHomeState) continue; // User is not from home state, skip HS seat
                 if (isOSQuota && isHomeState) continue;  // User is from home state, can't take OS seat (usually)
-                
+
                 // 2. Gender Check
                 // "Female-Only" / "Female Only" -> only for females
                 // "Gender-Neutral" -> for everyone
@@ -82,7 +82,7 @@ exports.predictColleges = async (req, res) => {
                 // User: "General", "OBC", "SC", "ST", "EWS"
                 // Cutoff: "General", "Open", "OBC-NCL", "SC", "ST", "EWS"
                 // We need strict matching. "OBC" matches "OBC" or "BC". 
-                
+
                 let categoryMatch = false;
 
                 if (userCatLower === 'general' || userCatLower === 'open') {
@@ -113,12 +113,12 @@ exports.predictColleges = async (req, res) => {
                     // We interpret opening/closing. 
                     // If rank <= closing, strict yes.
                     // If rank <= closing * 1.3, probable.
-                    
+
                     const closing = cut.closing;
                     const opening = cut.opening || 0; // Sometimes opening > closing in data anomalies, but usually opening < closing implies range
-                    
+
                     // Allow a buffer for "Low Chance"
-                    if (userRank <= closing * 1.3) { 
+                    if (userRank <= closing * 1.3) {
                         let chance = 'Low';
                         if (userRank <= closing) chance = 'High';
                         else if (userRank <= closing * 1.15) chance = 'Medium';
@@ -137,14 +137,14 @@ exports.predictColleges = async (req, res) => {
             }
 
             if (matchedBranches.length > 0) {
-                 // Clean up matched branches - maybe deduplicate or sort?
-                 matchedBranches.sort((a,b) => {
-                     // Sort by chance (High > Medium > Low) => Text sort? No.
-                     const map = { 'High': 1, 'Medium': 2, 'Low': 3 };
-                     return map[a.chance] - map[b.chance];
-                 });
+                // Clean up matched branches - maybe deduplicate or sort?
+                matchedBranches.sort((a, b) => {
+                    // Sort by chance (High > Medium > Low) => Text sort? No.
+                    const map = { 'High': 1, 'Medium': 2, 'Low': 3 };
+                    return map[a.chance] - map[b.chance];
+                });
 
-                 predictedColleges.push({
+                predictedColleges.push({
                     name: college.name,
                     location: college.location,
                     type: college.type,
@@ -196,16 +196,16 @@ exports.getColleges = async (req, res) => {
         if (!colleges || colleges.length === 0) {
             // master_colleges_dump.json is now the single source of truth from scrape_master.js
             const masterFile = path.join(__dirname, '../../data/master_colleges_dump.json');
-            
+
             let loadedColleges = [];
-            
+
             if (fs.existsSync(masterFile)) {
-                 try {
+                try {
                     const d = JSON.parse(fs.readFileSync(masterFile, 'utf-8'));
                     loadedColleges = d;
-                 } catch(e) {
-                     console.log("Error reading master dump:", e.message);
-                 }
+                } catch (e) {
+                    console.log("Error reading master dump:", e.message);
+                }
             }
 
             // Filter in memory
@@ -213,8 +213,8 @@ exports.getColleges = async (req, res) => {
                 loadedColleges = loadedColleges.filter(c => c.type === type);
             }
             // Sort
-            loadedColleges.sort((a,b) => (a.rank || 9999) - (b.rank || 9999));
-            
+            loadedColleges.sort((a, b) => (a.rank || 9999) - (b.rank || 9999));
+
             colleges = loadedColleges.slice(0, limit ? parseInt(limit) : 100);
         }
 
@@ -242,7 +242,7 @@ const calculateChance = (userRank, closingRank) => {
 exports.predictRank = async (req, res) => {
     try {
         const { score, percentile, shift } = req.body;
-        
+
         let predictedPercentile = 0;
         let predictedRank = 0;
         // Approx candidates for 2025
@@ -272,9 +272,9 @@ exports.predictRank = async (req, res) => {
         const interpolatePercentile = (inputScore) => {
             // Find range
             for (let i = 0; i < scoreToPercentileMap.length - 1; i++) {
-                if (inputScore <= scoreToPercentileMap[i].score && inputScore >= scoreToPercentileMap[i+1].score) {
+                if (inputScore <= scoreToPercentileMap[i].score && inputScore >= scoreToPercentileMap[i + 1].score) {
                     const upper = scoreToPercentileMap[i];
-                    const lower = scoreToPercentileMap[i+1];
+                    const lower = scoreToPercentileMap[i + 1];
                     const rangeScore = upper.score - lower.score;
                     const rangePerc = upper.percentile - lower.percentile;
                     const diff = inputScore - lower.score;
@@ -291,10 +291,10 @@ exports.predictRank = async (req, res) => {
         if (isProvided(percentile)) {
             // Mode 2: Input is Percentile -> Output Rank
             predictedPercentile = parseFloat(percentile);
-            
+
             // Validate number
             if (isNaN(predictedPercentile)) {
-                 return res.status(400).json({ success: false, message: 'Invalid percentile format' });
+                return res.status(400).json({ success: false, message: 'Invalid percentile format' });
             }
 
             if (predictedPercentile > 100) predictedPercentile = 100;
@@ -304,16 +304,16 @@ exports.predictRank = async (req, res) => {
         } else if (isProvided(score)) {
             // Mode 1: Input is Score -> Output Percentile (and Rank)
             const s = parseFloat(score);
-            
-             // Validate number
+
+            // Validate number
             if (isNaN(s)) {
-                 return res.status(400).json({ success: false, message: 'Invalid score format' });
+                return res.status(400).json({ success: false, message: 'Invalid score format' });
             }
 
             predictedPercentile = interpolatePercentile(s);
             // Limit decimals
             predictedPercentile = Math.round(predictedPercentile * 10000000) / 10000000;
-            
+
             predictedRank = Math.floor(((100 - predictedPercentile) * TOTAL_CANDIDATES) / 100) + 1;
         } else {
             return res.status(400).json({ success: false, message: 'Please provide score or percentile' });
@@ -349,17 +349,17 @@ exports.predictByPercentile = async (req, res) => {
 
         // Validation
         if (!percentile) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Percentile is required' 
+            return res.status(400).json({
+                success: false,
+                message: 'Percentile is required'
             });
         }
 
         const pct = parseFloat(percentile);
         if (isNaN(pct) || pct < 0 || pct > 100) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Percentile must be between 0 and 100' 
+            return res.status(400).json({
+                success: false,
+                message: 'Percentile must be between 0 and 100'
             });
         }
 
@@ -387,7 +387,7 @@ exports.predictByPercentile = async (req, res) => {
             } catch (aiError) {
                 console.error('AI Prediction failed, falling back to local:', aiError.message);
                 // Fallback to local algorithm
-                prediction = predictCollegesService(pct, cat, state, gen);
+                prediction = await predictCollegesService(pct, cat, state, gen);
                 prediction.predictor_status = {
                     enabled: true,
                     model: 'local-algorithm',
@@ -397,7 +397,7 @@ exports.predictByPercentile = async (req, res) => {
             }
         } else {
             // Use local algorithm
-            prediction = predictCollegesService(pct, cat, state, gen);
+            prediction = await predictCollegesService(pct, cat, state, gen);
             prediction.predictor_status = {
                 enabled: true,
                 model: 'local-algorithm',
@@ -409,14 +409,14 @@ exports.predictByPercentile = async (req, res) => {
         const rank = Math.round((100 - pct) * 1200000 / 100);
         prediction.iit_eligibility = {
             eligible_for_jee_advanced: rank <= 250000,
-            note: rank <= 250000 
+            note: rank <= 250000
                 ? `With AIR ~${rank}, you qualify to appear for JEE Advanced (top 2.5 lakh). IIT admissions depend on JEE Advanced rank.`
                 : `AIR ~${rank} is outside top 2.5 lakh. Focus on NITs, IIITs, and GFTIs through JoSAA.`
         };
 
         // Save prediction to database
         const PredictionResult = require('../models/PredictionResult.model');
-        
+
         const savedPrediction = await PredictionResult.create({
             user: req.user?._id || null,
             sessionId: req.headers['x-session-id'] || null,
@@ -463,7 +463,7 @@ exports.getPredictionById = async (req, res) => {
     try {
         const PredictionResult = require('../models/PredictionResult.model');
         const prediction = await PredictionResult.findById(req.params.id);
-        
+
         if (!prediction) {
             return res.status(404).json({ success: false, message: 'Prediction not found' });
         }
@@ -503,7 +503,7 @@ exports.getPredictionById = async (req, res) => {
 exports.getMyPredictions = async (req, res) => {
     try {
         const PredictionResult = require('../models/PredictionResult.model');
-        
+
         const predictions = await PredictionResult.find({ user: req.user._id })
             .sort({ createdAt: -1 })
             .limit(10)

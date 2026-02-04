@@ -226,6 +226,45 @@ export const testPrepData = [
 
 export const browseByStreamData = [
   {
+    id: 'university',
+    label: 'Universities',
+    link: '/universities',
+    titles: {
+      col1: 'Entrance Exams',
+      col2: 'Top Universities',
+      col3_1: 'Predictors',
+      col3_2: 'Resources'
+    },
+    content: {
+      exams: [
+        { title: 'CUET UG 2025', href: '/exams/cuet' },
+        { title: 'CUET PG 2025', href: '/exams/cuet-pg' },
+        { title: 'IPU CET', href: '/exams/ipu-cet' },
+        { title: 'AMU Entrance Exam', href: '/exams/amu-entrance' },
+        { title: 'JMI Entrance Exam', href: '/exams/jmi-entrance' },
+        { title: 'View All University Exams', href: '/exams?category=University', isLink: true }
+      ],
+      colleges: [
+        { title: 'Top Universities in India', href: '/colleges?goal=Colleges&type=University&nirfCategory=University' },
+        { title: 'Central Universities', href: '/colleges?goal=Colleges&type=Central University' },
+        { title: 'State Universities', href: '/colleges?goal=Colleges&type=State University' },
+        { title: 'Deemed Universities', href: '/colleges?goal=Colleges&type=Deemed' },
+        { title: 'Private Universities', href: '/colleges?goal=Colleges&type=Private University' },
+        { title: 'University Admissions 2025', href: '/colleges?goal=Colleges' }
+      ],
+      predictors: [
+        { title: 'CUET College Predictor', href: '#' },
+        { title: 'University Rank Predictor', href: '#' },
+        { title: 'College Comparison', href: '/compare-colleges' }
+      ],
+      resources: [
+        { title: 'NIRF University Rankings 2025', href: '/news/university-rankings-2025', isNew: true },
+        { title: 'UGC Guidelines', href: '#' },
+        { title: 'CUET 2025 Syllabus', href: '/exams/cuet?tab=syllabus' }
+      ]
+    }
+  },
+  {
     id: 'engineering',
     label: 'Engineering and Architecture',
     link: '/engineering',
@@ -811,53 +850,126 @@ export const browseByStreamData = [
   },
   {
     id: 'arts',
-    label: 'Arts, Commerce & Sciences',
+    label: 'Arts and Humanities',
+    link: '/arts',
     titles: {
       col1: 'Exams',
       col2: 'Colleges',
-      col3_1: 'Upcoming Events',
-      col3_2: 'News & Resources'
+      col3_1: 'News & Resources',
+      col3_2: ' '
     },
     content: {
       exams: [
-        { title: 'CUET Exam', href: '/exams/cuet-exam' },
-        { title: 'CUET PG', href: '/exams/cuet-pg' },
-        { title: 'NFAT', href: '/exams/nfat' },
-        { title: 'NEST', href: '/exams/nest' },
-        { title: 'UP BEd JEE', href: '/exams/up-bed-jee' },
-        { title: 'TS EDCET Exam', href: '/exams/ts-edcet-exam' },
-        { title: 'IIT JAM', href: '/exams/iit-jam' },
-        { title: 'AP PGCET Exam', href: '/exams/ap-pgcet-exam' },
-        { title: 'View All', href: '/exams?category=Arts%2C%20Commerce%20%26%20Sciences', isLink: true }
+        { title: 'CUET UG', href: '/exams/cuet-ug' },
+        { title: 'View All', href: '/exams?category=Arts', isLink: true }
       ],
       colleges: [
-        { title: 'Universities in India', href: '#' },
-        { title: 'Top Universities in India', href: '#' },
-        { title: 'Top Colleges in India', href: '#' },
-        { title: 'Top Universities in Uttar Pradesh', href: '#' },
-        { title: 'Top Universities in Bihar', href: '#' },
-        { title: 'Top Universities in Madhya Pradesh', href: '#' },
-        { title: 'Top Universities in Tamil Nadu', href: '#' },
-        { title: 'Central Universities in India', href: '#' }
+        { title: 'Top Arts Colleges in India', href: '/colleges?goal=Colleges&stream=Arts And Humanities' },
+        { title: 'Top BA Colleges', href: '/colleges?goal=Colleges&stream=Arts And Humanities&degree=BA' },
+        { title: 'Top MA Colleges', href: '/colleges?goal=Colleges&stream=Arts And Humanities&degree=MA' },
+        { title: 'Top Arts Colleges in Delhi', href: '/colleges?goal=Colleges&stream=Arts And Humanities&state=Delhi' },
+        { title: 'View All', href: '/colleges?goal=Colleges&stream=Arts And Humanities', isLink: true }
       ],
       predictors: [
         { title: 'DU Cut Off', href: '#' },
-        { title: 'IGNOU Date Sheet 2025', href: '#' },
-        { title: 'CUET 2026', href: '#' },
-        { title: 'CUET Cut Off', href: '#' },
-        { title: 'IIT JAM Syllabus', href: '#' },
-        { title: 'CUET Participating Universities 2026', href: '#' },
-        { title: 'CUET Previous Year Question Paper', href: '#' },
-        { title: 'IGNOU Result', href: '#' }
+        { title: 'Arts Ranking 2026', href: '/news/arts-rankings-2026', isNew: true },
+        { title: 'BA Economics Course', href: '/courses/ba-economics' }
       ],
-      resources: [
-        { title: 'CUET College Predictor', href: '#' },
-        { title: 'IIT JAM Exam Dates 2026', href: '/news/iit-jam-dates-2026', isNew: true },
-        { title: 'CUET 2026 Notification', href: '/news/cuet-notification-2026', isNew: true },
-        { title: 'CUET PG Cut Off', href: '#' },
-        { title: 'IGNOU Exam Form', href: '#' },
-        { title: 'CUET Syllabus', href: '#' }
-      ]
+      resources: []
+    }
+  },
+  {
+    id: 'science',
+    label: 'Science',
+    link: '/science',
+    titles: {
+      col1: 'Exams',
+      col2: 'Colleges',
+      col3_1: 'News & Resources',
+      col3_2: ' '
+    },
+    content: {
+      exams: [
+        { title: 'IIT JAM', href: '/exams/iit-jam' },
+        { title: 'NEST', href: '/exams/nest' },
+        { title: 'CUET PG (Science)', href: '/exams/cuet-pg' },
+        { title: 'View All', href: '/exams?category=Science', isLink: true }
+      ],
+      colleges: [
+        { title: 'Top Science Colleges', href: '/colleges?goal=Colleges&stream=Science' },
+        { title: 'Top B.Sc Colleges', href: '/colleges?goal=Colleges&stream=Science&degree=B.Sc' },
+        { title: 'Top M.Sc Colleges', href: '/colleges?goal=Colleges&stream=Science&degree=M.Sc' },
+        { title: 'Science Colleges in Bangalore', href: '/colleges?goal=Colleges&stream=Science&state=Karnataka' },
+        { title: 'View All', href: '/colleges?goal=Colleges&stream=Science', isLink: true }
+      ],
+      predictors: [
+        { title: 'IIT JAM Syllabus', href: '#' },
+        { title: 'Science Ranking 2026', href: '/news/science-rankings-2026', isNew: true },
+        { title: 'B.Sc Physics', href: '/courses/bsc-physics' }
+      ],
+      resources: []
+    }
+  },
+  {
+    id: 'education',
+    label: 'Education and Teaching',
+    link: '/education',
+    titles: {
+      col1: 'Exams',
+      col2: 'Colleges',
+      col3_1: 'News & Resources',
+      col3_2: ' '
+    },
+    content: {
+      exams: [
+        { title: 'CTET', href: '/exams/ctet' },
+        { title: 'UGC NET', href: '/exams/ugc-net' },
+        { title: 'UP B.Ed JEE', href: '/exams/up-bed-jee' },
+        { title: 'MAH B.Ed CET', href: '/exams/mah-bed-cet' },
+        { title: 'View All', href: '/exams?category=Education', isLink: true }
+      ],
+      colleges: [
+        { title: 'Top B.Ed Colleges', href: '/colleges?goal=Colleges&stream=Education&degree=B.Ed' },
+        { title: 'Top M.Ed Colleges', href: '/colleges?goal=Colleges&stream=Education&degree=M.Ed' },
+        { title: 'Colleges Accepting UP B.Ed JEE', href: '/colleges?goal=Colleges&stream=Education&exam=UP B.Ed JEE' },
+        { title: 'View All', href: '/colleges?goal=Colleges&stream=Education', isLink: true }
+      ],
+      predictors: [
+        { title: 'CTET Notification 2026', href: '/news/ctet-notification-2026', isNew: true },
+        { title: 'UGC NET Results', href: '#' },
+        { title: 'B.Ed Course Details', href: '/courses/b-ed' }
+      ],
+      resources: []
+    }
+  },
+  {
+    id: 'university',
+    label: 'Universities',
+    link: '/universities',
+    titles: {
+      col1: 'Entrance Exams',
+      col2: 'Top Universities',
+      col3_1: 'News & Resources',
+      col3_2: ' '
+    },
+    content: {
+      exams: [
+        { title: 'CUET UG', href: '/exams/cuet-ug' },
+        { title: 'CUET PG', href: '/exams/cuet-pg' },
+        { title: 'View All', href: '/exams?category=University', isLink: true }
+      ],
+      colleges: [
+        { title: 'Top Central Universities', href: '/colleges?goal=Colleges&type=Central University' },
+        { title: 'Top State Universities', href: '/colleges?goal=Colleges&type=State University' },
+        { title: 'Deemed Universities', href: '/colleges?goal=Colleges&type=Deemed University' },
+        { title: 'Private Universities', href: '/colleges?goal=Colleges&type=Private University' },
+        { title: 'View All', href: '/colleges?goal=Colleges', isLink: true }
+      ],
+      predictors: [
+        { title: 'CUET 2026', href: '#' },
+        { title: 'University Rankings 2026', href: '/news/university-rankings-2026', isNew: true }
+      ],
+      resources: []
     }
   },
   {

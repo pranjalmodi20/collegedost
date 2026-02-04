@@ -24,18 +24,23 @@ const StudyAbroadPage = ({ onOpenAskModal }) => {
         title={<>Global Education. <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">Limitless Opportunities.</span></>}
         subtitle="Discover top Universities worldwide, Scholarship opportunities, and Exam Prep."
         bgImage="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=85"
-        trending={[]}
-        showBadge={false}
+        trending={[
+          { text: "IELTS 2026", link: "#" },
+          { text: "Study in UK", link: "#" },
+          { text: "USA Visa", link: "#" },
+          { text: "GRE Prep", link: "#" }
+        ]}
+        showBadge={true}
       />
       
       <div className="container mx-auto px-4 py-12 flex-grow flex flex-col gap-16">
         
         <PillSection title="International Exams" items={data.content.exams} color="border-gray-200" />
         
-        <Section 
+        <PillSection 
           title="Top Study Destinations" 
-          items={data.content.colleges} // Using colleges list (contains Top University in USA etc.)
-          type="card" 
+          items={data.content.colleges} 
+          color="border-gray-200" 
         />
         
         <div className="text-center">
