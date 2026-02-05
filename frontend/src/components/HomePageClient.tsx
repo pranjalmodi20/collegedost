@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Hero from './Hero';
-import NewsSection from './NewsSection';
 import OtherProducts from './OtherProducts';
 import GenericCardGrid from './GenericCardGrid';
 import Counselling from './Counselling';
@@ -28,7 +27,6 @@ import {
 const HomePage = () => {
     const { openAskModal } = useUI(); // Use UI context
     const [featuredColleges, setFeaturedColleges] = useState(staticFeaturedColleges);
-    const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -56,18 +54,6 @@ const HomePage = () => {
                         link: `/colleges/${col.slug}`
                     }));
                     setFeaturedColleges(mappedColleges);
-                }
-
-                // Fetch News
-                const newsRes = await Promise.race<any>([
-                    api.get('/articles'),
-                    new Promise((_, reject) => 
-                        setTimeout(() => reject(new Error('Request timeout')), 8000)
-                    )
-                ]);
-                
-                if (newsRes?.data?.success) {
-                    setNews(newsRes.data.data);
                 }
             } catch (err) {
                 // Silently fail and use static data - user will see cached/default data
@@ -103,7 +89,6 @@ const HomePage = () => {
             className="overflow-x-hidden"
         >
             <Hero />
-            <NewsSection items={news} />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 grow flex flex-col gap-10 md:gap-20">
                 <motion.div variants={itemVariants}>
