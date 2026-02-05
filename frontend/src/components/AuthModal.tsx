@@ -7,6 +7,28 @@ import { GoogleLogin } from '@react-oauth/google';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
+// Reusable styled input field - DRY pattern for auth forms
+const AuthInputField = ({ 
+    label, icon: Icon, type = 'text', placeholder, value, onChange, required = false, extraInputClass = '' 
+}: {
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    type?: string;
+    placeholder: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    required?: boolean;
+    extraInputClass?: string;
+}) => (
+    <div className="space-y-1">
+        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">{label}</label>
+        <div className="relative group">
+            <Icon className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+            <input type={type} placeholder={placeholder} className={`w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400 ${extraInputClass}`} value={value} onChange={onChange} required={required} />
+        </div>
+    </div>
+);
+
 interface AuthModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -295,64 +317,12 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialTab = 'si
                                         {activeTab === 'forgotPassword' ? (
                                             <>
                                                 {step === 1 ? (
-                                                    <div className="space-y-1">
-                                                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
-                                                        <div className="relative group">
-                                                            <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                            <input
-                                                                type="email"
-                                                                placeholder="john@example.com"
-                                                                className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                value={formData.email}
-                                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                                required
-                                                            />
-                                                        </div>
-                                                    </div>
+                                                    <AuthInputField label="Email Address" icon={FaEnvelope} type="email" placeholder="john@example.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
                                                 ) : (
                                                     <>
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Reset Code (OTP)</label>
-                                                            <div className="relative group">
-                                                                <FaLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                <input
-                                                                    type="text"
-                                                                    placeholder="123456"
-                                                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400 tracking-widest"
-                                                                    value={formData.otp}
-                                                                    onChange={(e) => setFormData({ ...formData, otp: e.target.value })}
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">New Password</label>
-                                                            <div className="relative group">
-                                                                <FaLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                <input
-                                                                    type="password"
-                                                                    placeholder="••••••••"
-                                                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                    value={formData.password}
-                                                                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Confirm Password</label>
-                                                            <div className="relative group">
-                                                                <FaLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                <input
-                                                                    type="password"
-                                                                    placeholder="••••••••"
-                                                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                    value={formData.confirmPassword}
-                                                                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
+                                                        <AuthInputField label="Reset Code (OTP)" icon={FaLock} type="text" placeholder="123456" value={formData.otp} onChange={(e) => setFormData({ ...formData, otp: e.target.value })} required extraInputClass="tracking-widest" />
+                                                        <AuthInputField label="New Password" icon={FaLock} type="password" placeholder="••••••••" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
+                                                        <AuthInputField label="Confirm Password" icon={FaLock} type="password" placeholder="••••••••" value={formData.confirmPassword} onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })} required />
                                                     </>
                                                 )}
 
@@ -387,65 +357,12 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialTab = 'si
                                                 {activeTab === 'signup' && (
                                                     <>
                                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                                            <div className="space-y-1">
-                                                                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
-                                                                <div className="relative group">
-                                                                    <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                    <input
-                                                                        type="text"
-                                                                        placeholder="John Doe"
-                                                                        className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                        value={formData.name}
-                                                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                                        required
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div className="space-y-1">
-                                                                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Mobile</label>
-                                                                <div className="relative group">
-                                                                    <FaPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                    <input
-                                                                        type="tel"
-                                                                        placeholder="+91 98765 43210"
-                                                                        className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                        value={formData.mobile}
-                                                                        onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                                                                        required
-                                                                    />
-                                                                </div>
-                                                            </div>
+                                                            <AuthInputField label="Full Name" icon={FaUser} type="text" placeholder="John Doe" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
+                                                            <AuthInputField label="Mobile" icon={FaPhone} type="tel" placeholder="+91 98765 43210" value={formData.mobile} onChange={(e) => setFormData({ ...formData, mobile: e.target.value })} required />
                                                         </div>
 
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email</label>
-                                                            <div className="relative group">
-                                                                <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                <input
-                                                                    type="email"
-                                                                    placeholder="john@example.com"
-                                                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                    value={formData.email}
-                                                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Password</label>
-                                                            <div className="relative group">
-                                                                <FaLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                <input
-                                                                    type="password"
-                                                                    placeholder="••••••••"
-                                                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                    value={formData.password}
-                                                                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
+                                                        <AuthInputField label="Email" icon={FaEnvelope} type="email" placeholder="john@example.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+                                                        <AuthInputField label="Password" icon={FaLock} type="password" placeholder="••••••••" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
 
                                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                             <div className="space-y-1">
@@ -464,19 +381,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialTab = 'si
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div className="space-y-1">
-                                                                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">City</label>
-                                                                <div className="relative group">
-                                                                    <FaMapMarkerAlt className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                    <input
-                                                                        type="text"
-                                                                        placeholder="Mumbai"
-                                                                        className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                        value={formData.city}
-                                                                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                                                                    />
-                                                                </div>
-                                                            </div>
+                                                            <AuthInputField label="City" icon={FaMapMarkerAlt} type="text" placeholder="Mumbai" value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} />
                                                         </div>
 
                                                         <div className="flex items-start gap-2 mt-2">
@@ -496,34 +401,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialTab = 'si
 
                                                 {activeTab === 'login' && (
                                                     <>
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Email</label>
-                                                            <div className="relative group">
-                                                                <FaEnvelope className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                <input
-                                                                    type="email"
-                                                                    placeholder="john@example.com"
-                                                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                    value={formData.email}
-                                                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div className="space-y-1">
-                                                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Password</label>
-                                                            <div className="relative group">
-                                                                <FaLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
-                                                                <input
-                                                                    type="password"
-                                                                    placeholder="••••••••"
-                                                                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10 transition-all font-medium text-sm text-gray-800 placeholder-gray-400"
-                                                                    value={formData.password}
-                                                                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
+                                                        <AuthInputField label="Email" icon={FaEnvelope} type="email" placeholder="john@example.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+                                                        <AuthInputField label="Password" icon={FaLock} type="password" placeholder="••••••••" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
                                                     </>
                                                 )}
 

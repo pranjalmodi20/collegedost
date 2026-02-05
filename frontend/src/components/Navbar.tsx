@@ -4,22 +4,10 @@ import React, { useState, useEffect } from 'react';
 import {
     navLinks,
     browseByStreamData,
-    // ============================================
-    // PLANNED FEATURES: The following data imports
-    // are reserved for upcoming dropdown menus in
-    // the navigation. DO NOT REMOVE.
-    // ============================================
-    testPrepData,      // Future: Test Prep mega menu
-    collegesData,      // Future: Colleges dropdown
-    examsData,         // Future: Exams dropdown
-    coursesData,       // Future: Courses mega menu
-    rankingsData,      // Future: Rankings section
-    counsellingData,   // Future: Counselling section
-    careersData,       // Future: Career guidance section
-    moreData           // Future: Additional resources
-    // ============================================
+    collegesData,
+    examsData,
 } from '../data/navigation';
-import { FaSearch, FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaQuestion, FaShareAlt, FaBookOpen, FaChartPie, FaUniversity, FaNewspaper, FaUserShield, FaArrowLeft, FaTimes, FaGraduationCap, FaTrophy, FaBriefcase, FaEllipsisH, FaComments, FaHome, FaCompass, FaChartLine, FaStethoscope, FaLaptopCode, FaBalanceScale, FaPalette, FaMicrophone, FaCoins, FaDesktop, FaFlask, FaPlane, FaSchool, FaGlobeAmericas, FaChevronRight } from 'react-icons/fa';
+import { FaUser, FaBars, FaTh, FaChevronDown, FaAngleRight, FaQuestion, FaShareAlt, FaChartPie, FaUniversity, FaNewspaper, FaUserShield, FaArrowLeft, FaTimes, FaChevronRight } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';    
 import Link from 'next/link';
@@ -29,6 +17,88 @@ import { useUI } from '@/context/UIContext';
 
 
 interface NavbarProps { }
+
+// Reusable mega menu content grid - DRY pattern for Stream/Colleges/Exams dropdowns
+const MegaMenuContentGrid = ({ 
+    dataObj, 
+    content, 
+    onLinkClick,
+    useNextLink = false 
+}: { 
+    dataObj: any; 
+    content: any; 
+    onLinkClick: () => void;
+    useNextLink?: boolean;
+}) => {
+    const LinkComponent = useNextLink ? Link : 'a';
+    return (
+        <div className="flex-1 bg-slate-50 p-10 overflow-y-auto">
+            <div className="grid grid-cols-2 gap-16">
+                <div className="flex flex-col">
+                    <div className="mb-8">
+                        <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">
+                            {dataObj.titles?.col1 || 'Exams'}
+                        </h4>
+                        <ul className="flex flex-col gap-3">
+                            {content.exams?.map((item: any, idx: number) => (
+                                <li key={idx}>
+                                    <LinkComponent href={item.href} onClick={onLinkClick} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-indigo font-semibold' : 'text-slate-600 hover:text-brand-orange'}`}>
+                                        {item.title}
+                                    </LinkComponent>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="content-section">
+                        <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">
+                            {dataObj.titles?.col3_1 || 'Predictors'}
+                        </h4>
+                        <ul className="flex flex-col gap-3">
+                            {content.predictors?.map((item: any, idx: number) => (
+                                <li key={idx}>
+                                    <LinkComponent href={item.href} onClick={onLinkClick} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-indigo font-semibold' : 'text-slate-600 hover:text-brand-orange'}`}>
+                                        {item.title}
+                                    </LinkComponent>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div className="flex flex-col">
+                    <div className="mb-8">
+                        <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">
+                            {dataObj.titles?.col2 || 'Colleges'}
+                        </h4>
+                        <ul className="flex flex-col gap-3">
+                            {content.colleges?.map((item: any, idx: number) => (
+                                <li key={idx}>
+                                    <LinkComponent href={item.href} onClick={onLinkClick} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
+                                        {item.title}
+                                    </LinkComponent>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="content-section">
+                        <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">
+                            {dataObj.titles?.col3_2 || 'Resources'}
+                        </h4>
+                        <ul className="flex flex-col gap-3">
+                            {content.resources?.map((item: any, idx: number) => (
+                                <li key={idx}>
+                                    <LinkComponent href={item.href} onClick={onLinkClick} className="text-sm transition-colors flex items-center gap-2 text-gray-600 hover:text-brand-orange group">
+                                        <span>{item.title}</span>
+                                        {item.isNew && <span className="bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-sm">NEW</span>}
+                                    </LinkComponent>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const Navbar: React.FC<NavbarProps> = () => {
     const { user, logout, openAuthModal } = useAuth();
@@ -301,66 +371,12 @@ const Navbar: React.FC<NavbarProps> = () => {
                                                     ))}
                                                 </div>
 
-                                                <div className="flex-1 bg-slate-50 p-10 overflow-y-auto">
-                                                    <div className="grid grid-cols-2 gap-16">
-                                                        <div className="flex flex-col">
-                                                            <div className="mb-8">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentStreamDataObj.titles?.col1 || 'Exams'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentStreamContent.exams.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <Link href={item.href} onClick={() => setActiveDropdown(null)} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-indigo font-semibold' : 'text-slate-600 hover:text-brand-orange'}`}>
-                                                                                {item.title}
-                                                                            </Link>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-
-                                                            <div className="content-section">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentStreamDataObj.titles?.col3_1 || 'Predictors'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentStreamContent.predictors.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <Link href={item.href} onClick={() => setActiveDropdown(null)} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-indigo font-semibold' : 'text-slate-600 hover:text-brand-orange'}`}>
-                                                                                {item.title}
-                                                                            </Link>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="flex flex-col">
-                                                            <div className="mb-8">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentStreamDataObj.titles?.col2 || 'Colleges'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentStreamContent.colleges.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <Link href={item.href} onClick={() => setActiveDropdown(null)} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
-                                                                                {item.title}
-                                                                            </Link>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-
-                                                            <div className="content-section">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentStreamDataObj.titles?.col3_2 || 'Resources'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentStreamContent.resources.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <Link href={item.href} onClick={() => setActiveDropdown(null)} className="text-sm transition-colors flex items-center gap-2 text-gray-600 hover:text-brand-orange group">
-                                                                                <span>{item.title}</span>
-                                                                                {item.isNew && <span className="bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full animate-pulse shadow-sm">NEW</span>}
-                                                                            </Link>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <MegaMenuContentGrid 
+                                                    dataObj={currentStreamDataObj} 
+                                                    content={currentStreamContent} 
+                                                    onLinkClick={() => setActiveDropdown(null)}
+                                                    useNextLink={true}
+                                                />
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
@@ -390,67 +406,11 @@ const Navbar: React.FC<NavbarProps> = () => {
                                                     ))}
                                                 </div>
 
-                                                <div className="flex-1 bg-slate-50 p-10 overflow-y-auto">
-                                                    <div className="grid grid-cols-2 gap-16">
-                                                        <div className="flex flex-col">
-                                                            <div className="mb-8">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCollegeDataObj.titles?.col1 || 'Section 1'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentCollegeContent.exams?.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <a href={item.href} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-indigo font-semibold' : 'text-slate-600 hover:text-brand-orange'}`}>
-                                                                                {item.title}
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-
-                                                            <div className="content-section">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCollegeDataObj.titles?.col3_1 || 'Section 3'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentCollegeContent.predictors?.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <a href={item.href} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-indigo font-semibold' : 'text-slate-600 hover:text-brand-orange'}`}>
-                                                                                {item.title}
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="flex flex-col">
-                                                            <div className="mb-8">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCollegeDataObj.titles?.col2 || 'Section 2'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentCollegeContent.colleges?.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
-                                                                                {item.title}
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-
-                                                            <div className="content-section">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentCollegeDataObj.titles?.col3_2 || 'Section 4'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentCollegeContent.resources?.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
-                                                                                {item.title}
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <MegaMenuContentGrid 
+                                                    dataObj={currentCollegeDataObj} 
+                                                    content={currentCollegeContent} 
+                                                    onLinkClick={() => setActiveDropdown(null)}
+                                                />
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
@@ -478,67 +438,11 @@ const Navbar: React.FC<NavbarProps> = () => {
                                                     ))}
                                                 </div>
 
-                                                <div className="flex-1 bg-slate-50 p-10 overflow-y-auto">
-                                                    <div className="grid grid-cols-2 gap-16">
-                                                        <div className="flex flex-col">
-                                                            <div className="mb-8">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentExamDataObj.titles?.col1 || 'Section 1'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentExamContent.exams?.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <a href={item.href} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-indigo font-semibold' : 'text-slate-600 hover:text-brand-orange'}`}>
-                                                                                {item.title}
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-
-                                                            <div className="content-section">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentExamDataObj.titles?.col3_1 || 'Section 3'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentExamContent.predictors?.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <a href={item.href} className={`text-sm transition-colors block ${item.isLink ? 'text-brand-indigo font-semibold' : 'text-slate-600 hover:text-brand-orange'}`}>
-                                                                                {item.title}
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="flex flex-col">
-                                                            <div className="mb-8">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentExamDataObj.titles?.col2 || 'Section 2'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentExamContent.colleges?.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
-                                                                                {item.title}
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-
-                                                            <div className="content-section">
-                                                                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">{currentExamDataObj.titles?.col3_2 || 'Section 4'}</h4>
-                                                                <ul className="flex flex-col gap-3">
-                                                                    {currentExamContent.resources?.map((item: any, idx: number) => (
-                                                                        <li key={idx}>
-                                                                            <a href={item.href} className="text-sm transition-colors block text-gray-600 hover:text-brand-orange">
-                                                                                {item.title}
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <MegaMenuContentGrid 
+                                                    dataObj={currentExamDataObj} 
+                                                    content={currentExamContent} 
+                                                    onLinkClick={() => setActiveDropdown(null)}
+                                                />
                                             </motion.div>
                                         )}
                                     </AnimatePresence>

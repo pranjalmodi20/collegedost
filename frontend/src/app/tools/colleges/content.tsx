@@ -19,6 +19,68 @@ interface FilterState {
     sort: string;
 }
 
+// Reusable checkbox filter section component - DRY pattern
+const FilterCheckboxSection = ({ 
+    title, 
+    accentColor, 
+    searchPlaceholder, 
+    searchTerm, 
+    onSearchChange, 
+    options, 
+    selectedValues, 
+    onToggle 
+}: {
+    title: string;
+    accentColor: string;
+    searchPlaceholder: string;
+    searchTerm: string;
+    onSearchChange: (value: string) => void;
+    options: string[];
+    selectedValues: string[];
+    onToggle: (value: string) => void;
+}) => {
+    const filteredOptions = options.filter(opt => opt.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    return (
+        <div>
+            <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span className={`w-1 h-4 ${accentColor} rounded-full`}></span>
+                {title}
+            </h3>
+            <div className="relative mb-3 group">
+                <input
+                    type="text"
+                    placeholder={searchPlaceholder}
+                    value={searchTerm}
+                    onChange={(e) => onSearchChange(e.target.value)}
+                    className="w-full pl-9 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all placeholder:text-slate-400"
+                />
+                <FaSearch className="absolute left-3 top-3.5 text-slate-400 group-focus-within:text-brand-blue transition-colors text-xs" />
+            </div>
+            <div className="space-y-1 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
+                {filteredOptions.map((item) => (
+                    <label key={item} className="flex items-center gap-3 cursor-pointer group hover:bg-slate-50 p-2 rounded-lg transition-colors -mx-2">
+                        <div className="relative flex items-center justify-center flex-shrink-0">
+                            <input 
+                                type="checkbox" 
+                                className="peer appearance-none w-5 h-5 border-[1.5px] border-slate-300 rounded-[6px] bg-white checked:bg-blue-600 checked:border-blue-600 transition-all cursor-pointer" 
+                                checked={selectedValues.includes(item)} 
+                                onChange={() => onToggle(item)} 
+                            />
+                            <svg className="absolute w-3.5 h-3.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                        <span className={`text-sm leading-snug transition-colors ${selectedValues.includes(item) ? 'text-slate-900 font-medium' : 'text-slate-600 group-hover:text-slate-900'}`}>
+                            {item}
+                        </span>
+                    </label>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 // Helper function to parse URL params into filter state
 const parseFiltersFromParams = (searchParams: URLSearchParams): FilterState => ({
     search: searchParams.get('search') || '',
@@ -155,10 +217,6 @@ const PageContent: React.FC = () => {
         setPage(1);
     };
 
-    const filterOptions = (options: string[], term: string) => {
-        return options.filter(opt => opt.toLowerCase().includes(term.toLowerCase()));
-    };
-
     const fetchColleges = async () => {
         setLoading(true);
         try {
@@ -275,91 +333,40 @@ const PageContent: React.FC = () => {
                             </div>
 
                             {/* EDUCATION STREAM */}
-                            <div>
-                                <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                    <span className="w-1 h-4 bg-brand-blue rounded-full"></span>
-                                    Stream
-                                </h3>
-                                <div className="relative mb-3 group">
-                                    <input
-                                        type="text"
-                                        placeholder="Search streams..."
-                                        value={searchTermStream}
-                                        onChange={(e) => setSearchTermStream(e.target.value)}
-                                        className="w-full pl-9 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all placeholder:text-slate-400"
-                                    />
-                                    <FaSearch className="absolute left-3 top-3.5 text-slate-400 group-focus-within:text-brand-blue transition-colors text-xs" />
-                                </div>
-                                <div className="space-y-1 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
-                                    {filterOptions(streamsList, searchTermStream).map((stream) => (
-                                        <label key={stream} className="flex items-center gap-3 cursor-pointer group hover:bg-slate-50 p-2 rounded-lg transition-colors -mx-2">
-                                            <div className="relative flex items-center justify-center flex-shrink-0">
-                                                <input type="checkbox" className="peer appearance-none w-5 h-5 border-[1.5px] border-slate-300 rounded-[6px] bg-white checked:bg-blue-600 checked:border-blue-600 transition-all cursor-pointer" checked={filters.stream.includes(stream)} onChange={() => handleCheckboxChange('stream', stream)} />
-                                                <svg className="absolute w-3.5 h-3.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                                            </div>
-                                            <span className={`text-sm leading-snug transition-colors ${filters.stream.includes(stream) ? 'text-slate-900 font-medium' : 'text-slate-600 group-hover:text-slate-900'}`}>{stream}</span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
+                            <FilterCheckboxSection
+                                title="Stream"
+                                accentColor="bg-brand-blue"
+                                searchPlaceholder="Search streams..."
+                                searchTerm={searchTermStream}
+                                onSearchChange={setSearchTermStream}
+                                options={streamsList}
+                                selectedValues={filters.stream}
+                                onToggle={(value) => handleCheckboxChange('stream', value)}
+                            />
 
                             {/* DEGREE */}
-                            <div>
-                                <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                    <span className="w-1 h-4 bg-purple-500 rounded-full"></span>
-                                    Degree
-                                </h3>
-                                <div className="relative mb-3 group">
-                                    <input
-                                        type="text"
-                                        placeholder="Search degrees..."
-                                        value={searchTermDegree}
-                                        onChange={(e) => setSearchTermDegree(e.target.value)}
-                                        className="w-full pl-9 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all placeholder:text-slate-400"
-                                    />
-                                    <FaSearch className="absolute left-3 top-3.5 text-slate-400 group-focus-within:text-purple-500 transition-colors text-xs" />
-                                </div>
-                                <div className="space-y-1 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
-                                    {filterOptions(degreesList, searchTermDegree).map((deg) => (
-                                        <label key={deg} className="flex items-center gap-3 cursor-pointer group hover:bg-slate-50 p-2 rounded-lg transition-colors -mx-2">
-                                            <div className="relative flex items-center justify-center flex-shrink-0">
-                                                <input type="checkbox" className="peer appearance-none w-5 h-5 border-[1.5px] border-slate-300 rounded-[6px] bg-white checked:bg-blue-600 checked:border-blue-600 transition-all cursor-pointer" checked={filters.degree.includes(deg)} onChange={() => handleCheckboxChange('degree', deg)} />
-                                                <svg className="absolute w-3.5 h-3.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                                            </div>
-                                            <span className={`text-sm leading-snug transition-colors ${filters.degree.includes(deg) ? 'text-slate-900 font-medium' : 'text-slate-600 group-hover:text-slate-900'}`}>{deg}</span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
+                            <FilterCheckboxSection
+                                title="Degree"
+                                accentColor="bg-purple-500"
+                                searchPlaceholder="Search degrees..."
+                                searchTerm={searchTermDegree}
+                                onSearchChange={setSearchTermDegree}
+                                options={degreesList}
+                                selectedValues={filters.degree}
+                                onToggle={(value) => handleCheckboxChange('degree', value)}
+                            />
 
                             {/* STATE */}
-                            <div>
-                                <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                    <span className="w-1 h-4 bg-teal-500 rounded-full"></span>
-                                    State
-                                </h3>
-                                <div className="relative mb-3 group">
-                                    <input
-                                        type="text"
-                                        placeholder="Search states..."
-                                        value={searchTermState}
-                                        onChange={(e) => setSearchTermState(e.target.value)}
-                                        className="w-full pl-9 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all placeholder:text-slate-400"
-                                    />
-                                    <FaSearch className="absolute left-3 top-3.5 text-slate-400 group-focus-within:text-teal-500 transition-colors text-xs" />
-                                </div>
-                                <div className="space-y-1 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
-                                    {filterOptions(statesList, searchTermState).map((st) => (
-                                        <label key={st} className="flex items-center gap-3 cursor-pointer group hover:bg-slate-50 p-2 rounded-lg transition-colors -mx-2">
-                                            <div className="relative flex items-center justify-center flex-shrink-0">
-                                                <input type="checkbox" className="peer appearance-none w-5 h-5 border-[1.5px] border-slate-300 rounded-[6px] bg-white checked:bg-blue-600 checked:border-blue-600 transition-all cursor-pointer" checked={filters.state.includes(st)} onChange={() => handleCheckboxChange('state', st)} />
-                                                <svg className="absolute w-3.5 h-3.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                                            </div>
-                                            <span className={`text-sm leading-snug transition-colors ${filters.state.includes(st) ? 'text-slate-900 font-medium' : 'text-slate-600 group-hover:text-slate-900'}`}>{st}</span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
+                            <FilterCheckboxSection
+                                title="State"
+                                accentColor="bg-teal-500"
+                                searchPlaceholder="Search states..."
+                                searchTerm={searchTermState}
+                                onSearchChange={setSearchTermState}
+                                options={statesList}
+                                selectedValues={filters.state}
+                                onToggle={(value) => handleCheckboxChange('state', value)}
+                            />
                         </div>
                     </div>
                 </div>
