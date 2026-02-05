@@ -12,7 +12,7 @@ const UniversitiesPage = () => {
     const data = browseByStreamData.find(d => d.id === 'university');
     const { openAskModal } = useUI();
 
-    if (!data) return <div className="min-h-screen pt-24 text-center">Loading...</div>;
+    if (!data) return <div className="min-h-screen text-center">Loading...</div>;
 
     return (
         <>

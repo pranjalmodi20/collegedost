@@ -242,7 +242,7 @@ const PageContent: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-20 pb-12 overflow-x-hidden">
+        <div className="min-h-screen bg-gray-50 pb-12 overflow-x-hidden">
             {/* Header Section */}
             <div className="bg-linear-to-br from-green-900 via-emerald-800 to-green-900 relative overflow-hidden text-white pt-24 pb-20 mb-10">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[40px_40px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)] z-0 pointer-events-none"></div>

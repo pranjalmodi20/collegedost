@@ -18,7 +18,7 @@ const PageContent: React.FC = () => {
     const data = browseByStreamData.find(d => d.id === 'animation');
     const { openAskModal } = useUI();
 
-    if (!data) return <div className="min-h-screen pt-24 text-center">Loading...</div>;
+    if (!data) return <div className="min-h-screen text-center">Loading...</div>;
 
     return (
         <>

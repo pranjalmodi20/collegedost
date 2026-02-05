@@ -63,7 +63,7 @@ const PageContent: React.FC = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-12">
+        <div className="min-h-screen bg-gray-50 pb-12">
 
             {/* Hero Section */}
             <div className="bg-brand-deep-bg text-white py-16 mb-12 relative overflow-hidden">

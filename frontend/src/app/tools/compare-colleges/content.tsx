@@ -120,7 +120,7 @@ const PageContent: React.FC = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-20">
+        <div className="min-h-screen bg-gray-50 pb-20">
             <div className="container mx-auto px-4">
                 <div className="text-center max-w-3xl mx-auto mb-10">
                     <span className="bg-blue-100 text-brand-blue px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-block">

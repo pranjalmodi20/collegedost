@@ -53,7 +53,7 @@ const PageContent: React.FC = () => {
     const levels = ['All', 'Undergraduate', 'Postgraduate', 'Diploma', 'Doctorate'];
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-12">
+        <div className="min-h-screen bg-gray-50 pb-12">
 
             {/* Header */}
             <div className="bg-linear-to-r from-brand-violet to-brand-indigo text-white py-16 mb-12 relative overflow-hidden">

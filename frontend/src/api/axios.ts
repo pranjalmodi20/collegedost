@@ -32,8 +32,26 @@ const getCurrentBackendUrl = () => {
 // AXIOS INSTANCE
 // =======================
 const api = axios.create({
-  baseURL: getCurrentBackendUrl()
+  baseURL: getCurrentBackendUrl(),
+  timeout: 8000
 });
+
+// Add error interceptor
+api.interceptors.response.use(
+  response => response,
+  error => {
+    // Log error but don't break app
+    if (typeof window !== 'undefined') {
+      console.warn('API Error:', {
+        message: error.message,
+        code: error.code,
+        url: error.config?.url,
+        baseURL: error.config?.baseURL
+      });
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Debug log (Client only)
 if (typeof window !== 'undefined') {

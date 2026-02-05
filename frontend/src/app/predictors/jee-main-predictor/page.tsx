@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function JEEMainPredictorPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen pt-24 flex justify-center items-center"><div className="animate-spin rounded-full h-10 w-10 border-2 border-brand-blue border-t-transparent"></div></div>}>
+        <Suspense fallback={<div className="min-h-screen flex justify-center items-center"><div className="animate-spin rounded-full h-10 w-10 border-2 border-brand-blue border-t-transparent"></div></div>}>
             <PageContent />
         </Suspense>
     );

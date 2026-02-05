@@ -36,11 +36,11 @@ export const collegesData = [
     titles: { col1: 'Top Ranked', col2: 'By Placement', col3_1: 'By City', col3_2: 'By State' },
     content: {
       exams: [
-        { title: 'Top Engineering Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
-        { title: 'Top MBA Colleges', href: '/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' },
-        { title: 'Top Medical Colleges', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
-        { title: 'Top Law Colleges', href: '/colleges?goal=Colleges&stream=Law' },
-        { title: 'Top Pharmacy Colleges', href: '/colleges?goal=Colleges&stream=Pharmacy' }
+        { title: 'Top Engineering Colleges', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
+        { title: 'Top MBA Colleges', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' },
+        { title: 'Top Medical Colleges', href: '/tools/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'Top Law Colleges', href: '/tools/colleges?goal=Colleges&stream=Law' },
+        { title: 'Top Pharmacy Colleges', href: '/tools/colleges?goal=Colleges&stream=Pharmacy' }
       ],
       colleges: [
         { title: 'Colleges with Best ROI', href: '#' },
@@ -48,14 +48,14 @@ export const collegesData = [
         { title: 'Highest Package Colleges', href: '#' }
       ],
       predictors: [
-        { title: 'Colleges in Delhi NCR', href: '/colleges?goal=Colleges&state=Delhi' },
-        { title: 'Colleges in Bangalore', href: '/colleges?goal=Colleges&city=Bangalore' },
-        { title: 'Colleges in Mumbai', href: '/colleges?goal=Colleges&search=Mumbai' }
+        { title: 'Colleges in Delhi NCR', href: '/tools/colleges?goal=Colleges&state=Delhi' },
+        { title: 'Colleges in Bangalore', href: '/tools/colleges?goal=Colleges&city=Bangalore' },
+        { title: 'Colleges in Mumbai', href: '/tools/colleges?goal=Colleges&search=Mumbai' }
       ],
       resources: [
-        { title: 'Colleges in Uttar Pradesh', href: '/colleges?search=Uttar Pradesh' },
-        { title: 'Colleges in Maharashtra', href: '/colleges?state=Maharashtra' },
-        { title: 'Colleges in Karnataka', href: '/colleges?state=Karnataka' }
+        { title: 'Colleges in Uttar Pradesh', href: '/tools/colleges?search=Uttar Pradesh' },
+        { title: 'Colleges in Maharashtra', href: '/tools/colleges?state=Maharashtra' },
+        { title: 'Colleges in Karnataka', href: '/tools/colleges?state=Karnataka' }
       ]
     }
   },
@@ -65,22 +65,22 @@ export const collegesData = [
     titles: { col1: 'North India', col2: 'South India', col3_1: 'East India', col3_2: 'West India' },
     content: {
       exams: [
-        { title: 'Delhi', href: '/colleges?goal=Colleges&state=Delhi' },
-        { title: 'Uttar Pradesh', href: '/colleges?goal=Colleges&state=Uttar Pradesh' },
-        { title: 'Punjab', href: '/colleges?goal=Colleges&state=Punjab' }
+        { title: 'Delhi', href: '/tools/colleges?goal=Colleges&state=Delhi' },
+        { title: 'Uttar Pradesh', href: '/tools/colleges?goal=Colleges&state=Uttar Pradesh' },
+        { title: 'Punjab', href: '/tools/colleges?goal=Colleges&state=Punjab' }
       ],
       colleges: [
-        { title: 'Tamil Nadu', href: '/colleges?goal=Colleges&state=Tamil Nadu' },
-        { title: 'Karnataka', href: '/colleges?goal=Colleges&state=Karnataka' },
-        { title: 'Kerala', href: '/colleges?goal=Colleges&state=Kerala' }
+        { title: 'Tamil Nadu', href: '/tools/colleges?goal=Colleges&state=Tamil Nadu' },
+        { title: 'Karnataka', href: '/tools/colleges?goal=Colleges&state=Karnataka' },
+        { title: 'Kerala', href: '/tools/colleges?goal=Colleges&state=Kerala' }
       ],
       predictors: [
-        { title: 'West Bengal', href: '/colleges?goal=Colleges&state=West Bengal' },
-        { title: 'Bihar', href: '/colleges?goal=Colleges&state=Bihar' }
+        { title: 'West Bengal', href: '/tools/colleges?goal=Colleges&state=West Bengal' },
+        { title: 'Bihar', href: '/tools/colleges?goal=Colleges&state=Bihar' }
       ],
       resources: [
-        { title: 'Maharashtra', href: '/colleges?goal=Colleges&state=Maharashtra' },
-        { title: 'Gujarat', href: '/colleges?goal=Colleges&state=Gujarat' }
+        { title: 'Maharashtra', href: '/tools/colleges?goal=Colleges&state=Maharashtra' },
+        { title: 'Gujarat', href: '/tools/colleges?goal=Colleges&state=Gujarat' }
       ]
     }
   },
@@ -90,25 +90,25 @@ export const collegesData = [
     titles: { col1: 'Metro Cities', col2: 'Education Hubs', col3_1: 'Tier 2 Cities', col3_2: 'Others' },
     content: {
       exams: [
-        { title: 'Delhi', href: '/colleges?city=Delhi' },
-        { title: 'Mumbai', href: '/colleges?city=Mumbai' },
-        { title: 'Bangalore', href: '/colleges?city=Bangalore' },
-        { title: 'Chennai', href: '/colleges?city=Chennai' }
+        { title: 'Delhi', href: '/tools/colleges?city=Delhi' },
+        { title: 'Mumbai', href: '/tools/colleges?city=Mumbai' },
+        { title: 'Bangalore', href: '/tools/colleges?city=Bangalore' },
+        { title: 'Chennai', href: '/tools/colleges?city=Chennai' }
       ],
       colleges: [
-        { title: 'Kota', href: '/colleges?city=Kota' },
-        { title: 'Pune', href: '/colleges?city=Pune' },
-        { title: 'Hyderabad', href: '/colleges?city=Hyderabad' }
+        { title: 'Kota', href: '/tools/colleges?city=Kota' },
+        { title: 'Pune', href: '/tools/colleges?city=Pune' },
+        { title: 'Hyderabad', href: '/tools/colleges?city=Hyderabad' }
       ],
       predictors: [
-        { title: 'Lucknow', href: '/colleges?city=Lucknow' },
-        { title: 'Jaipur', href: '/colleges?city=Jaipur' },
-        { title: 'Chandigarh', href: '/colleges?city=Chandigarh' }
+        { title: 'Lucknow', href: '/tools/colleges?city=Lucknow' },
+        { title: 'Jaipur', href: '/tools/colleges?city=Jaipur' },
+        { title: 'Chandigarh', href: '/tools/colleges?city=Chandigarh' }
       ],
       resources: [
-        { title: 'Indore', href: '/colleges?city=Indore' },
-        { title: 'Bhopal', href: '/colleges?city=Bhopal' },
-        { title: 'Nagpur', href: '/colleges?city=Nagpur' }
+        { title: 'Indore', href: '/tools/colleges?city=Indore' },
+        { title: 'Bhopal', href: '/tools/colleges?city=Bhopal' },
+        { title: 'Nagpur', href: '/tools/colleges?city=Nagpur' }
       ]
     }
   },
@@ -118,18 +118,18 @@ export const collegesData = [
     titles: { col1: 'Top Countries', col2: 'Popular Destinations', col3_1: 'Check Now', col3_2: 'Resources' },
     content: {
       exams: [
-        { title: 'Study in USA', href: '/international-colleges?country=USA' },
-        { title: 'Study in UK', href: '/international-colleges?country=UK' },
-        { title: 'Study in Canada', href: '/international-colleges?country=Canada' },
-        { title: 'Study in Australia', href: '/international-colleges?country=Australia' }
+        { title: 'Study in USA', href: '/tools/international-colleges?country=USA' },
+        { title: 'Study in UK', href: '/tools/international-colleges?country=UK' },
+        { title: 'Study in Canada', href: '/tools/international-colleges?country=Canada' },
+        { title: 'Study in Australia', href: '/tools/international-colleges?country=Australia' }
       ],
       colleges: [
-        { title: 'Colleges in USA', href: '/international-colleges?country=USA' },
-        { title: 'Colleges in London', href: '/international-colleges?city=London' },
-        { title: 'Colleges in New York', href: '/international-colleges?city=New York' }
+        { title: 'Colleges in USA', href: '/tools/international-colleges?country=USA' },
+        { title: 'Colleges in London', href: '/tools/international-colleges?city=London' },
+        { title: 'Colleges in New York', href: '/tools/international-colleges?city=New York' }
       ],
       predictors: [
-        { title: 'View All International Colleges', href: '/international-colleges', isLink: true }
+        { title: 'View All International Colleges', href: '/tools/international-colleges', isLink: true }
       ],
       resources: [
         { title: 'Student Visa Guide', href: '#' },
@@ -146,26 +146,26 @@ export const testPrepData = [
     titles: { col1: 'Exam Prep', col2: 'Mock Tests', col3_1: 'Previous Papers', col3_2: 'Resources' },
     content: {
       exams: [
-        { title: 'JEE Main Preparation', href: '/exams/jee-main' },
+        { title: 'JEE Main Preparation', href: '/tools/exams/jee-main' },
         { title: 'JEE Advanced Preparation', href: '/test-prep/engineering/jee-advanced/preparation' },
         { title: 'BITSAT Preparation', href: '/test-prep/engineering/bitsat/preparation' },
         { title: 'VITEEE Preparation', href: '/test-prep/engineering/viteee/preparation' }
       ],
       colleges: [
-        { title: 'JEE Main Mock Test', href: '/exams/jee-main?tab=mock-test' },
+        { title: 'JEE Main Mock Test', href: '/tools/exams/jee-main?tab=mock-test' },
         { title: 'JEE Advanced Mock Test', href: '/test-prep/engineering/jee-advanced/mock-test' },
         { title: 'BITSAT Mock Test', href: '/test-prep/engineering/bitsat/mock-test' },
         { title: 'VITEEE Mock Test', href: '/test-prep/engineering/viteee/mock-test' }
       ],
       predictors: [
-        { title: 'JEE Main 2025 Paper', href: '/exams/jee-main?tab=previous-papers' },
+        { title: 'JEE Main 2025 Paper', href: '/tools/exams/jee-main?tab=previous-papers' },
         { title: 'JEE Advanced 2024 Paper', href: '/test-prep/engineering/jee-advanced/previous-paper' },
         { title: 'BITSAT Previous Papers', href: '/test-prep/engineering/bitsat/previous-paper' }
       ],
       resources: [
-        { title: 'Engineering Study Material', href: '/exams/jee-main?tab=resources' },
-        { title: 'Toppers Strategy', href: '/exams/jee-main?tab=resources' },
-        { title: 'Important Topics', href: '/exams/jee-main?tab=resources' }
+        { title: 'Engineering Study Material', href: '/tools/exams/jee-main?tab=resources' },
+        { title: 'Toppers Strategy', href: '/tools/exams/jee-main?tab=resources' },
+        { title: 'Important Topics', href: '/tools/exams/jee-main?tab=resources' }
       ]
     }
   },
@@ -226,45 +226,6 @@ export const testPrepData = [
 
 export const browseByStreamData = [
   {
-    id: 'university',
-    label: 'Universities',
-    link: '/universities',
-    titles: {
-      col1: 'Entrance Exams',
-      col2: 'Top Universities',
-      col3_1: 'Predictors',
-      col3_2: 'Resources'
-    },
-    content: {
-      exams: [
-        { title: 'CUET UG 2025', href: '/exams/cuet' },
-        { title: 'CUET PG 2025', href: '/exams/cuet-pg' },
-        { title: 'IPU CET', href: '/exams/ipu-cet' },
-        { title: 'AMU Entrance Exam', href: '/exams/amu-entrance' },
-        { title: 'JMI Entrance Exam', href: '/exams/jmi-entrance' },
-        { title: 'View All University Exams', href: '/exams?category=University', isLink: true }
-      ],
-      colleges: [
-        { title: 'Top Universities in India', href: '/colleges?goal=Colleges&type=University&nirfCategory=University' },
-        { title: 'Central Universities', href: '/colleges?goal=Colleges&type=Central University' },
-        { title: 'State Universities', href: '/colleges?goal=Colleges&type=State University' },
-        { title: 'Deemed Universities', href: '/colleges?goal=Colleges&type=Deemed' },
-        { title: 'Private Universities', href: '/colleges?goal=Colleges&type=Private University' },
-        { title: 'University Admissions 2025', href: '/colleges?goal=Colleges' }
-      ],
-      predictors: [
-        { title: 'CUET College Predictor', href: '#' },
-        { title: 'University Rank Predictor', href: '#' },
-        { title: 'College Comparison', href: '/compare-colleges' }
-      ],
-      resources: [
-        { title: 'NIRF University Rankings 2025', href: '/news/university-rankings-2025', isNew: true },
-        { title: 'UGC Guidelines', href: '#' },
-        { title: 'CUET 2025 Syllabus', href: '/exams/cuet?tab=syllabus' }
-      ]
-    }
-  },
-  {
     id: 'engineering',
     label: 'Engineering and Architecture',
     link: '/engineering',
@@ -276,25 +237,25 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'JEE Main Exam', href: '/exams/jee-main' },
-        { title: 'BITSAT Exam', href: '/exams/bitsat' },
-        { title: 'JEE Advanced Exam', href: '/exams/jee-advanced' },
-        { title: 'VITEEE Exam', href: '/exams/viteee' },
-        { title: 'UPESEAT- B.Tech', href: '/exams/upeseat' },
-        { title: 'AEEE Exam', href: '/exams/aeee' },
-        { title: 'MHT CET', href: '/exams/mht-cet' },
-        { title: 'View All Engineering Exams', href: '/exams?level=Engineering', isLink: true }
+        { title: 'JEE Main Exam', href: '/tools/exams/jee-main' },
+        { title: 'BITSAT Exam', href: '/tools/exams/bitsat' },
+        { title: 'JEE Advanced Exam', href: '/tools/exams/jee-advanced' },
+        { title: 'VITEEE Exam', href: '/tools/exams/viteee' },
+        { title: 'UPESEAT- B.Tech', href: '/tools/exams/upeseat' },
+        { title: 'AEEE Exam', href: '/tools/exams/aeee' },
+        { title: 'MHT CET', href: '/tools/exams/mht-cet' },
+        { title: 'View All Engineering Exams', href: '/tools/exams?level=Engineering', isLink: true }
       ],
       colleges: [
-        { title: 'Colleges Accepting B.Tech Applications', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&course=B.Tech' },
-        { title: 'Top Engineering Colleges in India', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
-        { title: 'Engineering Colleges Accepting JEE Main', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&branch=Engineering&exam=JEE Main' },
-        { title: 'Top IITs in India', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&search=IIT' },
-        { title: 'Top NITs in India', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&search=NIT' }
+        { title: 'Colleges Accepting B.Tech Applications', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture&course=B.Tech' },
+        { title: 'Top Engineering Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
+        { title: 'Engineering Colleges Accepting JEE Main', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture&branch=Engineering&exam=JEE Main' },
+        { title: 'Top IITs in India', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture&search=IIT' },
+        { title: 'Top NITs in India', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture&search=NIT' }
       ],
       predictors: [
-        { title: 'JEE Main College Predictor', href: '/jee-main-predictor' },
-        { title: 'JEE Main Rank Predictor', href: '/jee-rank-predictor' },
+        { title: 'JEE Main College Predictor', href: '/predictors/jee-main-predictor' },
+        { title: 'JEE Main Rank Predictor', href: '/predictors/jee-rank-predictor' },
         { title: 'MHT CET College Predictor', href: '#' },
         { title: 'AP EAMCET College Predictor', href: '#' },
         { title: 'GATE College Predictor', href: '#' },
@@ -303,16 +264,16 @@ export const browseByStreamData = [
         { title: 'View All College Predictors', href: '#', isLink: true }
       ],
       resources: [
-        { title: 'JEE Main Admit Card 2026', href: '/news/jee-main-admit-card-2026' },
-        { title: 'JEE Main Cutoff', href: '/exams/jee-main?tab=cutoffs' },
-        { title: 'GATE Admit Card 2026', href: '/news/gate-admit-card-2026' },
-        { title: 'JEE Main Syllabus 2026', href: '/exams/jee-main?tab=syllabus' },
-        { title: 'Compare Colleges', href: '/compare-colleges' },
-        { title: 'B.Tech College Applications', href: '/colleges?degree=B.E /B.Tech' },
-        { title: 'JEE Main Question Papers', href: '/exams/jee-main?tab=previous-papers' },
+        { title: 'JEE Main Admit Card 2026', href: '/tools/news/jee-main-admit-card-2026' },
+        { title: 'JEE Main Cutoff', href: '/tools/exams/jee-main?tab=cutoffs' },
+        { title: 'GATE Admit Card 2026', href: '/tools/news/gate-admit-card-2026' },
+        { title: 'JEE Main Syllabus 2026', href: '/tools/exams/jee-main?tab=syllabus' },
+        { title: 'Compare Colleges', href: '/tools/compare-colleges' },
+        { title: 'B.Tech College Applications', href: '/tools/colleges?degree=B.E /B.Tech' },
+        { title: 'JEE Main Question Papers', href: '/tools/exams/jee-main?tab=previous-papers' },
         /* Added News Items */
-        { title: 'JEE Main 2026 Exam Dates Announced', href: '/news/jee-main-dates-2026', isNew: true },
-        { title: 'Top Engineering Colleges Ranking 2026', href: '/news/engineering-rankings-2026', isNew: true }
+        { title: 'JEE Main 2026 Exam Dates Announced', href: '/tools/news/jee-main-dates-2026', isNew: true },
+        { title: 'Top Engineering Colleges Ranking 2026', href: '/tools/news/engineering-rankings-2026', isNew: true }
       ]
     }
   },
@@ -328,24 +289,24 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CAT Exam', href: '/exams/cat' },
-        { title: 'XAT Exam', href: '/exams/xat' },
-        { title: 'CMAT Exam', href: '/exams/cmat' },
-        { title: 'NMAT Exam', href: '/exams/nmat-by-gmac' },
-        { title: 'SNAP Exam', href: '/exams/snap' },
-        { title: 'MAT Exam', href: '/exams/mat' },
-        { title: 'IBSAT Exam', href: '/exams/ibsat' },
-        { title: 'View All Management Exams', href: '/exams?level=National', isLink: true }
+        { title: 'CAT Exam', href: '/tools/exams/cat' },
+        { title: 'XAT Exam', href: '/tools/exams/xat' },
+        { title: 'CMAT Exam', href: '/tools/exams/cmat' },
+        { title: 'NMAT Exam', href: '/tools/exams/nmat-by-gmac' },
+        { title: 'SNAP Exam', href: '/tools/exams/snap' },
+        { title: 'MAT Exam', href: '/tools/exams/mat' },
+        { title: 'IBSAT Exam', href: '/tools/exams/ibsat' },
+        { title: 'View All Management Exams', href: '/tools/exams?level=National', isLink: true }
       ],
       colleges: [
-        { title: 'Top MBA Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' },
-        { title: 'MBA College Admissions', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' },
-        { title: 'MBA Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' },
-        { title: 'Top IIMs Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&search=IIM' },
-        { title: 'Top Online MBA Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&type=Online' },
-        { title: 'Online MBA', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&type=Online' },
-        { title: 'MBA Colleges Accepting XAT Score', href: '/colleges?goal=Colleges&stream=Management And Business Administration&exam=XAT' },
-        { title: 'BBA Colleges in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&search=BBA' }
+        { title: 'Top MBA Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' },
+        { title: 'MBA College Admissions', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' },
+        { title: 'MBA Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' },
+        { title: 'Top IIMs Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&search=IIM' },
+        { title: 'Top Online MBA Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&type=Online' },
+        { title: 'Online MBA', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA&type=Online' },
+        { title: 'MBA Colleges Accepting XAT Score', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&exam=XAT' },
+        { title: 'BBA Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&search=BBA' }
       ],
       predictors: [
         { title: 'XAT College Predictor 2026', href: '#' },
@@ -358,12 +319,12 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       resources: [
-        { title: 'Top MBA Entrance Exams in India', href: '/exams?level=National' },
-        { title: 'CAT Result 2025', href: '/news/cat-result-2025' },
-        { title: 'IBSAT Mock Test', href: '/exams/ibsat?tab=mock-test' },
-        { title: 'IIM Fees Structure', href: '/colleges?search=IIM' },
-        { title: 'MBA Colleges Ranking 2025', href: '/news/mba-rankings-2025', isNew: true },
-        { title: 'CAT 2025 Registration Starts', href: '/news/cat-registration-2025', isNew: true }
+        { title: 'Top MBA Entrance Exams in India', href: '/tools/exams?level=National' },
+        { title: 'CAT Result 2025', href: '/tools/news/cat-result-2025' },
+        { title: 'IBSAT Mock Test', href: '/tools/exams/ibsat?tab=mock-test' },
+        { title: 'IIM Fees Structure', href: '/tools/colleges?search=IIM' },
+        { title: 'MBA Colleges Ranking 2025', href: '/tools/news/mba-rankings-2025', isNew: true },
+        { title: 'CAT 2025 Registration Starts', href: '/tools/news/cat-registration-2025', isNew: true }
       ]
     }
   },
@@ -374,26 +335,26 @@ export const browseByStreamData = [
     titles: { col1: 'Exams', col2: 'Colleges', col3_1: 'Predictors', col3_2: 'News & Resources' },
     content: {
       exams: [
-        { title: 'NEET UG', href: '/exams/neet-ug' },
-        { title: 'NEET PG', href: '/exams/neet-pg' },
-        { title: 'AIIMS Nursing', href: '/exams/aiims-bsc-nursing' },
-        { title: 'NEET MDS', href: '/exams/neet-mds' },
-        { title: 'INI CET', href: '/exams/ini-cet' },
-        { title: 'FMGE', href: '/exams/fmge' },
-        { title: 'AIAPGET', href: '/exams/aiapget' },
-        { title: 'View All Medicine Exams', href: '/exams?level=Medical', isLink: true }
+        { title: 'NEET UG', href: '/tools/exams/neet-ug' },
+        { title: 'NEET PG', href: '/tools/exams/neet-pg' },
+        { title: 'AIIMS Nursing', href: '/tools/exams/aiims-bsc-nursing' },
+        { title: 'NEET MDS', href: '/tools/exams/neet-mds' },
+        { title: 'INI CET', href: '/tools/exams/ini-cet' },
+        { title: 'FMGE', href: '/tools/exams/fmge' },
+        { title: 'AIAPGET', href: '/tools/exams/aiapget' },
+        { title: 'View All Medicine Exams', href: '/tools/exams?level=Medical', isLink: true }
       ],
       colleges: [
-        { title: 'Top Medical Colleges in India', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
-        { title: 'Top Medical Colleges in India accepting NEET Score', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
-        { title: 'Medical Colleges accepting NEET', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
-        { title: 'List of Medical Colleges in India', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
-        { title: 'List of AIIMS Colleges in India', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences&search=AIIMS' },
-        { title: 'Medical Colleges in Maharashtra', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences&state=Maharashtra' },
-        { title: 'Medical Colleges in India Accepting NEET PG', href: '/colleges?goal=Colleges&stream=Medicine And Allied Sciences' }
+        { title: 'Top Medical Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'Top Medical Colleges in India accepting NEET Score', href: '/tools/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'Medical Colleges accepting NEET', href: '/tools/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'List of Medical Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Medicine And Allied Sciences' },
+        { title: 'List of AIIMS Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Medicine And Allied Sciences&search=AIIMS' },
+        { title: 'Medical Colleges in Maharashtra', href: '/tools/colleges?goal=Colleges&stream=Medicine And Allied Sciences&state=Maharashtra' },
+        { title: 'Medical Colleges in India Accepting NEET PG', href: '/tools/colleges?goal=Colleges&stream=Medicine And Allied Sciences' }
       ],
       predictors: [
-        { title: 'NEET College Predictor', href: '/neet-predictor' },
+        { title: 'NEET College Predictor', href: '/predictors/neet-predictor' },
         { title: 'NEET PG College Predictor', href: '#' },
         { title: 'NEET MDS College Predictor', href: '#' },
         { title: 'NEET Rank Predictor', href: '#' },
@@ -401,12 +362,12 @@ export const browseByStreamData = [
         { title: 'View All', href: '#', isLink: true }
       ],
       resources: [
-        { title: 'NEET Syllabus 2026', href: '/exams/neet-ug?tab=syllabus' },
-        { title: 'NEET Exam Date 2026', href: '/news/neet-dates-2026' },
-        { title: 'NEET Cut off', href: '/exams/neet-ug?tab=cutoffs' },
-        { title: 'NEET Counselling 2025', href: '/news/neet-counselling-2025' },
-        { title: 'Top Medical Colleges Ranking', href: '/news/medical-rankings-2025', isNew: true },
-        { title: 'NEET UG 2026 Application', href: '/news/neet-application-2026', isNew: true }
+        { title: 'NEET Syllabus 2026', href: '/tools/exams/neet-ug?tab=syllabus' },
+        { title: 'NEET Exam Date 2026', href: '/tools/news/neet-dates-2026' },
+        { title: 'NEET Cut off', href: '/tools/exams/neet-ug?tab=cutoffs' },
+        { title: 'NEET Counselling 2025', href: '/tools/news/neet-counselling-2025' },
+        { title: 'Top Medical Colleges Ranking', href: '/tools/news/medical-rankings-2025', isNew: true },
+        { title: 'NEET UG 2026 Application', href: '/tools/news/neet-application-2026', isNew: true }
       ]
     }
   },
@@ -422,24 +383,24 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CLAT', href: '/exams/clat' },
-        { title: 'AILET', href: '/exams/ailet' },
-        { title: 'SLAT', href: '/exams/slat' },
-        { title: 'AP LAWCET', href: '/exams/ap-lawcet' },
-        { title: 'MH CET Law', href: '/exams/mh-cet-law' },
-        { title: 'AIBE', href: '/exams/aibe' },
-        { title: 'ULSAT-LLB', href: '/exams/ulsat-llb' },
-        { title: 'View All', href: '/exams?level=Law', isLink: true }
+        { title: 'CLAT', href: '/tools/exams/clat' },
+        { title: 'AILET', href: '/tools/exams/ailet' },
+        { title: 'SLAT', href: '/tools/exams/slat' },
+        { title: 'AP LAWCET', href: '/tools/exams/ap-lawcet' },
+        { title: 'MH CET Law', href: '/tools/exams/mh-cet-law' },
+        { title: 'AIBE', href: '/tools/exams/aibe' },
+        { title: 'ULSAT-LLB', href: '/tools/exams/ulsat-llb' },
+        { title: 'View All', href: '/tools/exams?level=Law', isLink: true }
       ],
       colleges: [
-        { title: 'Colleges Accepting Admissions', href: '/colleges?goal=Colleges&stream=Law' },
-        { title: 'Top Law Colleges in India', href: '/colleges?goal=Colleges&stream=Law' },
-        { title: 'Law College Accepting CLAT Score', href: '/colleges?goal=Colleges&stream=Law&search=CLAT' },
-        { title: 'List of Law Colleges in India', href: '/colleges?goal=Colleges&stream=Law' },
-        { title: 'Top Law Colleges in Delhi', href: '/colleges?goal=Colleges&stream=Law&state=Delhi' },
-        { title: 'Top NLUs Colleges in India', href: '/colleges?goal=Colleges&stream=Law&search=NLU' },
-        { title: 'Top Law Colleges in Chandigarh', href: '/colleges?goal=Colleges&stream=Law&search=Chandigarh' },
-        { title: 'Top Law Colleges in Lucknow', href: '/colleges?goal=Colleges&stream=Law&search=Lucknow' }
+        { title: 'Colleges Accepting Admissions', href: '/tools/colleges?goal=Colleges&stream=Law' },
+        { title: 'Top Law Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Law' },
+        { title: 'Law College Accepting CLAT Score', href: '/tools/colleges?goal=Colleges&stream=Law&search=CLAT' },
+        { title: 'List of Law Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Law' },
+        { title: 'Top Law Colleges in Delhi', href: '/tools/colleges?goal=Colleges&stream=Law&state=Delhi' },
+        { title: 'Top NLUs Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Law&search=NLU' },
+        { title: 'Top Law Colleges in Chandigarh', href: '/tools/colleges?goal=Colleges&stream=Law&search=Chandigarh' },
+        { title: 'Top Law Colleges in Lucknow', href: '/tools/colleges?goal=Colleges&stream=Law&search=Lucknow' }
       ],
       predictors: [
         { title: 'CLAT College Predictor', href: '#' },
@@ -450,11 +411,11 @@ export const browseByStreamData = [
         { title: 'CLAT Rank Predictor', href: '#' }
       ],
       resources: [
-        { title: 'Compare Law Colleges', href: '/compare-colleges' },
-        { title: 'CLAT Syllabus', href: '/exams/clat?tab=syllabus' },
-        { title: 'Free CLAT Practice Test', href: '/exams/clat?tab=mock-test' },
-        { title: 'CLAT 2026 Notification Out', href: '/news/clat-notification-2026', isNew: true },
-        { title: 'Top Law Colleges Ranking', href: '/news/law-rankings-2025', isNew: true }
+        { title: 'Compare Law Colleges', href: '/tools/compare-colleges' },
+        { title: 'CLAT Syllabus', href: '/tools/exams/clat?tab=syllabus' },
+        { title: 'Free CLAT Practice Test', href: '/tools/exams/clat?tab=mock-test' },
+        { title: 'CLAT 2026 Notification Out', href: '/tools/news/clat-notification-2026', isNew: true },
+        { title: 'Top Law Colleges Ranking', href: '/tools/news/law-rankings-2025', isNew: true }
       ]
     }
   },
@@ -470,24 +431,24 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'NIFT 2026', href: '/exams/nift' },
-        { title: 'UCEED Exam', href: '/exams/uceed' },
-        { title: 'NID DAT Exam', href: '/exams/nid-dat' },
-        { title: 'JNAFAU FADEE Exam', href: '/exams/jnafau-fadee' },
-        { title: 'CEED Exam', href: '/exams/ceed' },
-        { title: 'FDDI AIST Exam', href: '/exams/fddi-aist' },
-        { title: 'MITID DAT Exam', href: '/exams/mitid-dat' },
-        { title: 'View All', href: '/exams?level=Design', isLink: true }
+        { title: 'NIFT 2026', href: '/tools/exams/nift' },
+        { title: 'UCEED Exam', href: '/tools/exams/uceed' },
+        { title: 'NID DAT Exam', href: '/tools/exams/nid-dat' },
+        { title: 'JNAFAU FADEE Exam', href: '/tools/exams/jnafau-fadee' },
+        { title: 'CEED Exam', href: '/tools/exams/ceed' },
+        { title: 'FDDI AIST Exam', href: '/tools/exams/fddi-aist' },
+        { title: 'MITID DAT Exam', href: '/tools/exams/mitid-dat' },
+        { title: 'View All', href: '/tools/exams?level=Design', isLink: true }
       ],
       colleges: [
-        { title: 'Design Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design' },
-        { title: 'Top Design Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design' },
-        { title: 'Top NIFT Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design&search=NIFT' },
-        { title: 'Fashion Design Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design&search=Fashion' },
-        { title: 'Top Interior Design Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design&search=Interior' },
-        { title: 'Top Graphic Designing Colleges in India', href: '/colleges?goal=Colleges&stream=Animation And Design&search=Graphic' },
-        { title: 'Fashion Design Colleges in Delhi', href: '/colleges?goal=Colleges&stream=Animation And Design&state=Delhi' },
-        { title: 'Fashion Design Colleges in Mumbai', href: '/colleges?goal=Colleges&stream=Animation And Design&search=Mumbai' }
+        { title: 'Design Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Animation And Design' },
+        { title: 'Top Design Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Animation And Design' },
+        { title: 'Top NIFT Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Animation And Design&search=NIFT' },
+        { title: 'Fashion Design Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Animation And Design&search=Fashion' },
+        { title: 'Top Interior Design Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Animation And Design&search=Interior' },
+        { title: 'Top Graphic Designing Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Animation And Design&search=Graphic' },
+        { title: 'Fashion Design Colleges in Delhi', href: '/tools/colleges?goal=Colleges&stream=Animation And Design&state=Delhi' },
+        { title: 'Fashion Design Colleges in Mumbai', href: '/tools/colleges?goal=Colleges&stream=Animation And Design&search=Mumbai' }
       ],
       predictors: [
         { title: 'NIFT College Predictor', href: '#' },
@@ -500,11 +461,11 @@ export const browseByStreamData = [
         { title: 'NID DAT Question Papers', href: '#' }
       ],
       resources: [
-        { title: 'NIFT Cutoff 2025', href: '/exams/nift?tab=cutoffs' },
+        { title: 'NIFT Cutoff 2025', href: '/tools/exams/nift?tab=cutoffs' },
         { title: 'NID Cutoff 2025', href: '#' },
         { title: 'NIFT Fees Structure', href: '#' },
-        { title: 'Design Colleges Ranking 2026', href: '/news/design-rankings-2026', isNew: true },
-        { title: 'NIFT 2026 Application', href: '/news/nift-application-2026', isNew: true }
+        { title: 'Design Colleges Ranking 2026', href: '/tools/news/design-rankings-2026', isNew: true },
+        { title: 'NIFT 2026 Application', href: '/tools/news/nift-application-2026', isNew: true }
       ]
     }
   },
@@ -519,23 +480,23 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'IIMC Entrance Exam 2025', href: '/exams/iimc' },
-        { title: 'NPAT 2025', href: '/exams/npat' },
-        { title: 'View All', href: '/exams?level=Media', isLink: true }
+        { title: 'IIMC Entrance Exam 2025', href: '/tools/exams/iimc' },
+        { title: 'NPAT 2025', href: '/tools/exams/npat' },
+        { title: 'View All', href: '/tools/exams?level=Media', isLink: true }
       ],
       colleges: [
-        { title: 'Compare Colleges', href: '/compare-colleges' },
-        { title: 'Media & Journalism colleges in Delhi', href: '/colleges?goal=Colleges&stream=Arts And Humanities&state=Delhi&search=Media' },
-        { title: 'Media & Journalism colleges in Bangalore', href: '/colleges?goal=Colleges&stream=Arts And Humanities&search=Bangalore Media' },
-        { title: 'Media & Journalism colleges in Mumbai', href: '/colleges?goal=Colleges&stream=Arts And Humanities&search=Mumbai Media' },
-        { title: 'Colleges Accepting Admissions', href: '/colleges?goal=Colleges&stream=Arts And Humanities' },
-        { title: 'List of Media & Journalism Colleges in India', href: '/colleges?goal=Colleges&stream=Arts And Humanities&search=Media Journalism' },
-        { title: 'View All', href: '/colleges?goal=Colleges&stream=Arts And Humanities', isLink: true }
+        { title: 'Compare Colleges', href: '/tools/compare-colleges' },
+        { title: 'Media & Journalism colleges in Delhi', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities&state=Delhi&search=Media' },
+        { title: 'Media & Journalism colleges in Bangalore', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Bangalore Media' },
+        { title: 'Media & Journalism colleges in Mumbai', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Mumbai Media' },
+        { title: 'Colleges Accepting Admissions', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities' },
+        { title: 'List of Media & Journalism Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Media Journalism' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities', isLink: true }
       ],
       predictors: [ /* Content placed here to appear under the top header of col 3 */
-        { title: 'Compare Colleges', href: '/compare-colleges' },
-        { title: 'IIMC Entrance Exam Date', href: '/news/iimc-exam-date', isNew: true },
-        { title: 'Top Journalism Colleges Ranking', href: '/news/media-rankings-2025', isNew: true }
+        { title: 'Compare Colleges', href: '/tools/compare-colleges' },
+        { title: 'IIMC Entrance Exam Date', href: '/tools/news/iimc-exam-date', isNew: true },
+        { title: 'Top Journalism Colleges Ranking', href: '/tools/news/media-rankings-2025', isNew: true }
       ],
       resources: [] /* Empty second list */
     }
@@ -551,20 +512,20 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CA Intermediate', href: '/exams/ca-intermediate' },
-        { title: 'CA Foundation', href: '/exams/ca-foundation' },
-        { title: 'CA Final', href: '/exams/ca-final' },
-        { title: 'CS Executive', href: '/exams/cs-executive' },
-        { title: 'CS Professional', href: '/exams/cs-professional' },
-        { title: 'CFA Exam', href: '/exams/cfa' },
-        { title: 'CSEET', href: '/exams/cseet' },
-        { title: 'ACET', href: '/exams/acet' }
+        { title: 'CA Intermediate', href: '/tools/exams/ca-intermediate' },
+        { title: 'CA Foundation', href: '/tools/exams/ca-foundation' },
+        { title: 'CA Final', href: '/tools/exams/ca-final' },
+        { title: 'CS Executive', href: '/tools/exams/cs-executive' },
+        { title: 'CS Professional', href: '/tools/exams/cs-professional' },
+        { title: 'CFA Exam', href: '/tools/exams/cfa' },
+        { title: 'CSEET', href: '/tools/exams/cseet' },
+        { title: 'ACET', href: '/tools/exams/acet' }
       ],
       colleges: [
         { title: 'Difference between CA and CS', href: '#' },
         { title: 'Difference between CA and CMA', href: '#' },
-        { title: 'CA Exam Dates 2025', href: '/news/ca-exam-dates-2025', isNew: true },
-        { title: 'CS Executive Time Table', href: '/news/cs-time-table', isNew: true }
+        { title: 'CA Exam Dates 2025', href: '/tools/news/ca-exam-dates-2025', isNew: true },
+        { title: 'CS Executive Time Table', href: '/tools/news/cs-time-table', isNew: true }
       ],
       predictors: [
         { title: 'Bachelor of Commerce (B.Com)', href: '#' },
@@ -576,12 +537,12 @@ export const browseByStreamData = [
         { title: 'Financial Advisor', href: '#' }
       ],
       resources: [
-        { title: 'Top Commerce Colleges in India', href: '/colleges?goal=Colleges&stream=Commerce' },
-        { title: 'Top Government Commerce Colleges in India', href: '/colleges?goal=Colleges&stream=Commerce&type=Government' },
-        { title: 'Top Private Commerce Colleges in India', href: '/colleges?goal=Colleges&stream=Commerce&type=Private' },
-        { title: 'Top M.Com Colleges in Mumbai', href: '/colleges?goal=Colleges&stream=Commerce&degree=M.Com&search=Mumbai' },
-        { title: 'Top B.Com Colleges in India', href: '/colleges?goal=Colleges&stream=Commerce&degree=B.Com' },
-        { title: 'View All', href: '/colleges?goal=Colleges&stream=Commerce', isLink: true }
+        { title: 'Top Commerce Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Commerce' },
+        { title: 'Top Government Commerce Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Commerce&type=Government' },
+        { title: 'Top Private Commerce Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Commerce&type=Private' },
+        { title: 'Top M.Com Colleges in Mumbai', href: '/tools/colleges?goal=Colleges&stream=Commerce&degree=M.Com&search=Mumbai' },
+        { title: 'Top B.Com Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Commerce&degree=B.Com' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges&stream=Commerce', isLink: true }
       ]
     }
   },
@@ -596,28 +557,28 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'NIMCET', href: '/exams/nimcet' },
-        { title: 'CUET-PG (MCA)', href: '/exams/cuet-pg-mca' },
-        { title: 'MAH MCA CET', href: '/exams/mah-mca-cet' },
-        { title: 'IPU CET (MCA)', href: '/exams/ipu-cet-mca' },
-        { title: 'VITMEE', href: '/exams/vitmee' },
-        { title: 'WB JECA', href: '/exams/wb-jeca' },
-        { title: 'TANCET (MCA)', href: '/exams/tancet-mca' },
-        { title: 'View All', href: '/exams?level=Computer Application and IT', isLink: true }
+        { title: 'NIMCET', href: '/tools/exams/nimcet' },
+        { title: 'CUET-PG (MCA)', href: '/tools/exams/cuet-pg-mca' },
+        { title: 'MAH MCA CET', href: '/tools/exams/mah-mca-cet' },
+        { title: 'IPU CET (MCA)', href: '/tools/exams/ipu-cet-mca' },
+        { title: 'VITMEE', href: '/tools/exams/vitmee' },
+        { title: 'WB JECA', href: '/tools/exams/wb-jeca' },
+        { title: 'TANCET (MCA)', href: '/tools/exams/tancet-mca' },
+        { title: 'View All', href: '/tools/exams?level=Computer Application and IT', isLink: true }
       ],
       colleges: [
-        { title: 'Compare Colleges', href: '/compare-colleges' },
-        { title: 'IT Colleges in Tamil Nadu', href: '/colleges?goal=Colleges&stream=Science&state=Tamil Nadu&search=IT' },
-        { title: 'IT Colleges in Uttar Pradesh', href: '/colleges?goal=Colleges&stream=Science&state=Uttar Pradesh&search=IT' },
-        { title: 'Colleges Accepting Admissions', href: '/colleges?goal=Colleges&stream=Science' },
-        { title: 'MCA Colleges in India', href: '/colleges?goal=Colleges&stream=Science&search=MCA' },
-        { title: 'BCA Colleges in India', href: '/colleges?goal=Colleges&stream=Science&search=BCA' },
-        { title: 'View All', href: '/colleges?goal=Colleges&stream=Science', isLink: true }
+        { title: 'Compare Colleges', href: '/tools/compare-colleges' },
+        { title: 'IT Colleges in Tamil Nadu', href: '/tools/colleges?goal=Colleges&stream=Science&state=Tamil Nadu&search=IT' },
+        { title: 'IT Colleges in Uttar Pradesh', href: '/tools/colleges?goal=Colleges&stream=Science&state=Uttar Pradesh&search=IT' },
+        { title: 'Colleges Accepting Admissions', href: '/tools/colleges?goal=Colleges&stream=Science' },
+        { title: 'MCA Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Science&search=MCA' },
+        { title: 'BCA Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Science&search=BCA' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges&stream=Science', isLink: true }
       ],
       predictors: [
-        { title: 'NIMCET 2025 Notification', href: '/news/nimcet-notification-2025', isNew: true },
-        { title: 'Top MCA Colleges Ranking', href: '/news/mca-rankings-2025', isNew: true },
-        { title: 'BCA Course Details', href: '/courses/bachelor-of-computer-applications' }
+        { title: 'NIMCET 2025 Notification', href: '/tools/news/nimcet-notification-2025', isNew: true },
+        { title: 'Top MCA Colleges Ranking', href: '/tools/news/mca-rankings-2025', isNew: true },
+        { title: 'BCA Course Details', href: '/tools/courses/bachelor-of-computer-applications' }
       ],
       resources: [
         { title: 'MCA', href: '#' },
@@ -643,27 +604,27 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'GPAT', href: '/exams/gpat' },
-        { title: 'RUHS Pharmacy Admission Test', href: '/exams/ruhs-pharmacy-admission-test' },
-        { title: 'KAHER-AIET', href: '/exams/kaher-aiet' },
-        { title: 'NIPER JEE', href: '/exams/niper-jee' },
-        { title: 'UPESPAT', href: '/exams/upespat' },
-        { title: 'View All', href: '/exams?category=Pharmacy', isLink: true }
+        { title: 'GPAT', href: '/tools/exams/gpat' },
+        { title: 'RUHS Pharmacy Admission Test', href: '/tools/exams/ruhs-pharmacy-admission-test' },
+        { title: 'KAHER-AIET', href: '/tools/exams/kaher-aiet' },
+        { title: 'NIPER JEE', href: '/tools/exams/niper-jee' },
+        { title: 'UPESPAT', href: '/tools/exams/upespat' },
+        { title: 'View All', href: '/tools/exams?category=Pharmacy', isLink: true }
       ],
       colleges: [
-        { title: 'Top Pharmacy Colleges in India', href: '/colleges?goal=Colleges&stream=Pharmacy' },
-        { title: 'Pharmacy Colleges in Pune', href: '/colleges?goal=Colleges&stream=Pharmacy&search=Pune' },
-        { title: 'Pharmacy Colleges in Mumbai', href: '/colleges?goal=Colleges&stream=Pharmacy&search=Mumbai' },
-        { title: 'Colleges Accepting GPAT Score', href: '/colleges?goal=Colleges&stream=Pharmacy&exam=GPAT' },
-        { title: 'Pharmacy Colleges in Lucknow', href: '/colleges?goal=Colleges&stream=Pharmacy&search=Lucknow' },
-        { title: 'List of Pharmacy Colleges in Nagpur', href: '/colleges?goal=Colleges&stream=Pharmacy&search=Nagpur' },
-        { title: 'View All', href: '/colleges?goal=Colleges&stream=Pharmacy', isLink: true }
+        { title: 'Top Pharmacy Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Pharmacy' },
+        { title: 'Pharmacy Colleges in Pune', href: '/tools/colleges?goal=Colleges&stream=Pharmacy&search=Pune' },
+        { title: 'Pharmacy Colleges in Mumbai', href: '/tools/colleges?goal=Colleges&stream=Pharmacy&search=Mumbai' },
+        { title: 'Colleges Accepting GPAT Score', href: '/tools/colleges?goal=Colleges&stream=Pharmacy&exam=GPAT' },
+        { title: 'Pharmacy Colleges in Lucknow', href: '/tools/colleges?goal=Colleges&stream=Pharmacy&search=Lucknow' },
+        { title: 'List of Pharmacy Colleges in Nagpur', href: '/tools/colleges?goal=Colleges&stream=Pharmacy&search=Nagpur' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges&stream=Pharmacy', isLink: true }
       ],
       predictors: [
-        { title: 'GPAT Result', href: '/exams/gpat?tab=results' },
-        { title: 'GPAT 2025 Admit Card', href: '/news/gpat-admit-card-2025', isNew: true },
-        { title: 'Top Pharmacy Colleges', href: '/colleges?goal=Colleges&stream=Pharmacy&nirfCategory=Pharmacy', isNew: true },
-        { title: 'B. Pharma Course', href: '/courses/bachelor-of-pharmacy' }
+        { title: 'GPAT Result', href: '/tools/exams/gpat?tab=results' },
+        { title: 'GPAT 2025 Admit Card', href: '/tools/news/gpat-admit-card-2025', isNew: true },
+        { title: 'Top Pharmacy Colleges', href: '/tools/colleges?goal=Colleges&stream=Pharmacy&nirfCategory=Pharmacy', isNew: true },
+        { title: 'B. Pharma Course', href: '/tools/courses/bachelor-of-pharmacy' }
       ],
       resources: []
     }
@@ -682,25 +643,25 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'NCHMCT JEE 2025', href: '/exams/nchmct-jee-2025' },
-        { title: 'Mah BHMCT CET', href: '/exams/mah-bhmct-cet' },
-        { title: 'MAH HM CET', href: '/exams/mah-hm-cet' },
-        { title: 'PUTHAT', href: '/exams/puthat' },
-        { title: 'IHM-A', href: '/exams/ihm-a' },
-        { title: 'View All', href: '/exams?category=Hospitality%20and%20Tourism', isLink: true }
+        { title: 'NCHMCT JEE 2025', href: '/tools/exams/nchmct-jee-2025' },
+        { title: 'Mah BHMCT CET', href: '/tools/exams/mah-bhmct-cet' },
+        { title: 'MAH HM CET', href: '/tools/exams/mah-hm-cet' },
+        { title: 'PUTHAT', href: '/tools/exams/puthat' },
+        { title: 'IHM-A', href: '/tools/exams/ihm-a' },
+        { title: 'View All', href: '/tools/exams?category=Hospitality%20and%20Tourism', isLink: true }
       ],
       colleges: [
-        { title: 'Top Hotel Management Colleges in Delhi', href: '/colleges?goal=Colleges&state=Delhi&search=Hotel Management' },
-        { title: 'Top Hotel Management Colleges in Hyderabad', href: '/colleges?goal=Colleges&search=Hotel Management Hyderabad' },
-        { title: 'Top Hotel Management Colleges in Mumbai', href: '/colleges?goal=Colleges&search=Hotel Management Mumbai' },
-        { title: 'Top Hotel Management Colleges in Tamil Nadu', href: '/colleges?goal=Colleges&state=Tamil Nadu&search=Hotel Management' },
-        { title: 'Top Hotel Management Colleges in Maharashtra', href: '/colleges?goal=Colleges&state=Maharashtra&search=Hotel Management' },
-        { title: 'View All', href: '/colleges?goal=Colleges&search=Hotel Management', isLink: true }
+        { title: 'Top Hotel Management Colleges in Delhi', href: '/tools/colleges?goal=Colleges&state=Delhi&search=Hotel Management' },
+        { title: 'Top Hotel Management Colleges in Hyderabad', href: '/tools/colleges?goal=Colleges&search=Hotel Management Hyderabad' },
+        { title: 'Top Hotel Management Colleges in Mumbai', href: '/tools/colleges?goal=Colleges&search=Hotel Management Mumbai' },
+        { title: 'Top Hotel Management Colleges in Tamil Nadu', href: '/tools/colleges?goal=Colleges&state=Tamil Nadu&search=Hotel Management' },
+        { title: 'Top Hotel Management Colleges in Maharashtra', href: '/tools/colleges?goal=Colleges&state=Maharashtra&search=Hotel Management' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges&search=Hotel Management', isLink: true }
       ],
       predictors: [
-        { title: 'NCHMCT JEE 2025 Date', href: '/news/nchmct-jee-date-2025', isNew: true },
-        { title: 'Top Hotel Management Colleges', href: '/colleges?course=BHM' },
-        { title: 'B.Sc Hotel Management', href: '/courses/bsc-hotel-management' }
+        { title: 'NCHMCT JEE 2025 Date', href: '/tools/news/nchmct-jee-date-2025', isNew: true },
+        { title: 'Top Hotel Management Colleges', href: '/tools/colleges?course=BHM' },
+        { title: 'B.Sc Hotel Management', href: '/tools/courses/bsc-hotel-management' }
       ],
       resources: [
         { title: 'Top Diploma Colleges in Maharashtra', href: '#' }
@@ -718,18 +679,18 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'NDA Exam', href: '/exams/nda-exam' },
-        { title: 'UPSC IAS Exam', href: '/exams/upsc-ias-exam' },
-        { title: 'CDS Exam', href: '/exams/cds-exam' },
-        { title: 'AFCAT Exam', href: '/exams/afcat-exam' },
-        { title: 'SSC CGL Exam', href: '/exams/ssc-cgl-exam' },
-        { title: 'IBPS RRB Exam', href: '/exams/ibps-rrb-exam' },
-        { title: 'CTET Exam', href: '/exams/ctet-exam' },
-        { title: 'View All', href: '/exams?category=Competition', isLink: true }
+        { title: 'NDA Exam', href: '/tools/exams/nda-exam' },
+        { title: 'UPSC IAS Exam', href: '/tools/exams/upsc-ias-exam' },
+        { title: 'CDS Exam', href: '/tools/exams/cds-exam' },
+        { title: 'AFCAT Exam', href: '/tools/exams/afcat-exam' },
+        { title: 'SSC CGL Exam', href: '/tools/exams/ssc-cgl-exam' },
+        { title: 'IBPS RRB Exam', href: '/tools/exams/ibps-rrb-exam' },
+        { title: 'CTET Exam', href: '/tools/exams/ctet-exam' },
+        { title: 'View All', href: '/tools/exams?category=Competition', isLink: true }
       ],
       colleges: [
-        { title: 'UPSC IAS Notification 2025', href: '/news/upsc-notification-2025', isNew: true },
-        { title: 'SSC CGL Exam Dates', href: '/news/ssc-dates-2025', isNew: true },
+        { title: 'UPSC IAS Notification 2025', href: '/tools/news/upsc-notification-2025', isNew: true },
+        { title: 'SSC CGL Exam Dates', href: '/tools/news/ssc-dates-2025', isNew: true },
         { title: 'Previous Year Sample Papers', href: '#' },
         { title: 'Sarkari Result', href: '#' }
       ],
@@ -766,27 +727,27 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CBSE Class 10th', href: '/exams/cbse-class-10th' },
-        { title: 'CBSE Class 12th', href: '/exams/cbse-class-12th' },
-        { title: 'UP Board 10th', href: '/exams/up-board-10th' },
-        { title: 'UP Board 12th', href: '/exams/up-board-12th' },
-        { title: 'Bihar Board 10th', href: '/exams/bihar-board-10th' },
-        { title: 'Bihar Board 12th', href: '/exams/bihar-board-12th' },
-        { title: 'View All', href: '/exams?category=School', isLink: true }
+        { title: 'CBSE Class 10th', href: '/tools/exams/cbse-class-10th' },
+        { title: 'CBSE Class 12th', href: '/tools/exams/cbse-class-12th' },
+        { title: 'UP Board 10th', href: '/tools/exams/up-board-10th' },
+        { title: 'UP Board 12th', href: '/tools/exams/up-board-12th' },
+        { title: 'Bihar Board 10th', href: '/tools/exams/bihar-board-10th' },
+        { title: 'Bihar Board 12th', href: '/tools/exams/bihar-board-12th' },
+        { title: 'View All', href: '/tools/exams?category=School', isLink: true }
       ],
       colleges: [
-        { title: 'Top Schools in India', href: '/colleges?goal=Colleges&search=School' },
-        { title: 'Top Schools in Delhi', href: '/colleges?goal=Colleges&state=Delhi&search=School' },
-        { title: 'Top Schools in Mumbai', href: '/colleges?goal=Colleges&search=School Mumbai' },
-        { title: 'Top Schools in Chennai', href: '/colleges?goal=Colleges&search=School Chennai' },
-        { title: 'Top Schools in Hyderabad', href: '/colleges?goal=Colleges&search=School Hyderabad' },
-        { title: 'Top Schools in Kolkata', href: '/colleges?goal=Colleges&search=School Kolkata' },
-        { title: 'Top Schools in Pune', href: '/colleges?goal=Colleges&search=School Pune' },
-        { title: 'Top Schools in Bangalore', href: '/colleges?goal=Colleges&search=School Bangalore' }
+        { title: 'Top Schools in India', href: '/tools/colleges?goal=Colleges&search=School' },
+        { title: 'Top Schools in Delhi', href: '/tools/colleges?goal=Colleges&state=Delhi&search=School' },
+        { title: 'Top Schools in Mumbai', href: '/tools/colleges?goal=Colleges&search=School Mumbai' },
+        { title: 'Top Schools in Chennai', href: '/tools/colleges?goal=Colleges&search=School Chennai' },
+        { title: 'Top Schools in Hyderabad', href: '/tools/colleges?goal=Colleges&search=School Hyderabad' },
+        { title: 'Top Schools in Kolkata', href: '/tools/colleges?goal=Colleges&search=School Kolkata' },
+        { title: 'Top Schools in Pune', href: '/tools/colleges?goal=Colleges&search=School Pune' },
+        { title: 'Top Schools in Bangalore', href: '/tools/colleges?goal=Colleges&search=School Bangalore' }
       ],
       predictors: [
-        { title: 'CBSE Date Sheet 2025', href: '/news/cbse-datesheet-2025', isNew: true },
-        { title: 'State Boards Results 2025', href: '/news/board-results-2025', isNew: true },
+        { title: 'CBSE Date Sheet 2025', href: '/tools/news/cbse-datesheet-2025', isNew: true },
+        { title: 'State Boards Results 2025', href: '/tools/news/board-results-2025', isNew: true },
         { title: 'RD Sharma Solutions', href: '#' }
       ],
       resources: [
@@ -812,24 +773,24 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'TOEFL', href: '/exams/toefl' },
-        { title: 'PTE', href: '/exams/pte' },
-        { title: 'IELTS', href: '/exams/ielts' },
-        { title: 'GMAT', href: '/exams/gmat' },
-        { title: 'GRE', href: '/exams/gre' },
-        { title: 'SAT', href: '/exams/sat' },
-        { title: 'LNAT UK', href: '/exams/lnat-uk' },
-        { title: 'View All', href: '/exams?category=Study%20Abroad', isLink: true }
+        { title: 'TOEFL', href: '/tools/exams/toefl' },
+        { title: 'PTE', href: '/tools/exams/pte' },
+        { title: 'IELTS', href: '/tools/exams/ielts' },
+        { title: 'GMAT', href: '/tools/exams/gmat' },
+        { title: 'GRE', href: '/tools/exams/gre' },
+        { title: 'SAT', href: '/tools/exams/sat' },
+        { title: 'LNAT UK', href: '/tools/exams/lnat-uk' },
+        { title: 'View All', href: '/tools/exams?category=Study%20Abroad', isLink: true }
       ],
       colleges: [
-        { title: 'Top University in USA', href: '/international-colleges?country=USA' },
-        { title: 'Top University in Canada', href: '/international-colleges?country=Canada' },
-        { title: 'Top University in Ireland', href: '/international-colleges?country=Ireland' },
-        { title: 'Top Universities in UK', href: '/international-colleges?country=UK' },
-        { title: 'Top Universities in Australia', href: '/international-colleges?country=Australia' },
-        { title: 'Best MBA Colleges in Abroad', href: '/international-colleges?search=MBA' },
-        { title: 'Business Management Studies Colleges', href: '/international-colleges?search=Business Management' },
-        { title: 'View All', href: '/international-colleges', isLink: true }
+        { title: 'Top University in USA', href: '/tools/international-colleges?country=USA' },
+        { title: 'Top University in Canada', href: '/tools/international-colleges?country=Canada' },
+        { title: 'Top University in Ireland', href: '/tools/international-colleges?country=Ireland' },
+        { title: 'Top Universities in UK', href: '/tools/international-colleges?country=UK' },
+        { title: 'Top Universities in Australia', href: '/tools/international-colleges?country=Australia' },
+        { title: 'Best MBA Colleges in Abroad', href: '/tools/international-colleges?search=MBA' },
+        { title: 'Business Management Studies Colleges', href: '/tools/international-colleges?search=Business Management' },
+        { title: 'View All', href: '/tools/international-colleges', isLink: true }
       ],
       predictors: [
         { title: 'Study in USA', href: '#' },
@@ -842,7 +803,7 @@ export const browseByStreamData = [
         { title: 'Study in Europe', href: '#' }
       ],
       resources: [
-        { title: 'New UK Visa Rules 2025', href: '/news/uk-visa-rules-2025', isNew: true },
+        { title: 'New UK Visa Rules 2025', href: '/tools/news/uk-visa-rules-2025', isNew: true },
         { title: 'Student Visa Guide USA', href: '#' },
         { title: 'IELTS Reading Practice', href: '#' }
       ]
@@ -860,20 +821,20 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CUET UG', href: '/exams/cuet-ug' },
-        { title: 'View All', href: '/exams?category=Arts', isLink: true }
+        { title: 'CUET UG', href: '/tools/exams/cuet-ug' },
+        { title: 'View All', href: '/tools/exams?category=Arts', isLink: true }
       ],
       colleges: [
-        { title: 'Top Arts Colleges in India', href: '/colleges?goal=Colleges&stream=Arts And Humanities' },
-        { title: 'Top BA Colleges', href: '/colleges?goal=Colleges&stream=Arts And Humanities&degree=BA' },
-        { title: 'Top MA Colleges', href: '/colleges?goal=Colleges&stream=Arts And Humanities&degree=MA' },
-        { title: 'Top Arts Colleges in Delhi', href: '/colleges?goal=Colleges&stream=Arts And Humanities&state=Delhi' },
-        { title: 'View All', href: '/colleges?goal=Colleges&stream=Arts And Humanities', isLink: true }
+        { title: 'Top Arts Colleges in India', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities' },
+        { title: 'Top BA Colleges', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities&degree=BA' },
+        { title: 'Top MA Colleges', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities&degree=MA' },
+        { title: 'Top Arts Colleges in Delhi', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities&state=Delhi' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges&stream=Arts And Humanities', isLink: true }
       ],
       predictors: [
         { title: 'DU Cut Off', href: '#' },
-        { title: 'Arts Ranking 2026', href: '/news/arts-rankings-2026', isNew: true },
-        { title: 'BA Economics Course', href: '/courses/ba-economics' }
+        { title: 'Arts Ranking 2026', href: '/tools/news/arts-rankings-2026', isNew: true },
+        { title: 'BA Economics Course', href: '/tools/courses/ba-economics' }
       ],
       resources: []
     }
@@ -890,22 +851,22 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'IIT JAM', href: '/exams/iit-jam' },
-        { title: 'NEST', href: '/exams/nest' },
-        { title: 'CUET PG (Science)', href: '/exams/cuet-pg' },
-        { title: 'View All', href: '/exams?category=Science', isLink: true }
+        { title: 'IIT JAM', href: '/tools/exams/iit-jam' },
+        { title: 'NEST', href: '/tools/exams/nest' },
+        { title: 'CUET PG (Science)', href: '/tools/exams/cuet-pg' },
+        { title: 'View All', href: '/tools/exams?category=Science', isLink: true }
       ],
       colleges: [
-        { title: 'Top Science Colleges', href: '/colleges?goal=Colleges&stream=Science' },
-        { title: 'Top B.Sc Colleges', href: '/colleges?goal=Colleges&stream=Science&degree=B.Sc' },
-        { title: 'Top M.Sc Colleges', href: '/colleges?goal=Colleges&stream=Science&degree=M.Sc' },
-        { title: 'Science Colleges in Bangalore', href: '/colleges?goal=Colleges&stream=Science&state=Karnataka' },
-        { title: 'View All', href: '/colleges?goal=Colleges&stream=Science', isLink: true }
+        { title: 'Top Science Colleges', href: '/tools/colleges?goal=Colleges&stream=Science' },
+        { title: 'Top B.Sc Colleges', href: '/tools/colleges?goal=Colleges&stream=Science&degree=B.Sc' },
+        { title: 'Top M.Sc Colleges', href: '/tools/colleges?goal=Colleges&stream=Science&degree=M.Sc' },
+        { title: 'Science Colleges in Bangalore', href: '/tools/colleges?goal=Colleges&stream=Science&state=Karnataka' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges&stream=Science', isLink: true }
       ],
       predictors: [
         { title: 'IIT JAM Syllabus', href: '#' },
-        { title: 'Science Ranking 2026', href: '/news/science-rankings-2026', isNew: true },
-        { title: 'B.Sc Physics', href: '/courses/bsc-physics' }
+        { title: 'Science Ranking 2026', href: '/tools/news/science-rankings-2026', isNew: true },
+        { title: 'B.Sc Physics', href: '/tools/courses/bsc-physics' }
       ],
       resources: []
     }
@@ -922,28 +883,28 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CTET', href: '/exams/ctet' },
-        { title: 'UGC NET', href: '/exams/ugc-net' },
-        { title: 'UP B.Ed JEE', href: '/exams/up-bed-jee' },
-        { title: 'MAH B.Ed CET', href: '/exams/mah-bed-cet' },
-        { title: 'View All', href: '/exams?category=Education', isLink: true }
+        { title: 'CTET', href: '/tools/exams/ctet' },
+        { title: 'UGC NET', href: '/tools/exams/ugc-net' },
+        { title: 'UP B.Ed JEE', href: '/tools/exams/up-bed-jee' },
+        { title: 'MAH B.Ed CET', href: '/tools/exams/mah-bed-cet' },
+        { title: 'View All', href: '/tools/exams?category=Education', isLink: true }
       ],
       colleges: [
-        { title: 'Top B.Ed Colleges', href: '/colleges?goal=Colleges&stream=Education&degree=B.Ed' },
-        { title: 'Top M.Ed Colleges', href: '/colleges?goal=Colleges&stream=Education&degree=M.Ed' },
-        { title: 'Colleges Accepting UP B.Ed JEE', href: '/colleges?goal=Colleges&stream=Education&exam=UP B.Ed JEE' },
-        { title: 'View All', href: '/colleges?goal=Colleges&stream=Education', isLink: true }
+        { title: 'Top B.Ed Colleges', href: '/tools/colleges?goal=Colleges&stream=Education&degree=B.Ed' },
+        { title: 'Top M.Ed Colleges', href: '/tools/colleges?goal=Colleges&stream=Education&degree=M.Ed' },
+        { title: 'Colleges Accepting UP B.Ed JEE', href: '/tools/colleges?goal=Colleges&stream=Education&exam=UP B.Ed JEE' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges&stream=Education', isLink: true }
       ],
       predictors: [
-        { title: 'CTET Notification 2026', href: '/news/ctet-notification-2026', isNew: true },
+        { title: 'CTET Notification 2026', href: '/tools/news/ctet-notification-2026', isNew: true },
         { title: 'UGC NET Results', href: '#' },
-        { title: 'B.Ed Course Details', href: '/courses/b-ed' }
+        { title: 'B.Ed Course Details', href: '/tools/courses/b-ed' }
       ],
       resources: []
     }
   },
   {
-    id: 'university',
+    id: 'universities-explore',
     label: 'Universities',
     link: '/universities',
     titles: {
@@ -954,20 +915,20 @@ export const browseByStreamData = [
     },
     content: {
       exams: [
-        { title: 'CUET UG', href: '/exams/cuet-ug' },
-        { title: 'CUET PG', href: '/exams/cuet-pg' },
-        { title: 'View All', href: '/exams?category=University', isLink: true }
+        { title: 'CUET UG', href: '/tools/exams/cuet-ug' },
+        { title: 'CUET PG', href: '/tools/exams/cuet-pg' },
+        { title: 'View All', href: '/tools/exams?category=University', isLink: true }
       ],
       colleges: [
-        { title: 'Top Central Universities', href: '/colleges?goal=Colleges&type=Central University' },
-        { title: 'Top State Universities', href: '/colleges?goal=Colleges&type=State University' },
-        { title: 'Deemed Universities', href: '/colleges?goal=Colleges&type=Deemed University' },
-        { title: 'Private Universities', href: '/colleges?goal=Colleges&type=Private University' },
-        { title: 'View All', href: '/colleges?goal=Colleges', isLink: true }
+        { title: 'Top Central Universities', href: '/tools/colleges?goal=Colleges&type=Central University' },
+        { title: 'Top State Universities', href: '/tools/colleges?goal=Colleges&type=State University' },
+        { title: 'Deemed Universities', href: '/tools/colleges?goal=Colleges&type=Deemed University' },
+        { title: 'Private Universities', href: '/tools/colleges?goal=Colleges&type=Private University' },
+        { title: 'View All', href: '/tools/colleges?goal=Colleges', isLink: true }
       ],
       predictors: [
         { title: 'CUET 2026', href: '#' },
-        { title: 'University Rankings 2026', href: '/news/university-rankings-2026', isNew: true }
+        { title: 'University Rankings 2026', href: '/tools/news/university-rankings-2026', isNew: true }
       ],
       resources: []
     }
@@ -1072,12 +1033,12 @@ export const examsData = [
         { title: 'BITSAT', href: '#' }
       ],
       colleges: [
-        { title: 'JEE Main 2026 Dates', href: '/exams/jee-main?tab=dates' },
-        { title: 'Application Process', href: '/exams/jee-main?tab=application' },
+        { title: 'JEE Main 2026 Dates', href: '/tools/exams/jee-main?tab=dates' },
+        { title: 'Application Process', href: '/tools/exams/jee-main?tab=application' },
         { title: 'Exam Centers', href: '#' }
       ],
       predictors: [
-        { title: 'Syllabus', href: '/exams/jee-main?tab=syllabus' },
+        { title: 'Syllabus', href: '/tools/exams/jee-main?tab=syllabus' },
         { title: 'Mock Tests', href: '#' },
         { title: 'Previous Papers', href: '#' }
       ],
@@ -1142,7 +1103,7 @@ export const coursesData = [
     titles: { col1: 'Bachelors', col2: 'Masters', col3_1: 'Doctoral', col3_2: 'Popular' },
     content: {
       exams: [
-        { title: 'B.Tech', href: '/courses/bachelor-of-technology-computer-science' },
+        { title: 'B.Tech', href: '/tools/courses/bachelor-of-technology-computer-science' },
         { title: 'B.Sc', href: '/courses?search=B.Sc' },
         { title: 'B.Com', href: '/courses?search=B.Com' },
         { title: 'B.A', href: '/courses?search=B.A' }
@@ -1150,7 +1111,7 @@ export const coursesData = [
       colleges: [
         { title: 'M.Tech', href: '/courses?search=M.Tech' },
         { title: 'M.Sc', href: '/courses?search=M.Sc' },
-        { title: 'MBA', href: '/courses/master-of-business-administration' },
+        { title: 'MBA', href: '/tools/courses/master-of-business-administration' },
         { title: 'M.A', href: '/courses?search=M.A' }
       ],
       predictors: [
@@ -1219,7 +1180,7 @@ export const predictorsData = [
     content: {
       exams: [
         { title: 'JEE Main College Predictor', href: '/jee-main-college-predictor' },
-        { title: 'JEE Main Rank Predictor', href: '/jee-rank-predictor' },
+        { title: 'JEE Main Rank Predictor', href: '/predictors/jee-rank-predictor' },
         { title: 'JEE Main B.Arch Predictor', href: '#' }
       ],
       colleges: [
@@ -1244,7 +1205,7 @@ export const predictorsData = [
     titles: { col1: 'NEET', col2: 'AIIMS', col3_1: 'State Quota', col3_2: 'Others' },
     content: {
       exams: [
-        { title: 'NEET College Predictor', href: '/neet-predictor' },
+        { title: 'NEET College Predictor', href: '/predictors/neet-predictor' },
         { title: 'NEET Rank Predictor', href: '/rank-predictor?exam=NEET' }
       ],
       colleges: [
@@ -1290,20 +1251,20 @@ export const rankingsData = [
     titles: { col1: 'NIRF Ranking', col2: 'CollegeDost Ranking', col3_1: 'By Placement', col3_2: 'International' },
     content: {
       exams: [
-        { title: 'Top Engineering Colleges (NIRF)', href: '/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
-        { title: 'Best Engineering Colleges India', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' }
+        { title: 'Top Engineering Colleges (NIRF)', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture&nirfCategory=Engineering' },
+        { title: 'Best Engineering Colleges India', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture' }
       ],
       colleges: [
-        { title: 'Top Rated Engineering Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' },
-        { title: 'AAA+ Rated Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' }
+        { title: 'Top Rated Engineering Colleges', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture' },
+        { title: 'AAA+ Rated Colleges', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture' }
       ],
       predictors: [
-        { title: 'Best Placement Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' },
-        { title: 'Best ROI Colleges', href: '/colleges?goal=Colleges&stream=Engineering And Architecture' }
+        { title: 'Best Placement Colleges', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture' },
+        { title: 'Best ROI Colleges', href: '/tools/colleges?goal=Colleges&stream=Engineering And Architecture' }
       ],
       resources: [
-        { title: 'QS World University Rankings', href: '/international-colleges' },
-        { title: 'THE World Rankings', href: '/international-colleges' }
+        { title: 'QS World University Rankings', href: '/tools/international-colleges' },
+        { title: 'THE World Rankings', href: '/tools/international-colleges' }
       ]
     }
   },
@@ -1333,17 +1294,17 @@ export const rankingsData = [
     titles: { col1: 'IIMs', col2: 'Private B-Schools', col3_1: 'Executive MBA', col3_2: 'Global' },
     content: {
       exams: [
-        { title: 'Top IIMs in India', href: '/colleges?goal=Colleges&stream=Management And Business Administration&search=IIM' },
-        { title: 'NIRF Management Ranking', href: '/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' }
+        { title: 'Top IIMs in India', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&search=IIM' },
+        { title: 'NIRF Management Ranking', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&nirfCategory=Management' }
       ],
       colleges: [
-        { title: 'Top Private MBA Colleges', href: '/colleges?goal=Colleges&stream=Management And Business Administration&type=Private&degree=MBA' }
+        { title: 'Top Private MBA Colleges', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&type=Private&degree=MBA' }
       ],
       predictors: [
-        { title: 'One Year MBA Ranking', href: '/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' }
+        { title: 'One Year MBA Ranking', href: '/tools/colleges?goal=Colleges&stream=Management And Business Administration&degree=MBA' }
       ],
       resources: [
-        { title: 'FT Global MBA Ranking', href: '/international-colleges' }
+        { title: 'FT Global MBA Ranking', href: '/tools/international-colleges' }
       ]
     }
   }
@@ -1427,9 +1388,9 @@ export const counsellingData = [
 
 export const navLinks = [
   { title: 'Browse by Stream', href: '#', hasDropdown: true },
-  { title: 'Colleges', href: '/colleges', hasDropdown: true },
+  { title: 'Colleges', href: '/tools/colleges', hasDropdown: true },
   { title: 'Exams', href: '#', hasDropdown: true },
-  { title: 'News', href: '/news', hasDropdown: false }
+  { title: 'News', href: '/tools/news', hasDropdown: false }
 ];
 
 export const heroTabs = [

@@ -11,7 +11,7 @@ import { browseByStreamData } from '@/data/navigation';
 const ComputerApplicationsPage = () => {
     const data = browseByStreamData.find(d => d.id === 'computer');
 
-    if (!data) return <div className="min-h-screen pt-24 text-center">Loading...</div>;
+    if (!data) return <div className="min-h-screen text-center">Loading...</div>;
 
     return (
         <>

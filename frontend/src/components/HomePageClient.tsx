@@ -34,9 +34,15 @@ const HomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch Colleges
-                const collegesRes = await api.get('/colleges');
-                if (collegesRes.data.success && collegesRes.data.data.length > 0) {
+                // Fetch Colleges with timeout
+                const collegesRes = await Promise.race<any>([
+                    api.get('/colleges'),
+                    new Promise((_, reject) => 
+                        setTimeout(() => reject(new Error('Request timeout')), 8000)
+                    )
+                ]);
+                
+                if (collegesRes?.data?.success && collegesRes?.data?.data?.length > 0) {
                     // Map to required format
                     const mappedColleges = collegesRes.data.data.slice(0, 8).map((col: any) => ({
                         id: col._id,
@@ -53,12 +59,19 @@ const HomePage = () => {
                 }
 
                 // Fetch News
-                const newsRes = await api.get('/articles');
-                if (newsRes.data.success) {
+                const newsRes = await Promise.race<any>([
+                    api.get('/articles'),
+                    new Promise((_, reject) => 
+                        setTimeout(() => reject(new Error('Request timeout')), 8000)
+                    )
+                ]);
+                
+                if (newsRes?.data?.success) {
                     setNews(newsRes.data.data);
                 }
             } catch (err) {
-                console.error("Failed to fetch homepage data", err);
+                // Silently fail and use static data - user will see cached/default data
+                console.warn("Homepage data fetch failed - using fallback data", err instanceof Error ? err.message : err);
             } finally {
                 setLoading(false);
             }

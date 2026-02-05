@@ -9,7 +9,7 @@ import { allExamCategories } from '@/data/navigation';
 const PageContent: React.FC = () => {
 
     return (
-        <div className="pt-32 pb-16 min-h-screen bg-slate-50 relative overflow-hidden">
+        <div className="pb-16 min-h-screen bg-slate-50 relative overflow-hidden">
 
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-125 bg-linear-to-b from-blue-50 to-transparent -z-10"></div>

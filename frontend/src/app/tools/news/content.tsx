@@ -43,7 +43,7 @@ const PageContent: React.FC = () => {
         : articles.filter(article => article.category === filter);
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-12">
+        <div className="min-h-screen bg-gray-50 pb-12">
 
             {/* Header */}
             <div className="bg-white border-b border-gray-200 mb-10">
@@ -56,7 +56,7 @@ const PageContent: React.FC = () => {
                         {categories.map(cat => (
                             <Link
                                 key={cat}
-                                href={cat === 'All' ? '/news' : `/news?category=${encodeURIComponent(cat)}`}
+                                href={cat === 'All' ? '/tools/news' : `/tools/news?category=${encodeURIComponent(cat)}`}
                                 className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${filter === cat ? 'bg-brand-blue text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
                             >
                                 {cat}
@@ -76,12 +76,28 @@ const PageContent: React.FC = () => {
                         {filteredArticles.length > 0 ? (
                             filteredArticles.map(article => (
                                 <article key={article._id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full group">
-                                    <div className="relative h-48 overflow-hidden">
-                                        <img
-                                            src={article.image}
-                                            alt={article.title}
-                                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                        />
+                                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-brand-blue/10 to-brand-orange/10">
+                                        {article.image ? (
+                                            <img
+                                                src={article.image}
+                                                alt={article.title}
+                                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                                onError={(e) => {
+                                                    e.currentTarget.style.display = 'none';
+                                                    if (e.currentTarget.nextElementSibling) {
+                                                        (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                                                    }
+                                                }}
+                                            />
+                                        ) : null}
+                                        <div className="absolute inset-0 flex items-center justify-center" style={{ display: article.image ? 'none' : 'flex' }}>
+                                            <div className="text-center">
+                                                <svg className="w-16 h-16 mx-auto text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                                <p className="text-xs text-gray-400 font-medium">No Image</p>
+                                            </div>
+                                        </div>
                                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-brand-blue shadow-sm">
                                             {article.category}
                                         </div>
@@ -94,14 +110,14 @@ const PageContent: React.FC = () => {
                                         </div>
 
                                         <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 leading-tight group-hover:text-brand-blue transition-colors">
-                                            <Link href={`/news/${article.slug}`}>{article.title}</Link>
+                                            <Link href={`/tools/news/${article.slug}`}>{article.title}</Link>
                                         </h2>
 
                                         <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-3">
                                             {article.summary}
                                         </p>
 
-                                        <Link href={`/news/${article.slug}`} className="inline-flex items-center gap-2 text-brand-orange font-bold text-sm hover:gap-3 transition-all mt-auto">
+                                        <Link href={`/tools/news/${article.slug}`} className="inline-flex items-center gap-2 text-brand-orange font-bold text-sm hover:gap-3 transition-all mt-auto">
                                             Read Article <FaArrowRight />
                                         </Link>
                                     </div>

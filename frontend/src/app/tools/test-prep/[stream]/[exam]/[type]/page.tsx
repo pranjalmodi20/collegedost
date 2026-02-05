@@ -74,14 +74,14 @@ const TestPrepListPage = () => {
     };
 
     if (loading) return (
-        <div className="min-h-screen pt-24 flex flex-col items-center justify-center">
+        <div className="min-h-screen flex flex-col items-center justify-center">
             <div className="animate-spin text-4xl text-brand-blue mb-4"><FaSpinner /></div>
             <p className="text-gray-500">Loading Prep Content...</p>
         </div>
     );
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-20 pb-10">
+        <div className="min-h-screen bg-gray-50 pb-10">
             {/* Header */}
             <div className="bg-brand-blue-dark text-white py-12 mb-8">
                 <div className="container mx-auto px-4 text-center">

@@ -28,7 +28,7 @@ const NewsSection: React.FC<NewsSectionProps> = ({ items = [] }) => {
                     <div className="flex gap-4 animate-scroll w-max hover:paused">
                         {[...newsList, ...newsList].map((news, idx) => {
                             const title = typeof news === 'string' ? news : news.title;
-                            const link = typeof news !== 'string' && news.slug ? `/news/${news.slug}` : '#';
+                            const link = typeof news !== 'string' && news.slug ? `/tools/news/${news.slug}` : '#';
 
                             return (
                                 <Link href={link} key={idx} className="text-sm text-gray-400 font-medium flex items-center gap-3 hover:text-white transition-colors whitespace-nowrap">

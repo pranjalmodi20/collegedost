@@ -33,10 +33,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${inter.variable} ${poppins.variable} antialiased`}
+        suppressHydrationWarning
       >
         <Providers>
           <Navbar />
-          <main className="min-h-screen pt-17.5">
+          <main className="min-h-screen pt-20">
             {children}
           </main>
           <Footer />

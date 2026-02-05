@@ -166,8 +166,9 @@ const Navbar: React.FC<NavbarProps> = () => {
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isAdminMode ? 'bg-slate-900 border-b border-slate-800 shadow-md' : (scrolled ? 'glass' : 'bg-white/90 backdrop-blur-md')}`}>
             <div className={`py-3 transition-colors duration-300 ${isAdminMode ? 'bg-slate-900 text-white' : 'bg-white'}`}>
-                <div className="container mx-auto px-4 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <div className="container mx-auto px-4 flex items-center justify-between gap-8">
+                    {/* LEFT: Logo Section */}
+                    <div className="flex items-center gap-4 shrink-0">
                         {/* Mobile Menu Toggle */}
                         <button
                             className="lg:hidden text-gray-700 text-xl"
@@ -205,7 +206,159 @@ const Navbar: React.FC<NavbarProps> = () => {
                         </Link>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    {/* CENTER: Navigation Menu (Desktop only) */}
+                    <div className="hidden lg:flex items-center justify-center flex-1">
+                        <ul className="flex items-center gap-1 h-14">
+                            {isAdminMode ? (
+                                // ADMIN LINKS
+                                adminLinks.map((link, index) => {
+                                    const isActive = (link.href === '/admin' ? pathname === '/admin' : pathname?.startsWith(link.href));
+                                    return (
+                                        <li key={index} className="h-full relative">
+                                            <Link href={link.href} className={`flex items-center gap-2 h-full px-5 text-sm font-medium transition-all duration-300 relative z-10 ${isActive
+                                                ? 'text-white'
+                                                : 'text-slate-400 hover:text-white'
+                                                }`}>
+                                                <link.icon className={`text-lg transition-transform duration-300 ${isActive ? 'scale-110 text-indigo-400' : 'group-hover:text-indigo-300'}`} />
+                                                {link.title}
+                                            </Link>
+                                            {isActive && (
+                                                <motion.div
+                                                    layoutId="adminNavIndicator"
+                                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-500 shadow-[0_-2px_8px_rgba(99,102,241,0.5)]"
+                                                    initial={false}
+                                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                                />
+                                            )}
+                                            {isActive && (
+                                                <div className="absolute inset-0 bg-linear-to-b from-transparent to-slate-800/50 pointer-events-none" />
+                                            )}
+                                        </li>
+                                    );
+                                })
+                            ) : (
+                                // PUBLIC LINKS
+                                navLinks.map((link: any, index: number) => (
+                                    <li
+                                        key={index}
+                                        className="h-full group"
+                                        onMouseEnter={() => handleMouseEnter(link.title)}
+                                        onMouseLeave={handleMouseLeave}
+                                    >
+                                        <a href={link.href} className="flex items-center gap-1.5 h-full px-4 text-sm font-medium text-slate-600 border-b-2 border-transparent hover:text-brand-indigo hover:bg-slate-50/50 hover:border-brand-orange transition-all duration-200">
+                                            {link.title}
+                                            {link.hasDropdown && <FaChevronDown className="text-[10px] opacity-60 group-hover:opacity-100 transition-opacity" />}
+                                        </a>
+
+                                        {/* Mega Menu Dropdowns */}
+                                        <AnimatePresence>
+                                            {link.title === 'Browse by Stream' && activeDropdown === 'Browse by Stream' && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: 10 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="fixed left-0 right-0 top-full mx-auto w-225 bg-white shadow-2xl rounded-xl border border-gray-100 z-100 overflow-hidden flex max-h-150"
+                                                    style={{ marginTop: '0' }}
+                                                >
+                                                    <div className="w-72 bg-white shrink-0 py-4 overflow-y-auto">
+                                                        {browseByStreamData.map((stream: any) => (
+                                                            <div
+                                                                key={stream.id}
+                                                                className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer text-left ${activeStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
+                                                                onMouseEnter={() => setActiveStream(stream.id)}
+                                                                onClick={() => {
+                                                                    if (stream.link) {
+                                                                        router.push(stream.link);
+                                                                        setActiveDropdown(null);
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <span className="flex-1 text-left pr-2">{stream.label}</span>
+                                                                <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                                                            </div>
+                                                        ))}
+                                                    </div>
+
+                                                    <MegaMenuContentGrid 
+                                                        dataObj={currentStreamDataObj} 
+                                                        content={currentStreamContent} 
+                                                        onLinkClick={() => setActiveDropdown(null)}
+                                                        useNextLink={true}
+                                                    />
+                                                </motion.div>
+                                            )}
+
+                                            {/* Colleges Mega Menu */}
+                                            {link.title === 'Colleges' && activeDropdown === 'Colleges' && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: 10 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="fixed left-0 right-0 top-full mx-auto w-225 bg-white shadow-2xl rounded-xl border border-gray-100 z-100 overflow-hidden flex max-h-150"
+                                                    style={{ marginTop: '0' }}
+                                                >
+                                                    <div className="w-72 bg-white shrink-0 py-4 overflow-y-auto">
+                                                        {collegesData.map((stream: any) => (
+                                                            <div
+                                                                key={stream.id}
+                                                                className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer ${activeCollegeStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
+                                                                onMouseEnter={() => setActiveCollegeStream(stream.id)}
+                                                            >
+                                                                {stream.label}
+                                                                <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                            </div>
+                                                        ))}
+                                                    </div>
+
+                                                    <MegaMenuContentGrid 
+                                                        dataObj={currentCollegeDataObj} 
+                                                        content={currentCollegeContent} 
+                                                        onLinkClick={() => setActiveDropdown(null)}
+                                                    />
+                                                </motion.div>
+                                            )}
+
+                                            {/* Exams Mega Menu */}
+                                            {link.title === 'Exams' && activeDropdown === 'Exams' && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: 10 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="fixed left-0 right-0 top-full mx-auto w-225 bg-white shadow-2xl rounded-xl border border-gray-100 z-100 overflow-hidden flex max-h-150"
+                                                    style={{ marginTop: '0' }}
+                                                >
+                                                    <div className="w-72 bg-white shrink-0 py-4 overflow-y-auto">
+                                                        {examsData.map((stream: any) => (
+                                                            <div
+                                                                key={stream.id}
+                                                                className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer ${activeExamStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
+                                                                onMouseEnter={() => setActiveExamStream(stream.id)}
+                                                            >
+                                                                {stream.label}
+                                                                <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                            </div>
+                                                        ))}
+                                                    </div>
+
+                                                    <MegaMenuContentGrid 
+                                                        dataObj={currentExamDataObj} 
+                                                        content={currentExamContent} 
+                                                        onLinkClick={() => setActiveDropdown(null)}
+                                                    />
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </li>
+                                ))
+                            )}
+                        </ul>
+                    </div>
+
+                    {/* RIGHT: Actions & User Section */}
+                    <div className="flex items-center gap-4 shrink-0">
                         {!isAdminMode && (
                             <div className="hidden md:flex items-center gap-6 text-gray-600">
                                 <button onClick={handleOpenAskModal} className="flex items-center gap-1.5 hover:text-brand-orange transition-colors font-medium text-sm">
@@ -298,169 +451,6 @@ const Navbar: React.FC<NavbarProps> = () => {
                 </div>
             </div>
 
-            <div className={`relative h-14 hidden lg:block ${isAdminMode ? 'bg-slate-800/50 backdrop-blur-sm border-t border-slate-700/50' : 'bg-white'}`}>
-                <div className="container mx-auto px-4 h-full flex items-center justify-center relative">
-                    <ul className="flex items-center gap-1 h-full">
-                        {isAdminMode ? (
-                            // ADMIN LINKS
-                            adminLinks.map((link, index) => {
-                                const isActive = (link.href === '/admin' ? pathname === '/admin' : pathname?.startsWith(link.href));
-                                return (
-                                    <li key={index} className="h-full relative">
-                                        <Link href={link.href} className={`flex items-center gap-2 h-full px-5 text-sm font-medium transition-all duration-300 relative z-10 ${isActive
-                                            ? 'text-white'
-                                            : 'text-slate-400 hover:text-white'
-                                            }`}>
-                                            <link.icon className={`text-lg transition-transform duration-300 ${isActive ? 'scale-110 text-indigo-400' : 'group-hover:text-indigo-300'}`} />
-                                            {link.title}
-                                        </Link>
-                                        {isActive && (
-                                            <motion.div
-                                                layoutId="adminNavIndicator"
-                                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-500 shadow-[0_-2px_8px_rgba(99,102,241,0.5)]"
-                                                initial={false}
-                                                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                            />
-                                        )}
-                                        {isActive && (
-                                            <div className="absolute inset-0 bg-linear-to-b from-transparent to-slate-800/50 pointer-events-none" />
-                                        )}
-                                    </li>
-                                );
-                            })
-                        ) : (
-                            // PUBLIC LINKS
-                            navLinks.map((link: any, index: number) => (
-                                <li
-                                    key={index}
-                                    className="h-full group"
-                                    onMouseEnter={() => handleMouseEnter(link.title)}
-                                    onMouseLeave={handleMouseLeave}
-                                >
-                                    <a href={link.href} className="flex items-center gap-1.5 h-full px-4 text-sm font-medium text-slate-600 border-b-2 border-transparent hover:text-brand-indigo hover:bg-slate-50/50 hover:border-brand-orange transition-all duration-200">
-                                        {link.title}
-                                        {link.hasDropdown && <FaChevronDown className="text-[10px] opacity-60 group-hover:opacity-100 transition-opacity" />}
-                                    </a>
-
-                                    {/* Specific Layout for "Browse by Stream" */}
-                                    <AnimatePresence>
-                                        {link.title === 'Browse by Stream' && activeDropdown === 'Browse by Stream' && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 10 }}
-                                                transition={{ duration: 0.2 }}
-                                                className="absolute top-full left-0 right-0 mx-auto w-225 bg-white shadow-2xl rounded-xl border border-gray-100 z-100 overflow-hidden flex max-h-150"
-                                            >
-                                                <div className="w-72 bg-white shrink-0 py-4 overflow-y-auto">
-                                                    {browseByStreamData.map((stream: any) => (
-                                                        <div
-                                                            key={stream.id}
-                                                            className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer text-left ${activeStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
-                                                            onMouseEnter={() => setActiveStream(stream.id)}
-                                                            onClick={() => {
-                                                                if (stream.link) {
-                                                                    router.push(stream.link);
-                                                                    setActiveDropdown(null);
-                                                                }
-                                                            }}
-                                                        >
-                                                            <span className="flex-1 text-left pr-2">{stream.label}</span>
-                                                            <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
-                                                        </div>
-                                                    ))}
-                                                </div>
-
-                                                <MegaMenuContentGrid 
-                                                    dataObj={currentStreamDataObj} 
-                                                    content={currentStreamContent} 
-                                                    onLinkClick={() => setActiveDropdown(null)}
-                                                    useNextLink={true}
-                                                />
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-
-
-
-                                    {/* Colleges Mega Menu */}
-                                    <AnimatePresence>
-                                        {link.title === 'Colleges' && activeDropdown === 'Colleges' && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 10 }}
-                                                transition={{ duration: 0.2 }}
-                                                className="absolute top-full left-0 right-0 mx-auto w-225 bg-white shadow-2xl rounded-xl border border-gray-100 z-100 overflow-hidden flex max-h-150"
-                                            >
-                                                <div className="w-72 bg-white shrink-0 py-4 overflow-y-auto">
-                                                    {collegesData.map((stream: any) => (
-                                                        <div
-                                                            key={stream.id}
-                                                            className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer ${activeCollegeStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
-                                                            onMouseEnter={() => setActiveCollegeStream(stream.id)}
-                                                        >
-                                                            {stream.label}
-                                                            <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
-                                                        </div>
-                                                    ))}
-                                                </div>
-
-                                                <MegaMenuContentGrid 
-                                                    dataObj={currentCollegeDataObj} 
-                                                    content={currentCollegeContent} 
-                                                    onLinkClick={() => setActiveDropdown(null)}
-                                                />
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-
-                                    {/* Exams Mega Menu */}
-                                    <AnimatePresence>
-                                        {link.title === 'Exams' && activeDropdown === 'Exams' && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 10 }}
-                                                transition={{ duration: 0.2 }}
-                                                className="absolute top-full left-0 right-0 mx-auto w-225 bg-white shadow-2xl rounded-xl border border-gray-100 z-100 overflow-hidden flex max-h-150"
-                                            >
-                                                <div className="w-72 bg-white shrink-0 py-4 overflow-y-auto">
-                                                    {examsData.map((stream: any) => (
-                                                        <div
-                                                            key={stream.id}
-                                                            className={`flex items-center justify-between px-6 py-3 text-sm font-medium transition-all cursor-pointer ${activeExamStream === stream.id ? 'bg-slate-50 text-brand-orange font-semibold' : 'text-gray-600 hover:bg-slate-50 hover:text-brand-orange'}`}
-                                                            onMouseEnter={() => setActiveExamStream(stream.id)}
-                                                        >
-                                                            {stream.label}
-                                                            <FaAngleRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
-                                                        </div>
-                                                    ))}
-                                                </div>
-
-                                                <MegaMenuContentGrid 
-                                                    dataObj={currentExamDataObj} 
-                                                    content={currentExamContent} 
-                                                    onLinkClick={() => setActiveDropdown(null)}
-                                                />
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-
-
-
-                                    {/* Generic Dropdown for others (simpler) */}
-                                    {link.title !== 'Browse by Stream' && link.title !== 'Test Prep' && link.title !== 'Colleges' && link.title !== 'Exams' && link.hasDropdown && activeDropdown === link.title && (
-                                        <div className="simple-dropdown">
-                                            {/* ... other dropdowns can be implemented similarly ... */}
-                                        </div>
-                                    )}
-                                </li>
-                            )))}
-
-                    </ul>
-                </div>
-            </div>
             {/* Mobile Menu Sidebar (Careers360 Style) */}
             <AnimatePresence>
                 {isMobileMenuOpen && (

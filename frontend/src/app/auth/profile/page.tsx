@@ -103,7 +103,7 @@ const ProfilePage = () => {
     if (!isMounted) return null; // Avoid hydration mismatch
 
     if (!user) {
-        return <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-500 font-medium pt-20">Please login to view profile.</div>;
+        return <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-500 font-medium">Please login to view profile.</div>;
     }
 
     return (

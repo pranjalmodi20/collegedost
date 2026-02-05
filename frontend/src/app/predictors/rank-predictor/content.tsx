@@ -30,7 +30,7 @@ const PageContent: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-12">
+        <div className="min-h-screen bg-gray-50 pb-12">
             <div className="bg-brand-deep-bg text-white py-12 mb-10">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-3xl md:text-5xl font-bold mb-4 font-heading">{examParam} Rank Predictor</h1>

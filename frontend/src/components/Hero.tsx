@@ -77,7 +77,7 @@ const Hero: React.FC<HeroProps> = ({
     };
 
     return (
-        <section className="relative min-h-212.5 flex items-center justify-center text-center text-white overflow-visible pt-20 bg-brand-deep-bg">
+        <section className="relative min-h-screen flex items-center justify-center text-center text-white overflow-visible bg-brand-deep-bg">
 
             {/* Premium Gradient Background */}
             {/* Premium Gradient or Image Background */}

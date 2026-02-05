@@ -287,7 +287,7 @@ const PageContent: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-20 pb-12 overflow-x-hidden">
+        <div className="min-h-screen bg-gray-50 pb-12 overflow-x-hidden">
             {/* Header Section */}
             <div className="bg-brand-deep-bg relative overflow-hidden text-white pt-24 pb-20 mb-10">
                 <div className="absolute inset-0 bg-linear-to-br from-brand-dark via-[#1e3a8a] to-brand-dark z-0"></div>
