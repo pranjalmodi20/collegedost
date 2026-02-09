@@ -7,8 +7,8 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: "#4F46E5",
-                secondary: "#7C3AED",
+                primary: "#83beb2",
+                secondary: "#f7a553",
                 "background-light": "#F8FAFC",
                 "background-dark": "#0F172A",
                 "surface-light": "#FFFFFF",
@@ -18,12 +18,12 @@ export default {
                 "text-muted-light": "#64748B",
                 "text-muted-dark": "#94A3B8",
                 brand: {
-                    indigo: '#4F46E5',
-                    violet: '#7c3aed',
-                    'violet-dark': '#5b21b6',
-                    cyan: '#06b6d4',
-                    mint: '#10b981',
-                    orange: '#f97316',
+                    indigo: '#83beb2',
+                    violet: '#f7a553',
+                    'violet-dark': '#e8923e',
+                    cyan: '#6aada0',
+                    mint: '#83beb2',
+                    orange: '#f7a553',
                     dark: '#0f172a',
                     'dark-light': '#1e293b',
                     light: '#f8fafc',
@@ -46,9 +46,9 @@ export default {
             },
             boxShadow: {
                 'premium': '0 20px 40px -5px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04)',
-                'premium-hover': '0 25px 50px -12px rgba(79, 70, 229, 0.25)',
+                'premium-hover': '0 25px 50px -12px rgba(131, 190, 178, 0.25)',
                 'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
-                'neon': '0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(124, 58, 237, 0.3)',
+                'neon': '0 0 10px rgba(131, 190, 178, 0.5), 0 0 20px rgba(247, 165, 83, 0.3)',
             },
             animation: {
                 'scroll': 'scroll 60s linear infinite',

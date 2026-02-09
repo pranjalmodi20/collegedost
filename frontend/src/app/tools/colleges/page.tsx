@@ -1,6 +1,7 @@
 
 import React, { Suspense } from 'react';
 import PageContent from "./content";
+import { CollegesPageSkeleton } from '@/components/ui';
 
 export const metadata = {
     title: 'CollegeDost | Find Best Colleges in India 2026',
@@ -9,7 +10,7 @@ export const metadata = {
 
 export default function CollegesPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen flex justify-center items-center"><div className="animate-spin rounded-full h-10 w-10 border-2 border-brand-blue border-t-transparent"></div></div>}>
+        <Suspense fallback={<CollegesPageSkeleton />}>
             <PageContent />
         </Suspense>
     );

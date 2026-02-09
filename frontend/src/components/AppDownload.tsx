@@ -62,13 +62,14 @@ const AppDownload: React.FC<AppDownloadProps> = ({ features = defaultFeatures })
                     <div className="shrink-0 relative">
                         <div className="absolute inset-0 bg-primary/50 blur-[60px] rounded-full"></div>
                         <div className="relative bg-white p-4 rounded-xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                            <div className="w-40 h-40 bg-linear-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-                                <div className="text-center text-white">
-                                    <div className="text-3xl font-bold mb-1">CD</div>
-                                    <div className="text-xs">CollegeDost</div>
-                                </div>
+                            <div className="w-48 h-48 bg-green-700/20 rounded-lg flex items-center justify-center">
+                                <img
+                                    src="/logo.png"
+                                    alt="CollegeDost App"
+                                    className="w-full h-full object-contain"
+                                />
                             </div>
-                            <p className="text-center text-xs font-bold mt-2 text-gray-800">Download Now</p>
+                            <p className="text-center text-sm font-semibold mt-2 text-gray-800">Download Now</p>
                         </div>
                     </div>
                 </div>

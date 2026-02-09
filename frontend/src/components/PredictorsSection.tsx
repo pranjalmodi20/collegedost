@@ -42,7 +42,7 @@ const PredictorsSection: React.FC<PredictorsSectionProps> = ({
                         <span className="p-2 rounded-lg bg-brand-orange/10 text-brand-orange"><FaChartLine /></span>
                         <h2 className="text-3xl font-heading font-bold text-gray-900">{title}</h2>
                     </div>
-                    <Link href="#" className="flex items-center gap-2 text-sm font-bold text-brand-indigo bg-indigo-50 px-5 py-2.5 rounded-full hover:bg-brand-indigo hover:text-white transition-all duration-300 shadow-sm hover:shadow-md group">
+                    <Link href="#" className="flex items-center gap-2 text-sm font-bold text-brand-indigo bg-teal-50 px-5 py-2.5 rounded-full hover:bg-brand-indigo hover:text-white transition-all duration-300 shadow-sm hover:shadow-md group">
                         View All <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>

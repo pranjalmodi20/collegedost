@@ -122,13 +122,13 @@ export default function PredictorsPageContent() {
             {/* ── Hero Section ─────────────────────────────────────────── */}
             <section className="relative bg-white border-b border-gray-200 overflow-hidden pt-16 pb-6">
                 {/* Background decoration */}
-                <div className="absolute inset-0 bg-linear-to-br from-indigo-50/50 to-violet-50/50 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-br from-teal-50/50 to-amber-50/50 pointer-events-none" />
                 <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
                 <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
 
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-semibold tracking-wide uppercase mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 text-teal-700 text-xs font-semibold tracking-wide uppercase mb-6">
                         <span className="text-sm">✨</span>
                         AI-Powered Predictions
                     </div>

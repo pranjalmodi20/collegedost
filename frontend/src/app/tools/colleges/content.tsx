@@ -1,635 +1,784 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import api from '@/api/axios';
 import Link from 'next/link';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { FaSearch, FaMapMarkerAlt, FaFilter, FaRedo, FaChevronRight } from 'react-icons/fa';
+import {
+    FaSearch, FaMapMarkerAlt, FaStar, FaChevronDown, FaChevronUp,
+    FaTimes, FaFilter, FaUniversity, FaArrowRight
+} from 'react-icons/fa';
 
-// Types for Filters
+/* ─── Types ─────────────────────────────────────────────────────────────── */
 interface FilterState {
     search: string;
     state: string[];
-    city: string;
-    type: string;
-    stream: string[];
+    city: string[];
     degree: string[];
-    targetYear: string[];
-    goal: string[];
+    stream: string[];
+    ownership: string[];
+    specialization: string[];
+    fees: string;
+    rating: string;
     sort: string;
 }
 
-// Reusable checkbox filter section component - DRY pattern
-const FilterCheckboxSection = ({ 
-    title, 
-    accentColor, 
-    searchPlaceholder, 
-    searchTerm, 
-    onSearchChange, 
-    options, 
-    selectedValues, 
-    onToggle 
+/* ─── Filter Options Data ───────────────────────────────────────────────── */
+const statesList = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+    "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+    "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan",
+    "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh",
+    "Uttarakhand", "West Bengal"
+];
+
+const citiesList = [
+    "Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai", "Kolkata",
+    "Pune", "Ahmedabad", "Jaipur", "Lucknow", "Chandigarh", "Indore",
+    "Bhopal", "Nagpur", "Coimbatore", "Kochi", "Vellore", "Manipal",
+    "Noida", "Gurgaon", "Dehradun", "Thiruvananthapuram", "Patna",
+    "Bhubaneswar", "Visakhapatnam"
+];
+
+const degreesList = [
+    "B.E / B.Tech", "MBA / PGDM", "MBBS", "B.Sc", "B.Com", "B.A",
+    "B.Arch", "B.Plan", "BBA", "BCA", "B.Pharma", "LLB", "B.Des",
+    "M.E / M.Tech", "M.Sc", "M.A", "M.Com", "MCA", "M.Pharma",
+    "D.Pharma", "Diploma", "Ph.D"
+];
+
+const streamsList = [
+    "Engineering", "Management", "Medicine", "Law",
+    "Science", "Commerce", "Arts", "Design",
+    "Pharmacy", "Education", "Hospitality", "Media",
+    "Computer Application", "Architecture"
+];
+
+const ownershipList = ["Government", "Private", "Public-Private", "Deemed", "Autonomous"];
+
+const specializationList = [
+    "Computer Science", "Mechanical", "Electrical", "Civil", "Electronics",
+    "Information Technology", "Chemical", "Aerospace", "Biotechnology",
+    "Data Science", "Artificial Intelligence", "Finance", "Marketing",
+    "Human Resources", "Operations", "General Medicine", "Surgery",
+    "Pediatrics", "Dermatology"
+];
+
+const feesOptions = [
+    { label: "Under ₹1 Lakh", value: "under_1l" },
+    { label: "₹1 - 3 Lakhs", value: "1l_3l" },
+    { label: "₹3 - 5 Lakhs", value: "3l_5l" },
+    { label: "₹5 - 10 Lakhs", value: "5l_10l" },
+    { label: "Above ₹10 Lakhs", value: "above_10l" },
+];
+
+const ratingOptions = [
+    { label: "4★ & above", value: "4" },
+    { label: "3★ & above", value: "3" },
+    { label: "2★ & above", value: "2" },
+];
+
+/* ─── Collapsible Filter Panel ──────────────────────────────────────────── */
+const FilterPanel = ({
+    title,
+    children,
+    defaultOpen = true,
 }: {
     title: string;
-    accentColor: string;
-    searchPlaceholder: string;
-    searchTerm: string;
-    onSearchChange: (value: string) => void;
-    options: string[];
-    selectedValues: string[];
-    onToggle: (value: string) => void;
+    children: React.ReactNode;
+    defaultOpen?: boolean;
 }) => {
-    const filteredOptions = options.filter(opt => opt.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+    const [open, setOpen] = useState(defaultOpen);
+    return (
+        <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <button
+                onClick={() => setOpen(!open)}
+                className="flex items-center justify-between w-full font-bold text-[13px] tracking-wide text-gray-900"
+            >
+                {title}
+                {open
+                    ? <FaChevronUp className="text-xs text-gray-400" />
+                    : <FaChevronDown className="text-xs text-gray-400" />}
+            </button>
+            {open && <div className="mt-4">{children}</div>}
+        </div>
+    );
+};
+
+/* ─── Checkbox List with Optional Search ────────────────────────────────── */
+const CheckboxFilterList = ({
+    options,
+    selected,
+    onToggle,
+    searchable = false,
+}: {
+    options: string[];
+    selected: string[];
+    onToggle: (value: string) => void;
+    searchable?: boolean;
+}) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const filtered = searchable
+        ? options.filter(o => o.toLowerCase().includes(searchTerm.toLowerCase()))
+        : options;
+
     return (
         <div>
-            <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <span className={`w-1 h-4 ${accentColor} rounded-full`}></span>
-                {title}
-            </h3>
-            <div className="relative mb-3 group">
-                <input
-                    type="text"
-                    placeholder={searchPlaceholder}
-                    value={searchTerm}
-                    onChange={(e) => onSearchChange(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all placeholder:text-slate-400"
-                />
-                <FaSearch className="absolute left-3 top-3.5 text-slate-400 group-focus-within:text-brand-blue transition-colors text-xs" />
-            </div>
-            <div className="space-y-1 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
-                {filteredOptions.map((item) => (
-                    <label key={item} className="flex items-center gap-3 cursor-pointer group hover:bg-slate-50 p-2 rounded-lg transition-colors -mx-2">
-                        <div className="relative flex items-center justify-center shrink-0">
-                            <input 
-                                type="checkbox" 
-                                className="peer appearance-none w-5 h-5 border-[1.5px] border-slate-300 rounded-md bg-white checked:bg-blue-600 checked:border-blue-600 transition-all cursor-pointer" 
-                                checked={selectedValues.includes(item)} 
-                                onChange={() => onToggle(item)} 
-                            />
-                            <svg className="absolute w-3.5 h-3.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
+            {searchable && (
+                <div className="relative mb-3">
+                    <FaSearch className="absolute left-3 top-2.5 text-gray-400 text-xs" />
+                    <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder="Search..."
+                        className="w-full pl-8 pr-3 py-2 text-sm bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 shadow-sm"
+                    />
+                </div>
+            )}
+            <div className="space-y-1.5 filter-scroll max-h-52 overflow-y-auto pr-2">
+                {filtered.map((item) => (
+                    <label
+                        key={item}
+                        className={`flex items-center justify-between group cursor-pointer p-2 rounded-xl transition-colors -mx-2 ${
+                            selected.includes(item)
+                                ? 'bg-primary/5 ring-1 ring-primary/10'
+                                : 'hover:bg-gray-50'
+                        }`}
+                    >
+                        <div className="flex items-center gap-2.5">
+                            <div className="relative flex items-center justify-center shrink-0">
+                                <input
+                                    type="checkbox"
+                                    checked={selected.includes(item)}
+                                    onChange={() => onToggle(item)}
+                                    className="peer appearance-none w-4 h-4 border-[1.5px] border-gray-300 rounded-md bg-white checked:bg-primary checked:border-primary checked:ring-2 checked:ring-primary/20 transition-all cursor-pointer"
+                                />
+                                <svg className="absolute w-3 h-3 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                            <span className={`text-sm leading-snug transition-colors ${selected.includes(item) ? 'text-gray-900 font-medium' : 'text-gray-600 group-hover:text-gray-900'}`}>
+                                {item}
+                            </span>
                         </div>
-                        <span className={`text-sm leading-snug transition-colors ${selectedValues.includes(item) ? 'text-slate-900 font-medium' : 'text-slate-600 group-hover:text-slate-900'}`}>
-                            {item}
-                        </span>
                     </label>
                 ))}
+                {filtered.length === 0 && (
+                    <p className="text-xs text-gray-400 text-center py-2">No matches</p>
+                )}
             </div>
         </div>
     );
 };
 
-// Helper function to parse URL params into filter state
-const parseFiltersFromParams = (searchParams: URLSearchParams): FilterState => ({
-    search: searchParams.get('search') || '',
-    state: searchParams.get('state') ? searchParams.get('state')!.split(',') : [],
-    city: searchParams.get('city') || '',
-    type: searchParams.get('type') || '',
-    stream: searchParams.get('stream') ? searchParams.get('stream')!.split(',') : [],
-    degree: searchParams.get('degree') ? searchParams.get('degree')!.split(',') : [],
-    targetYear: searchParams.get('targetYear') ? searchParams.get('targetYear')!.split(',') : [],
-    goal: searchParams.get('goal') ? searchParams.get('goal')!.split(',') : [],
-    sort: searchParams.get('sort') || 'nirfRank'
+/* ─── URL Parsing Helper ────────────────────────────────────────────────── */
+const parseFiltersFromParams = (sp: URLSearchParams): FilterState => ({
+    search: sp.get('search') || '',
+    state: sp.get('state') ? sp.get('state')!.split(',') : [],
+    city: sp.get('city') ? sp.get('city')!.split(',') : [],
+    degree: sp.get('degree') ? sp.get('degree')!.split(',') : [],
+    stream: sp.get('stream') ? sp.get('stream')!.split(',') : [],
+    ownership: sp.get('ownership') ? sp.get('ownership')!.split(',') : [],
+    specialization: sp.get('specialization') ? sp.get('specialization')!.split(',') : [],
+    fees: sp.get('fees') || '',
+    rating: sp.get('rating') || '',
+    sort: sp.get('sort') || 'popularity',
 });
 
+/* ━━━━━━━━━━━━━━━━  MAIN COMPONENT  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const PageContent: React.FC = () => {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    const [filters, setFilters] = useState<FilterState>(() => parseFiltersFromParams(new URLSearchParams(searchParams?.toString())));
-
+    const [filters, setFilters] = useState<FilterState>(() =>
+        parseFiltersFromParams(new URLSearchParams(searchParams?.toString()))
+    );
     const [colleges, setColleges] = useState<any[]>([]);
+    const [totalCount, setTotalCount] = useState(0);
     const [loading, setLoading] = useState(true);
-
-    // Pagination State
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [hasMoreResults, setHasMoreResults] = useState(false);
     const LIMIT = 20;
-    const MAX_PAGES = 5;
 
-    // Filter Logic
-    const isInternalUpdate = useRef(false);
-
-    // Checkbox Options Data
-    const streamsList = ["Engineering And Architecture", "Management And Business Administration", "Medicine And Allied Sciences", "Law", "Animation And Design", "Pharmacy", "Arts And Humanities", "Science", "Commerce", "Education", "Hospitality And Tourism", "Media, Mass Communication And Journalism", "Computer Application And IT"];
-    const degreesList = ["Diploma", "B.E /B.Tech", "B.Arch", "B.Plan", "Other Bachelors", "MBA", "MBBS", "B.Sc", "B.Com", "B.A", "B.Pharma", "M.Pharma", "D.Pharma"];
-    const statesList = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Delhi", "Gujarat", "Haryana", "Karnataka", "Kerala", "Maharashtra", "Madhya Pradesh", "Odisha", "Punjab", "Rajasthan", "Tamil Nadu", "Telangana", "Uttar Pradesh", "West Bengal"];
-
-    const [searchTermStream, setSearchTermStream] = useState("");
-    const [searchTermDegree, setSearchTermDegree] = useState("");
-    const [searchTermState, setSearchTermState] = useState("");
-
-    // Autocomplete State
     const [query, setQuery] = useState(filters.search);
     const [suggestions, setSuggestions] = useState<any[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const searchRef = useRef<HTMLDivElement>(null);
+    const isInternalUpdate = useRef(false);
+    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-    // Safe page setter
-    const safeSetPage = (newPage: number | ((prev: number) => number)) => {
-        if (typeof newPage === 'function') {
-            setPage(p => Math.min(MAX_PAGES, Math.max(1, newPage(p))));
-        } else {
-            setPage(Math.min(MAX_PAGES, Math.max(1, newPage)));
-        }
-    };
+    /* ── Active Filter Count ─────────────────────────────────── */
+    const activeFilterCount = [
+        filters.state.length, filters.city.length, filters.degree.length,
+        filters.stream.length, filters.ownership.length, filters.specialization.length,
+        filters.fees ? 1 : 0, filters.rating ? 1 : 0,
+    ].reduce((a, b) => a + b, 0);
 
-    // Sync URL → State when external navigation occurs
-    useEffect(() => {
-        if (isInternalUpdate.current) {
-            isInternalUpdate.current = false;
-            return;
-        }
-
-        const newFilters = parseFiltersFromParams(new URLSearchParams(searchParams?.toString()));
-
-        setFilters(newFilters);
-        setQuery(newFilters.search);
-        setPage(1);
-
-        setSearchTermStream("");
-        setSearchTermDegree("");
-        setSearchTermState("");
-
-    }, [searchParams]);
-
-    // Fetch on Filters or Page Change (State → URL sync)
-    useEffect(() => {
-        isInternalUpdate.current = true;
-
-        const params = new URLSearchParams();
-        if (filters.search) params.set('search', filters.search);
-        if (filters.state.length) params.set('state', filters.state.join(','));
-        if (filters.city) params.set('city', filters.city);
-        if (filters.type) params.set('type', filters.type);
-        if (filters.stream.length) params.set('stream', filters.stream.join(','));
-        if (filters.degree.length) params.set('degree', filters.degree.join(','));
-        if (filters.targetYear.length) params.set('targetYear', filters.targetYear.join(','));
-        if (filters.goal.length) params.set('goal', filters.goal.join(','));
-        if (filters.sort && filters.sort !== 'nirfRank') params.set('sort', filters.sort);
-
-        // Update URL
-        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-
-        fetchColleges();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, [filters, page]);
-
-    // Fetch Suggestions Debounced
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (query && query.length > 1 && query !== filters.search) {
-                fetchSuggestions(query);
-            } else {
-                setSuggestions([]);
-                setShowSuggestions(false);
-            }
-        }, 300);
-        return () => clearTimeout(timer);
-    }, [query]);
-
-    // Handle click outside
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-                setShowSuggestions(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
-    const handleCheckboxChange = (category: keyof FilterState, value: string) => {
+    /* ── Handlers ────────────────────────────────────────────── */
+    type MultiSelectKey = 'state' | 'city' | 'degree' | 'stream' | 'ownership' | 'specialization';
+    
+    const handleCheckboxToggle = (category: MultiSelectKey, value: string) => {
         setFilters(prev => {
             const current = prev[category] as string[];
             const updated = current.includes(value)
-                ? current.filter(item => item !== value)
+                ? current.filter(v => v !== value)
                 : [...current, value];
             return { ...prev, [category]: updated };
         });
         setPage(1);
     };
 
-    const fetchColleges = async () => {
+    const clearAllFilters = () => {
+        setFilters({
+            search: '', state: [], city: [], degree: [], stream: [],
+            ownership: [], specialization: [], fees: '', rating: '', sort: 'popularity',
+        });
+        setQuery('');
+        setPage(1);
+    };
+
+    /* ── API Functions ───────────────────────────────────────── */
+    const fetchColleges = useCallback(async () => {
         setLoading(true);
         try {
-            const hasGoalFilter = filters.goal.length > 0;
-            const includesCollegesGoal = filters.goal.includes('Colleges');
-
-            if (hasGoalFilter && !includesCollegesGoal) {
-                setColleges([]);
-                setTotalPages(1);
-                setLoading(false);
-                return;
-            }
-
             const params = new URLSearchParams();
-
             if (filters.search) params.append('search', filters.search);
             if (filters.state.length) params.append('state', filters.state.join(','));
+            if (filters.city.length) params.append('city', filters.city.join(','));
             if (filters.stream.length) params.append('branch', filters.stream.join(','));
             if (filters.degree.length) params.append('course', filters.degree.join(','));
+            if (filters.ownership.length) params.append('type', filters.ownership.join(','));
+            if (filters.fees) params.append('fees', filters.fees);
+            if (filters.rating) params.append('rating', filters.rating);
             if (filters.sort) params.append('sort', filters.sort);
-            if (filters.city) params.append('city', filters.city);
-
             params.append('page', page.toString());
             params.append('limit', LIMIT.toString());
-
             const res = await api.get(`/colleges?${params.toString()}`);
             if (res.data.success) {
                 setColleges(res.data.data);
                 if (res.data.pagination) {
-                    const actualTotalPages = res.data.pagination.pages;
-                    const cappedPages = Math.min(actualTotalPages, MAX_PAGES);
-                    setTotalPages(cappedPages);
-                    setHasMoreResults(actualTotalPages > MAX_PAGES);
+                    setTotalPages(res.data.pagination.pages);
+                    setTotalCount(res.data.pagination.total || res.data.data.length);
                 }
             }
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
+        } catch (err) { console.error(err); }
+        finally { setLoading(false); }
+    }, [filters, page]);
 
-    const fetchSuggestions = async (searchTerm: string) => {
+    const fetchSuggestions = useCallback(async (term: string) => {
         try {
-            const res = await api.get(`/colleges/search?q=${searchTerm}`);
-            if (res.data.success) {
-                setSuggestions(res.data.data);
-                setShowSuggestions(true);
-            }
-        } catch (error) {
-            console.error("Error fetching suggestions:", error);
-        }
+            const res = await api.get(`/colleges/search?q=${term}`);
+            if (res.data.success) { setSuggestions(res.data.data); setShowSuggestions(true); }
+        } catch { /* silent */ }
+    }, []);
+
+    const handleSearchSubmit = () => {
+        setFilters(prev => ({ ...prev, search: query }));
+        setPage(1);
+        setShowSuggestions(false);
     };
 
-    const handleSearchSubmit = (e: React.KeyboardEvent | React.MouseEvent) => {
-        if ((e as React.KeyboardEvent).key === 'Enter' || e.type === 'click') {
-            setFilters({ ...filters, search: query });
-            setPage(1);
-            setShowSuggestions(false);
-        }
-    };
+    /* ── URL ↔ State Sync ────────────────────────────────────── */
+    useEffect(() => {
+        if (isInternalUpdate.current) { isInternalUpdate.current = false; return; }
+        const newFilters = parseFiltersFromParams(new URLSearchParams(searchParams?.toString()));
+        setFilters(newFilters);
+        setQuery(newFilters.search);
+        setPage(1);
+    }, [searchParams]);
 
+    useEffect(() => {
+        isInternalUpdate.current = true;
+        const params = new URLSearchParams();
+        if (filters.search) params.set('search', filters.search);
+        if (filters.state.length) params.set('state', filters.state.join(','));
+        if (filters.city.length) params.set('city', filters.city.join(','));
+        if (filters.degree.length) params.set('degree', filters.degree.join(','));
+        if (filters.stream.length) params.set('stream', filters.stream.join(','));
+        if (filters.ownership.length) params.set('ownership', filters.ownership.join(','));
+        if (filters.specialization.length) params.set('specialization', filters.specialization.join(','));
+        if (filters.fees) params.set('fees', filters.fees);
+        if (filters.rating) params.set('rating', filters.rating);
+        if (filters.sort && filters.sort !== 'popularity') params.set('sort', filters.sort);
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+        fetchColleges();
+    }, [filters, page, router, pathname, fetchColleges]);
+
+    /* ── Search Suggestions ──────────────────────────────────── */
+    useEffect(() => {
+        const t = setTimeout(() => {
+            if (query && query.length > 1 && query !== filters.search) {
+                fetchSuggestions(query);
+            } else { setSuggestions([]); setShowSuggestions(false); }
+        }, 300);
+        return () => clearTimeout(t);
+    }, [query, filters.search, fetchSuggestions]);
+
+    useEffect(() => {
+        const handler = (e: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(e.target as Node)) setShowSuggestions(false);
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, []);
+
+    /* ── Active Filter Chips ─────────────────────────────────── */
+    const activeChips: { label: string; onRemove: () => void }[] = [];
+    filters.state.forEach(s => activeChips.push({ label: s, onRemove: () => handleCheckboxToggle('state', s) }));
+    filters.city.forEach(c => activeChips.push({ label: c, onRemove: () => handleCheckboxToggle('city', c) }));
+    filters.degree.forEach(d => activeChips.push({ label: d, onRemove: () => handleCheckboxToggle('degree', d) }));
+    filters.stream.forEach(s => activeChips.push({ label: s, onRemove: () => handleCheckboxToggle('stream', s) }));
+    filters.ownership.forEach(o => activeChips.push({ label: o, onRemove: () => handleCheckboxToggle('ownership', o) }));
+    filters.specialization.forEach(s => activeChips.push({ label: s, onRemove: () => handleCheckboxToggle('specialization', s) }));
+    if (filters.fees) {
+        const feeLabel = feesOptions.find(f => f.value === filters.fees)?.label || filters.fees;
+        activeChips.push({ label: `Fees: ${feeLabel}`, onRemove: () => setFilters(prev => ({ ...prev, fees: '' })) });
+    }
+    if (filters.rating) {
+        activeChips.push({ label: `${filters.rating}★ & above`, onRemove: () => setFilters(prev => ({ ...prev, rating: '' })) });
+    }
+
+    /* ── Shared Sidebar Filter Panels ────────────────────────── */
+    const renderFilters = () => (
+        <div className="space-y-5">
+            <FilterPanel title="State" defaultOpen={true}>
+                <CheckboxFilterList options={statesList} selected={filters.state} onToggle={(v) => handleCheckboxToggle('state', v)} searchable />
+            </FilterPanel>
+            <FilterPanel title="City" defaultOpen={false}>
+                <CheckboxFilterList options={citiesList} selected={filters.city} onToggle={(v) => handleCheckboxToggle('city', v)} searchable />
+            </FilterPanel>
+            <FilterPanel title="Degree" defaultOpen={false}>
+                <CheckboxFilterList options={degreesList} selected={filters.degree} onToggle={(v) => handleCheckboxToggle('degree', v)} searchable />
+            </FilterPanel>
+            <FilterPanel title="Branch / Stream" defaultOpen={false}>
+                <CheckboxFilterList options={streamsList} selected={filters.stream} onToggle={(v) => handleCheckboxToggle('stream', v)} />
+            </FilterPanel>
+            <FilterPanel title="Ownership" defaultOpen={false}>
+                <CheckboxFilterList options={ownershipList} selected={filters.ownership} onToggle={(v) => handleCheckboxToggle('ownership', v)} />
+            </FilterPanel>
+            <FilterPanel title="Specialization" defaultOpen={false}>
+                <CheckboxFilterList options={specializationList} selected={filters.specialization} onToggle={(v) => handleCheckboxToggle('specialization', v)} searchable />
+            </FilterPanel>
+            <FilterPanel title="Avg Fees (Yearly)" defaultOpen={false}>
+                <div className="space-y-2.5">
+                    {feesOptions.map(opt => (
+                        <label
+                            key={opt.value}
+                            className={`flex items-center gap-3 group cursor-pointer p-2 rounded-xl transition-colors ${
+                                filters.fees === opt.value ? 'bg-primary/5 ring-1 ring-primary/10' : 'hover:bg-gray-50'
+                            }`}
+                        >
+                            <input
+                                type="radio"
+                                name="fees"
+                                checked={filters.fees === opt.value}
+                                onChange={() => { setFilters(prev => ({ ...prev, fees: prev.fees === opt.value ? '' : opt.value })); setPage(1); }}
+                                className="border-gray-300 text-primary focus:ring-primary w-4 h-4"
+                            />
+                            <span className={`text-sm font-medium transition-colors ${filters.fees === opt.value ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-800'}`}>
+                                {opt.label}
+                            </span>
+                        </label>
+                    ))}
+                </div>
+            </FilterPanel>
+            <FilterPanel title="Rating" defaultOpen={false}>
+                <div className="space-y-2.5">
+                    {ratingOptions.map(opt => (
+                        <label
+                            key={opt.value}
+                            className={`flex items-center gap-3 group cursor-pointer p-2 rounded-xl transition-colors ${
+                                filters.rating === opt.value ? 'bg-primary/5 ring-1 ring-primary/10' : 'hover:bg-gray-50'
+                            }`}
+                        >
+                            <input
+                                type="radio"
+                                name="rating"
+                                checked={filters.rating === opt.value}
+                                onChange={() => { setFilters(prev => ({ ...prev, rating: prev.rating === opt.value ? '' : opt.value })); setPage(1); }}
+                                className="border-gray-300 text-primary focus:ring-primary w-4 h-4"
+                            />
+                            <span className={`text-sm font-medium transition-colors ${filters.rating === opt.value ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-800'}`}>
+                                {opt.label}
+                            </span>
+                        </label>
+                    ))}
+                </div>
+            </FilterPanel>
+        </div>
+    );
+
+    /* ━━━━━━━━━━━━━━━━  RENDER  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-background-light antialiased">
 
-            <div className="container mx-auto px-4 pt-12 pb-8 flex flex-col lg:flex-row gap-8">
-
-                {/* --- LEFT SIDEBAR FILTERS --- */}
-                <div className="w-full lg:w-1/4 shrink-0">
-                    <div className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-slate-100 sticky top-32 max-h-[calc(100vh-120px)] overflow-hidden flex flex-col">
-
-                        <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-white z-10">
-                            <div className="flex items-center gap-3">
-                                <div className="p-2 bg-brand-blue/5 text-brand-blue rounded-lg">
-                                    <FaFilter className="text-sm" />
-                                </div>
-                                <h2 className="text-base font-bold text-slate-800">Filters</h2>
-                            </div>
-                            <button
-                                onClick={() => setFilters({ search: '', state: [], city: '', type: '', stream: [], degree: [], targetYear: [], goal: [], sort: 'nirfRank' })}
-                                className="text-xs font-semibold text-slate-500 hover:text-brand-orange transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-orange-50"
-                            >
-                                <FaRedo className="text-[10px]" /> Reset
-                            </button>
-                        </div>
-
-                        <div className="overflow-y-auto px-6 py-6 custom-scrollbar space-y-8 flex-1">
-                            {/* GOAL */}
-                            <div>
-                                <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                    <span className="w-1 h-4 bg-brand-orange rounded-full"></span>
-                                    Goal
-                                </h3>
-                                <div className="space-y-1">
-                                    {['Colleges', 'Exams', 'Coachings', 'Study Abroad'].map((goal) => (
-                                        <label key={goal} className="flex items-center gap-3 cursor-pointer group hover:bg-slate-50 p-2 rounded-lg transition-colors -mx-2">
-                                            <div className="relative flex items-center justify-center shrink-0">
-                                                <input
-                                                    type="checkbox"
-                                                    className="peer appearance-none w-5 h-5 border-[1.5px] border-slate-300 rounded-md bg-white checked:bg-blue-600 checked:border-blue-600 transition-all cursor-pointer"
-                                                    checked={filters.goal.includes(goal)}
-                                                    onChange={() => handleCheckboxChange('goal', goal)}
-                                                />
-                                                <svg className="absolute w-3.5 h-3.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <span className={`text-sm font-medium transition-colors ${filters.goal.includes(goal) ? 'text-slate-900' : 'text-slate-600 group-hover:text-slate-900'}`}>
-                                                {goal}
-                                            </span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* EDUCATION STREAM */}
-                            <FilterCheckboxSection
-                                title="Stream"
-                                accentColor="bg-brand-blue"
-                                searchPlaceholder="Search streams..."
-                                searchTerm={searchTermStream}
-                                onSearchChange={setSearchTermStream}
-                                options={streamsList}
-                                selectedValues={filters.stream}
-                                onToggle={(value) => handleCheckboxChange('stream', value)}
-                            />
-
-                            {/* DEGREE */}
-                            <FilterCheckboxSection
-                                title="Degree"
-                                accentColor="bg-purple-500"
-                                searchPlaceholder="Search degrees..."
-                                searchTerm={searchTermDegree}
-                                onSearchChange={setSearchTermDegree}
-                                options={degreesList}
-                                selectedValues={filters.degree}
-                                onToggle={(value) => handleCheckboxChange('degree', value)}
-                            />
-
-                            {/* STATE */}
-                            <FilterCheckboxSection
-                                title="State"
-                                accentColor="bg-teal-500"
-                                searchPlaceholder="Search states..."
-                                searchTerm={searchTermState}
-                                onSearchChange={setSearchTermState}
-                                options={statesList}
-                                selectedValues={filters.state}
-                                onToggle={(value) => handleCheckboxChange('state', value)}
-                            />
-                        </div>
+            {/* ── Hero Section ───────────────────────────────────── */}
+            <section className="bg-[radial-gradient(circle_at_top_left,#F5F3FF_0%,#FFFFFF_100%)] pt-8 pb-8 border-b border-gray-100">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    {/* Breadcrumb */}
+                    <nav aria-label="Breadcrumb" className="flex mb-8 text-sm font-medium text-gray-500">
+                        <ol className="flex items-center space-x-2">
+                            <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
+                            <li><FaChevronDown className="text-[10px] -rotate-90" /></li>
+                            <li className="text-primary font-semibold">Admissions Open</li>
+                        </ol>
+                    </nav>
+                    <div className="max-w-3xl">
+                        <h1 className="font-display text-4xl lg:text-5xl font-extrabold mb-6 tracking-tight text-gray-900 leading-tight">
+                            Discover Colleges with <br />
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary">
+                                Open Admissions
+                            </span>
+                        </h1>
                     </div>
                 </div>
+            </section>
 
-                {/* --- RIGHT CONTENT AREA --- */}
-                <div className="flex-1">
+            {/* ── Main Content ───────────────────────────────────── */}
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="flex flex-col lg:flex-row gap-8">
 
-                    {/* Top Search Bar */}
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6 flex gap-4 items-center">
-                        <div className="flex-1 relative" ref={searchRef}>
-                            <FaSearch className="absolute left-4 top-3.5 text-gray-400" />
-                            <input
-                                type="text"
-                                value={query}
-                                onChange={(e) => {
-                                    setQuery(e.target.value);
-                                    if (e.target.value.length === 0) {
-                                        setFilters({ ...filters, search: '' });
-                                        setShowSuggestions(false);
-                                    }
-                                }}
-                                onFocus={() => {
-                                    if (query.length > 1 && suggestions.length > 0) setShowSuggestions(true);
-                                }}
-                                onKeyDown={handleSearchSubmit}
-                                placeholder="Search for colleges, exams, courses and more..."
-                                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-brand-blue outline-none"
-                            />
+                    {/* ── Sidebar Filters (Desktop) ──────────────── */}
+                    <aside className="hidden lg:block w-72 shrink-0">
+                        <div className="sticky top-28 space-y-5 max-h-[calc(100vh-8rem)] overflow-y-auto filter-scroll pr-1">
+                            <div className="flex items-center justify-between mb-1">
+                                <h3 className="font-bold text-lg flex items-center gap-2">
+                                    <FaFilter className="text-primary" /> Filters
+                                    {activeFilterCount > 0 && (
+                                        <span className="text-xs bg-primary text-white rounded-full w-5 h-5 flex items-center justify-center">{activeFilterCount}</span>
+                                    )}
+                                </h3>
+                                <button onClick={clearAllFilters} className="text-xs font-bold text-primary hover:underline">Clear All</button>
+                            </div>
+                            {renderFilters()}
+                        </div>
+                    </aside>
+
+                    {/* ── Mobile Filter FAB ───────────────────────── */}
+                    <button
+                        onClick={() => setMobileFiltersOpen(true)}
+                        className="lg:hidden fixed bottom-6 right-6 z-40 bg-primary text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-2 font-bold text-sm"
+                    >
+                        <FaFilter /> Filters
+                        {activeFilterCount > 0 && (
+                            <span className="bg-white text-primary rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">{activeFilterCount}</span>
+                        )}
+                    </button>
+
+                    {/* ── Mobile Filter Drawer ────────────────────── */}
+                    {mobileFiltersOpen && (
+                        <>
+                            <div className="fixed inset-0 bg-black/50 z-50 lg:hidden" onClick={() => setMobileFiltersOpen(false)} />
+                            <div className="fixed top-0 left-0 h-full w-[85%] max-w-sm bg-background-light z-50 lg:hidden overflow-y-auto shadow-2xl">
+                                <div className="flex items-center justify-between p-5 border-b border-gray-200 bg-white sticky top-0 z-10">
+                                    <h3 className="font-bold text-lg flex items-center gap-2">
+                                        <FaFilter className="text-primary" /> Filters
+                                    </h3>
+                                    <div className="flex items-center gap-3">
+                                        <button onClick={clearAllFilters} className="text-xs font-bold text-primary">Clear All</button>
+                                        <button onClick={() => setMobileFiltersOpen(false)} className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center">
+                                            <FaTimes className="text-gray-500" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="p-5">{renderFilters()}</div>
+                            </div>
+                        </>
+                    )}
+
+                    {/* ── Results Column ──────────────────────────── */}
+                    <div className="flex-1">
+
+                        {/* Result Count */}
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 gap-4">
+                            <div className="text-sm font-medium text-gray-500">
+                                Showing <span className="text-gray-900 font-bold">{totalCount.toLocaleString('en-IN')}</span> Colleges
+                            </div>
+                        </div>
+                        
+                        {/* Search Bar */}
+                        <div className="relative group mb-6" ref={searchRef}>
+                            <div className="absolute -inset-1 bg-linear-to-r from-primary/10 to-secondary/10 rounded-2xl blur opacity-30"></div>
+                            <div className="relative flex items-center bg-white rounded-2xl shadow-lg p-1.5 border border-gray-100">
+                                <FaSearch className="ml-4 text-gray-400" />
+                                <input
+                                    type="text"
+                                    value={query}
+                                    onChange={(e) => {
+                                        setQuery(e.target.value);
+                                        if (e.target.value.length === 0) {
+                                            setFilters(prev => ({ ...prev, search: '' }));
+                                            setShowSuggestions(false);
+                                        }
+                                    }}
+                                    onFocus={() => { if (query.length > 1 && suggestions.length > 0) setShowSuggestions(true); }}
+                                    onKeyDown={(e) => { if (e.key === 'Enter') handleSearchSubmit(); }}
+                                    placeholder="Search by college name, course or city..."
+                                    className="w-full bg-transparent border-0 focus:ring-0 text-gray-900 placeholder-gray-400 h-12 px-4 text-base outline-none"
+                                />
+                                <button
+                                    onClick={handleSearchSubmit}
+                                    className="bg-primary hover:bg-secondary text-white rounded-xl h-10 px-6 font-bold transition-colors flex items-center gap-2 shrink-0"
+                                >
+                                    Find Colleges
+                                </button>
+                            </div>
                             {/* Suggestions Dropdown */}
                             {showSuggestions && suggestions.length > 0 && (
                                 <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden max-h-80 overflow-y-auto">
-                                    {suggestions.map((item) => (
+                                    {suggestions.map((item: any) => (
                                         <div
                                             key={item._id}
                                             onClick={() => {
                                                 setQuery(item.name);
-                                                setFilters({ ...filters, search: item.name });
+                                                setFilters(prev => ({ ...prev, search: item.name }));
                                                 setPage(1);
                                                 setShowSuggestions(false);
                                             }}
-                                            className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0 flex items-center justify-between group"
+                                            className="px-5 py-3.5 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0 flex items-center justify-between group/s"
                                         >
                                             <div>
-                                                <div className="text-sm font-medium text-gray-800 group-hover:text-brand-blue">
-                                                    {item.name}
-                                                </div>
-                                                <div className="text-xs text-gray-500 flex items-center gap-1">
+                                                <div className="text-sm font-semibold text-gray-800 group-hover/s:text-primary">{item.name}</div>
+                                                <div className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
+                                                    <FaMapMarkerAlt className="text-[10px]" />
                                                     {item.location?.city}, {item.location?.state}
-                                                    {item.type && <span className="px-1.5 py-0.5 bg-gray-100 rounded text-[10px]">{item.type}</span>}
+                                                    {item.type && <span className="ml-1 px-1.5 py-0.5 bg-gray-100 rounded text-[10px]">{item.type}</span>}
                                                 </div>
                                             </div>
-                                            <div className="text-gray-300 group-hover:text-brand-orange">
-                                                <FaChevronRight className="text-xs" />
-                                            </div>
+                                            <FaArrowRight className="text-xs text-gray-300 group-hover/s:text-primary" />
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
-                        <button onClick={(e) => handleSearchSubmit(e)} className="bg-brand-orange text-white px-8 py-3 rounded-lg font-bold hover:bg-orange-600 transition shadow-lg">
-                            Search
-                        </button>
-                    </div>
 
-                    {/* Result Count & Active Filters */}
-                    <div className="mb-4 flex justify-between items-center">
-                        <p className="text-gray-500 font-medium">Found <span className="text-brand-blue font-bold">{colleges.length}</span> Colleges</p>
-                        <select
-                            value={filters.sort}
-                            onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
-                            className="bg-white border border-gray-200 rounded px-3 py-1.5 text-sm outline-none focus:border-brand-blue"
-                        >
-                            <option value="nirfRank">Sort by Ranking</option>
-                            <option value="fees_low">Fees: Low to High</option>
-                            <option value="fees_high">Fees: High to Low</option>
-                        </select>
-                    </div>
+                        {/* Active Filter Chips */}
+                        {activeChips.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-5">
+                                {activeChips.map((chip, i) => (
+                                    <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/5 border border-primary/20 text-primary text-xs font-semibold rounded-full">
+                                        {chip.label}
+                                        <button onClick={chip.onRemove} className="hover:text-red-500 transition-colors"><FaTimes className="text-[10px]" /></button>
+                                    </span>
+                                ))}
+                                <button onClick={clearAllFilters} className="text-xs font-bold text-gray-500 hover:text-primary px-2">Clear all</button>
+                            </div>
+                        )}
 
-                    {/* College Listing */}
-                    {loading ? (
-                        <div className="py-20 flex justify-center"><div className="animate-spin rounded-full h-10 w-10 border-2 border-brand-blue border-t-transparent"></div></div>
-                    ) : (
-                        <div className="space-y-4">
-                            {colleges.length > 0 ? (
-                                colleges.map(college => (
-                                    <div key={college._id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col md:flex-row gap-6 hover:shadow-md transition-all group">
-                                        <div className="w-full md:w-48 h-32 md:h-auto bg-gray-100 rounded-lg shrink-0 flex items-center justify-center overflow-hidden relative">
-                                            {college.logo ? (
-                                                <img src={college.logo} alt={college.name} className="w-full h-full object-contain p-2" />
-                                            ) : (
-                                                <span className="text-4xl font-bold text-gray-300">{college.name.charAt(0)}</span>
-                                            )}
-
-                                            <div className="absolute top-2 left-2 bg-white/90 backdrop-blur text-xs font-bold px-2 py-0.5 rounded shadow-sm text-gray-700 uppercase">
-                                                {college.type || 'Institute'}
+                        {/* College Cards */}
+                        {loading ? (
+                            <div className="grid grid-cols-1 gap-4">
+                                {Array.from({ length: 5 }).map((_, i) => (
+                                    <div key={i} className="bg-white rounded-xl border border-gray-200 p-5">
+                                        <div className="flex gap-5">
+                                            <div className="shrink-0">
+                                                <div className="w-28 h-28 rounded-xl bg-gray-200 animate-pulse" />
                                             </div>
-                                        </div>
-
-                                        <div className="flex-1 py-1">
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-brand-blue transition-colors">
-                                                        <Link href={`/tools/colleges/${college.slug}`}>{college.name}</Link>
-                                                    </h3>
-                                                    <p className="text-sm text-gray-500 flex items-center gap-1 mb-3">
-                                                        <FaMapMarkerAlt />
-                                                        {college.location.city ? `${college.location.city}, ` : ''}
-                                                        {college.location.state || college.location.address || 'India'}
-                                                    </p>
+                                            <div className="flex-1 min-w-0 space-y-4">
+                                                <div className="h-6 bg-gray-200 rounded-lg animate-pulse w-3/4" />
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
+                                                    {Array.from({ length: 6 }).map((_, j) => (
+                                                        <div key={j} className="h-4 bg-gray-100 rounded-md animate-pulse" style={{ width: `${65 + (j % 3) * 12}%` }} />
+                                                    ))}
                                                 </div>
-                                                {college.nirfRank && (
-                                                    <div className="text-right">
-                                                        <span className="block text-xs text-gray-500 font-bold uppercase tracking-wider">NIRF Rank</span>
-                                                        <span className="text-xl font-bold text-brand-blue">#{college.nirfRank}</span>
-                                                    </div>
-                                                )}
-                                                {!college.nirfRank && college.rating && (
-                                                    <div className="text-right">
-                                                        <span className="block text-xs text-gray-500 font-bold uppercase tracking-wider">Rating</span>
-                                                        <span className="text-lg font-bold text-brand-orange">{college.rating}</span>
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-                                                <div className="bg-blue-50/50 p-2 rounded border border-blue-100/50">
-                                                    <span className="block text-xs text-gray-500 font-medium whitespace-nowrap overflow-hidden text-ellipsis">Courses Offered</span>
-                                                    <div className="text-sm font-bold text-gray-800 line-clamp-2">
-                                                        {college.coursesOffered && college.coursesOffered.length > 0
-                                                            ? college.coursesOffered.slice(0, 3).map((c: any) => c.courseName).join(', ') + (college.coursesOffered.length > 3 ? '...' : '')
-                                                            : (college.streams?.join(', ') || 'View Details')}
-                                                    </div>
+                                                <div className="flex gap-3 mt-2">
+                                                    <div className="h-9 w-40 bg-gray-200 rounded-lg animate-pulse" />
+                                                    <div className="h-9 w-28 bg-gray-100 rounded-lg animate-pulse" />
                                                 </div>
-
-                                                <div className="bg-green-50/50 p-2 rounded border border-green-100/50">
-                                                    <span className="block text-xs text-gray-500 font-medium">Avg Fees</span>
-                                                    <span className="text-sm font-bold text-green-700">
-                                                        {college.coursesOffered?.[0]?.fee > 0
-                                                            ? `₹ ${(college.coursesOffered[0].fee).toLocaleString('en-IN')}`
-                                                            : (college.fees?.tuition ? `₹ ${(college.fees.tuition).toLocaleString('en-IN')}` : 'Check Website')}
-                                                    </span>
-                                                </div>
-
-                                                <div className="bg-purple-50/50 p-2 rounded border border-purple-100/50 hidden md:block">
-                                                    <span className="block text-xs text-gray-500 font-medium">Ownership</span>
-                                                    <span className="text-sm font-bold text-purple-700 capitalize">
-                                                        {college.type || 'Private'}
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <div className="flex gap-3">
-                                                <a
-                                                    href={college.website}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex-1 bg-brand-orange text-white text-center py-2.5 rounded-lg font-bold text-sm hover:bg-orange-600 transition shadow opacity-90 hover:opacity-100"
-                                                >
-                                                    Visit Website
-                                                </a>
-                                                <Link href={`/tools/colleges/${college.slug}`} className="flex-1 bg-white text-gray-800 border border-gray-300 text-center py-2.5 rounded-lg font-bold text-sm hover:bg-gray-50 transition">
-                                                    View Details
-                                                </Link>
                                             </div>
                                         </div>
                                     </div>
-                                ))
-                            ) : (
-                                <div className="text-center py-24 bg-white rounded-xl border border-dashed border-gray-300">
-                                    {filters.goal.includes('Study Abroad') && !filters.goal.includes('Colleges') ? (
-                                        <>
-                                            <div className="text-6xl mb-4">✈️</div>
-                                            <h3 className="text-xl font-bold text-gray-800 mb-2">Study Abroad Programs</h3>
-                                            <p className="text-gray-500 max-w-md mx-auto">
-                                                Study Abroad programs are not listed on this page.<br />
-                                                Select <strong>"Colleges"</strong> in the Goal filter to view college listings.
-                                            </p>
-                                            <button
-                                                onClick={() => handleCheckboxChange('goal', 'Colleges')}
-                                                className="mt-6 bg-brand-blue text-white px-6 py-2.5 rounded-lg font-bold hover:bg-blue-700 transition"
-                                            >
-                                                Show Colleges Instead
-                                            </button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <div className="text-6xl mb-4">🔍</div>
-                                            <h3 className="text-xl font-bold text-gray-800 mb-2">No colleges found</h3>
-                                            <p className="text-gray-500">We couldn't find any results matching your filters.</p>
-                                            <button
-                                                onClick={() => setFilters({ search: '', state: [], city: '', type: '', stream: [], degree: [], targetYear: [], goal: [], sort: 'nirfRank' })}
-                                                className="mt-6 text-brand-blue font-bold hover:underline"
-                                            >
-                                                Clear all filters
-                                            </button>
-                                        </>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    )}
-
-                    {/* Pagination */}
-                    {!loading && colleges.length > 0 && totalPages > 1 && (
-                        <div className="flex justify-center items-center mt-10 mb-4 gap-1">
-                            {page > 1 && (
-                                <button
-                                    onClick={() => safeSetPage(p => p - 1)}
-                                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition-colors"
-                                >
-                                    ← Prev
-                                </button>
-                            )}
-
-                            <div className="flex items-center gap-1 mx-2">
-                                {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
-                                    <button
-                                        key={pageNum}
-                                        onClick={() => safeSetPage(pageNum)}
-                                        className={`w-10 h-10 flex items-center justify-center text-sm font-medium rounded-lg transition-all duration-200 ${page === pageNum
-                                            ? 'bg-brand-blue text-white shadow-md shadow-blue-200'
-                                            : 'text-gray-600 hover:bg-gray-100 border border-gray-200'
-                                            }`}
-                                    >
-                                        {pageNum}
-                                    </button>
                                 ))}
                             </div>
+                        ) : (
+                            <div className="grid grid-cols-1 gap-4">
+                                {colleges.length > 0 ? colleges.map((college: any) => (
+                                    <div
+                                        key={college._id}
+                                        className="group bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-all duration-200"
+                                    >
+                                        <div className="flex gap-5">
+                                            {/* Left - Logo */}
+                                            <div className="shrink-0">
+                                                <div className="w-28 h-28 rounded-xl border-2 border-gray-200 p-2 bg-white flex items-center justify-center">
+                                                    {college.logo ? (
+                                                        <img src={college.logo} alt={college.name} className="w-full h-full object-contain" />
+                                                    ) : (
+                                                        <FaUniversity className="text-4xl text-gray-300" />
+                                                    )}
+                                                </div>
+                                            </div>
 
-                            {page < totalPages && (
-                                <button
-                                    onClick={() => safeSetPage(p => p + 1)}
-                                    className="px-4 py-2.5 text-sm font-semibold text-brand-blue border-2 border-brand-blue hover:bg-brand-blue hover:text-white rounded-lg transition-all duration-200 flex items-center gap-1"
-                                >
-                                    Next <span className="text-lg">→</span>
-                                </button>
-                            )}
-                        </div>
-                    )}
+                                            {/* Middle - Info */}
+                                            <div className="flex-1 min-w-0">
+                                                {/* College Name */}
+                                                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                                                    <Link href={`/tools/colleges/${college.slug}`}>{college.name}</Link>
+                                                </h3>
 
-                    {!loading && hasMoreResults && (
-                        <div className="flex justify-center mt-4 mb-2">
-                            <div className="inline-flex items-center gap-2 px-5 py-3 bg-linear-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl text-sm">
-                                <span className="text-amber-600 text-lg">💡</span>
-                                <span className="text-amber-800 font-medium">
-                                    Showing top results only
-                                </span>
-                                <span className="text-amber-600">—</span>
-                                <span className="text-amber-700">
-                                    apply more filters to refine the list
-                                </span>
-                                <button
-                                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                    className="ml-2 text-amber-700 hover:text-amber-900 font-semibold flex items-center gap-1 hover:underline"
-                                >
-                                    <FaFilter className="text-xs" /> Filters ↑
-                                </button>
+                                                {/* Info Grid - 3 columns */}
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2.5 text-sm mb-3">
+                                                    {/* Ownership */}
+                                                    <div className="flex items-center gap-2 text-gray-700">
+                                                        <svg className="w-4 h-4 text-secondary shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                                                        </svg>
+                                                        <span className="font-medium">Ownership:</span>
+                                                        <span>{college.type || 'Private'}</span>
+                                                    </div>
+
+                                                    {/* Location */}
+                                                    <div className="flex items-center gap-2 text-gray-700">
+                                                        <FaMapMarkerAlt className="text-secondary shrink-0" />
+                                                        <span>{college.location?.city ? `${college.location.city}, ` : ''}{college.location?.state || 'India'}</span>
+                                                    </div>
+
+                                                    {/* NIRF Ranking */}
+                                                    <div className="flex items-center gap-2 text-gray-700">
+                                                        <svg className="w-4 h-4 text-secondary shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                        </svg>
+                                                        <span className="font-medium">NIRF:</span>
+                                                        <span className="font-bold text-primary">#{college.nirfRank || 'N/A'}</span>
+                                                    </div>
+
+                                                    {/* Rating */}
+                                                    <div className="flex items-center gap-2 text-gray-700">
+                                                        <FaStar className="text-secondary shrink-0" />
+                                                        <span className="font-medium">Rating:</span>
+                                                        <span>{college.rating ? `${college.rating}/5` : 'N/A'}</span>
+                                                    </div>
+
+                                                    {/* Fees */}
+                                                    <div className="flex items-center gap-2 text-gray-700">
+                                                        <svg className="w-4 h-4 text-secondary shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd" />
+                                                        </svg>
+                                                        <span className="font-medium">Fees:</span>
+                                                        <span className="font-bold">
+                                                            {college.coursesOffered && college.coursesOffered.length > 0 && college.coursesOffered[0].fee > 0
+                                                                ? `₹${(college.coursesOffered[0].fee / 100000).toFixed(2)} L`
+                                                                : 'N/A'}
+                                                        </span>
+                                                    </div>
+
+                                                    {/* Average Placement */}
+                                                    <div className="flex items-center gap-2 text-gray-700">
+                                                        <svg className="w-4 h-4 text-secondary shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
+                                                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                                                        </svg>
+                                                        <span className="font-medium">Avg Package:</span>
+                                                        <span className="font-bold">
+                                                            {college.placements?.averagePackage 
+                                                                ? `₹${(college.placements.averagePackage / 100000).toFixed(2)} LPA`
+                                                                : 'N/A'}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Action Buttons - Below Info */}
+                                                <div className="flex gap-3 mt-2">
+                                                    {college.brochureUrl ? (
+                                                        <a
+                                                            href={college.brochureUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="px-5 py-2 bg-secondary text-white font-semibold rounded-lg text-sm flex items-center gap-2"
+                                                        >
+                                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
+                                                            </svg>
+                                                            Download Brochure
+                                                        </a>
+                                                    ) : college.website ? (
+                                                        <a
+                                                            href={college.website}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="px-5 py-2 bg-secondary text-white font-semibold rounded-lg text-sm flex items-center gap-2"
+                                                        >
+                                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+                                                            </svg>
+                                                            Visit Website
+                                                        </a>
+                                                    ) : null}
+                                                    <button className="px-5 py-2 bg-white border-2 border-primary text-primary font-semibold rounded-lg text-sm hover:bg-primary hover:text-white transition-all duration-200 flex items-center gap-2">
+                                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                                                            <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                                                        </svg>
+                                                        Compare
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )) : (
+                                    /* Empty State */
+                                    <div className="text-center py-24 bg-white rounded-xl border border-dashed border-gray-300">
+                                        <div className="text-6xl mb-4">🔍</div>
+                                        <h3 className="text-xl font-bold text-gray-800 mb-2">No colleges found</h3>
+                                        <p className="text-gray-500">We couldn&apos;t find any results matching your filters.</p>
+                                        <button onClick={clearAllFilters} className="mt-6 text-primary font-bold hover:underline">Clear all filters</button>
+                                    </div>
+                                )}
+
+                                {/* Pagination */}
+                                {colleges.length > 0 && totalPages > 1 && (
+                                    <div className="py-10 flex justify-center">
+                                        <div className="flex items-center gap-1">
+                                            {page > 1 && (
+                                                <button
+                                                    onClick={() => { setPage(p => p - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
+                                                >
+                                                    ← Prev
+                                                </button>
+                                            )}
+                                            {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                                                let pageNum: number;
+                                                if (totalPages <= 5) pageNum = i + 1;
+                                                else if (page <= 3) pageNum = i + 1;
+                                                else if (page >= totalPages - 2) pageNum = totalPages - 4 + i;
+                                                else pageNum = page - 2 + i;
+                                                return (
+                                                    <button
+                                                        key={pageNum}
+                                                        onClick={() => { setPage(pageNum); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                                        className={`w-10 h-10 flex items-center justify-center text-sm font-medium rounded-lg transition-all ${
+                                                            page === pageNum
+                                                                ? 'bg-primary text-white shadow-md'
+                                                                : 'text-gray-600 hover:bg-gray-100 border border-gray-200'
+                                                        }`}
+                                                    >
+                                                        {pageNum}
+                                                    </button>
+                                                );
+                                            })}
+                                            {page < totalPages && (
+                                                <button
+                                                    onClick={() => { setPage(p => p + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                                    className="px-4 py-2.5 text-sm font-semibold text-primary border-2 border-primary/20 hover:bg-primary hover:text-white rounded-lg transition-all"
+                                                >
+                                                    Next →
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
-
-            </div>
+            </main>
         </div>
     );
 };

@@ -79,12 +79,15 @@ const FeaturedColleges: React.FC = () => {
     };
 
     const SkeletonCard = () => (
-        <div className="shrink-0 w-85 bg-white rounded-2xl overflow-hidden shadow-md animate-pulse">
-            <div className="h-48 bg-gray-200"></div>
+        <div className="shrink-0 w-85 bg-white rounded-2xl overflow-hidden shadow-md">
+            <div className="h-48 bg-gray-200 animate-pulse"></div>
             <div className="p-5 space-y-3">
-                <div className="h-5 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                <div className="h-5 bg-gray-200 rounded-lg w-3/4 animate-pulse"></div>
+                <div className="h-4 bg-gray-100 rounded-md w-1/2 animate-pulse"></div>
+                <div className="flex gap-2 mt-2">
+                    <div className="h-6 w-16 bg-gray-100 rounded-full animate-pulse"></div>
+                    <div className="h-6 w-20 bg-gray-100 rounded-full animate-pulse"></div>
+                </div>
             </div>
         </div>
     );

@@ -23,7 +23,7 @@ const PillSection: React.FC<PillSectionProps> = ({ title, items, color = "border
             <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-bold font-heading text-gray-900 pl-3 border-l-4 border-brand-orange">{title}</h2>
                 <Link href="#" className="flex items-center gap-2 text-sm font-bold text-brand-indigo hover:text-brand-orange transition-colors group">
-                    View All <span className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center group-hover:bg-brand-orange group-hover:text-white transition-all"><FaArrowRight className="text-xs" /></span>
+                    View All <span className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center group-hover:bg-brand-orange group-hover:text-white transition-all"><FaArrowRight className="text-xs" /></span>
                 </Link>
             </div>
 

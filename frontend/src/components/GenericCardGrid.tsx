@@ -46,7 +46,7 @@ const Section: React.FC<SectionProps> = ({ title, items, type = 'card', viewAllL
                         <h2 className="text-2xl md:text-3xl font-heading font-bold text-gray-900">{title}</h2>
                     </div>
                     <Link href={viewAllLink || (title.includes('Colleges') ? '/tools/colleges' : '#')} className="flex items-center gap-2 text-sm font-bold text-brand-indigo hover:text-brand-orange transition-colors group">
-                        View All <span className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center group-hover:bg-brand-orange group-hover:text-white transition-all"><FaArrowRight className="text-xs" /></span>
+                        View All <span className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center group-hover:bg-brand-orange group-hover:text-white transition-all"><FaArrowRight className="text-xs" /></span>
                     </Link>
                 </div>
 
@@ -124,7 +124,7 @@ const Section: React.FC<SectionProps> = ({ title, items, type = 'card', viewAllL
                                         </div>
 
                                         <div className="p-4 bg-white border-t border-gray-100 flex gap-3 mt-auto relative z-20 pointer-events-auto">
-                                            <button className="flex-1 py-3 rounded-xl text-xs font-bold border border-gray-200 text-gray-600 hover:text-brand-indigo hover:border-brand-indigo hover:bg-indigo-50 transition-all flex items-center justify-center gap-2">
+                                            <button className="flex-1 py-3 rounded-xl text-xs font-bold border border-gray-200 text-gray-600 hover:text-brand-indigo hover:border-brand-indigo hover:bg-teal-50 transition-all flex items-center justify-center gap-2">
                                                 <FaDownload /> Brochure
                                             </button>
                                             <Link href={item.link || item.href || '#'} className="flex-1 py-3 rounded-xl text-xs font-bold bg-brand-orange text-white hover:bg-orange-600 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all flex items-center justify-center gap-2">

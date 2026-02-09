@@ -167,7 +167,7 @@ const Navbar = () => {
                                     </div>
                                 </div>
                             ) : (
-                                <span className="font-display font-bold text-2xl tracking-tight text-primary">COLLEGEDOST</span>
+                                <span className="font-display font-bold text-2xl tracking-tight text-primary">COLLEGE DOST</span>
                             )}
                         </Link>
 
@@ -354,7 +354,7 @@ const Navbar = () => {
                     <div className="fixed top-0 left-0 h-screen w-[85%] max-w-100 bg-white z-1000 lg:hidden shadow-2xl flex flex-col">
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 border-b border-gray-100">
-                            <span className="font-display font-bold text-xl text-primary">COLLEGEDOST</span>
+                            <span className="font-display font-bold text-xl text-primary">COLLEGE DOST</span>
                             <button
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500"

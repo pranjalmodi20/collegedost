@@ -104,7 +104,7 @@ const HeroNew: React.FC<HeroProps> = ({
                             {title || (
                                 <>
                                     Empowering Your <br/>
-                                    <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-purple-300">Academic Journey</span>
+                                    <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-300 to-amber-300">Academic Journey</span>
                                 </>
                             )}
                         </h1>

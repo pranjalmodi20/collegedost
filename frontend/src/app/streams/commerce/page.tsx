@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import PageContent from "./content";
-import { PageLoader } from '@/components/ui';
+import { StreamPageSkeleton } from '@/components/ui';
 
 /**
  * SEO Metadata for Commerce stream page.
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
  */
 export default function CommercePage() {
     return (
-        <Suspense fallback={<PageLoader />}>
+        <Suspense fallback={<StreamPageSkeleton />}>
             <PageContent />
         </Suspense>
     );

@@ -99,12 +99,13 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
                 }
             } catch (err: any) {
                 const isCanceled = err?.name === 'AbortError' || err?.name === 'CanceledError' || err?.code === 'ERR_CANCELED';
-                if (!isCanceled) {
-                    console.error('Error fetching college:', err);
-                    setError(err.response?.data?.message || 'Failed to load college data');
-                }
+                if (isCanceled) return; // Don't update state for aborted requests
+                console.error('Error fetching college:', err);
+                setError(err.response?.data?.message || 'Failed to load college data');
             } finally {
-                setLoading(false);
+                if (!abortController.signal.aborted) {
+                    setLoading(false);
+                }
             }
         };
         
@@ -177,10 +178,131 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
     // --- Loading / Error / Not Found states ---
     if (loading) {
         return (
-            <div className="min-h-screen flex justify-center items-center bg-background-light">
-                <div className="flex flex-col items-center gap-4">
-                    <div className="animate-spin h-12 w-12 border-4 border-primary rounded-full border-t-transparent"></div>
-                    <p className="text-text-muted-light font-medium">Loading college details...</p>
+            <div className="min-h-screen bg-background-light">
+                {/* Hero Banner Skeleton */}
+                <div className="relative h-120 w-full bg-gray-800">
+                    <div className="absolute inset-0 bg-linear-to-t from-gray-900/90 via-gray-900/40 to-gray-700/30" />
+                    <div className="absolute bottom-0 left-0 w-full z-10 p-4 sm:p-6 lg:p-8">
+                        <div className="max-w-7xl mx-auto">
+                            <div className="bg-white/10 rounded-2xl p-6 lg:p-8 backdrop-blur-xl border border-white/10">
+                                <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6">
+                                    <div className="space-y-4 flex-1">
+                                        {/* Badges */}
+                                        <div className="flex gap-3">
+                                            <div className="h-7 w-28 bg-white/20 rounded-full animate-pulse" />
+                                            <div className="h-7 w-36 bg-white/15 rounded-full animate-pulse" />
+                                            <div className="h-7 w-24 bg-white/15 rounded-full animate-pulse" />
+                                        </div>
+                                        {/* Title */}
+                                        <div className="h-10 lg:h-14 bg-white/20 rounded-xl animate-pulse w-4/5" />
+                                        {/* Description */}
+                                        <div className="space-y-2">
+                                            <div className="h-4 bg-white/15 rounded-lg animate-pulse w-full max-w-3xl" />
+                                            <div className="h-4 bg-white/10 rounded-lg animate-pulse w-3/5 max-w-2xl" />
+                                        </div>
+                                    </div>
+                                    {/* CTA Buttons */}
+                                    <div className="flex gap-4 shrink-0 w-full lg:w-auto">
+                                        <div className="h-12 w-36 bg-white/15 rounded-xl animate-pulse" />
+                                        <div className="h-12 w-36 bg-white/20 rounded-xl animate-pulse" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Sticky Tabs Skeleton */}
+                <div className="sticky top-16 z-30 bg-white border-b border-gray-200 shadow-sm">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex items-center gap-4 h-14">
+                            {Array.from({ length: 7 }).map((_, i) => (
+                                <div key={i} className="h-4 bg-gray-200 rounded-md animate-pulse" style={{ width: `${60 + (i % 3) * 16}px` }} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Content Skeleton */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+                        {/* Left Column */}
+                        <div className="lg:col-span-8 space-y-10">
+                            {/* Overview Section */}
+                            <div className="bg-white rounded-2xl border border-gray-100 p-6 lg:p-8 space-y-5">
+                                <div className="h-7 bg-gray-200 rounded-lg animate-pulse w-40" />
+                                <div className="space-y-3">
+                                    <div className="h-4 bg-gray-100 rounded-md animate-pulse w-full" />
+                                    <div className="h-4 bg-gray-100 rounded-md animate-pulse w-11/12" />
+                                    <div className="h-4 bg-gray-100 rounded-md animate-pulse w-4/5" />
+                                    <div className="h-4 bg-gray-100 rounded-md animate-pulse w-9/12" />
+                                </div>
+                                {/* Key highlights grid */}
+                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+                                    {Array.from({ length: 4 }).map((_, i) => (
+                                        <div key={i} className="bg-gray-50 rounded-xl p-4 space-y-2">
+                                            <div className="h-4 w-16 bg-gray-200 rounded animate-pulse" />
+                                            <div className="h-6 w-20 bg-gray-200 rounded animate-pulse" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Courses Section */}
+                            <div className="bg-white rounded-2xl border border-gray-100 p-6 lg:p-8 space-y-5">
+                                <div className="h-7 bg-gray-200 rounded-lg animate-pulse w-44" />
+                                <div className="space-y-3">
+                                    {Array.from({ length: 3 }).map((_, i) => (
+                                        <div key={i} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                                            <div className="space-y-2 flex-1">
+                                                <div className="h-5 bg-gray-200 rounded animate-pulse w-48" />
+                                                <div className="h-4 bg-gray-100 rounded animate-pulse w-32" />
+                                            </div>
+                                            <div className="h-5 w-24 bg-gray-200 rounded animate-pulse" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Placements Section */}
+                            <div className="bg-white rounded-2xl border border-gray-100 p-6 lg:p-8 space-y-5">
+                                <div className="h-7 bg-gray-200 rounded-lg animate-pulse w-36" />
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                    {Array.from({ length: 3 }).map((_, i) => (
+                                        <div key={i} className="bg-gray-50 rounded-xl p-5 space-y-2">
+                                            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse" />
+                                            <div className="h-8 w-28 bg-gray-200 rounded animate-pulse" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right Sidebar */}
+                        <div className="lg:col-span-4 space-y-6">
+                            {/* Quick Info Card */}
+                            <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-4">
+                                <div className="h-6 bg-gray-200 rounded-lg animate-pulse w-32" />
+                                <div className="space-y-3">
+                                    {Array.from({ length: 5 }).map((_, i) => (
+                                        <div key={i} className="flex justify-between items-center py-2 border-b border-gray-50">
+                                            <div className="h-4 w-24 bg-gray-100 rounded animate-pulse" />
+                                            <div className="h-4 w-20 bg-gray-200 rounded animate-pulse" />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="h-12 bg-gray-200 rounded-xl animate-pulse" />
+                                <div className="h-12 bg-gray-100 rounded-xl animate-pulse" />
+                            </div>
+                            {/* Ad / CTA Card */}
+                            <div className="bg-gray-50 rounded-2xl border border-gray-100 p-6 space-y-3">
+                                <div className="h-5 w-36 bg-gray-200 rounded animate-pulse" />
+                                <div className="h-4 w-full bg-gray-100 rounded animate-pulse" />
+                                <div className="h-4 w-3/4 bg-gray-100 rounded animate-pulse" />
+                                <div className="h-10 w-full bg-gray-200 rounded-xl animate-pulse mt-2" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

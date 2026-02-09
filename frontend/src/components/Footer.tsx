@@ -21,7 +21,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-1 space-y-4">
             <Link href="/" className="font-display font-bold text-2xl text-white tracking-tight">
-              COLLEGEDOST
+              CollegeDost
             </Link>
             <p className="text-sm leading-relaxed">
               A data-enabled and technology-driven Educational Products and Services Company.
