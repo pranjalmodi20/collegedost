@@ -24,11 +24,22 @@ app.use(cors({
 import auth from './src/routes/auth.routes';
 import users from './src/routes/user.routes';
 import admin from './src/routes/admin.routes';
-// const colleges = require('./src/routes/college.routes'); // To be added later
+import colleges from './src/routes/college.routes';
+import predictor from './src/routes/predictor.routes';
+import reviews from './src/routes/review.routes';
+import articles from './src/routes/article.routes';
+import exams from './src/routes/exam.routes';
+import courses from './src/routes/course.routes';
 
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 app.use('/api/admin', admin);
+app.use('/api/colleges', colleges);
+app.use('/api/predictor', predictor);
+app.use('/api/reviews', reviews);
+app.use('/api/articles', articles);
+app.use('/api/exams', exams);
+app.use('/api/courses', courses);
 
 // Base route
 app.get('/', (req: Request, res: Response) => {
