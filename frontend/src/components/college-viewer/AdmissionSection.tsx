@@ -2,14 +2,16 @@ import React from 'react';
 import {
     FaCalendarAlt, FaClipboardList, FaFileAlt, FaCheckCircle
 } from 'react-icons/fa';
+import { CollegeData } from './types';
 
 interface AdmissionSectionProps {
+    college: CollegeData;
     sectionRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const AdmissionSection: React.FC<AdmissionSectionProps> = ({ sectionRef }) => {
+const AdmissionSection: React.FC<AdmissionSectionProps> = ({ college, sectionRef }) => {
     return (
-        <div 
+        <div
             ref={sectionRef}
             id="admission"
             className="bg-surface-light rounded-2xl p-6 lg:p-8 shadow-sm border border-gray-200 transition-colors duration-300"
@@ -18,7 +20,37 @@ const AdmissionSection: React.FC<AdmissionSectionProps> = ({ sectionRef }) => {
                 <span className="w-2 h-8 bg-linear-to-b from-primary to-blue-500 rounded-full"></span>
                 Admissions
             </h2>
-            
+
+            {/* Cutoffs Section */}
+            {college.cutoffs && college.cutoffs.length > 0 && (
+                <div className="mb-10">
+                    <h3 className="font-bold text-lg text-text-main-light mb-4 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Expected Cutoffs 2024
+                    </h3>
+                    <div className="overflow-x-auto rounded-xl border border-gray-100">
+                        <table className="w-full text-left text-sm">
+                            <thead className="bg-gray-50 text-text-muted-light font-bold">
+                                <tr>
+                                    <th className="p-4">Rank Category</th>
+                                    <th className="p-4">Exam</th>
+                                    <th className="p-4">Closing Rank</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-50">
+                                {college.cutoffs.map((cutoff, idx) => (
+                                    <tr key={idx} className="hover:bg-gray-50/50">
+                                        <td className="p-4 font-medium">{cutoff.branch} ({cutoff.category})</td>
+                                        <td className="p-4">{cutoff.exam}</td>
+                                        <td className="p-4 font-bold text-primary">{cutoff.closingRank}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )}
+
             {/* Important Dates */}
             <div className="mb-8">
                 <h3 className="font-bold text-lg text-text-main-light mb-4 flex items-center gap-2">

@@ -10,7 +10,7 @@ interface CoursesSectionProps {
 
 const CoursesSection: React.FC<CoursesSectionProps> = ({ college, sectionRef, scrollToSection }) => {
     return (
-        <div 
+        <div
             ref={sectionRef}
             id="courses"
             className="bg-surface-light rounded-2xl shadow-sm border border-gray-200 overflow-hidden transition-colors duration-300"
@@ -19,7 +19,7 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ college, sectionRef, sc
                 <h2 className="text-xl lg:text-2xl font-display font-bold text-text-main-light">
                     Courses, Fees &amp; Eligibility
                 </h2>
-                <button 
+                <button
                     onClick={() => scrollToSection('admission')}
                     className="text-xs font-bold text-primary hover:text-secondary uppercase tracking-wide flex items-center gap-1"
                 >
@@ -41,7 +41,7 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ college, sectionRef, sc
                             college.coursesOffered.slice(0, 5).map((course: any, idx: number) => (
                                 <tr key={idx} className="hover:bg-gray-50 transition-colors">
                                     <td className="p-5 pl-8">
-                                        <div className="font-bold text-base text-text-main-light mb-1">{course.courseName}</div>
+                                        <div className="font-bold text-base text-text-main-light mb-1">{course.name}</div>
                                         <div className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-700">
                                             {course.duration || '4 Years'} | Full Time
                                         </div>
@@ -53,7 +53,7 @@ const CoursesSection: React.FC<CoursesSectionProps> = ({ college, sectionRef, sc
                                         {course.eligibility || 'Check eligibility'}
                                     </td>
                                     <td className="p-5 pr-8 text-right">
-                                        <button 
+                                        <button
                                             onClick={() => scrollToSection('admission')}
                                             className="text-primary font-bold hover:text-secondary text-xs uppercase border border-primary/20 hover:border-primary px-3 py-1.5 rounded transition-all"
                                         >

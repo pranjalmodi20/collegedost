@@ -20,7 +20,7 @@ export interface CollegeData {
     placementStats?: any;
     placements?: any;
     infrastructure?: any;
-    cutoff?: any[];
+    cutoffs?: any[];
     admissionProcess?: any;
     website?: string;
     brochureUrl?: string;

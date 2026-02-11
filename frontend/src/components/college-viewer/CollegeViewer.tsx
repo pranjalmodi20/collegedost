@@ -24,7 +24,7 @@ interface CollegeViewerProps {
 
 const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
     const params = useParams();
-    
+
     // Safely handle slug param (can be string | string[] | undefined)
     const rawSlug = params?.slug;
     const slug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug || '';
@@ -41,7 +41,7 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
     const [hasMoreReviews, setHasMoreReviews] = useState(true);
     const [isLoadingReviews, setIsLoadingReviews] = useState(false);
     const [totalReviewCount, setTotalReviewCount] = useState<number>(0);
-    
+
     const sectionRefs = {
         overview: useRef<HTMLDivElement>(null),
         courses: useRef<HTMLDivElement>(null),
@@ -82,9 +82,9 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
     // Fetch college data
     useEffect(() => {
         if (initialData) return;
-        
+
         const abortController = new AbortController();
-        
+
         const fetchCollege = async () => {
             try {
                 setLoading(true);
@@ -108,7 +108,7 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
                 }
             }
         };
-        
+
         if (slug) {
             fetchCollege();
         }
@@ -127,18 +127,18 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
 
     const fetchReviews = async (page: number = 1) => {
         if (!college?._id) return;
-        
+
         try {
             setIsLoadingReviews(true);
             const response = await api.get(`/reviews/college/${college._id}?page=${page}&limit=5`);
             const reviewsData = response.data?.data || [];
-            
+
             if (page === 1) {
                 setReviews(reviewsData);
             } else {
                 setReviews(prev => [...prev, ...reviewsData]);
             }
-            
+
             const totalPages = Number(response.data?.pages || 0);
             const totalCount = Number(response.data?.total || 0);
             setHasMoreReviews(totalPages > 0 ? page < totalPages : false);
@@ -359,11 +359,10 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
                             <button
                                 key={tab.id}
                                 onClick={() => scrollToSection(tab.id)}
-                                className={`h-full flex items-center px-4 text-sm whitespace-nowrap font-medium transition-all ${
-                                    activeTab === tab.id 
-                                        ? 'text-primary border-b-[3px] border-primary font-bold bg-primary/5' 
+                                className={`h-full flex items-center px-4 text-sm whitespace-nowrap font-medium transition-all ${activeTab === tab.id
+                                        ? 'text-primary border-b-[3px] border-primary font-bold bg-primary/5'
                                         : 'text-text-muted-light hover:text-primary hover:bg-gray-50'
-                                }`}
+                                    }`}
                             >
                                 {tab.label}
                             </button>
@@ -375,23 +374,23 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
             {/* Main Content Grid */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-                    
+
                     {/* Left Content Column */}
                     <div className="lg:col-span-8 space-y-10">
                         <OverviewSection college={college} sectionRef={sectionRefs.overview} />
                         <CoursesSection college={college} sectionRef={sectionRefs.courses} scrollToSection={scrollToSection} />
-                        <AdmissionSection sectionRef={sectionRefs.admission} />
+                        <AdmissionSection college={college} sectionRef={sectionRefs.admission} />
                         <PlacementsSection college={college} sectionRef={sectionRefs.placement} />
                         <ScholarshipsSection sectionRef={sectionRefs.scholarship} scrollToSection={scrollToSection} />
-                        <GallerySection 
-                            college={college} 
-                            sectionRef={sectionRefs.gallery} 
+                        <GallerySection
+                            college={college}
+                            sectionRef={sectionRefs.gallery}
                             onOpenLightbox={(index) => {
                                 setIsGalleryOpen(true);
                                 setSelectedImageIndex(index);
                             }}
                         />
-                        <ReviewsSection 
+                        <ReviewsSection
                             college={college}
                             sectionRef={sectionRefs.reviews}
                             reviews={reviews}
@@ -404,7 +403,7 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
 
                     {/* Right Sidebar Column */}
                     <div className="lg:col-span-4">
-                        <CollegeSidebar 
+                        <CollegeSidebar
                             college={college}
                             isShortlisted={isShortlisted}
                             onToggleShortlist={() => setIsShortlisted(!isShortlisted)}
