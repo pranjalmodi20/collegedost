@@ -1387,10 +1387,14 @@ export const counsellingData = [
 ];
 
 export const navLinks = [
-  { title: 'Browse by Stream', href: '#', hasDropdown: true },
-  { title: 'Colleges', href: '/tools/colleges', hasDropdown: true },
-  { title: 'Exams', href: '#', hasDropdown: true },
-  { title: 'News', href: '/tools/news', hasDropdown: false }
+  { title: 'MBA', href: '/management', hasDropdown: true, streamId: 'management' },
+  { title: 'Engineering', href: '/engineering', hasDropdown: true, streamId: 'engineering' },
+  { title: 'Medical', href: '/medicine', hasDropdown: true, streamId: 'medical' },
+  { title: 'Design', href: '/streams/design', hasDropdown: true, streamId: 'animation' },
+  { title: 'More', href: '#', hasDropdown: true, streamId: 'streams' },
+  { title: 'Study Abroad', href: '#', hasDropdown: true, streamId: 'abroad' },
+  { title: 'Counselling', href: '#', hasDropdown: false, streamId: 'counselling' },
+  { title: 'Online Courses', href: '/tools/courses', hasDropdown: false, streamId: 'online-courses' },
 ];
 
 export const heroTabs = [

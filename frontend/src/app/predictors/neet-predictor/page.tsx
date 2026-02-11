@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function NEETPredictorPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen flex justify-center items-center"><div className="animate-spin rounded-full h-10 w-10 border-2 border-green-600 border-t-transparent"></div></div>}>
+        <Suspense fallback={<div className="min-h-screen flex justify-center items-center bg-slate-50"><div className="animate-spin rounded-full h-10 w-10 border-2 border-indigo-600 border-t-transparent" /></div>}>
             <PageContent />
         </Suspense>
     );
