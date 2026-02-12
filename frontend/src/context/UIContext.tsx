@@ -9,8 +9,6 @@ interface UIContextType {
     isShareModalOpen: boolean;
     openShareModal: () => void;
     closeShareModal: () => void;
-    isAuthModalOpen: boolean; // Re-exporting or separate? AuthContext already has it.
-    // Actually, AuthContext manages AuthModal. Let's keep UIContext for Ask/Share.
 }
 
 const UIContext = createContext<UIContextType | undefined>(undefined);
@@ -33,7 +31,6 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
             isShareModalOpen,
             openShareModal,
             closeShareModal,
-            isAuthModalOpen: false, // Placeholder if needed, but AuthContext handles this.
         }}>
             {children}
         </UIContext.Provider>

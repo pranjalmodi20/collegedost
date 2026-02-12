@@ -7,14 +7,14 @@ import api from '../api/axios';
 import Link from 'next/link';
 import CollegeCarousel from './CollegeCarousel';
 
-interface HeroProps {
+interface HomeHeroProps {
     title?: React.ReactNode;
     subtitle?: React.ReactNode;
     trending?: { text: string; link: string }[];
     showBadge?: boolean;
 }
 
-const HeroNew: React.FC<HeroProps> = ({
+const HomeHero: React.FC<HomeHeroProps> = ({
     title,
     subtitle = "Navigate your career path with personalized insights, real-time data, and expert counseling. Discover colleges, exams, and courses tailored for your success.",
     trending = [
@@ -253,4 +253,4 @@ const HeroNew: React.FC<HeroProps> = ({
     );
 };
 
-export default HeroNew;
+export default HomeHero;
