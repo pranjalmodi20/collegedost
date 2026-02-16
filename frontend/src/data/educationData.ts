@@ -1,10 +1,10 @@
 
 export const educationRankings = [
     { name: "Top Education Colleges in India", link: "/tools/colleges?goal=Colleges&search=Education" },
-    { name: "Best B.Ed Colleges in India", link: "/tools/colleges?goal=Colleges&degree=B.Ed" },
+    { name: "Best B.Ed Colleges in India", link: "/tools/colleges?goal=Colleges&search=B.Ed" },
     { name: "Education Colleges in Delhi", link: "/tools/colleges?goal=Colleges&state=Delhi&search=Education" },
-    { name: "Top M.Ed Colleges", link: "/tools/colleges?goal=Colleges&degree=M.Ed" },
-    { name: "Government B.Ed Colleges", link: "/tools/colleges?goal=Colleges&type=Government&search=B.Ed" },
+    { name: "Top M.Ed Colleges", link: "/tools/colleges?goal=Colleges&search=M.Ed" },
+    { name: "Government B.Ed Colleges", link: "/tools/colleges?goal=Colleges&ownership=Government&search=B.Ed" },
     { name: "D.El.Ed Colleges", link: "/tools/colleges?goal=Colleges&search=D.El.Ed" },
     { name: "Top Teacher Training Institutes", link: "/tools/colleges?goal=Colleges&search=Teacher Training" },
     { name: "NCTE Approved Colleges", link: "/tools/colleges?goal=Colleges&search=NCTE" }
@@ -108,11 +108,11 @@ export const educationCoursesData = [
 
 export const educationCities = [
     { name: "Education Colleges in Delhi", link: "/tools/colleges?goal=Colleges&state=Delhi&search=Education" },
-    { name: "Education Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Education Mumbai" },
-    { name: "Education Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=Education Bangalore" },
-    { name: "Education Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=Education Chennai" },
-    { name: "Education Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=Education Kolkata" },
-    { name: "Education Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=Education Pune" },
-    { name: "Education Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=Education Hyderabad" },
-    { name: "Education Colleges in Lucknow", link: "/tools/colleges?goal=Colleges&search=Education Lucknow" }
+    { name: "Education Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Education&city=Mumbai" },
+    { name: "Education Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=Education&city=Bangalore" },
+    { name: "Education Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=Education&city=Chennai" },
+    { name: "Education Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=Education&city=Kolkata" },
+    { name: "Education Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=Education&city=Pune" },
+    { name: "Education Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=Education&city=Hyderabad" },
+    { name: "Education Colleges in Lucknow", link: "/tools/colleges?goal=Colleges&search=Education&city=Lucknow" }
 ];

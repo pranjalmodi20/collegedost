@@ -1,13 +1,13 @@
 
 export const medicineRankings = [
-    { name: "Top Medical Colleges in India", link: "#" },
-    { name: "Top Government Medical Colleges", link: "#" },
-    { name: "Top Private Medical Colleges", link: "#" },
-    { name: "Top AIIMS Colleges", link: "#" },
-    { name: "Top Dental (BDS) Colleges", link: "#" },
-    { name: "Top Pharmacy Colleges", link: "#" },
-    { name: "Best Medical Colleges State Wise", link: "#" },
-    { name: "NIRF Medical Rankings 2025", link: "#" }
+    { name: "Top Medical Colleges in India", link: "/tools/colleges?goal=Colleges&search=Medical" },
+    { name: "Top Government Medical Colleges", link: "/tools/colleges?goal=Colleges&search=Medical&ownership=Government" },
+    { name: "Top Private Medical Colleges", link: "/tools/colleges?goal=Colleges&search=Medical&ownership=Private" },
+    { name: "Top AIIMS Colleges", link: "/tools/colleges?goal=Colleges&search=AIIMS" },
+    { name: "Top Dental (BDS) Colleges", link: "/tools/colleges?goal=Colleges&search=BDS" },
+    { name: "Top Pharmacy Colleges", link: "/tools/colleges?goal=Colleges&search=Pharmacy" },
+    { name: "Best Medical Colleges State Wise", link: "/tools/colleges?goal=Colleges&search=Medical" },
+    { name: "NIRF Medical Rankings 2025", link: "/tools/colleges?goal=Colleges&search=Medical" }
 ];
 
 export const medicineExams = [
@@ -117,12 +117,12 @@ export const medicineCoursesData = [
 ];
 
 export const medicineCities = [
-    { name: "Medical Colleges in Delhi", link: "#" },
-    { name: "Medical Colleges in Bangalore", link: "#" },
-    { name: "Medical Colleges in Chennai", link: "#" },
-    { name: "Medical Colleges in Mumbai", link: "#" },
-    { name: "Medical Colleges in Kolkata", link: "#" },
-    { name: "Medical Colleges in Pune", link: "#" },
-    { name: "Medical Colleges in Hyderabad", link: "#" },
-    { name: "Medical Colleges in Lucknow", link: "#" }
+    { name: "Medical Colleges in Delhi", link: "/tools/colleges?goal=Colleges&search=Medical&city=Delhi" },
+    { name: "Medical Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=Medical&city=Bangalore" },
+    { name: "Medical Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=Medical&city=Chennai" },
+    { name: "Medical Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Medical&city=Mumbai" },
+    { name: "Medical Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=Medical&city=Kolkata" },
+    { name: "Medical Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=Medical&city=Pune" },
+    { name: "Medical Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=Medical&city=Hyderabad" },
+    { name: "Medical Colleges in Lucknow", link: "/tools/colleges?goal=Colleges&search=Medical&city=Lucknow" }
 ];

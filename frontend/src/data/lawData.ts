@@ -1,13 +1,13 @@
 
 export const lawRankings = [
-    { name: "Top Law Colleges in India", link: "#" },
-    { name: "Top NLUs in India", link: "#" },
-    { name: "Best Private Law Colleges", link: "#" },
-    { name: "Top Government Law Colleges", link: "#" },
-    { name: "LLB Colleges in India", link: "#" },
-    { name: "LLM Colleges in India", link: "#" },
-    { name: "Law Colleges in Delhi NCR", link: "#" },
-    { name: "NIRF Ranked Law Colleges", link: "#" }
+    { name: "Top Law Colleges in India", link: "/tools/colleges?goal=Colleges&search=Law" },
+    { name: "Top NLUs in India", link: "/tools/colleges?goal=Colleges&search=NLU" },
+    { name: "Best Private Law Colleges", link: "/tools/colleges?goal=Colleges&search=Law&ownership=Private" },
+    { name: "Top Government Law Colleges", link: "/tools/colleges?goal=Colleges&search=Law&ownership=Government" },
+    { name: "LLB Colleges in India", link: "/tools/colleges?goal=Colleges&search=LLB" },
+    { name: "LLM Colleges in India", link: "/tools/colleges?goal=Colleges&search=LLM" },
+    { name: "Law Colleges in Delhi NCR", link: "/tools/colleges?goal=Colleges&search=Law&city=Delhi" },
+    { name: "NIRF Ranked Law Colleges", link: "/tools/colleges?goal=Colleges&search=Law" }
 ];
 
 export const lawExams = [
@@ -107,12 +107,12 @@ export const lawCoursesData = [
 ];
 
 export const lawCities = [
-    { name: "Delhi", link: "/tools/colleges?stream=Law&city=Delhi" },
-    { name: "Bangalore", link: "/tools/colleges?stream=Law&city=Bangalore" },
-    { name: "Pune", link: "/tools/colleges?stream=Law&city=Pune" },
-    { name: "Hyderabad", link: "/tools/colleges?stream=Law&city=Hyderabad" },
-    { name: "Lucknow", link: "/tools/colleges?stream=Law&city=Lucknow" },
-    { name: "Chandigarh", link: "/tools/colleges?stream=Law&city=Chandigarh" },
-    { name: "Kolkata", link: "/tools/colleges?stream=Law&city=Kolkata" },
-    { name: "Jaipur", link: "/tools/colleges?stream=Law&city=Jaipur" }
+    { name: "Delhi", link: "/tools/colleges?goal=Colleges&search=Law&city=Delhi" },
+    { name: "Bangalore", link: "/tools/colleges?goal=Colleges&search=Law&city=Bangalore" },
+    { name: "Pune", link: "/tools/colleges?goal=Colleges&search=Law&city=Pune" },
+    { name: "Hyderabad", link: "/tools/colleges?goal=Colleges&search=Law&city=Hyderabad" },
+    { name: "Lucknow", link: "/tools/colleges?goal=Colleges&search=Law&city=Lucknow" },
+    { name: "Chandigarh", link: "/tools/colleges?goal=Colleges&search=Law&city=Chandigarh" },
+    { name: "Kolkata", link: "/tools/colleges?goal=Colleges&search=Law&city=Kolkata" },
+    { name: "Jaipur", link: "/tools/colleges?goal=Colleges&search=Law&city=Jaipur" }
 ];

@@ -3,9 +3,9 @@ export const mediaRankings = [
     { name: "Top Mass Communication Colleges in India", link: "/tools/colleges?goal=Colleges&search=Mass Communication" },
     { name: "Best Journalism Colleges in India", link: "/tools/colleges?goal=Colleges&search=Journalism" },
     { name: "Media Colleges in Delhi", link: "/tools/colleges?goal=Colleges&state=Delhi&search=Media" },
-    { name: "Media Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Media Mumbai" },
+    { name: "Media Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Media&city=Mumbai" },
     { name: "Top BJMC Colleges", link: "/tools/colleges?goal=Colleges&search=BJMC" },
-    { name: "Government Media Colleges", link: "/tools/colleges?goal=Colleges&type=Government&search=Media" },
+    { name: "Government Media Colleges", link: "/tools/colleges?goal=Colleges&ownership=Government&search=Media" },
     { name: "Top Film & Television Institutes", link: "/tools/colleges?goal=Colleges&search=Film Television" },
     { name: "Best PR & Advertising Colleges", link: "/tools/colleges?goal=Colleges&search=PR Advertising" }
 ];
@@ -108,11 +108,11 @@ export const mediaCoursesData = [
 
 export const mediaCities = [
     { name: "Media Colleges in Delhi", link: "/tools/colleges?goal=Colleges&state=Delhi&search=Media" },
-    { name: "Media Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Media Mumbai" },
-    { name: "Media Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=Media Bangalore" },
-    { name: "Media Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=Media Chennai" },
-    { name: "Media Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=Media Kolkata" },
-    { name: "Media Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=Media Pune" },
-    { name: "Media Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=Media Hyderabad" },
-    { name: "Media Colleges in Lucknow", link: "/tools/colleges?goal=Colleges&search=Media Lucknow" }
+    { name: "Media Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Media&city=Mumbai" },
+    { name: "Media Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=Media&city=Bangalore" },
+    { name: "Media Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=Media&city=Chennai" },
+    { name: "Media Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=Media&city=Kolkata" },
+    { name: "Media Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=Media&city=Pune" },
+    { name: "Media Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=Media&city=Hyderabad" },
+    { name: "Media Colleges in Lucknow", link: "/tools/colleges?goal=Colleges&search=Media&city=Lucknow" }
 ];
