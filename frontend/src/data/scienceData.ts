@@ -1,12 +1,12 @@
 
 export const scienceRankings = [
-    { name: "Top Science Colleges in India", link: "/tools/colleges?goal=Colleges&stream=Science" },
-    { name: "Best B.Sc Colleges in India", link: "/tools/colleges?goal=Colleges&degree=B.Sc" },
+    { name: "Top Science Colleges in India", link: "/tools/colleges?goal=Colleges&search=Science" },
+    { name: "Best B.Sc Colleges in India", link: "/tools/colleges?goal=Colleges&search=B.Sc" },
     { name: "Top IISERs in India", link: "/tools/colleges?goal=Colleges&search=IISER" },
-    { name: "Science Colleges in Delhi", link: "/tools/colleges?goal=Colleges&stream=Science&state=Delhi" },
-    { name: "Top M.Sc Colleges", link: "/tools/colleges?goal=Colleges&degree=M.Sc" },
+    { name: "Science Colleges in Delhi", link: "/tools/colleges?goal=Colleges&search=Science&state=Delhi" },
+    { name: "Top M.Sc Colleges", link: "/tools/colleges?goal=Colleges&search=M.Sc" },
     { name: "IISc Bangalore", link: "/tools/colleges?goal=Colleges&search=IISc" },
-    { name: "Government Science Colleges", link: "/tools/colleges?goal=Colleges&stream=Science&type=Government" },
+    { name: "Government Science Colleges", link: "/tools/colleges?goal=Colleges&search=Science&ownership=Government" },
     { name: "Research Institutes", link: "/tools/colleges?goal=Colleges&search=Research Institute" }
 ];
 
@@ -107,12 +107,12 @@ export const scienceCoursesData = [
 ];
 
 export const scienceCities = [
-    { name: "Science Colleges in Delhi", link: "/tools/colleges?goal=Colleges&stream=Science&state=Delhi" },
-    { name: "Science Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&stream=Science&search=Bangalore" },
-    { name: "Science Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&stream=Science&search=Mumbai" },
-    { name: "Science Colleges in Chennai", link: "/tools/colleges?goal=Colleges&stream=Science&search=Chennai" },
-    { name: "Science Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&stream=Science&search=Kolkata" },
-    { name: "Science Colleges in Pune", link: "/tools/colleges?goal=Colleges&stream=Science&search=Pune" },
-    { name: "Science Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&stream=Science&search=Hyderabad" },
-    { name: "Science Colleges in Chandigarh", link: "/tools/colleges?goal=Colleges&stream=Science&search=Chandigarh" }
+    { name: "Science Colleges in Delhi", link: "/tools/colleges?goal=Colleges&search=Science&state=Delhi" },
+    { name: "Science Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=Science&city=Bangalore" },
+    { name: "Science Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Science&city=Mumbai" },
+    { name: "Science Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=Science&city=Chennai" },
+    { name: "Science Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=Science&city=Kolkata" },
+    { name: "Science Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=Science&city=Pune" },
+    { name: "Science Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=Science&city=Hyderabad" },
+    { name: "Science Colleges in Chandigarh", link: "/tools/colleges?goal=Colleges&search=Science&city=Chandigarh" }
 ];

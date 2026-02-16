@@ -1,12 +1,12 @@
 
 export const artsRankings = [
-    { name: "Top Arts Colleges in India", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities" },
-    { name: "Best B.A. Colleges in India", link: "/tools/colleges?goal=Colleges&degree=B.A." },
-    { name: "Arts Colleges in Delhi", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&state=Delhi" },
+    { name: "Top Arts Colleges in India", link: "/tools/colleges?goal=Colleges&search=Arts" },
+    { name: "Best B.A. Colleges in India", link: "/tools/colleges?goal=Colleges&search=B.A." },
+    { name: "Arts Colleges in Delhi", link: "/tools/colleges?goal=Colleges&search=Arts&state=Delhi" },
     { name: "Top Psychology Colleges", link: "/tools/colleges?goal=Colleges&search=Psychology" },
-    { name: "Top M.A. Colleges", link: "/tools/colleges?goal=Colleges&degree=M.A." },
+    { name: "Top M.A. Colleges", link: "/tools/colleges?goal=Colleges&search=M.A." },
     { name: "History Colleges in India", link: "/tools/colleges?goal=Colleges&search=History" },
-    { name: "Government Arts Colleges", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&type=Government" },
+    { name: "Government Arts Colleges", link: "/tools/colleges?goal=Colleges&search=Arts&ownership=Government" },
     { name: "Top Sociology Colleges", link: "/tools/colleges?goal=Colleges&search=Sociology" }
 ];
 
@@ -107,12 +107,12 @@ export const artsCoursesData = [
 ];
 
 export const artsCities = [
-    { name: "Arts Colleges in Delhi", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&state=Delhi" },
-    { name: "Arts Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Mumbai" },
-    { name: "Arts Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Kolkata" },
-    { name: "Arts Colleges in Chennai", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Chennai" },
-    { name: "Arts Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Bangalore" },
-    { name: "Arts Colleges in Pune", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Pune" },
-    { name: "Arts Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Hyderabad" },
-    { name: "Arts Colleges in Lucknow", link: "/tools/colleges?goal=Colleges&stream=Arts And Humanities&search=Lucknow" }
+    { name: "Arts Colleges in Delhi", link: "/tools/colleges?goal=Colleges&search=Arts&state=Delhi" },
+    { name: "Arts Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Arts&city=Mumbai" },
+    { name: "Arts Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=Arts&city=Kolkata" },
+    { name: "Arts Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=Arts&city=Chennai" },
+    { name: "Arts Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=Arts&city=Bangalore" },
+    { name: "Arts Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=Arts&city=Pune" },
+    { name: "Arts Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=Arts&city=Hyderabad" },
+    { name: "Arts Colleges in Lucknow", link: "/tools/colleges?goal=Colleges&search=Arts&city=Lucknow" }
 ];

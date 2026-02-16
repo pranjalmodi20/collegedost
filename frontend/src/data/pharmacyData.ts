@@ -1,13 +1,13 @@
 
 export const pharmacyRankings = [
-    { name: "Top Pharmacy Colleges in India", link: "/tools/colleges?goal=Colleges&stream=Pharmacy" },
-    { name: "Best Pharmacy Colleges in Delhi", link: "/tools/colleges?goal=Colleges&stream=Pharmacy&state=Delhi" },
-    { name: "Top Government Pharmacy Colleges", link: "/tools/colleges?goal=Colleges&stream=Pharmacy&type=Government" },
-    { name: "Private Pharmacy Colleges with Low Fees", link: "/tools/colleges?goal=Colleges&stream=Pharmacy&type=Private" },
-    { name: "Top B.Pharma Colleges", link: "/tools/colleges?goal=Colleges&stream=Pharmacy&degree=B.Pharma" },
-    { name: "D.Pharma Colleges in India", link: "/tools/colleges?goal=Colleges&stream=Pharmacy&degree=D.Pharma" },
-    { name: "M.Pharma Colleges in India", link: "/tools/colleges?goal=Colleges&stream=Pharmacy&degree=M.Pharma" },
-    { name: "NIRF Ranked Pharmacy Colleges", link: "/tools/colleges?goal=Colleges&stream=Pharmacy&nirfCategory=Pharmacy" }
+    { name: "Top Pharmacy Colleges in India", link: "/tools/colleges?goal=Colleges&search=Pharmacy" },
+    { name: "Best Pharmacy Colleges in Delhi", link: "/tools/colleges?goal=Colleges&search=Pharmacy&state=Delhi" },
+    { name: "Top Government Pharmacy Colleges", link: "/tools/colleges?goal=Colleges&search=Pharmacy&ownership=Government" },
+    { name: "Private Pharmacy Colleges with Low Fees", link: "/tools/colleges?goal=Colleges&search=Pharmacy&ownership=Private" },
+    { name: "Top B.Pharma Colleges", link: "/tools/colleges?goal=Colleges&search=B.Pharma" },
+    { name: "D.Pharma Colleges in India", link: "/tools/colleges?goal=Colleges&search=D.Pharma" },
+    { name: "M.Pharma Colleges in India", link: "/tools/colleges?goal=Colleges&search=M.Pharma" },
+    { name: "NIRF Ranked Pharmacy Colleges", link: "/tools/colleges?goal=Colleges&search=Pharmacy" }
 ];
 
 export const pharmacyExams = [
@@ -107,12 +107,12 @@ export const pharmacyCoursesData = [
 ];
 
 export const pharmacyCities = [
-    { name: "Delhi", link: "/tools/colleges?stream=Pharmacy&city=Delhi" },
-    { name: "Mumbai", link: "/tools/colleges?stream=Pharmacy&city=Mumbai" },
-    { name: "Bangalore", link: "/tools/colleges?stream=Pharmacy&city=Bangalore" },
-    { name: "Pune", link: "/tools/colleges?stream=Pharmacy&city=Pune" },
-    { name: "Hyderabad", link: "/tools/colleges?stream=Pharmacy&city=Hyderabad" },
-    { name: "Chennai", link: "/tools/colleges?stream=Pharmacy&city=Chennai" },
-    { name: "Kolkata", link: "/tools/colleges?stream=Pharmacy&city=Kolkata" },
-    { name: "Ahmedabad", link: "/tools/colleges?stream=Pharmacy&city=Ahmedabad" }
+    { name: "Delhi", link: "/tools/colleges?goal=Colleges&search=Pharmacy&city=Delhi" },
+    { name: "Mumbai", link: "/tools/colleges?goal=Colleges&search=Pharmacy&city=Mumbai" },
+    { name: "Bangalore", link: "/tools/colleges?goal=Colleges&search=Pharmacy&city=Bangalore" },
+    { name: "Pune", link: "/tools/colleges?goal=Colleges&search=Pharmacy&city=Pune" },
+    { name: "Hyderabad", link: "/tools/colleges?goal=Colleges&search=Pharmacy&city=Hyderabad" },
+    { name: "Chennai", link: "/tools/colleges?goal=Colleges&search=Pharmacy&city=Chennai" },
+    { name: "Kolkata", link: "/tools/colleges?goal=Colleges&search=Pharmacy&city=Kolkata" },
+    { name: "Ahmedabad", link: "/tools/colleges?goal=Colleges&search=Pharmacy&city=Ahmedabad" }
 ];

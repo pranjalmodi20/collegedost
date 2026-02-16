@@ -1,11 +1,11 @@
 
 export const commerceRankings = [
-    { name: "Top Commerce Colleges in India", link: "/tools/colleges?goal=Colleges&stream=Commerce" },
-    { name: "Best B.Com Colleges in India", link: "/tools/colleges?goal=Colleges&degree=B.Com" },
-    { name: "Commerce Colleges in Delhi", link: "/tools/colleges?goal=Colleges&stream=Commerce&state=Delhi" },
-    { name: "Commerce Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&stream=Commerce&search=Mumbai" },
-    { name: "Top M.Com Colleges", link: "/tools/colleges?goal=Colleges&degree=M.Com" },
-    { name: "Government Commerce Colleges", link: "/tools/colleges?goal=Colleges&stream=Commerce&type=Government" },
+    { name: "Top Commerce Colleges in India", link: "/tools/colleges?goal=Colleges&search=Commerce" },
+    { name: "Best B.Com Colleges in India", link: "/tools/colleges?goal=Colleges&search=B.Com" },
+    { name: "Commerce Colleges in Delhi", link: "/tools/colleges?goal=Colleges&search=Commerce&state=Delhi" },
+    { name: "Commerce Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Commerce&city=Mumbai" },
+    { name: "Top M.Com Colleges", link: "/tools/colleges?goal=Colleges&search=M.Com" },
+    { name: "Government Commerce Colleges", link: "/tools/colleges?goal=Colleges&search=Commerce&ownership=Government" },
     { name: "Top CA Coaching Institutes", link: "/tools/colleges?goal=Colleges&search=CA Coaching" },
     { name: "Best BBA Colleges", link: "/tools/colleges?goal=Colleges&search=BBA" }
 ];
@@ -107,12 +107,12 @@ export const commerceCoursesData = [
 ];
 
 export const commerceCities = [
-    { name: "Commerce Colleges in Delhi", link: "/tools/colleges?goal=Colleges&stream=Commerce&state=Delhi" },
-    { name: "Commerce Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&stream=Commerce&search=Mumbai" },
-    { name: "Commerce Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&stream=Commerce&search=Bangalore" },
-    { name: "Commerce Colleges in Chennai", link: "/tools/colleges?goal=Colleges&stream=Commerce&search=Chennai" },
-    { name: "Commerce Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&stream=Commerce&search=Kolkata" },
-    { name: "Commerce Colleges in Pune", link: "/tools/colleges?goal=Colleges&stream=Commerce&search=Pune" },
-    { name: "Commerce Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&stream=Commerce&search=Hyderabad" },
-    { name: "Commerce Colleges in Ahmedabad", link: "/tools/colleges?goal=Colleges&stream=Commerce&search=Ahmedabad" }
+    { name: "Commerce Colleges in Delhi", link: "/tools/colleges?goal=Colleges&search=Commerce&state=Delhi" },
+    { name: "Commerce Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=Commerce&city=Mumbai" },
+    { name: "Commerce Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=Commerce&city=Bangalore" },
+    { name: "Commerce Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=Commerce&city=Chennai" },
+    { name: "Commerce Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=Commerce&city=Kolkata" },
+    { name: "Commerce Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=Commerce&city=Pune" },
+    { name: "Commerce Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=Commerce&city=Hyderabad" },
+    { name: "Commerce Colleges in Ahmedabad", link: "/tools/colleges?goal=Colleges&search=Commerce&city=Ahmedabad" }
 ];

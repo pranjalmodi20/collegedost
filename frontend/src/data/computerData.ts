@@ -5,7 +5,7 @@ export const computerRankings = [
     { name: "IT Colleges in Delhi", link: "/tools/colleges?goal=Colleges&state=Delhi&search=IT" },
     { name: "Top Computer Science Colleges", link: "/tools/colleges?goal=Colleges&search=Computer Science" },
     { name: "NIT MCA Programs", link: "/tools/colleges?goal=Colleges&search=NIT MCA" },
-    { name: "Government IT Colleges", link: "/tools/colleges?goal=Colleges&type=Government&search=IT" },
+    { name: "Government IT Colleges", link: "/tools/colleges?goal=Colleges&ownership=Government&search=IT" },
     { name: "Top Data Science Colleges", link: "/tools/colleges?goal=Colleges&search=Data Science" },
     { name: "Best AI/ML Colleges", link: "/tools/colleges?goal=Colleges&search=Artificial Intelligence" }
 ];
@@ -108,11 +108,11 @@ export const computerCoursesData = [
 
 export const computerCities = [
     { name: "IT Colleges in Delhi", link: "/tools/colleges?goal=Colleges&state=Delhi&search=IT" },
-    { name: "IT Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=IT Bangalore" },
-    { name: "IT Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=IT Mumbai" },
-    { name: "IT Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=IT Chennai" },
-    { name: "IT Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=IT Hyderabad" },
-    { name: "IT Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=IT Pune" },
-    { name: "IT Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=IT Kolkata" },
-    { name: "IT Colleges in Noida", link: "/tools/colleges?goal=Colleges&search=IT Noida" }
+    { name: "IT Colleges in Bangalore", link: "/tools/colleges?goal=Colleges&search=IT&city=Bangalore" },
+    { name: "IT Colleges in Mumbai", link: "/tools/colleges?goal=Colleges&search=IT&city=Mumbai" },
+    { name: "IT Colleges in Chennai", link: "/tools/colleges?goal=Colleges&search=IT&city=Chennai" },
+    { name: "IT Colleges in Hyderabad", link: "/tools/colleges?goal=Colleges&search=IT&city=Hyderabad" },
+    { name: "IT Colleges in Pune", link: "/tools/colleges?goal=Colleges&search=IT&city=Pune" },
+    { name: "IT Colleges in Kolkata", link: "/tools/colleges?goal=Colleges&search=IT&city=Kolkata" },
+    { name: "IT Colleges in Noida", link: "/tools/colleges?goal=Colleges&search=IT&city=Noida" }
 ];
