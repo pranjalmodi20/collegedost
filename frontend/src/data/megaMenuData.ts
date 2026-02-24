@@ -147,15 +147,15 @@ const mbaMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            cs('MBA Colleges in India'),
-            cs('MBA Colleges in Bangalore'),
-            cs('MBA Colleges in Chennai'),
-            cs('MBA colleges in Delhi-NCR'),
-            cs('MBA Colleges in Hyderabad'),
-            cs('MBA Colleges in Kolkata'),
-            cs('MBA Colleges in Mumbai'),
-            cs('MBA Colleges in Pune'),
-            viewAll('All Locations →', '/coming-soon'),
+            { label: 'MBA Colleges in India', href: '/tools/colleges?stream=Management' },
+            { label: 'MBA Colleges in Bangalore', href: '/tools/colleges?stream=Management&city=Bangalore' },
+            { label: 'MBA Colleges in Chennai', href: '/tools/colleges?stream=Management&city=Chennai' },
+            { label: 'MBA Colleges in Delhi-NCR', href: '/tools/colleges?stream=Management&city=Delhi' },
+            { label: 'MBA Colleges in Hyderabad', href: '/tools/colleges?stream=Management&city=Hyderabad' },
+            { label: 'MBA Colleges in Kolkata', href: '/tools/colleges?stream=Management&city=Kolkata' },
+            { label: 'MBA Colleges in Mumbai', href: '/tools/colleges?stream=Management&city=Mumbai' },
+            { label: 'MBA Colleges in Pune', href: '/tools/colleges?stream=Management&city=Pune' },
+            { label: 'All Locations →', href: '/tools/colleges?stream=Management', isViewAll: true },
           ],
         },
       ],
@@ -380,15 +380,15 @@ const engineeringMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            cs('Engineering Colleges in India'),
-            cs('Engineering Colleges in Bangalore'),
-            cs('Engineering Colleges in Chennai'),
-            cs('Engineering Colleges in Delhi-NCR'),
-            cs('Engineering Colleges in Kolkata'),
-            cs('Engineering Colleges in Mumbai'),
-            cs('Engineering Colleges in Pune'),
-            cs('Engineering Colleges in Hyderabad'),
-            viewAll('All Locations →', '/coming-soon'),
+            { label: 'Engineering Colleges in India', href: '/tools/colleges?stream=Engineering' },
+            { label: 'Engineering Colleges in Bangalore', href: '/tools/colleges?stream=Engineering&city=Bangalore' },
+            { label: 'Engineering Colleges in Chennai', href: '/tools/colleges?stream=Engineering&city=Chennai' },
+            { label: 'Engineering Colleges in Delhi-NCR', href: '/tools/colleges?stream=Engineering&city=Delhi' },
+            { label: 'Engineering Colleges in Kolkata', href: '/tools/colleges?stream=Engineering&city=Kolkata' },
+            { label: 'Engineering Colleges in Mumbai', href: '/tools/colleges?stream=Engineering&city=Mumbai' },
+            { label: 'Engineering Colleges in Pune', href: '/tools/colleges?stream=Engineering&city=Pune' },
+            { label: 'Engineering Colleges in Hyderabad', href: '/tools/colleges?stream=Engineering&city=Hyderabad' },
+            { label: 'All Locations →', href: '/tools/colleges?stream=Engineering', isViewAll: true },
           ],
         },
       ],
@@ -580,14 +580,14 @@ const medicalMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            cs('Medical Colleges in India'),
-            cs('Medical Colleges in Delhi'),
-            cs('Medical Colleges in Bangalore'),
-            cs('Medical Colleges in Chennai'),
-            cs('Medical Colleges in Hyderabad'),
-            cs('Medical Colleges in Mumbai'),
-            cs('Medical Colleges in Kolkata'),
-            cs('Medical Colleges in Pune'),
+            { label: 'Medical Colleges in India', href: '/tools/colleges?stream=Medicine' },
+            { label: 'Medical Colleges in Delhi', href: '/tools/colleges?stream=Medicine&city=Delhi' },
+            { label: 'Medical Colleges in Bangalore', href: '/tools/colleges?stream=Medicine&city=Bangalore' },
+            { label: 'Medical Colleges in Chennai', href: '/tools/colleges?stream=Medicine&city=Chennai' },
+            { label: 'Medical Colleges in Hyderabad', href: '/tools/colleges?stream=Medicine&city=Hyderabad' },
+            { label: 'Medical Colleges in Mumbai', href: '/tools/colleges?stream=Medicine&city=Mumbai' },
+            { label: 'Medical Colleges in Kolkata', href: '/tools/colleges?stream=Medicine&city=Kolkata' },
+            { label: 'Medical Colleges in Pune', href: '/tools/colleges?stream=Medicine&city=Pune' },
           ],
         },
       ],
@@ -726,32 +726,32 @@ const designMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            cs('Design Colleges in India'),
-            cs('Design Colleges in Maharashtra'),
-            cs('Design Colleges in Delhi'),
-            cs('Design Colleges in Karnataka'),
-            cs('Design Colleges in Punjab'),
-            cs('Design Colleges in Telangana'),
-            cs('Design Colleges in Gujarat'),
-            cs('Design Colleges in Chandigarh'),
-            cs('Design Colleges in Rajasthan'),
-            cs('Design Colleges in Madhya Pradesh'),
-            cs('Design Colleges in Uttar Pradesh'),
-            cs('Design Colleges in Tamil Nadu'),
+            { label: 'Design Colleges in India', href: '/tools/colleges?stream=Design' },
+            { label: 'Design Colleges in Maharashtra', href: '/tools/colleges?stream=Design&state=Maharashtra' },
+            { label: 'Design Colleges in Delhi', href: '/tools/colleges?stream=Design&city=Delhi' },
+            { label: 'Design Colleges in Karnataka', href: '/tools/colleges?stream=Design&state=Karnataka' },
+            { label: 'Design Colleges in Punjab', href: '/tools/colleges?stream=Design&state=Punjab' },
+            { label: 'Design Colleges in Telangana', href: '/tools/colleges?stream=Design&state=Telangana' },
+            { label: 'Design Colleges in Gujarat', href: '/tools/colleges?stream=Design&state=Gujarat' },
+            { label: 'Design Colleges in Chandigarh', href: '/tools/colleges?stream=Design&state=Chandigarh' },
+            { label: 'Design Colleges in Rajasthan', href: '/tools/colleges?stream=Design&state=Rajasthan' },
+            { label: 'Design Colleges in Madhya Pradesh', href: '/tools/colleges?stream=Design&state=Madhya+Pradesh' },
+            { label: 'Design Colleges in Uttar Pradesh', href: '/tools/colleges?stream=Design&state=Uttar+Pradesh' },
+            { label: 'Design Colleges in Tamil Nadu', href: '/tools/colleges?stream=Design&state=Tamil+Nadu' },
           ],
         },
         {
           links: [
-            cs('Design Colleges in Pune'),
-            cs('Design Colleges in Mumbai'),
-            cs('Design Colleges in Bangalore'),
-            cs('Design Colleges in Hyderabad'),
-            cs('Design Colleges in Ahmedabad'),
-            cs('Design Colleges in Ludhiana'),
-            cs('Design Colleges in Jalandhar'),
-            cs('Design Colleges in Jaipur'),
-            cs('Design Colleges in Indore'),
-            cs('Design Colleges in Gurgaon'),
+            { label: 'Design Colleges in Pune', href: '/tools/colleges?stream=Design&city=Pune' },
+            { label: 'Design Colleges in Mumbai', href: '/tools/colleges?stream=Design&city=Mumbai' },
+            { label: 'Design Colleges in Bangalore', href: '/tools/colleges?stream=Design&city=Bangalore' },
+            { label: 'Design Colleges in Hyderabad', href: '/tools/colleges?stream=Design&city=Hyderabad' },
+            { label: 'Design Colleges in Ahmedabad', href: '/tools/colleges?stream=Design&city=Ahmedabad' },
+            { label: 'Design Colleges in Ludhiana', href: '/tools/colleges?stream=Design&city=Ludhiana' },
+            { label: 'Design Colleges in Jalandhar', href: '/tools/colleges?stream=Design&city=Jalandhar' },
+            { label: 'Design Colleges in Jaipur', href: '/tools/colleges?stream=Design&city=Jaipur' },
+            { label: 'Design Colleges in Indore', href: '/tools/colleges?stream=Design&city=Indore' },
+            { label: 'Design Colleges in Gurgaon', href: '/tools/colleges?stream=Design&city=Gurgaon' },
           ],
         },
       ],
@@ -859,11 +859,11 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top Law Colleges in India'),
-            cs('Top Law Colleges in Bangalore'),
-            cs('Top Law Colleges in Delhi'),
-            cs('Top Law Colleges in Pune'),
-            cs('Top Law Colleges in Hyderabad'),
+            { label: 'Top Law Colleges in India', href: '/tools/colleges?stream=Law' },
+            { label: 'Top Law Colleges in Bangalore', href: '/tools/colleges?stream=Law&city=Bangalore' },
+            { label: 'Top Law Colleges in Delhi', href: '/tools/colleges?stream=Law&city=Delhi' },
+            { label: 'Top Law Colleges in Pune', href: '/tools/colleges?stream=Law&city=Pune' },
+            { label: 'Top Law Colleges in Hyderabad', href: '/tools/colleges?stream=Law&city=Hyderabad' },
           ],
         },
         {
@@ -929,22 +929,22 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Colleges by Location'),
-            cs('Law Colleges in India'),
-            cs('Law Colleges in Punjab'),
-            cs('Law Colleges in Delhi'),
-            cs('Law Colleges in Chandigarh'),
-            cs('Law Colleges in Maharashtra'),
-            cs('Law Colleges in Orissa'),
-            cs('Law Colleges in Uttarakhand'),
-            cs('Law Colleges in West Bengal'),
-            cs('Law Colleges in Karnataka'),
-            cs('Law Colleges in Ludhiana'),
-            cs('Law Colleges in Pune'),
-            cs('Law Colleges in Jalandhar'),
-            cs('Law Colleges in Bhubaneswar'),
-            cs('Law Colleges in Roorkee'),
-            cs('Law Colleges in Kolkata'),
-            cs('Law Colleges in Udupi'),
+            { label: 'Law Colleges in India', href: '/tools/colleges?stream=Law' },
+            { label: 'Law Colleges in Punjab', href: '/tools/colleges?stream=Law&state=Punjab' },
+            { label: 'Law Colleges in Delhi', href: '/tools/colleges?stream=Law&city=Delhi' },
+            { label: 'Law Colleges in Chandigarh', href: '/tools/colleges?stream=Law&state=Chandigarh' },
+            { label: 'Law Colleges in Maharashtra', href: '/tools/colleges?stream=Law&state=Maharashtra' },
+            { label: 'Law Colleges in Orissa', href: '/tools/colleges?stream=Law&state=Odisha' },
+            { label: 'Law Colleges in Uttarakhand', href: '/tools/colleges?stream=Law&state=Uttarakhand' },
+            { label: 'Law Colleges in West Bengal', href: '/tools/colleges?stream=Law&state=West+Bengal' },
+            { label: 'Law Colleges in Karnataka', href: '/tools/colleges?stream=Law&state=Karnataka' },
+            { label: 'Law Colleges in Ludhiana', href: '/tools/colleges?stream=Law&city=Ludhiana' },
+            { label: 'Law Colleges in Pune', href: '/tools/colleges?stream=Law&city=Pune' },
+            { label: 'Law Colleges in Jalandhar', href: '/tools/colleges?stream=Law&city=Jalandhar' },
+            { label: 'Law Colleges in Bhubaneswar', href: '/tools/colleges?stream=Law&city=Bhubaneswar' },
+            { label: 'Law Colleges in Roorkee', href: '/tools/colleges?stream=Law&city=Roorkee' },
+            { label: 'Law Colleges in Kolkata', href: '/tools/colleges?stream=Law&city=Kolkata' },
+            { label: 'Law Colleges in Udupi', href: '/tools/colleges?stream=Law&city=Udupi' },
           ],
         },
       ],
@@ -965,10 +965,10 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top Hotel Management Colleges in India'),
-            cs('Top Hotel Management Colleges in Hyderabad'),
-            cs('Top Hotel Management Colleges in Delhi'),
-            cs('Top Hotel Management Colleges in Mumbai'),
+            { label: 'Top Hotel Management Colleges in India', href: '/tools/colleges?stream=Hospitality' },
+            { label: 'Top Hotel Management Colleges in Hyderabad', href: '/tools/colleges?stream=Hospitality&city=Hyderabad' },
+            { label: 'Top Hotel Management Colleges in Delhi', href: '/tools/colleges?stream=Hospitality&city=Delhi' },
+            { label: 'Top Hotel Management Colleges in Mumbai', href: '/tools/colleges?stream=Hospitality&city=Mumbai' },
           ],
         },
         {
@@ -999,16 +999,16 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Colleges by Location'),
-            cs('Culinary Arts colleges in India'),
-            cs('Travel & Tourism colleges in India'),
-            cs('Event Management colleges in India'),
+            { label: 'Culinary Arts colleges in India', href: '/tools/colleges?stream=Hospitality' },
+            { label: 'Travel & Tourism colleges in India', href: '/tools/colleges?stream=Hospitality' },
+            { label: 'Event Management colleges in India', href: '/tools/colleges?stream=Hospitality' },
           ],
         },
       ],
     },
     {
       title: 'Animation',
-      directLink: '/coming-soon',
+      directLink: '/tools/colleges?search=Animation',
       columns: [
         {
           links: [
@@ -1025,10 +1025,10 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top Animation Colleges in India'),
-            cs('Top Animation Colleges in Bangalore'),
-            cs('Top Animation Colleges in Delhi'),
-            cs('Top Animation Colleges in Kolkata'),
+            { label: 'Top Animation Colleges in India', href: '/tools/colleges?search=Animation' },
+            { label: 'Top Animation Colleges in Bangalore', href: '/tools/colleges?search=Animation&city=Bangalore' },
+            { label: 'Top Animation Colleges in Delhi', href: '/tools/colleges?search=Animation&city=Delhi' },
+            { label: 'Top Animation Colleges in Kolkata', href: '/tools/colleges?search=Animation&city=Kolkata' },
           ],
         },
         {
@@ -1081,11 +1081,11 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top Mass Communication Colleges in India'),
-            cs('Top Mass Communication Colleges in Delhi'),
-            cs('Top Mass Communication Colleges in Mumbai'),
-            cs('Top Mass Communication Colleges in Kolkata'),
-            cs('Top Mass Communication Colleges in Bangalore'),
+            { label: 'Top Mass Communication Colleges in India', href: '/tools/colleges?stream=Media' },
+            { label: 'Top Mass Communication Colleges in Delhi', href: '/tools/colleges?stream=Media&city=Delhi' },
+            { label: 'Top Mass Communication Colleges in Mumbai', href: '/tools/colleges?stream=Media&city=Mumbai' },
+            { label: 'Top Mass Communication Colleges in Kolkata', href: '/tools/colleges?stream=Media&city=Kolkata' },
+            { label: 'Top Mass Communication Colleges in Bangalore', href: '/tools/colleges?stream=Media&city=Bangalore' },
           ],
         },
         {
@@ -1142,13 +1142,13 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top BBA Colleges in India'),
-            cs('Top BBA Colleges in Delhi'),
-            cs('Top BBA Colleges in Bangalore'),
-            cs('Top BBA Colleges in Hyderabad'),
-            cs('Top BBA Colleges in Pune'),
-            cs('Top BBA Colleges in Kolkata'),
-            cs('Top BBA Colleges in Mumbai'),
+            { label: 'Top BBA Colleges in India', href: '/tools/colleges?stream=Management&search=BBA' },
+            { label: 'Top BBA Colleges in Delhi', href: '/tools/colleges?stream=Management&search=BBA&city=Delhi' },
+            { label: 'Top BBA Colleges in Bangalore', href: '/tools/colleges?stream=Management&search=BBA&city=Bangalore' },
+            { label: 'Top BBA Colleges in Hyderabad', href: '/tools/colleges?stream=Management&search=BBA&city=Hyderabad' },
+            { label: 'Top BBA Colleges in Pune', href: '/tools/colleges?stream=Management&search=BBA&city=Pune' },
+            { label: 'Top BBA Colleges in Kolkata', href: '/tools/colleges?stream=Management&search=BBA&city=Kolkata' },
+            { label: 'Top BBA Colleges in Mumbai', href: '/tools/colleges?stream=Management&search=BBA&city=Mumbai' },
           ],
         },
         {
@@ -1165,7 +1165,7 @@ const moreMenu: MegaMenuItem = {
     },
     {
       title: 'IT & Software',
-      directLink: '/coming-soon',
+      directLink: '/tools/colleges?stream=Computer+Application',
       columns: [
         {
           links: [
@@ -1184,11 +1184,11 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top BCA Colleges in India'),
-            cs('Top BCA Colleges in Delhi'),
-            cs('Top BCA Colleges in Bangalore'),
-            cs('Top BCA Colleges in Mumbai'),
-            cs('Top BCA Colleges in Pune'),
+            { label: 'Top BCA Colleges in India', href: '/tools/colleges?stream=Computer+Application' },
+            { label: 'Top BCA Colleges in Delhi', href: '/tools/colleges?stream=Computer+Application&city=Delhi' },
+            { label: 'Top BCA Colleges in Bangalore', href: '/tools/colleges?stream=Computer+Application&city=Bangalore' },
+            { label: 'Top BCA Colleges in Mumbai', href: '/tools/colleges?stream=Computer+Application&city=Mumbai' },
+            { label: 'Top BCA Colleges in Pune', href: '/tools/colleges?stream=Computer+Application&city=Pune' },
           ],
         },
         {
@@ -1277,7 +1277,7 @@ const moreMenu: MegaMenuItem = {
     },
     {
       title: 'Arts (Fine/Visual/Performing)',
-      directLink: '/coming-soon',
+      directLink: '/tools/colleges?stream=Arts',
       columns: [
         {
           links: [
@@ -1290,10 +1290,10 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top Arts Colleges in India'),
-            cs('Top Arts Colleges in Chennai'),
-            cs('Top Arts Colleges in Mumbai'),
-            cs('Top Colleges in Delhi for Arts'),
+            { label: 'Top Arts Colleges in India', href: '/tools/colleges?stream=Arts' },
+            { label: 'Top Arts Colleges in Chennai', href: '/tools/colleges?stream=Arts&city=Chennai' },
+            { label: 'Top Arts Colleges in Mumbai', href: '/tools/colleges?stream=Arts&city=Mumbai' },
+            { label: 'Top Colleges in Delhi for Arts', href: '/tools/colleges?stream=Arts&city=Delhi' },
           ],
         },
         {
@@ -1334,9 +1334,9 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top Science Colleges in Mumbai'),
-            cs('Top Science Colleges in India'),
-            cs('Top Science Colleges in Pune'),
+            { label: 'Top Science Colleges in Mumbai', href: '/tools/colleges?stream=Science&city=Mumbai' },
+            { label: 'Top Science Colleges in India', href: '/tools/colleges?stream=Science' },
+            { label: 'Top Science Colleges in Pune', href: '/tools/colleges?stream=Science&city=Pune' },
           ],
         },
         {
@@ -1355,7 +1355,7 @@ const moreMenu: MegaMenuItem = {
     },
     {
       title: 'Architecture & Planning',
-      directLink: '/coming-soon',
+      directLink: '/tools/colleges?stream=Architecture',
       columns: [
         {
           links: [
@@ -1371,11 +1371,11 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top Architecture Colleges in India'),
-            cs('Top Architecture Colleges in Bangalore'),
-            cs('Top Architecture Colleges in Mumbai'),
-            cs('Top Architecture Colleges in Delhi'),
-            cs('Top Architecture Colleges in Chennai'),
+            { label: 'Top Architecture Colleges in India', href: '/tools/colleges?stream=Architecture' },
+            { label: 'Top Architecture Colleges in Bangalore', href: '/tools/colleges?stream=Architecture&city=Bangalore' },
+            { label: 'Top Architecture Colleges in Mumbai', href: '/tools/colleges?stream=Architecture&city=Mumbai' },
+            { label: 'Top Architecture Colleges in Delhi', href: '/tools/colleges?stream=Architecture&city=Delhi' },
+            { label: 'Top Architecture Colleges in Chennai', href: '/tools/colleges?stream=Architecture&city=Chennai' },
           ],
         },
         {
@@ -1434,12 +1434,12 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Ranked Colleges'),
-            cs('Top Commerce Colleges in India'),
-            cs('Top Commerce Colleges in Mumbai'),
-            cs('Top Commerce Colleges in Delhi'),
-            cs('Top Commerce Colleges in Pune'),
-            cs('Top Commerce Colleges in Bangalore'),
-            cs('Top Commerce Colleges in Kolkata'),
+            { label: 'Top Commerce Colleges in India', href: '/tools/colleges?stream=Commerce' },
+            { label: 'Top Commerce Colleges in Mumbai', href: '/tools/colleges?stream=Commerce&city=Mumbai' },
+            { label: 'Top Commerce Colleges in Delhi', href: '/tools/colleges?stream=Commerce&city=Delhi' },
+            { label: 'Top Commerce Colleges in Pune', href: '/tools/colleges?stream=Commerce&city=Pune' },
+            { label: 'Top Commerce Colleges in Bangalore', href: '/tools/colleges?stream=Commerce&city=Bangalore' },
+            { label: 'Top Commerce Colleges in Kolkata', href: '/tools/colleges?stream=Commerce&city=Kolkata' },
           ],
         },
         {
@@ -1473,7 +1473,7 @@ const moreMenu: MegaMenuItem = {
     },
     {
       title: 'Banking, Finance & Insurance',
-      directLink: '/coming-soon',
+      directLink: '/tools/colleges?search=Banking',
       columns: [
         {
           links: [
@@ -1490,9 +1490,9 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Colleges'),
-            cs('Top Finance Colleges in India'),
-            cs('Top Banking Colleges in India'),
-            cs('Top Insurance Colleges in India'),
+            { label: 'Top Finance Colleges in India', href: '/tools/colleges?search=Finance' },
+            { label: 'Top Banking Colleges in India', href: '/tools/colleges?search=Banking' },
+            { label: 'Top Insurance Colleges in India', href: '/tools/colleges?search=Insurance' },
           ],
         },
         {
@@ -1529,7 +1529,7 @@ const moreMenu: MegaMenuItem = {
     },
     {
       title: 'Aviation',
-      directLink: '/coming-soon',
+      directLink: '/tools/colleges?search=Aviation',
       columns: [
         {
           links: [
@@ -1545,10 +1545,10 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Colleges'),
-            cs('Top Aviation Colleges in India'),
-            cs('Top Aviation Colleges in Delhi'),
-            cs('Top Aviation Colleges in Mumbai'),
-            cs('Top Aviation Colleges in Bangalore'),
+            { label: 'Top Aviation Colleges in India', href: '/tools/colleges?search=Aviation' },
+            { label: 'Top Aviation Colleges in Delhi', href: '/tools/colleges?search=Aviation&city=Delhi' },
+            { label: 'Top Aviation Colleges in Mumbai', href: '/tools/colleges?search=Aviation&city=Mumbai' },
+            { label: 'Top Aviation Colleges in Bangalore', href: '/tools/colleges?search=Aviation&city=Bangalore' },
           ],
         },
         {
@@ -1595,11 +1595,11 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Colleges'),
-            cs('Top B.Ed. Colleges in India'),
-            cs('Top B.Ed. Colleges in Delhi'),
-            cs('Top B.Ed. Colleges in Mumbai'),
-            cs('Top B.Ed. Colleges in Bangalore'),
-            cs('Top B.Ed. Colleges in Kolkata'),
+            { label: 'Top B.Ed. Colleges in India', href: '/tools/colleges?stream=Education' },
+            { label: 'Top B.Ed. Colleges in Delhi', href: '/tools/colleges?stream=Education&city=Delhi' },
+            { label: 'Top B.Ed. Colleges in Mumbai', href: '/tools/colleges?stream=Education&city=Mumbai' },
+            { label: 'Top B.Ed. Colleges in Bangalore', href: '/tools/colleges?stream=Education&city=Bangalore' },
+            { label: 'Top B.Ed. Colleges in Kolkata', href: '/tools/colleges?stream=Education&city=Kolkata' },
           ],
         },
         {
@@ -1632,7 +1632,7 @@ const moreMenu: MegaMenuItem = {
     },
     {
       title: 'Nursing',
-      directLink: '/coming-soon',
+      directLink: '/tools/colleges?search=Nursing',
       columns: [
         {
           links: [
@@ -1652,19 +1652,19 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Colleges by Location'),
-            cs('Nursing Colleges in Uttar Pradesh'),
-            cs('Nursing Colleges in Bihar'),
-            cs('Nursing Colleges in Bangalore'),
-            cs('Nursing Colleges in Kerala'),
-            cs('Nursing Colleges in Kolkata'),
-            cs('Nursing Colleges in Delhi NCR'),
+            { label: 'Nursing Colleges in Uttar Pradesh', href: '/tools/colleges?search=Nursing&state=Uttar+Pradesh' },
+            { label: 'Nursing Colleges in Bihar', href: '/tools/colleges?search=Nursing&state=Bihar' },
+            { label: 'Nursing Colleges in Bangalore', href: '/tools/colleges?search=Nursing&city=Bangalore' },
+            { label: 'Nursing Colleges in Kerala', href: '/tools/colleges?search=Nursing&state=Kerala' },
+            { label: 'Nursing Colleges in Kolkata', href: '/tools/colleges?search=Nursing&city=Kolkata' },
+            { label: 'Nursing Colleges in Delhi NCR', href: '/tools/colleges?search=Nursing&city=Delhi' },
           ],
         },
       ],
     },
     {
       title: 'Beauty & Fitness',
-      directLink: '/coming-soon',
+      directLink: '/tools/colleges',
       columns: [
         {
           links: [
@@ -1683,47 +1683,47 @@ const moreMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Central Universities'),
-            cs('University of Delhi'),
-            cs('JNU Delhi'),
-            cs('IGNOU Delhi'),
-            cs('Banaras Hindu University'),
+            { label: 'University of Delhi', href: '/tools/colleges?search=University+of+Delhi' },
+            { label: 'JNU Delhi', href: '/tools/colleges?search=Jawaharlal+Nehru+University' },
+            { label: 'IGNOU Delhi', href: '/tools/colleges?search=IGNOU' },
+            { label: 'Banaras Hindu University', href: '/tools/colleges?search=Banaras+Hindu+University' },
           ],
         },
         {
           links: [
             hdr('Top State Universities'),
-            cs('University of Mumbai'),
-            cs('Anna University'),
-            cs('Gujarat University'),
-            cs('CCS University'),
+            { label: 'University of Mumbai', href: '/tools/colleges?search=University+of+Mumbai' },
+            { label: 'Anna University', href: '/tools/colleges?search=Anna+University' },
+            { label: 'Gujarat University', href: '/tools/colleges?search=Gujarat+University' },
+            { label: 'CCS University', href: '/tools/colleges?search=CCS+University' },
           ],
         },
         {
           links: [
             hdr('Top Ranked Universities'),
-            cs('Top Universities in India'),
-            cs('Top Colleges in India'),
-            cs('Top Universities in Bangalore'),
-            cs('Top Universities in Delhi'),
-            cs('Top Universities in Punjab'),
+            { label: 'Top Universities in India', href: '/tools/colleges?institutionCategory=University' },
+            { label: 'Top Colleges in India', href: '/tools/colleges' },
+            { label: 'Top Universities in Bangalore', href: '/tools/colleges?institutionCategory=University&city=Bangalore' },
+            { label: 'Top Universities in Delhi', href: '/tools/colleges?institutionCategory=University&city=Delhi' },
+            { label: 'Top Universities in Punjab', href: '/tools/colleges?institutionCategory=University&state=Punjab' },
           ],
         },
         {
           links: [
             hdr('Colleges by State'),
-            cs('Colleges in Maharashtra'),
-            cs('Colleges in Karnataka'),
-            cs('Colleges in Uttar Pradesh'),
-            cs('Colleges in Kerala'),
+            { label: 'Colleges in Maharashtra', href: '/tools/colleges?state=Maharashtra' },
+            { label: 'Colleges in Karnataka', href: '/tools/colleges?state=Karnataka' },
+            { label: 'Colleges in Uttar Pradesh', href: '/tools/colleges?state=Uttar+Pradesh' },
+            { label: 'Colleges in Kerala', href: '/tools/colleges?state=Kerala' },
           ],
         },
         {
           links: [
             hdr('Colleges by City'),
-            cs('Colleges in Delhi'),
-            cs('Colleges in Bangalore'),
-            cs('Colleges in Mumbai'),
-            cs('Colleges in Hyderabad'),
+            { label: 'Colleges in Delhi', href: '/tools/colleges?city=Delhi' },
+            { label: 'Colleges in Bangalore', href: '/tools/colleges?city=Bangalore' },
+            { label: 'Colleges in Mumbai', href: '/tools/colleges?city=Mumbai' },
+            { label: 'Colleges in Hyderabad', href: '/tools/colleges?city=Hyderabad' },
           ],
         },
       ],
