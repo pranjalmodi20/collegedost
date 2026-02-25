@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>College Predictors — Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #f8fafc; /* background-light */
+      --card: #ffffff;
+      --muted: #64748b;
+      --primary: #7c3aed;
+      --accent: #f5f3ff;
+      --radius: 12px;
+      --glass: rgba(255,255,255,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family: 'Lexend', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      margin:0; background:var(--bg); color:#0f172a; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      padding:24px;
+    }
+    .container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:20px}
+
+    header{display:flex;align-items:center;gap:16px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#4f46e5);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:14px}
+
+    /* grid layout for sections */
+    .grid{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:920px){.grid{grid-template-columns:repeat(2,1fr)}}
+
+    .card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:0 6px 18px rgba(15,23,42,0.06);border:1px solid rgba(15,23,42,0.03)}
+    .card h2{margin:0 0 6px 0;font-size:18px}
+    .card p{margin:0 0 12px 0;color:var(--muted);font-size:13px}
+
+    form{display:flex;flex-direction:column;gap:10px}
+    .row{display:flex;gap:10px}
+    .col{flex:1}
+    .input,select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid #e6edf6;background:#fbfdff;font-size:14px;color:#0f172a}
+    .input:focus,select:focus{outline:none;box-shadow:0 6px 18px rgba(124,58,237,0.08);border-color:var(--primary)}
+
+    .btn{background:var(--primary);color:#fff;border:none;padding:12px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+    .btn.secondary{background:#eef2ff;color:var(--primary);border:1px solid rgba(124,58,237,0.12)}
+
+    .result{margin-top:12px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(124,58,237,0.06), rgba(245,243,255,0.02));border:1px solid rgba(124,58,237,0.06);color:#0f172a}
+
+    .small{font-size:12px;color:var(--muted)}
+
+    /* reusable header for each section */
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+
+    footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* mobile tweaks */
+    @media(max-width:500px){
+      body{padding:14px}
+      .logo{width:48px;height:48px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">CD</div>
+      <div>
+        <h1>College Predictors — Demo</h1>
+        <p class="lead">Quick multi-exam layout. Each section uses the same design system — responsive and reusable.</p>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- Template section (copy for each exam) -->
+
+      <section class="card" id="jee-main">
+        <div class="section-head">
+          <div>
+            <h2>JEE Main College Predictor</h2>
+            <p class="small">Predict likely colleges based on your JEE Main rank, category and preferred state.</p>
+          </div>
+          <div class="small">Est. time: <strong>1–2s</strong></div>
+        </div>
+
+        <form data-exam="jee-main" onsubmit="predict(event)">
+          <div class="row">
+            <div class="col">
+              <label class="small">Rank</label>
+              <input required class="input" name="rank" type="number" placeholder="e.g. 12000">
+            </div>
+            <div class="col">
+              <label class="small">Category</label>
+              <select name="category" class="input">
+                <option>General</option>
+                <option>OBC</option>
+                <option>SC</option>
+                <option>ST</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label class="small">State</label>
+              <select name="state" class="input">
+                <option>All India</option>
+                <option>Maharashtra</option>
+                <option>Delhi</option>
+                <option>Karnataka</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="small">Quota (optional)</label>
+              <select name="quota" class="input">
+                <option>None</option>
+                <option>Home State</option>
+                <option>Counselling</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:6px;align-items:center">
+            <button class="btn" type="submit">Predict Colleges</button>
+            <button type="button" class="btn secondary" onclick="showExample(this, 'jee-main')">Example</button>
+          </div>
+
+          <div class="result" aria-live="polite" style="display:none"></div>
+        </form>
+      </section>
+
+      <!-- BITSAT -->
+      <section class="card" id="bitsat">
+        <div class="section-head">
+          <div>
+            <h2>BITSAT College Predictor</h2>
+            <p class="small">Estimate which BITS campuses you can get into using your BITSAT score and category.</p>
+          </div>
+          <div class="small">Est. time: <strong>1–2s</strong></div>
+        </div>
+
+        <form data-exam="bitsat" onsubmit="predict(event)">
+          <div class="row">
+            <div class="col">
+              <label class="small">BITSAT Score</label>
+              <input required class="input" name="score" type="number" placeholder="e.g. 280">
+            </div>
+            <div class="col">
+              <label class="small">Category</label>
+              <select name="category" class="input">
+                <option>General</option>
+                <option>OBC</option>
+                <option>SC</option>
+                <option>ST</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label class="small">Preferred Campus</label>
+              <select name="campus" class="input">
+                <option>Any</option>
+                <option>Pilani</option>
+                <option>Goa</option>
+                <option>Hyderabad</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="small">Course</label>
+              <input class="input" name="course" type="text" placeholder="e.g. B.E. (Hons) Computer Science">
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:6px;align-items:center">
+            <button class="btn" type="submit">Predict Colleges</button>
+            <button type="button" class="btn secondary" onclick="showExample(this, 'bitsat')">Example</button>
+          </div>
+
+          <div class="result" aria-live="polite" style="display:none"></div>
+        </form>
+      </section>
+
+      <!-- VITEEE -->
+      <section class="card" id="viteee">
+        <div class="section-head">
+          <div>
+            <h2>VITEEE College Predictor</h2>
+            <p class="small">Predict likely VIT campuses and branches given your VITEEE score and category.</p>
+          </div>
+          <div class="small">Est. time: <strong>1–2s</strong></div>
+        </div>
+
+        <form data-exam="viteee" onsubmit="predict(event)">
+          <div class="row">
+            <div class="col">
+              <label class="small">VITEEE Score</label>
+              <input required class="input" name="score" type="number" placeholder="e.g. 140">
+            </div>
+            <div class="col">
+              <label class="small">Category</label>
+              <select name="category" class="input">
+                <option>General</option>
+                <option>OBC</option>
+                <option>SC</option>
+                <option>ST</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label class="small">State</label>
+              <select name="state" class="input">
+                <option>Any</option>
+                <option>Tamil Nadu</option>
+                <option>Andhra Pradesh</option>
+                <option>Karnataka</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="small">Branch</label>
+              <input class="input" name="branch" type="text" placeholder="e.g. CSE">
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:6px;align-items:center">
+            <button class="btn" type="submit">Predict Colleges</button>
+            <button type="button" class="btn secondary" onclick="showExample(this, 'viteee')">Example</button>
+          </div>
+
+          <div class="result" aria-live="polite" style="display:none"></div>
+        </form>
+      </section>
+
+      <!-- AIIMS INI-CET -->
+      <section class="card" id="aiims">
+        <div class="section-head">
+          <div>
+            <h2>AIIMS INI-CET Predictor</h2>
+            <p class="small">Estimate seat chances for AIIMS/INI-CET based on your percentile/score and category.</p>
+          </div>
+          <div class="small">Est. time: <strong>1–2s</strong></div>
+        </div>
+
+      <form data-exam="aiims" onsubmit="predict(event)">
+        <div class="row">
+          <div class="col">
+            <label class="small">Score / Percentile</label>
+            <input required class="input" name="score" type="text" placeholder="e.g. 97.5 percentile">
+          </div>
+          <div class="col">
+            <label class="small">Category</label>
+            <select name="category" class="input">
+              <option>General</option>
+              <option>OBC</option>
+              <option>SC</option>
+              <option>ST</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="small">Speciality (optional)</label>
+            <input class="input" name="speciality" type="text" placeholder="e.g. Medicine">
+          </div>
+          <div class="col">
+            <label class="small">State</label>
+            <select name="state" class="input">
+              <option>Any</option>
+              <option>Delhi</option>
+              <option>Maharashtra</option>
+              <option>West Bengal</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:6px;align-items:center">
+          <button class="btn" type="submit">Predict Colleges</button>
+          <button type="button" class="btn secondary" onclick="showExample(this, 'aiims')">Example</button>
+        </div>
+
+        <div class="result" aria-live="polite" style="display:none"></div>
+      </form>
+      </section>
+
+      <!-- CAT -->
+      <section class="card" id="cat">
+        <div class="section-head">
+          <div>
+            <h2>CAT College Predictor</h2>
+            <p class="small">Predict likely management colleges (IIMs and others) using your CAT percentile and category.</p>
+          </div>
+          <div class="small">Est. time: <strong>1–2s</strong></div>
+        </div>
+
+        <form data-exam="cat" onsubmit="predict(event)">
+          <div class="row">
+            <div class="col">
+              <label class="small">CAT Percentile</label>
+              <input required class="input" name="percentile" type="number" placeholder="e.g. 95">
+            </div>
+            <div class="col">
+              <label class="small">Work Experience (yrs)</label>
+              <input class="input" name="exp" type="number" placeholder="e.g. 2">
+            </div>
+          </div>
+
+Continue... (file too long, truncated)

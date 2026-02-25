@@ -12,7 +12,7 @@ const AuthInputField = ({
     label, icon: Icon, type = 'text', placeholder, value, onChange, required = false, extraInputClass = '' 
 }: {
     label: string;
-    icon: React.ComponentType<{ className?: string }>;
+    icon: React.ComponentType<{ className?: string }>
     type?: string;
     placeholder: string;
     value: string;
