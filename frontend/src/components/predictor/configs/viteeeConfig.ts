@@ -1,6 +1,7 @@
+import { PredictorConfig } from '../types';
 import { jeeConfig } from './jeeConfig';
 
-export const viteeeConfig = {
+export const viteeeConfig: PredictorConfig = {
   ...jeeConfig,
   examName: 'VITEEE',
   examSlug: 'viteee',

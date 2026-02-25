@@ -70,18 +70,18 @@ export const featuredManagementColleges = [
 
 export const managementCounsellingData = [
     {
+        title: "CAT College Predictor",
+        description: "Find out your IIM call chances based on CAT percentile.",
+        image: "https://images.unsplash.com/photo-1554224155-1696413565d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        cta: "Predict Now",
+        link: "/predictors/cat-predictor",
+        color: "bg-orange-50"
+    },
+    {
         title: "MBA Profile Evaluation",
         description: "Get your profile evaluated by IIM Alumni for free.",
         image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         cta: "Evaluate Now",
-        link: "#",
-        color: "bg-orange-50"
-    },
-    {
-        title: "Ask a CAT Topper",
-        description: "Connect with CAT 99%ilers and get prep strategy.",
-        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        cta: "Chat Now",
         link: "#",
         color: "bg-blue-50"
     }

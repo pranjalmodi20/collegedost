@@ -69,9 +69,8 @@ const Mobile: React.FC<MobileProps> = ({
               >
                 {item.title}
                 <FaChevronDown
-                  className={`text-xs text-gray-400 transition-transform duration-200 ${
-                    menuIdx === mIdx ? 'rotate-180' : ''
-                  }`}
+                  className={`text-xs text-gray-400 transition-transform duration-200 ${menuIdx === mIdx ? 'rotate-180' : ''
+                    }`}
                 />
               </button>
 
@@ -106,9 +105,8 @@ const Mobile: React.FC<MobileProps> = ({
                         >
                           {sub.title}
                           <FaAngleRight
-                            className={`text-[10px] text-gray-400 transition-transform duration-200 ${
-                              subIdx === sIdx ? 'rotate-90' : ''
-                            }`}
+                            className={`text-[10px] text-gray-400 transition-transform duration-200 ${subIdx === sIdx ? 'rotate-90' : ''
+                              }`}
                           />
                         </button>
 
@@ -128,16 +126,25 @@ const Mobile: React.FC<MobileProps> = ({
                                     </div>
                                   );
                                 }
+                                if (link.isSubHeader) {
+                                  return (
+                                    <div
+                                      key={lIdx}
+                                      className="text-[11px] font-bold text-gray-500 tracking-wide pt-2 pb-0.5 first:pt-0"
+                                    >
+                                      {link.label}
+                                    </div>
+                                  );
+                                }
                                 return (
                                   <Link
                                     key={lIdx}
                                     href={link.href}
                                     onClick={closeMobile}
-                                    className={`block py-1 text-[13px] transition-colors ${
-                                      link.isViewAll
+                                    className={`block py-1 text-[13px] transition-colors ${link.isViewAll
                                         ? 'text-primary font-semibold'
                                         : 'text-gray-600 hover:text-primary'
-                                    }`}
+                                      }`}
                                   >
                                     {link.label}
                                   </Link>

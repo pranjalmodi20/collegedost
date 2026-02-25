@@ -205,14 +205,14 @@ const mbaMenu: MegaMenuItem = {
         {
           links: [
             cs('IIM & Non IIM Call Predictor'),
-            cs('CAT College Predictor'),
+            { label: 'CAT College Predictor', href: '/predictors/cat-predictor', comingSoon: false },
             cs('MAH CET College Predictor'),
             cs('XAT College/ Call Predictor'),
             cs('IIFT College Predictor'),
             cs('NMAT College Predictor'),
             cs('SNAP College and Call Predictor'),
             cs('CMAT College Predictor'),
-            viewAll('MBA College Predictor →', '/coming-soon'),
+            viewAll('MBA College Predictor →', '/predictors', false),
           ],
         },
         {
@@ -436,7 +436,7 @@ const engineeringMenu: MegaMenuItem = {
             cs('MP BE College Predictor'),
             cs('PTU BTech College Predictor'),
             cs('JAC Chandigarh College Predictor'),
-            cs('GATE College Predictor'),
+            { label: 'GATE College Predictor', href: '/predictors/gate-predictor', comingSoon: false },
             viewAll('Engineering College Predictor →', '/predictors', false),
           ],
         },
@@ -446,11 +446,11 @@ const engineeringMenu: MegaMenuItem = {
             cs('WBJEE College Predictor'),
             cs('AP EAMCET College Predictor'),
             cs('TS EAMCET College Predictor'),
-            cs('BITSAT College Predictor'),
+            { label: 'BITSAT College Predictor', href: '/predictors/bitsat-predictor', comingSoon: false },
             cs('IPU CET College Predictor'),
             cs('OJEE College Predictor'),
             cs('GUJCET College Predictor'),
-            cs('VITEEE College Predictor'),
+            { label: 'VITEEE College Predictor', href: '/predictors/viteee-predictor', comingSoon: false },
             cs('SRMJEEE College Predictor'),
             cs('JAC Delhi College Predictor'),
           ],
@@ -598,6 +598,7 @@ const medicalMenu: MegaMenuItem = {
         {
           links: [
             { label: 'NEET College Predictor', href: '/predictors/neet-predictor', comingSoon: false },
+            { label: 'AIIMS INI-CET Predictor', href: '/predictors/aiims-predictor', comingSoon: false },
             cs('NEET PG College Predictor'),
             viewAll('Medicine College Predictor →', '/predictors', false),
           ],
@@ -924,6 +925,9 @@ const moreMenu: MegaMenuItem = {
             cs('AMU Law Entrance Exam'),
             cs('ACLAT'),
             viewAll('All Law Exams →', '/coming-soon'),
+            subHdr('College Predictors'),
+            { label: 'CLAT College Predictor', href: '/predictors/clat-predictor', comingSoon: false },
+            { label: 'CLAT Rank Predictor', href: '/predictors/rank-predictor?exam=CLAT', comingSoon: false },
           ],
         },
         {

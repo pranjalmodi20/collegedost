@@ -1,6 +1,7 @@
+import { PredictorConfig } from '../types';
 import { jeeConfig } from './jeeConfig';
 
-export const catConfig = {
+export const catConfig: PredictorConfig = {
   ...jeeConfig,
   examName: 'CAT',
   examSlug: 'cat',

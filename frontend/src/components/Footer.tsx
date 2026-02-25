@@ -39,11 +39,11 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Top Exams</h4>
             <ul className="space-y-3 text-sm">
-              <li><Link href="/exams/jee-main" className="hover:text-primary transition-colors">JEE Main 2026</Link></li>
-              <li><Link href="/exams/cat" className="hover:text-primary transition-colors">CAT 2025</Link></li>
-              <li><Link href="/exams/neet" className="hover:text-primary transition-colors">NEET 2026</Link></li>
-              <li><Link href="/exams/gate" className="hover:text-primary transition-colors">GATE 2026</Link></li>
-              <li><Link href="/exams/clat" className="hover:text-primary transition-colors">CLAT 2026</Link></li>
+              <li><Link href="/tools/exams/jee-main" className="hover:text-primary transition-colors">JEE Main 2026</Link></li>
+              <li><Link href="/tools/exams/cat" className="hover:text-primary transition-colors">CAT 2025</Link></li>
+              <li><Link href="/tools/exams/neet" className="hover:text-primary transition-colors">NEET 2026</Link></li>
+              <li><Link href="/tools/exams/gate" className="hover:text-primary transition-colors">GATE 2026</Link></li>
+              <li><Link href="/tools/exams/clat" className="hover:text-primary transition-colors">CLAT 2026</Link></li>
             </ul>
           </div>
 
@@ -64,7 +64,7 @@ const Footer = () => {
             <h4 className="text-white font-bold mb-6">Resources</h4>
             <ul className="space-y-3 text-sm">
               <li><Link href="/predictors" className="hover:text-primary transition-colors">College Predictors</Link></li>
-              <li><Link href="/predictors/rank" className="hover:text-primary transition-colors">Rank Predictors</Link></li>
+              <li><Link href="/predictors/rank-predictor" className="hover:text-primary transition-colors">Rank Predictors</Link></li>
               <li><Link href="/qna" className="hover:text-primary transition-colors">CollegeDost Q&A</Link></li>
               <li><Link href="/reviews" className="hover:text-primary transition-colors">College Reviews</Link></li>
             </ul>
@@ -83,7 +83,7 @@ const Footer = () => {
                 className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary text-sm"
                 placeholder="Your email address"
               />
-              <button 
+              <button
                 type="submit"
                 className="w-full bg-primary hover:bg-secondary text-white font-bold py-2.5 rounded-lg text-sm transition-colors"
               >

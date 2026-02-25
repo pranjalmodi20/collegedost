@@ -11,14 +11,14 @@ export const medicineRankings = [
 ];
 
 export const medicineExams = [
-    { name: "NEET UG 2025", link: "#" },
-    { name: "NEET PG 2025", link: "#" },
-    { name: "INI CET 2025", link: "#" },
-    { name: "NEET MDS", link: "#" },
-    { name: "FMGE 2025", link: "#" },
-    { name: "AIAPGET", link: "#" },
-    { name: "JIPMER PG", link: "#" },
-    { name: "CMSE", link: "#" }
+    { name: "NEET UG 2026", link: "/tools/exams/neet-ug" },
+    { name: "NEET PG 2026", link: "/coming-soon" },
+    { name: "INI CET 2026", link: "/coming-soon" },
+    { name: "NEET MDS", link: "/coming-soon" },
+    { name: "FMGE 2026", link: "/coming-soon" },
+    { name: "AIAPGET", link: "/coming-soon" },
+    { name: "JIPMER PG", link: "/coming-soon" },
+    { name: "CMSE", link: "/coming-soon" }
 ];
 
 export const featuredMedicineColleges = [
@@ -74,7 +74,7 @@ export const medicineCounsellingData = [
         description: "Know your expected rank based on your marks.",
         image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         cta: "Predict Rank",
-        link: "#",
+        link: "/predictors/rank-predictor?exam=NEET",
         color: "bg-blue-50"
     },
     {
@@ -82,7 +82,7 @@ export const medicineCounsellingData = [
         description: "Predict chances of getting AIIMS/Govt colleges.",
         image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         cta: "Predict College",
-        link: "#",
+        link: "/predictors/neet-predictor",
         color: "bg-green-50"
     }
 ];

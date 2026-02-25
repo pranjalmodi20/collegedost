@@ -11,14 +11,14 @@ export const engineeringRankings = [
 ];
 
 export const engineeringExams = [
-    { name: "JEE Main 2025", link: "/tools/exams/jee-main" },
-    { name: "JEE Advanced 2025", link: "#" },
-    { name: "BITSAT 2025", link: "#" },
-    { name: "VITEEE 2025", link: "#" },
-    { name: "SRMJEEE 2025", link: "#" },
-    { name: "WBJEE 2025", link: "#" },
-    { name: "MHT CET 2025", link: "#" },
-    { name: "GATE 2025", link: "#" }
+    { name: "JEE Main 2026", link: "/tools/exams/jee-main" },
+    { name: "JEE Advanced 2026", link: "/coming-soon" },
+    { name: "BITSAT 2026", link: "/coming-soon" },
+    { name: "VITEEE 2026", link: "/coming-soon" },
+    { name: "SRMJEEE 2026", link: "/coming-soon" },
+    { name: "WBJEE 2026", link: "/coming-soon" },
+    { name: "MHT CET 2026", link: "/coming-soon" },
+    { name: "GATE 2026", link: "/coming-soon" }
 ];
 
 export const featuredEngineeringColleges = [
@@ -74,16 +74,32 @@ export const engineeringCounsellingData = [
         description: "Predict your college based on JEE/NTA score.",
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         cta: "Predict College",
-        link: "/jee-main-predictor",
+        link: "/predictors/jee-main-predictor",
         color: "bg-orange-50"
     },
     {
-        title: "Engineering Rank Predictor",
-        description: "Know your expected rank for JEE Main 2025.",
-        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        cta: "Predict Rank",
-        link: "/jee-main-rank-predictor",
+        title: "BITSAT College Predictor",
+        description: "Predict your BITS campus based on BITSAT score.",
+        image: "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        cta: "Predict Now",
+        link: "/predictors/bitsat-predictor",
         color: "bg-blue-50"
+    },
+    {
+        title: "VITEEE College Predictor",
+        description: "Predict your VIT campus and category based on rank.",
+        image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        cta: "Predict Now",
+        link: "/predictors/viteee-predictor",
+        color: "bg-indigo-50"
+    },
+    {
+        title: "GATE College Predictor",
+        description: "Predict IIT/NIT M.Tech admissions based on GATE score.",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        cta: "Predict Now",
+        link: "/predictors/gate-predictor",
+        color: "bg-emerald-50"
     }
 ];
 

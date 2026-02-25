@@ -25,7 +25,7 @@ const allPredictors = [
         category: 'Engineering',
         usersCount: '450K+',
         rating: '4.6',
-        href: '/predictors/rank-predictor?exam=BITSAT',
+        href: '/predictors/bitsat-predictor',
         featured: false,
     },
     {
@@ -36,7 +36,7 @@ const allPredictors = [
         category: 'Engineering',
         usersCount: '320K+',
         rating: '4.5',
-        href: '/predictors/rank-predictor?exam=VITEEE',
+        href: '/predictors/viteee-predictor',
         featured: false,
     },
     {
@@ -58,7 +58,7 @@ const allPredictors = [
         category: 'Medical',
         usersCount: '120K+',
         rating: '4.7',
-        href: '/predictors/rank-predictor?exam=INI-CET',
+        href: '/predictors/aiims-predictor',
         featured: false,
     },
     {
@@ -69,7 +69,7 @@ const allPredictors = [
         category: 'Management',
         usersCount: '200K+',
         rating: '4.7',
-        href: '/predictors/rank-predictor?exam=CAT',
+        href: '/predictors/cat-predictor',
         featured: true,
     },
     {
@@ -80,7 +80,7 @@ const allPredictors = [
         category: 'Law',
         usersCount: '80K+',
         rating: '4.6',
-        href: '/predictors/rank-predictor?exam=CLAT',
+        href: '/predictors/clat-predictor',
         featured: false,
     },
     {
@@ -91,7 +91,7 @@ const allPredictors = [
         category: 'Engineering',
         usersCount: '900K+',
         rating: '4.7',
-        href: '/predictors/rank-predictor?exam=GATE',
+        href: '/predictors/gate-predictor',
         featured: false,
     },
     {
@@ -158,11 +158,10 @@ export default function PredictorsPageContent() {
                                 type="button"
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
-                                    activeCategory === cat
+                                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${activeCategory === cat
                                         ? 'bg-primary text-white shadow-lg shadow-primary/20'
                                         : 'bg-white text-text-muted-light border border-gray-200 hover:border-primary hover:text-primary'
-                                }`}
+                                    }`}
                             >
                                 {cat}
                             </button>

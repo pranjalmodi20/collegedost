@@ -1,6 +1,7 @@
+import { PredictorConfig } from '../types';
 import { jeeConfig } from './jeeConfig';
 
-export const clatConfig = {
+export const clatConfig: PredictorConfig = {
   ...jeeConfig,
   examName: 'CLAT',
   examSlug: 'clat',

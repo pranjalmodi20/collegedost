@@ -1,6 +1,7 @@
+import { PredictorConfig } from '../types';
 import { jeeConfig } from './jeeConfig';
 
-export const bitsatConfig = {
+export const bitsatConfig: PredictorConfig = {
   ...jeeConfig,
   examName: 'BITSAT',
   examSlug: 'bitsat',

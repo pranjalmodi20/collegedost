@@ -11,14 +11,14 @@ export const lawRankings = [
 ];
 
 export const lawExams = [
-    { name: "CLAT 2025", link: "#" },
-    { name: "AILET 2025", link: "#" },
-    { name: "SLAT 2025", link: "#" },
-    { name: "LSAT-India 2025", link: "#" },
-    { name: "MHCET Law 2025", link: "#" },
-    { name: "TS LAWCET", link: "#" },
-    { name: "AP LAWCET", link: "#" },
-    { name: "KLEE 2025", link: "#" }
+    { name: "CLAT 2026", link: "/coming-soon" },
+    { name: "AILET 2026", link: "/coming-soon" },
+    { name: "SLAT 2026", link: "/coming-soon" },
+    { name: "LSAT-India 2026", link: "/coming-soon" },
+    { name: "MHCET Law 2026", link: "/coming-soon" },
+    { name: "TS LAWCET", link: "/coming-soon" },
+    { name: "AP LAWCET", link: "/coming-soon" },
+    { name: "KLEE 2026", link: "/coming-soon" }
 ];
 
 export const featuredLawColleges = [
@@ -66,19 +66,19 @@ export const featuredLawColleges = [
 
 export const lawCounsellingData = [
     {
-        title: "CLAT Counselling",
-        description: "Complete guide to NLU admissions and seat allotment process.",
+        title: "CLAT College Predictor",
+        description: "Predict your NLU seat chances based on CLAT rank.",
         image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        cta: "Read Guide",
-        link: "#",
-        color: "bg-purple-50" // Law specific color theme
+        cta: "Predict Now",
+        link: "/predictors/clat-predictor",
+        color: "bg-purple-50"
     },
     {
-        title: "Ask Legal Experts",
-        description: "Get advice from top legal mentors and counselors.",
+        title: "CLAT Rank Predictor",
+        description: "Estimate your state and All India rank for CLAT.",
         image: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        cta: "Ask Now",
-        link: "#",
+        cta: "Predict Rank",
+        link: "/predictors/rank-predictor?exam=CLAT",
         color: "bg-blue-50"
     }
 ];

@@ -1,6 +1,7 @@
+import { PredictorConfig } from '../types';
 import { jeeConfig } from './jeeConfig';
 
-export const aiimsConfig = {
+export const aiimsConfig: PredictorConfig = {
   ...jeeConfig,
   examName: 'AIIMS INI-CET',
   examSlug: 'aiims-ini-cet',
