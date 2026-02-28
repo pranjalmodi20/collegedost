@@ -3,8 +3,9 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import api from '@/api/axios';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { FaUser, FaTrash, FaUserShield, FaCheckCircle, FaSearch, FaFileExcel, FaFilter } from 'react-icons/fa';
+import { FaUser, FaTrash, FaUserShield, FaCheckCircle, FaSearch, FaFileExcel, FaFilter, FaHistory } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import UserJourneyModal from '@/components/admin/UserJourneyModal';
 
 /**
  * Interface for user data returned from API
@@ -35,6 +36,10 @@ const AdminUsers: React.FC = () => {
         return new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('T')[0];
     });
     const [exporting, setExporting] = useState<boolean>(false);
+
+    // Journey Modal State
+    const [isJourneyModalOpen, setIsJourneyModalOpen] = useState<boolean>(false);
+    const [selectedUser, setSelectedUser] = useState<{ id: string; name: string } | null>(null);
 
     useEffect(() => {
         fetchUsers();
@@ -213,14 +218,27 @@ const AdminUsers: React.FC = () => {
                                             {new Date(user.createdAt).toLocaleDateString()}
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <button
-                                                onClick={() => handleDelete(user._id)}
-                                                className="text-gray-400 hover:text-red-600 p-2 rounded-full hover:bg-red-50 transition-colors"
-                                                title="Delete User"
-                                                disabled={user.role === 'admin'}
-                                            >
-                                                <FaTrash />
-                                            </button>
+                                            <div className="flex justify-end gap-2">
+                                                <button
+                                                    onClick={() => {
+                                                        setSelectedUser({ id: user._id, name: user.name || 'User' });
+                                                        setIsJourneyModalOpen(true);
+                                                    }
+                                                    }
+                                                    className="text-gray-400 hover:text-brand-blue p-2 rounded-full hover:bg-blue-50 transition-colors"
+                                                    title="User Journey"
+                                                >
+                                                    <FaHistory />
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDelete(user._id)}
+                                                    className="text-gray-400 hover:text-red-600 p-2 rounded-full hover:bg-red-50 transition-colors"
+                                                    title="Delete User"
+                                                    disabled={user.role === 'admin'}
+                                                >
+                                                    <FaTrash />
+                                                </button>
+                                            </div>
                                         </td>
                                     </motion.tr>
                                 ))}
@@ -236,6 +254,13 @@ const AdminUsers: React.FC = () => {
                     </div>
                 </div>
             )}
+
+            <UserJourneyModal
+                isOpen={isJourneyModalOpen}
+                onClose={() => setIsJourneyModalOpen(false)}
+                userId={selectedUser?.id || null}
+                userName={selectedUser?.name || null}
+            />
         </AdminLayout>
     );
 };

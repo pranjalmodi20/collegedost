@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa';
 import { megaMenuItems } from '@/data/megaMenuData';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface MobileProps {
   isOpen: boolean;
@@ -43,9 +44,18 @@ const Mobile: React.FC<MobileProps> = ({
       <div className="fixed top-0 left-0 h-screen w-[85%] max-w-100 bg-white z-1000 lg:hidden shadow-2xl flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-100">
-          <span className="font-display font-bold text-xl text-primary">
-            COLLEGE DOST
-          </span>
+          <div className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              alt="College Dost Logo"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+            <span className="font-display font-bold text-xl text-primary">
+              COLLEGE DOST
+            </span>
+          </div>
           <button
             onClick={closeMobile}
             className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500"
@@ -142,8 +152,8 @@ const Mobile: React.FC<MobileProps> = ({
                                     href={link.href}
                                     onClick={closeMobile}
                                     className={`block py-1 text-[13px] transition-colors ${link.isViewAll
-                                        ? 'text-primary font-semibold'
-                                        : 'text-gray-600 hover:text-primary'
+                                      ? 'text-primary font-semibold'
+                                      : 'text-gray-600 hover:text-primary'
                                       }`}
                                   >
                                     {link.label}

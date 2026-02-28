@@ -5,6 +5,7 @@ import { Providers } from "@/components/Providers";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/Footer";
 import ModalManager from "@/components/ModalManager";
+import UserJourneyTracker from "@/components/UserJourneyTracker";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -61,7 +62,9 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <Providers>
-          <Navbar />
+          <UserJourneyTracker />
+          <Navbar
+           />
           <main className="min-h-screen">
             {children}
           </main>
