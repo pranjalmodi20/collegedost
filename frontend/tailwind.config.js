@@ -7,7 +7,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: "#83beb2",
+                primary: "#14B8A6",
                 secondary: "#f7a553",
                 "background-light": "#F8FAFC",
                 "background-dark": "#0F172A",
@@ -18,11 +18,11 @@ export default {
                 "text-muted-light": "#64748B",
                 "text-muted-dark": "#94A3B8",
                 brand: {
-                    indigo: '#83beb2',
+                    indigo: '#14B8A6',
                     violet: '#f7a553',
                     'violet-dark': '#e8923e',
                     cyan: '#6aada0',
-                    mint: '#83beb2',
+                    mint: '#14B8A6',
                     orange: '#f7a553',
                     dark: '#0f172a',
                     'dark-light': '#1e293b',
@@ -78,8 +78,6 @@ export default {
                 blob: {
                     '0%': { transform: 'translate(0px, 0px) scale(1)' },
                     '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                    '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                    '100%': { transform: 'translate(0px, 0px) scale(1)' },
                 },
                 marquee: {
                     '0%': { transform: 'translateX(0)' },

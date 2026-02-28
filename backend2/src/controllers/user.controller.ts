@@ -326,3 +326,67 @@ export const exportUsers = async (req: AuthRequest, res: Response) => {
         });
     }
 };
+
+// @desc    Track user journey (URL visited)
+// @route   POST /api/users/journey
+// @access  Private
+export const trackJourney = async (req: AuthRequest, res: Response) => {
+    try {
+        const { url } = req.body;
+
+        if (!url) {
+            return res.status(400).json({ success: false, message: 'Please provide a URL' });
+        }
+
+        if (!req.user) {
+            return res.status(401).json({ success: false, message: 'Not authorized' });
+        }
+
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        user.journey.push({ url, timestamp: new Date() });
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Journey tracked'
+        });
+    } catch (error) {
+        console.error('Track Journey Error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server Error'
+        });
+    }
+};
+
+// @desc    Get user journey (Admin only)
+// @route   GET /api/users/:id/journey
+// @access  Private/Admin
+export const getUserJourney = async (req: AuthRequest, res: Response) => {
+    try {
+        const user = await User.findById(req.params.id).select('journey name');
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: user.journey,
+            userName: user.name
+        });
+    } catch (error) {
+        console.error('Get User Journey Error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server Error'
+        });
+    }
+};

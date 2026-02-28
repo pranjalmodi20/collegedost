@@ -2,7 +2,7 @@
 
 @theme {
   /* Colors - Updated for Careers360-style design */
-  --color-primary: #83beb2;
+  --color-primary: #14B8A6;
   --color-secondary: #f7a553;
   --color-background-light: #F8FAFC;
   --color-background-dark: #0F172A;
@@ -12,13 +12,13 @@
   --color-text-main-dark: #F1F5F9;
   --color-text-muted-light: #64748B;
   --color-text-muted-dark: #94A3B8;
-  
+
   /* Legacy brand colors for compatibility */
-  --color-brand-indigo: #83beb2;
+  --color-brand-indigo: #14B8A6;
   --color-brand-violet: #f7a553;
   --color-brand-violet-dark: #e8923e;
   --color-brand-cyan: #6aada0;
-  --color-brand-mint: #83beb2;
+  --color-brand-mint: #14B8A6;
   --color-brand-orange: #f7a553;
   --color-brand-dark: #0f172a;
   --color-brand-dark-light: #1e293b;
@@ -49,10 +49,12 @@
 
   /* Keyframes */
   @keyframes float {
+
     0%,
     100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-20px);
     }
@@ -63,6 +65,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -73,6 +76,7 @@
     0% {
       transform: translateX(-100%);
     }
+
     100% {
       transform: translateX(100%);
     }
@@ -82,12 +86,15 @@
     0% {
       transform: translate(0px, 0px) scale(1);
     }
+
     33% {
       transform: translate(30px, -50px) scale(1.1);
     }
+
     66% {
       transform: translate(-20px, 20px) scale(0.9);
     }
+
     100% {
       transform: translate(0px, 0px) scale(1);
     }
@@ -97,6 +104,7 @@
     0% {
       transform: translateX(0);
     }
+
     100% {
       transform: translateX(-50%);
     }
@@ -119,6 +127,7 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -153,10 +162,12 @@ body {
 .filter-scroll::-webkit-scrollbar {
   width: 4px;
 }
+
 .filter-scroll::-webkit-scrollbar-thumb {
   background: #E2E8F0;
   border-radius: 10px;
 }
+
 .filter-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
