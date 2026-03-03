@@ -26,6 +26,8 @@ export interface IExam extends Document {
     syllabus: ISyllabusSubject[];
     importantDates: IImportantDate[];
     news: IExamNews[];
+    aiGuideContent?: any;
+    aiGuideGeneratedAt?: Date;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -69,7 +71,15 @@ const examSchema = new Schema<IExam>({
             type: Date,
             default: Date.now
         }
-    }]
+    }],
+    aiGuideContent: {
+        type: Schema.Types.Mixed,
+        default: null
+    },
+    aiGuideGeneratedAt: {
+        type: Date,
+        default: null
+    }
 }, {
     timestamps: true
 });

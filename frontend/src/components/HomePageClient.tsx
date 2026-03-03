@@ -5,11 +5,14 @@ import HomeHero from './HomeHero';
 import FeaturedColleges from './FeaturedColleges';
 import HomeCounselling from './HomeCounselling';
 import DataRankings from './DataRankings';
-import OnlineCourses from './OnlineCourses';
+// import OnlineCourses from './OnlineCourses';
 import AppDownload from './AppDownload';
 import ManagementRankings from './ManagementRankings';
 import EngineeringRankings from './EngineeringRankings';
 import MedicalRankings from './MedicalRankings';
+import TopExams from './TopExams';
+import VideoSection from './VideoSection';
+import TrendingCourses from './TrendingCourses';
 import { useUI } from '@/context/UIContext';
 
 const HomePage = () => {
@@ -48,11 +51,20 @@ const HomePage = () => {
                     {/* Personalized Counselling */}
                     <HomeCounselling onOpenAskModal={openAskModal} />
 
+                    {/* Video Section */}
+                    <VideoSection />
+
+                    {/* Top Exams this month */}
+                    <TopExams />
+
+                    {/* Trending Courses */}
+                    <TrendingCourses />
+
                     {/* Data & Rankings + Smart Predictors */}
                     <DataRankings />
 
                     {/* Online Courses */}
-                    <OnlineCourses />
+                    {/* <OnlineCourses /> */}
                 </div>
             </main>
 

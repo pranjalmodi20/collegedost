@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Exam from '../models/Exam';
+import { generateExamGuide } from '../services/gemini.service';
 
 // @desc    Get all exams
 // @route   GET /api/exams
@@ -108,5 +109,72 @@ export const deleteExam = async (req: Request, res: Response): Promise<void> => 
         });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// @desc    Get AI-generated exam guide
+// @route   GET /api/exams/:slug/guide
+// @access  Public
+export const getExamGuide = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const slug = req.params.slug as string;
+
+        // Try to find the exam in database
+        let exam = await Exam.findOne({ examSlug: slug });
+
+        // If exam exists and has cached guide content (less than 30 days old), return it
+        if (exam && exam.aiGuideContent && exam.aiGuideGeneratedAt) {
+            const daysSinceGenerated = (Date.now() - exam.aiGuideGeneratedAt.getTime()) / (1000 * 60 * 60 * 24);
+            if (daysSinceGenerated < 30) {
+                res.status(200).json({
+                    success: true,
+                    cached: true,
+                    data: exam.aiGuideContent
+                });
+                return;
+            }
+        }
+
+        // Derive a human-readable exam name from the slug
+        const examName: string = exam?.examName || slug
+            .split('-')
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+            .replace(/\b(Jee|Neet|Cuet|Cet|Mht|Mah|Sat|Cfa|Amu|Iiser|Nift|Nata|Rrb|Ctet|Aiims)\b/gi, (match: string) => match.toUpperCase());
+
+        // Generate guide content using Gemini
+        console.log(`[Gemini] Generating guide for: ${examName} (slug: ${slug})`);
+        const guideData = await generateExamGuide(examName, slug);
+
+        // Auto-create exam record if it doesn't exist
+        if (!exam) {
+            exam = await Exam.create({
+                examName: examName,
+                examSlug: slug,
+                conductingAuthority: guideData.highlights?.find(h => h.key.toLowerCase().includes('conducting'))?.value || 'TBA',
+                examLevel: 'National',
+                description: guideData.sections?.find(s => s.id === 'what-is')?.content?.replace(/<[^>]*>/g, '').substring(0, 500) || '',
+                aiGuideContent: guideData,
+                aiGuideGeneratedAt: new Date()
+            });
+        } else {
+            // Update existing exam with cached content
+            exam.aiGuideContent = guideData;
+            exam.aiGuideGeneratedAt = new Date();
+            await exam.save();
+        }
+
+        res.status(200).json({
+            success: true,
+            cached: false,
+            data: guideData
+        });
+    } catch (error: any) {
+        console.error('[Gemini Guide Error]', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to generate exam guide. Please try again later.',
+            error: error.message
+        });
     }
 };

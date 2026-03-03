@@ -80,8 +80,8 @@ const PageContent: React.FC = () => {
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-                                <FaGlobeAmericas className="text-brand-blue" />
-                                Study Abroad
+                                {/* <FaGlobeAmericas className="text-brand-blue" />
+                                Study Abroad */}
                             </h1>
                             <p className="text-gray-600 mt-2">Explore {totalCount > 0 ? totalCount.toLocaleString() : 'thousands of'} top universities from around the world.</p>
                         </div>

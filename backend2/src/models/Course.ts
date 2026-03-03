@@ -8,6 +8,8 @@ export interface ICourseEntity extends Document {
     duration: string;
     overview: string;
     careerOptions: string[];
+    aiGuideContent?: any;
+    aiGuideGeneratedAt?: Date;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -43,7 +45,15 @@ const courseSchema = new Schema<ICourseEntity>({
         type: String,
         required: [true, 'Please add an overview']
     },
-    careerOptions: [String]
+    careerOptions: [String],
+    aiGuideContent: {
+        type: Schema.Types.Mixed,
+        default: null
+    },
+    aiGuideGeneratedAt: {
+        type: Date,
+        default: null
+    }
 }, {
     timestamps: true
 });
