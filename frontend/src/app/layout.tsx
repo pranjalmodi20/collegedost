@@ -48,6 +48,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+      </head>
+      <body
+        className={`${inter.variable} ${poppins.variable} antialiased bg-background-light`}
+        suppressHydrationWarning
+      >
         {/* Inject Google Tracking Code */}
         {trackingCodes.googleTrackingCode && (
           <div dangerouslySetInnerHTML={{ __html: trackingCodes.googleTrackingCode }} />
@@ -56,15 +61,9 @@ export default async function RootLayout({
         {trackingCodes.metaTrackingCode && (
           <div dangerouslySetInnerHTML={{ __html: trackingCodes.metaTrackingCode }} />
         )}
-      </head>
-      <body
-        className={`${inter.variable} ${poppins.variable} antialiased bg-background-light`}
-        suppressHydrationWarning
-      >
         <Providers>
           <UserJourneyTracker />
-          <Navbar
-           />
+          <Navbar />
           <main className="min-h-screen">
             {children}
           </main>

@@ -503,7 +503,7 @@ export const megaMenuItems: MegaMenuItem[] = [
   medicalMenu,
   designMenu,
   moreMenu,
-  studyAbroadMenu,
+  // studyAbroadMenu,
   counselingMenu,
-  onlineCoursesMenu,
+  // onlineCoursesMenu,
 ];

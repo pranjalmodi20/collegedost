@@ -13,7 +13,7 @@ import { useUI } from '@/context/UIContext';
  */
 const PageContent: React.FC = () => {
     const { openAskModal } = useUI();
-    
+
     return (
         <>
             <Hero
@@ -32,14 +32,14 @@ const PageContent: React.FC = () => {
             />
 
             <div className="container mx-auto px-4 py-12 grow flex flex-col gap-16">
-                <PillSection 
-                    title="Entrance Exams" 
+                <PillSection
+                    title="Entrance Exams"
                     items={[
                         { name: "NEST", link: "#" },
                         { name: "IIT JAM", link: "#" },
-                        { name: "CUET Science", link: "#" }
-                    ]} 
-                    color="border-gray-200" 
+                        { name: "CUET Science", link: "/exams/cuet" }
+                    ]}
+                    color="border-gray-200"
                 />
 
                 <GenericCardGrid
@@ -52,7 +52,7 @@ const PageContent: React.FC = () => {
                     type="card"
                 />
 
-                <Counselling 
+                <Counselling
                     items={[]}
                     onOpenAskModal={openAskModal}
                 />

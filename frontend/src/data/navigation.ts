@@ -968,57 +968,59 @@ export const browseByStreamData = [
       ]
     }
   },
-  {
-    id: 'online',
-    label: 'Online Courses and Certifications',
-    titles: {
-      col1: 'Top Streams',
-      col2: 'Specializations',
-      col3_1: 'Resources',
-      col3_2: 'Top Providers'
+  /*
+    {
+      id: 'online',
+      label: 'Online Courses and Certifications',
+      titles: {
+        col1: 'Top Streams',
+        col2: 'Specializations',
+        col3_1: 'Resources',
+        col3_2: 'Top Providers'
+      },
+      content: {
+        exams: [
+          { title: 'IT & Software Certification Courses', href: '#' },
+          { title: 'Engineering and Architecture Certification Courses', href: '#' },
+          { title: 'Programming And Development Certification Courses', href: '#' },
+          { title: 'Business and Management Certification Courses', href: '#' },
+          { title: 'Marketing Certification Courses', href: '#' },
+          { title: 'Health and Fitness Certification Courses', href: '#' },
+          { title: 'Design Certification Courses', href: '#' },
+          { title: 'View All', href: '#', isLink: true }
+        ],
+        colleges: [
+          { title: 'Digital Marketing Certification Courses', href: '#' },
+          { title: 'Cyber Security Certification Courses', href: '#' },
+          { title: 'Artificial Intelligence Certification Courses', href: '#' },
+          { title: 'Business Analytics Certification Courses', href: '#' },
+          { title: 'Data Science Certification Courses', href: '#' },
+          { title: 'Cloud Computing Certification Courses', href: '#' },
+          { title: 'Machine Learning Certification Courses', href: '#' },
+          { title: 'View All Certification Courses', href: '#', isLink: true }
+        ],
+        predictors: [
+          { title: 'UG Degree Courses', href: '#' },
+          { title: 'PG Degree Courses', href: '#' },
+          { title: 'Online MBA', href: '#' },
+          { title: 'Short Term Courses', href: '#' },
+          { title: 'Free Courses', href: '#' },
+          { title: 'Online Degrees and Diplomas', href: '#' },
+          { title: 'Compare Courses', href: '#' }
+        ],
+        resources: [
+          { title: 'Coursera Courses', href: '#' },
+          { title: 'Udemy Courses', href: '#' },
+          { title: 'Edx Courses', href: '#' },
+          { title: 'Swayam Courses', href: '#' },
+          { title: 'upGrad Courses', href: '#' },
+          { title: 'Simplilearn Courses', href: '#' },
+          { title: 'Great Learning Courses', href: '#' },
+          { title: 'View All', href: '#', isLink: true }
+        ]
+      }
     },
-    content: {
-      exams: [
-        { title: 'IT & Software Certification Courses', href: '#' },
-        { title: 'Engineering and Architecture Certification Courses', href: '#' },
-        { title: 'Programming And Development Certification Courses', href: '#' },
-        { title: 'Business and Management Certification Courses', href: '#' },
-        { title: 'Marketing Certification Courses', href: '#' },
-        { title: 'Health and Fitness Certification Courses', href: '#' },
-        { title: 'Design Certification Courses', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
-      ],
-      colleges: [
-        { title: 'Digital Marketing Certification Courses', href: '#' },
-        { title: 'Cyber Security Certification Courses', href: '#' },
-        { title: 'Artificial Intelligence Certification Courses', href: '#' },
-        { title: 'Business Analytics Certification Courses', href: '#' },
-        { title: 'Data Science Certification Courses', href: '#' },
-        { title: 'Cloud Computing Certification Courses', href: '#' },
-        { title: 'Machine Learning Certification Courses', href: '#' },
-        { title: 'View All Certification Courses', href: '#', isLink: true }
-      ],
-      predictors: [
-        { title: 'UG Degree Courses', href: '#' },
-        { title: 'PG Degree Courses', href: '#' },
-        { title: 'Online MBA', href: '#' },
-        { title: 'Short Term Courses', href: '#' },
-        { title: 'Free Courses', href: '#' },
-        { title: 'Online Degrees and Diplomas', href: '#' },
-        { title: 'Compare Courses', href: '#' }
-      ],
-      resources: [
-        { title: 'Coursera Courses', href: '#' },
-        { title: 'Udemy Courses', href: '#' },
-        { title: 'Edx Courses', href: '#' },
-        { title: 'Swayam Courses', href: '#' },
-        { title: 'upGrad Courses', href: '#' },
-        { title: 'Simplilearn Courses', href: '#' },
-        { title: 'Great Learning Courses', href: '#' },
-        { title: 'View All', href: '#', isLink: true }
-      ]
-    }
-  },
+  */
 ];
 
 export const examsData = [
@@ -1395,7 +1397,7 @@ export const navLinks = [
   { title: 'More', href: '#', hasDropdown: true, streamId: 'streams' },
   { title: 'Study Abroad', href: '#', hasDropdown: true, streamId: 'abroad' },
   { title: 'Counselling', href: '#', hasDropdown: false, streamId: 'counselling' },
-  { title: 'Online Courses', href: '/tools/courses', hasDropdown: false, streamId: 'online-courses' },
+  // { title: 'Online Courses', href: '/tools/courses', hasDropdown: false, streamId: 'online-courses' },
 ];
 
 export const heroTabs = [
@@ -1610,7 +1612,7 @@ export const moreData = [
     label: 'Learn',
     content: {
       col1: [
-        { title: 'Online Courses', href: '#', isLink: true },
+        // { title: 'Online Courses', href: '#', isLink: true },
         { title: 'Mock Tests', href: '#', isLink: true }
       ],
       col2: [
