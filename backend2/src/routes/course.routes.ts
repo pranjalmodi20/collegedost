@@ -19,12 +19,14 @@ router.route('/')
 router.route('/:slug/guide')
     .get(getCourseGuide);
 
-router.route('/:slug')
-    .get(getCourseBySlug);
-
 router.route('/id/:id')
-    .get(getCourseById)
+    .get(getCourseById);
+
+router.route('/:id')
     .put(protect, authorize('admin'), updateCourse)
     .delete(protect, authorize('admin'), deleteCourse);
+
+router.route('/:slug')
+    .get(getCourseBySlug);
 
 export default router;

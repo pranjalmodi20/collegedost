@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import College from '../models/College';
 import { generateCollegeContent, validatePlacementStats } from '../services/collegeAI';
+import { generateCollegeGuide } from '../services/gemini.service';
 
 // @desc    Get all colleges with filters and pagination
 // @route   GET /api/colleges
@@ -11,7 +12,7 @@ export const getColleges = async (req: Request, res: Response): Promise<void> =>
             search, state, city, course, branch, type,
             fees, rating, sort, page = 1, limit = 20,
             management, collegeType, institutionCategory, locationType,
-            stream
+            stream, trending
         } = req.query;
 
         const conditions: any[] = [];
@@ -82,6 +83,7 @@ export const getColleges = async (req: Request, res: Response): Promise<void> =>
         if (collegeType) conditions.push({ collegeType: { $in: (collegeType as string).split(',') } });
         if (institutionCategory) conditions.push({ institutionCategory: { $in: (institutionCategory as string).split(',') } });
         if (locationType) conditions.push({ locationType: { $in: (locationType as string).split(',') } });
+        if (trending === 'true') conditions.push({ isTrending: true });
 
         // Stream filter
         if (stream) {
@@ -618,5 +620,57 @@ export const generateAIContent = async (req: Request, res: Response): Promise<vo
     } catch (error: any) {
         console.error(`AI content generation error: ${error.message}`);
         res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// @desc    Get AI-generated college guide (Table of Contents)
+// @route   GET /api/colleges/:slug/guide
+// @access  Public
+export const getCollegeGuide = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const slug = req.params.slug as string;
+
+        // Find the college by slug
+        const college = await College.findOne({ slug });
+
+        if (!college) {
+            res.status(404).json({ success: false, message: 'College not found' });
+            return;
+        }
+
+        // Return cached guide if less than 30 days old
+        if (college.aiGuideContent && college.aiGuideGeneratedAt) {
+            const daysSinceGenerated = (Date.now() - college.aiGuideGeneratedAt.getTime()) / (1000 * 60 * 60 * 24);
+            if (daysSinceGenerated < 30) {
+                res.status(200).json({
+                    success: true,
+                    cached: true,
+                    data: college.aiGuideContent
+                });
+                return;
+            }
+        }
+
+        // Generate guide content using Gemini
+        console.log(`[Gemini] Generating college guide for: ${college.name} (slug: ${slug})`);
+        const guideData = await generateCollegeGuide(college.name, slug);
+
+        // Cache the generated content
+        college.aiGuideContent = guideData;
+        college.aiGuideGeneratedAt = new Date();
+        await college.save();
+
+        res.status(200).json({
+            success: true,
+            cached: false,
+            data: guideData
+        });
+    } catch (error: any) {
+        console.error('[Gemini College Guide Error]', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to generate college guide. Please try again later.',
+            error: error.message
+        });
     }
 };

@@ -104,6 +104,9 @@ export interface ICollege extends Document {
     aiContent?: IAIContent;
     aiGenerated: boolean;
     aiGeneratedAt?: Date;
+    isTrending: boolean;
+    aiGuideContent?: any;
+    aiGuideGeneratedAt?: Date;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -214,7 +217,19 @@ const collegeSchema = new Schema<ICollege>({
         seoDescription: String
     },
     aiGenerated: { type: Boolean, default: false },
-    aiGeneratedAt: Date
+    aiGeneratedAt: Date,
+    isTrending: {
+        type: Boolean,
+        default: false
+    },
+    aiGuideContent: {
+        type: Schema.Types.Mixed,
+        default: null
+    },
+    aiGuideGeneratedAt: {
+        type: Date,
+        default: null
+    }
 }, {
     timestamps: true
 });

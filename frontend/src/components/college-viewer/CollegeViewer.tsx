@@ -19,6 +19,7 @@ import ReviewsSection from './ReviewsSection';
 import CollegeSidebar from './CollegeSidebar';
 import GalleryLightbox from './GalleryLightbox';
 import AIContentSection from './AIContentSection';
+import CollegeGuideSection from './CollegeGuideSection';
 
 interface CollegeViewerProps {
     initialData?: CollegeData;
@@ -79,6 +80,7 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
     const [totalReviewCount, setTotalReviewCount] = useState<number>(0);
 
     const sectionRefs = {
+        'college-guide': useRef<HTMLDivElement>(null),
         overview: useRef<HTMLDivElement>(null),
         courses: useRef<HTMLDivElement>(null),
         admission: useRef<HTMLDivElement>(null),
@@ -374,6 +376,7 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
     }
 
     const tabs = [
+        { id: 'college-guide', label: 'College Info' },
         { id: 'overview', label: 'Overview' },
         { id: 'courses', label: 'Courses & Fees' },
         { id: 'admission', label: 'Admissions' },
@@ -415,6 +418,7 @@ const CollegeViewer: React.FC<CollegeViewerProps> = ({ initialData }) => {
 
                     {/* Left Content Column */}
                     <div className="lg:col-span-8 space-y-10">
+                        <CollegeGuideSection slug={slug} collegeName={college.name} sectionRef={sectionRefs['college-guide']} />
                         <OverviewSection college={college} sectionRef={sectionRefs.overview} />
                         <CoursesSection college={college} sectionRef={sectionRefs.courses} scrollToSection={scrollToSection} />
                         <AdmissionSection college={college} sectionRef={sectionRefs.admission} />

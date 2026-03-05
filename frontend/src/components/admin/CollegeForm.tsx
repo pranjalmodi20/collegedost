@@ -26,6 +26,7 @@ interface CollegeFormData {
     nirfRank: string;
     website: string;
     images: string;
+    isTrending: boolean;
 }
 
 /**
@@ -45,7 +46,8 @@ const CollegeForm: React.FC = () => {
         type: 'Private',
         nirfRank: '',
         website: '',
-        images: ''
+        images: '',
+        isTrending: false
     });
 
     useEffect(() => {
@@ -70,7 +72,8 @@ const CollegeForm: React.FC = () => {
                     type: college.type || 'Private',
                     nirfRank: college.nirfRank?.toString() || '',
                     website: college.website || '',
-                    images: college.images?.[0] || ''
+                    images: college.images?.[0] || '',
+                    isTrending: college.isTrending || false
                 });
             }
         } catch (error) {
@@ -105,7 +108,7 @@ const CollegeForm: React.FC = () => {
                 nirfRank: formData.nirfRank ? parseInt(formData.nirfRank) : undefined,
                 images: formData.images ? [formData.images] : []
             };
-            
+
             if (isEditMode) {
                 await api.put(`/colleges/${id}`, payload);
                 alert('College updated successfully');
@@ -113,7 +116,7 @@ const CollegeForm: React.FC = () => {
                 await api.post('/colleges', payload);
                 alert('College added successfully');
             }
-            
+
             router.push('/admin/colleges');
         } catch (error) {
             console.error(error);
@@ -152,9 +155,9 @@ const CollegeForm: React.FC = () => {
 
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
-                                <select 
-                                    name="type" 
-                                    value={formData.type} 
+                                <select
+                                    name="type"
+                                    value={formData.type}
                                     onChange={handleChange}
                                     className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-orange outline-none"
                                 >
@@ -209,7 +212,7 @@ const CollegeForm: React.FC = () => {
                                     className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-orange outline-none"
                                 />
                             </div>
-                            
+
                             <div className="col-span-2">
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Cover Image URL</label>
                                 <input
@@ -220,6 +223,23 @@ const CollegeForm: React.FC = () => {
                                     placeholder="https://..."
                                     className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-orange outline-none"
                                 />
+                            </div>
+
+                            <div className="col-span-2">
+                                <label className="flex items-center gap-3 cursor-pointer group">
+                                    <div className="relative">
+                                        <input
+                                            type="checkbox"
+                                            name="isTrending"
+                                            checked={formData.isTrending}
+                                            onChange={(e) => setFormData(prev => ({ ...prev, isTrending: e.target.checked }))}
+                                            className="sr-only"
+                                        />
+                                        <div className={`w-12 h-6 rounded-full transition-colors ${formData.isTrending ? 'bg-orange-500' : 'bg-gray-200'}`}></div>
+                                        <div className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform ${formData.isTrending ? 'translate-x-6' : ''}`}></div>
+                                    </div>
+                                    <span className="text-sm font-medium text-gray-700">Display in "Trending Colleges" section on homepage</span>
+                                </label>
                             </div>
                         </div>
 

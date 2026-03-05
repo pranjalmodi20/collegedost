@@ -451,3 +451,154 @@ export async function generateBoardGuide(boardName: string, boardSlug: string): 
     throw new Error(`Failed to parse AI response: ${error.message}`);
   }
 }
+
+export interface CollegeGuideData {
+  collegeName: string;
+  sections: ExamGuideSection[];
+  highlights: { key: string; value: string }[];
+  faqs: { question: string; answer: string }[];
+}
+
+export async function generateCollegeGuide(collegeName: string, collegeSlug: string): Promise<CollegeGuideData> {
+  const model = getGeminiModel();
+
+  const prompt = `You are an expert Indian education counselor. Generate a comprehensive, detailed guide for "${collegeName}" college/university in India.
+
+Return a JSON object with this EXACT structure (no markdown, no code fences, just raw JSON):
+
+{
+  "collegeName": "${collegeName}",
+  "highlights": [
+    {"key": "College Name", "value": "Full official name"},
+    {"key": "Type", "value": "Government/Private/Deemed"},
+    {"key": "Established", "value": "Year of establishment"},
+    {"key": "Location", "value": "City, State"},
+    {"key": "NIRF Rank", "value": "Rank if available or N/A"},
+    {"key": "Approved By", "value": "UGC/AICTE/etc."},
+    {"key": "Affiliation", "value": "University affiliation"},
+    {"key": "Official Website", "value": "URL"}
+  ],
+  "sections": [
+    {
+      "id": "overview",
+      "title": "${collegeName} Overview",
+      "content": "<p>Detailed introduction about the college, its history, mission, vision, and significance in Indian education...</p>"
+    },
+    {
+      "id": "highlights-2026",
+      "title": "${collegeName} Highlights 2026",
+      "content": "<p>Key highlights and recent achievements, rankings, accreditations...</p>"
+    },
+    {
+      "id": "courses-fees",
+      "title": "${collegeName} Courses and Fees 2026",
+      "content": "<p>Detailed breakdown of courses offered (UG, PG, PhD) along with fee structures...</p><ul><li>Course 1...</li></ul>"
+    },
+    {
+      "id": "admission",
+      "title": "${collegeName} Admission Process and Important Dates 2026",
+      "content": "<p>Step-by-step admission process, entrance exams accepted, important dates and deadlines...</p>"
+    },
+    {
+      "id": "reviews",
+      "title": "${collegeName} Student Reviews",
+      "content": "<p>What current and past students say about academics, campus life, faculty quality...</p>"
+    },
+    {
+      "id": "popular-programmes",
+      "title": "${collegeName} Popular Programmes 2026",
+      "content": "<p>Most sought-after courses at this institution with details on intake, specializations...</p>"
+    },
+    {
+      "id": "popular-courses",
+      "title": "${collegeName} Popular Courses",
+      "content": "<p>Breakdown of individual popular courses with key details...</p>"
+    },
+    {
+      "id": "placements",
+      "title": "${collegeName} Placements 2025",
+      "content": "<p>Placement statistics, top recruiters, average and highest packages, placement percentage...</p>"
+    },
+    {
+      "id": "cutoff",
+      "title": "${collegeName} Cutoff 2025",
+      "content": "<p>Previous year cutoffs for various exams and categories...</p>"
+    },
+    {
+      "id": "infrastructure",
+      "title": "${collegeName} Infrastructure",
+      "content": "<p>Campus facilities, labs, libraries, hostels, sports facilities, Wi-Fi, canteen...</p>"
+    },
+    {
+      "id": "application-process",
+      "title": "${collegeName} Application Process 2026",
+      "content": "<p>Detailed steps to apply online/offline, required documents...</p>"
+    },
+    {
+      "id": "online-courses",
+      "title": "Top online courses you might be interested in",
+      "content": "<p>Related online courses and certifications that complement studies at this college...</p>"
+    },
+    {
+      "id": "scholarships",
+      "title": "${collegeName} Scholarships 2026",
+      "content": "<p>Available scholarships, eligibility criteria, and application process...</p>"
+    },
+    {
+      "id": "comparison",
+      "title": "${collegeName} vs Other Universities: Which is Better?",
+      "content": "<p>Comparison with similar institutions on parameters like ranking, fees, placements...</p>"
+    },
+    {
+      "id": "faculty",
+      "title": "${collegeName} Faculty",
+      "content": "<p>Information about faculty strength, qualifications, notable professors...</p>"
+    },
+    {
+      "id": "collaborations",
+      "title": "${collegeName} Collaborations and Partnerships",
+      "content": "<p>Industry tie-ups, international collaborations, MoUs with other institutions...</p>"
+    },
+    {
+      "id": "schools",
+      "title": "${collegeName} Schools of Study",
+      "content": "<p>Different schools/departments within the institution and their specializations...</p>"
+    }
+  ],
+  "faqs": [
+    {"question": "How to get admission in ${collegeName}?", "answer": "..."},
+    {"question": "What is the fee structure of ${collegeName}?", "answer": "..."},
+    {"question": "What are the top courses at ${collegeName}?", "answer": "..."},
+    {"question": "What is the placement record of ${collegeName}?", "answer": "..."},
+    {"question": "Is ${collegeName} good for engineering/management?", "answer": "..."}
+  ]
+}
+
+IMPORTANT RULES:
+1. Content must be factually accurate and up-to-date for 2025-2026
+2. Each section's "content" must be rich HTML with <p>, <ul>, <ol>, <li>, <strong>, <em> tags
+3. Each section should have at least 2-3 detailed paragraphs (150-300 words minimum per section)
+4. Include real data: actual placement figures, actual courses, actual faculty info where possible
+5. Return ONLY valid JSON, no markdown fences, no extra text
+6. If you don't know exact data, provide realistic estimates based on the college's reputation and type`;
+
+  const result = await model.generateContent(prompt);
+  const text = result.response.text();
+
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) {
+    console.error('[Gemini Service] No JSON found in college guide response:', text);
+    throw new Error('Failed to parse AI response: No JSON found');
+  }
+
+  const cleanedText = jsonMatch[0];
+
+  try {
+    const guideData: CollegeGuideData = JSON.parse(cleanedText);
+    return guideData;
+  } catch (error: any) {
+    console.error('[Gemini Service] College Guide JSON Parse Error:', error.message);
+    console.error('[Gemini Service] Raw response segment:', text.substring(0, 500));
+    throw new Error(`Failed to parse AI response: ${error.message}`);
+  }
+}

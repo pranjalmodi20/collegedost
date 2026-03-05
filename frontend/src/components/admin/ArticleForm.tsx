@@ -25,6 +25,7 @@ interface ArticleFormData {
     content: string;
     image: string;
     tags: string;
+    isFeatured: boolean;
     links: ArticleLink[];
 }
 
@@ -45,6 +46,7 @@ const ArticleForm: React.FC = () => {
         content: '',
         image: '',
         tags: '',
+        isFeatured: false,
         links: []
     });
 
@@ -70,6 +72,7 @@ const ArticleForm: React.FC = () => {
                     content: article.content,
                     image: article.image || '',
                     tags: article.tags ? article.tags.join(', ') : '',
+                    isFeatured: !!article.isFeatured,
                     links: article.links || []
                 });
             }
@@ -110,7 +113,7 @@ const ArticleForm: React.FC = () => {
                 ...formData,
                 tags: formData.tags.split(',').map(t => t.trim()).filter(t => t)
             };
-            
+
             if (isEditMode) {
                 await api.put(`/articles/${id}`, dataToSubmit);
                 alert('Article updated successfully!');
@@ -227,12 +230,27 @@ const ArticleForm: React.FC = () => {
                             />
                         </div>
 
+                        {/* Featured Checkbox */}
+                        <div className="flex items-center gap-2 bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <input
+                                type="checkbox"
+                                id="isFeatured"
+                                name="isFeatured"
+                                checked={formData.isFeatured}
+                                onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
+                                className="w-5 h-5 rounded text-brand-orange focus:ring-brand-orange border-gray-300"
+                            />
+                            <label htmlFor="isFeatured" className="text-sm font-bold text-gray-800 cursor-pointer">
+                                Mark as Featured Article (Shows on Home Page)
+                            </label>
+                        </div>
+
                         {/* External Links Section */}
                         <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
                             <h3 className="text-sm font-bold text-gray-800 mb-4 flex items-center gap-2">
                                 <FaLink /> Important Links
                             </h3>
-                            
+
                             {/* List of added links */}
                             <div className="space-y-3 mb-4">
                                 {formData.links.map((link, idx) => (
@@ -270,8 +288,8 @@ const ArticleForm: React.FC = () => {
                                         placeholder="https://..."
                                     />
                                 </div>
-                                <button 
-                                    type="button" 
+                                <button
+                                    type="button"
                                     onClick={handleAddLink}
                                     className="bg-gray-800 text-white px-4 py-2 rounded text-sm font-medium hover:bg-gray-700 transition-colors h-9.5"
                                 >

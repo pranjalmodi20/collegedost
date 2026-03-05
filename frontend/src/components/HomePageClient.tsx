@@ -15,6 +15,8 @@ import VideoSection from './VideoSection';
 import LatestNews from './LatestNews';
 import TrendingCourses from './TrendingCourses';
 import TopBoards from './TopBoards';
+import TrendingColleges from './TrendingColleges';
+import FeaturedArticles from './FeaturedArticles';
 import { useUI } from '@/context/UIContext';
 
 const HomePage = () => {
@@ -64,6 +66,12 @@ const HomePage = () => {
 
                     {/* Top Boards in India */}
                     <TopBoards />
+
+                    {/* Trending Colleges & Universities */}
+                    <TrendingColleges />
+
+                    {/* Featured Articles */}
+                    <FeaturedArticles />
 
                     {/* Trending Courses */}
                     <TrendingCourses />
