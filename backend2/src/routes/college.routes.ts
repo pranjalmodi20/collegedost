@@ -10,7 +10,8 @@ import {
     deleteCollege,
     syncColleges,
     getCollegeById,
-    generateAIContent
+    generateAIContent,
+    getCollegeGuide
 } from '../controllers/college.controller';
 
 
@@ -29,6 +30,8 @@ router.post('/sync', protect, authorize('admin'), syncColleges);
 router.get('/id/:id', getCollegeById);
 router.post('/:id/generate-ai', protect, authorize('admin'), generateAIContent);
 
+router.route('/:slug/guide')
+    .get(getCollegeGuide);
 
 router.route('/:slug')
     .get(getCollegeBySlug);

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import api from '@/api/axios';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { FaUniversity, FaPlus, FaMapMarkerAlt, FaStar, FaEdit, FaTrash, FaSearch, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaUniversity, FaPlus, FaMapMarkerAlt, FaStar, FaEdit, FaTrash, FaSearch, FaChevronLeft, FaChevronRight, FaFire } from 'react-icons/fa';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -26,6 +26,7 @@ interface College {
     nirfRank?: number;
     location?: CollegeLocation;
     type?: string;
+    isTrending?: boolean; // Added isTrending field
 }
 
 /**
@@ -107,13 +108,13 @@ const AdminColleges: React.FC = () => {
                     <h1 className="text-2xl font-bold text-gray-900">Colleges Management</h1>
                     <p className="text-gray-500 text-sm">Manage database of colleges</p>
                 </div>
-                
+
                 <div className="flex items-center gap-4 w-full md:w-auto">
                     <div className="relative flex-1 md:w-64">
                         <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                        <input 
-                            type="text" 
-                            placeholder="Search colleges..." 
+                        <input
+                            type="text"
+                            placeholder="Search colleges..."
                             value={search}
                             onChange={handleSearchChange}
                             className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange/20 focus:border-brand-orange transition-all"
@@ -133,7 +134,7 @@ const AdminColleges: React.FC = () => {
                 <>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {colleges.map((college, index) => (
-                            <motion.div 
+                            <motion.div
                                 key={college._id}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -141,20 +142,25 @@ const AdminColleges: React.FC = () => {
                                 className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow group"
                             >
                                 <div className="h-40 bg-gray-100 relative">
-                                    <img 
-                                        src={college.images?.[0] || 'https://via.placeholder.com/400x200?text=No+Image'} 
-                                        alt={college.name} 
+                                    <img
+                                        src={college.images?.[0] || 'https://via.placeholder.com/400x200?text=No+Image'}
+                                        alt={college.name}
                                         className="w-full h-full object-cover"
                                     />
                                     <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-brand-orange shadow-sm flex items-center gap-1">
                                         <FaStar className="text-yellow-400" /> {college.nirfRank ? `#${college.nirfRank} NIRF` : 'N/A'}
                                     </div>
+                                    {college.isTrending && (
+                                        <div className="absolute top-3 left-3 bg-orange-100 text-orange-800 border border-orange-200 px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 shadow-sm">
+                                            <FaFire className="text-orange-500" /> Trending
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="p-5">
                                     <div className="flex items-start justify-between mb-2">
                                         <h3 className="font-bold text-gray-900 line-clamp-2 min-h-12">{college.name}</h3>
                                     </div>
-                                    
+
                                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
                                         <FaMapMarkerAlt className="text-gray-400" />
                                         <span className="truncate">{college.location?.city}, {college.location?.state}</span>
@@ -188,19 +194,19 @@ const AdminColleges: React.FC = () => {
                     {/* Pagination Controls */}
                     {totalPages > 1 && (
                         <div className="flex justify-center items-center gap-4 mt-8">
-                            <button 
+                            <button
                                 onClick={() => handlePageChange(page - 1)}
                                 disabled={page === 1}
                                 className={`p-2 rounded-lg border ${page === 1 ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:text-brand-orange'}`}
                             >
                                 <FaChevronLeft />
                             </button>
-                            
+
                             <span className="text-sm font-medium text-gray-600">
                                 Page {page} of {totalPages}
                             </span>
-                            
-                            <button 
+
+                            <button
                                 onClick={() => handlePageChange(page + 1)}
                                 disabled={page === totalPages}
                                 className={`p-2 rounded-lg border ${page === totalPages ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50 hover:text-brand-orange'}`}
