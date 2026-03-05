@@ -6,8 +6,12 @@ import Article from '../models/Article';
 // @access  Public
 export const getArticles = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { category, search, page = 1, limit = 10 } = req.query;
+        const { category, search, isFeatured, page = 1, limit = 10 } = req.query;
         const query: any = {};
+
+        if (isFeatured === 'true') {
+            query.isFeatured = true;
+        }
 
         if (category && category !== 'All') {
             query.category = category;

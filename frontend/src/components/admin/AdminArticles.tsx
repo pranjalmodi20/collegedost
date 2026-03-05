@@ -16,6 +16,7 @@ interface Article {
     slug: string;
     summary: string;
     category: string;
+    isFeatured: boolean;
     createdAt: string;
 }
 
@@ -96,9 +97,9 @@ const AdminArticles: React.FC = () => {
                                 </span>
                             </div>
                         </div>
-                        
+
                         <p className="text-sm text-gray-500 mb-4 line-clamp-2">{article.summary}</p>
-                        
+
                         <div className="flex items-center justify-between pt-4 border-t border-gray-50 mt-2">
                             <span className="text-xs text-gray-400 font-medium">
                                 {new Date(article.createdAt).toLocaleDateString()}
@@ -117,7 +118,7 @@ const AdminArticles: React.FC = () => {
                         </div>
                     </motion.div>
                 ))}
-                
+
                 {articles.length === 0 && (
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center text-gray-500">
                         <p>No articles found.</p>
@@ -132,14 +133,15 @@ const AdminArticles: React.FC = () => {
                         <tr>
                             <th className="px-6 py-4 font-semibold text-gray-700 text-sm">Title</th>
                             <th className="px-6 py-4 font-semibold text-gray-700 text-sm">Category</th>
+                            <th className="px-6 py-4 font-semibold text-gray-700 text-sm text-center">Featured</th>
                             <th className="px-6 py-4 font-semibold text-gray-700 text-sm">Date</th>
                             <th className="px-6 py-4 font-semibold text-gray-700 text-sm text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
                         {articles.map((article, index) => (
-                            <motion.tr 
-                                key={article._id} 
+                            <motion.tr
+                                key={article._id}
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.05 }}
@@ -153,6 +155,15 @@ const AdminArticles: React.FC = () => {
                                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-800">
                                         {article.category}
                                     </span>
+                                </td>
+                                <td className="px-6 py-4 text-center">
+                                    {article.isFeatured ? (
+                                        <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-700 border border-amber-200">
+                                            FEATURED
+                                        </span>
+                                    ) : (
+                                        <span className="text-gray-300 text-[10px]">—</span>
+                                    )}
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-500">
                                     {new Date(article.createdAt).toLocaleDateString()}
