@@ -64,17 +64,81 @@ const mbaMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'Top MBA Colleges in India', href: '/tools/colleges?stream=Management' },
-            { label: 'Top Private MBA Colleges in India', href: '/tools/colleges?stream=Management&ownership=Private' },
-            { label: 'Top MBA Colleges in Bangalore', href: '/tools/colleges?search=MBA&city=Bangalore' },
-            { label: 'Top MBA Colleges in Mumbai', href: '/tools/colleges?search=MBA&city=Mumbai' },
-            { label: 'Top MBA Colleges in Pune', href: '/tools/colleges?search=MBA&city=Pune' },
-            { label: 'Top MBA Colleges in Hyderabad', href: '/tools/colleges?search=MBA&city=Hyderabad' },
-            { label: 'Top MBA Colleges in Delhi', href: '/tools/colleges?search=MBA&city=Delhi' },
-            { label: 'Top MBA Colleges in Chennai', href: '/tools/colleges?search=MBA&city=Chennai' },
-            { label: 'Top MBA Colleges in Maharashtra', href: '/tools/colleges?search=MBA&state=Maharashtra' },
-            { label: 'Top MBA Colleges in Kolkata', href: '/tools/colleges?search=MBA&city=Kolkata' },
-            { label: 'Top MBA Colleges in Kerala', href: '/tools/colleges?search=MBA&state=Kerala' },
+            cs('Top MBA Colleges in India'),
+            cs('Top Private MBA Colleges in India'),
+            cs('Top MBA Colleges in Bangalore'),
+            cs('Top MBA Colleges in Mumbai'),
+            cs('Top MBA Colleges in Pune'),
+            cs('Top MBA Colleges in Hyderabad'),
+            cs('Top MBA Colleges in Delhi'),
+            cs('Top MBA Colleges in Chennai'),
+            cs('Top MBA Colleges in Maharashtra'),
+            cs('Top MBA Colleges in Kolkata'),
+            cs('Top MBA Colleges in Kerala'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Courses',
+      columns: [
+        {
+          links: [
+            cs('MBA/PGDM'),
+            cs('Executive MBA'),
+            cs('Distance MBA'),
+            cs('Online MBA'),
+            cs('Part-Time MBA'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Specializations',
+      columns: [
+        {
+          links: [
+            cs('MBA in Finance'),
+            cs('MBA in Healthcare Management'),
+            cs('MBA in HR'),
+            cs('MBA in IT'),
+            cs('MBA in Operations Management'),
+            cs('MBA in Marketing'),
+            cs('MBA in International Business'),
+            cs('MBA in Pharmaceutical Management'),
+            cs('MBA in Digital Marketing'),
+            cs('MBA in Data Analytics'),
+          ],
+        },
+        {
+          links: [
+            cs('MBA in Entrepreneurship'),
+            cs('MBA in Family Managed Business'),
+            cs('MBA in Agriculture'),
+            cs('MBA in Product Management'),
+            cs('MBA in General Management'),
+            cs('MBA in Data Science'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Exams',
+      columns: [
+        {
+          links: [
+            hdr('Popular Exams'),
+            cs('CAT'),
+            cs('CMAT'),
+            cs('SNAP'),
+            cs('XAT'),
+            cs('MAT'),
+            cs('ATMA'),
+            cs('NMAT by GMAC'),
+            cs('IBSAT'),
+            cs('KIITEE Management'),
+            cs('UPCET'),
+            viewAll('All MBA Exams →', '/coming-soon'),
           ],
         },
       ],
@@ -84,26 +148,98 @@ const mbaMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'MBA Colleges in India', href: '/tools/colleges?stream=Management' },
-            { label: 'MBA Colleges in Bangalore', href: '/tools/colleges?stream=Management&city=Bangalore' },
-            { label: 'MBA Colleges in Chennai', href: '/tools/colleges?stream=Management&city=Chennai' },
-            { label: 'MBA Colleges in Delhi-NCR', href: '/tools/colleges?stream=Management&city=Delhi' },
-            { label: 'MBA Colleges in Hyderabad', href: '/tools/colleges?stream=Management&city=Hyderabad' },
-            { label: 'MBA Colleges in Kolkata', href: '/tools/colleges?stream=Management&city=Kolkata' },
-            { label: 'MBA Colleges in Mumbai', href: '/tools/colleges?stream=Management&city=Mumbai' },
-            { label: 'MBA Colleges in Pune', href: '/tools/colleges?stream=Management&city=Pune' },
-            { label: 'All Locations →', href: '/tools/colleges?stream=Management', isViewAll: true },
+            cs('MBA Colleges in India'),
+            cs('MBA Colleges in Bangalore'),
+            cs('MBA Colleges in Chennai'),
+            cs('MBA colleges in Delhi-NCR'),
+            cs('MBA Colleges in Hyderabad'),
+            cs('MBA Colleges in Kolkata'),
+            cs('MBA Colleges in Mumbai'),
+            cs('MBA Colleges in Pune'),
+            viewAll('All Locations →', '/coming-soon'),
           ],
         },
       ],
+    },
+    {
+      title: 'Compare Colleges',
+      columns: [
+        {
+          links: [
+            hdr('Popular Comparisons'),
+            cs('IIM Ahmedabad Vs IIM Bangalore'),
+            cs('IIM Ahmedabad Vs IIM Calcutta'),
+            cs('SIBM Pune Vs SCMHRD Pune'),
+            cs('SP Jain (SPJIMR) Vs MDI Gurgaon'),
+            cs('NMIMS SBM Mumbai Vs SP Jain (SPJIMR)'),
+            viewAll('Compare other MBA colleges →', '/tools/compare-colleges', false),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'College Reviews',
+      columns: [
+        {
+          links: [
+            cs('IIM Ahmedabad Reviews'),
+            cs('IIM Bangalore Reviews'),
+            cs('IIM Calcutta Reviews'),
+            cs('IIM Lucknow Reviews'),
+            cs('IIM Kozhikode Reviews'),
+            cs('IIM Indore Reviews'),
+            cs('FMS Delhi Reviews'),
+            cs('SP Jain Reviews'),
+            cs('MDI Gurgaon Reviews'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'CAT Percentile Predictor',
+      directLink: '/coming-soon',
+      columns: [],
     },
     {
       title: 'College Predictors',
       columns: [
         {
           links: [
-            { label: 'CAT College Predictor', href: '/predictors/cat-predictor' },
-            viewAll('MBA College Predictor →', '/predictors', false),
+            cs('IIM & Non IIM Call Predictor'),
+            cs('CAT College Predictor'),
+            cs('MAH CET College Predictor'),
+            cs('XAT College/ Call Predictor'),
+            cs('IIFT College Predictor'),
+            cs('NMAT College Predictor'),
+            cs('SNAP College and Call Predictor'),
+            cs('CMAT College Predictor'),
+            viewAll('MBA College Predictor →', '/coming-soon'),
+          ],
+        },
+        {
+          links: [
+            cs('MAT College Predictor'),
+            cs('KMAT College Predictor'),
+            cs('TANCET MBA College Predictor'),
+            cs('TSICET College Predictor'),
+            cs('IBSAT College Predictor'),
+            cs('UPCET College Predictor'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Resources',
+      columns: [
+        {
+          links: [
+            cs('MBA Alumni Salary Data'),
+            cs('Ask a Question'),
+            cs('Discussions'),
+            cs('MBA News'),
+            cs('MBA Articles'),
+            cs('Apply to colleges'),
+            cs('Trends in MBA'),
           ],
         },
       ],
@@ -122,16 +258,120 @@ const engineeringMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'Top Engineering Colleges in India', href: '/tools/colleges?stream=Engineering' },
-            { label: 'Top Private Engineering Colleges', href: '/tools/colleges?stream=Engineering&ownership=Private' },
-            { label: 'Top IITs in India', href: '/tools/colleges?search=Indian+Institute+of+Technology' },
-            { label: 'Top NITs in India', href: '/tools/colleges?search=National+Institute+of+Technology' },
-            { label: 'Top Engineering Colleges in Bangalore', href: '/tools/colleges?search=Engineering&city=Bangalore' },
-            { label: 'Top Engineering Colleges in Hyderabad', href: '/tools/colleges?search=Engineering&city=Hyderabad' },
-            { label: 'Top Engineering Colleges in Pune', href: '/tools/colleges?search=Engineering&city=Pune' },
-            { label: 'Top Engineering Colleges in Mumbai', href: '/tools/colleges?search=Engineering&city=Mumbai' },
-            { label: 'Top Engineering Colleges in Chennai', href: '/tools/colleges?search=Engineering&city=Chennai' },
-            { label: 'Top Engineering Colleges in Delhi', href: '/tools/colleges?search=Engineering&city=Delhi' },
+            cs('Top Engineering Colleges in India'),
+            cs('Top Private Engineering Colleges in India'),
+            cs('Top IITs in India'),
+            cs('Top NITs in India'),
+            cs('Top Engineering Colleges in Bangalore'),
+            cs('Top Engineering Colleges in Karnataka'),
+            cs('Top Engineering Colleges in Hyderabad'),
+            cs('Top Engineering Colleges in Pune'),
+            cs('Top Engineering Colleges in Mumbai'),
+            cs('Top Engineering Colleges in Maharashtra'),
+            cs('Top Engineering Colleges in Chennai'),
+            cs('Top Engineering Colleges in Kerala'),
+            cs('Top Engineering Colleges in Delhi'),
+            cs('Top Engineering Colleges in Telangana'),
+            cs('Top Engineering Colleges in Gujarat'),
+            cs('Top Engineering Colleges in West Bengal'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Courses',
+      columns: [
+        {
+          links: [
+            cs('B.E/B.Tech'),
+            cs('M.E/M.Tech'),
+            cs('Ph.D.'),
+            cs('Diploma Courses'),
+            cs('Distance Diploma Courses'),
+            cs('Distance B.Tech'),
+            viewAll('All Engineering Courses →', '/coming-soon'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Specializations',
+      columns: [
+        {
+          links: [
+            cs('Computer Science Engineering'),
+            cs('Mechanical Engineering'),
+            cs('Civil Engineering'),
+            cs('Electronics & Communication Engineering'),
+            cs('Aeronautical Engineering'),
+            cs('Aerospace Engineering'),
+            cs('Information Technology'),
+            cs('Electrical Engineering'),
+            cs('Electronics Engineering'),
+            cs('Nanotechnology'),
+            cs('Chemical Engineering'),
+            cs('Automobile Engineering'),
+            cs('Biomedical Engineering'),
+            cs('Construction Engineering'),
+            cs('Pulp & Paper Technology'),
+          ],
+        },
+        {
+          links: [
+            cs('Marine Engineering'),
+            cs('Genetic Engineering'),
+            cs('Food Technology'),
+            cs('Petroleum Engineering'),
+            cs('Control Systems'),
+            cs('Industrial Engineering'),
+            cs('Production Engineering'),
+            cs('Environmental Engineering'),
+            cs('Robotics Engineering'),
+            cs('Telecommunication Engineering'),
+            cs('Materials Science'),
+            cs('Structural Engineering'),
+            cs('Aircraft Maintenance'),
+            cs('RF & Microwave Engineering'),
+          ],
+        },
+        {
+          links: [
+            cs('VLSI Design'),
+            cs('Mechatronics Engineering'),
+            cs('Mining Engineering'),
+            cs('Biotechnology Engineering'),
+            cs('Transportation Engineering'),
+            cs('Metallurgical Engineering'),
+            cs('Textile Engineering'),
+            cs('Naval Architecture'),
+            cs('Power Engineering'),
+            cs('Dairy Technology'),
+            cs('Microelectronics'),
+            cs('Communications Engineering'),
+            cs('Tool Engineering'),
+            cs('Ceramic Engineering'),
+            cs('Jute & Fiber Technology'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Exams',
+      columns: [
+        {
+          links: [
+            hdr('Popular Exams'),
+            cs('JEE Main'),
+            cs('COMEDK'),
+            cs('BITSAT'),
+            cs('WBJEE'),
+            cs('JEE Advanced'),
+            cs('GATE'),
+            cs('LPU-NEST'),
+            cs('JET'),
+            cs('CUCET Chandigarh University'),
+            cs('CGCUET'),
+            viewAll('All Engineering Exams →', '/coming-soon'),
           ],
         },
       ],
@@ -141,15 +381,31 @@ const engineeringMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'Engineering Colleges in India', href: '/tools/colleges?stream=Engineering' },
-            { label: 'Engineering Colleges in Bangalore', href: '/tools/colleges?stream=Engineering&city=Bangalore' },
-            { label: 'Engineering Colleges in Chennai', href: '/tools/colleges?stream=Engineering&city=Chennai' },
-            { label: 'Engineering Colleges in Delhi-NCR', href: '/tools/colleges?stream=Engineering&city=Delhi' },
-            { label: 'Engineering Colleges in Kolkata', href: '/tools/colleges?stream=Engineering&city=Kolkata' },
-            { label: 'Engineering Colleges in Mumbai', href: '/tools/colleges?stream=Engineering&city=Mumbai' },
-            { label: 'Engineering Colleges in Pune', href: '/tools/colleges?stream=Engineering&city=Pune' },
-            { label: 'Engineering Colleges in Hyderabad', href: '/tools/colleges?stream=Engineering&city=Hyderabad' },
-            { label: 'All Locations →', href: '/tools/colleges?stream=Engineering', isViewAll: true },
+            cs('Engineering Colleges in India'),
+            cs('Engineering Colleges in Bangalore'),
+            cs('Engineering Colleges in Chennai'),
+            cs('Engineering Colleges in Delhi-NCR'),
+            cs('Engineering Colleges in Kolkata'),
+            cs('Engineering Colleges in Mumbai'),
+            cs('Engineering Colleges in Pune'),
+            cs('Engineering Colleges in Hyderabad'),
+            viewAll('All Locations →', '/coming-soon'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Compare Colleges',
+      columns: [
+        {
+          links: [
+            hdr('Popular Comparisons'),
+            cs('IIT Madras Vs IIT Kanpur'),
+            cs('VNIT Nagpur Vs NIT Rourkela'),
+            cs('Alliance University Vs Christ University'),
+            cs('IIT Bombay Vs IIT Delhi'),
+            cs('BITS Pilani Vs DTU Delhi'),
+            viewAll('Compare other colleges →', '/tools/compare-colleges', false),
           ],
         },
       ],
@@ -159,8 +415,9 @@ const engineeringMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'JEE Advanced Rank Predictor', href: '/predictors/rank-predictor' },
-            { label: 'JEE MAIN Rank Predictor', href: '/predictors/rank-predictor' },
+            { label: 'COMEDK UGET Rank Predictor', href: '/coming-soon', comingSoon: true },
+            { label: 'JEE Advanced Rank Predictor', href: '/predictors/rank-predictor', comingSoon: false },
+            { label: 'JEE MAIN Rank Predictor', href: '/predictors/rank-predictor', comingSoon: false },
           ],
         },
       ],
@@ -170,12 +427,68 @@ const engineeringMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'JEE MAIN College Predictor', href: '/predictors/jee-main-predictor' },
-            { label: 'JEE Advanced College Predictor', href: '/predictors/predict-colleges' },
-            { label: 'GATE College Predictor', href: '/predictors/gate-predictor' },
-            { label: 'BITSAT College Predictor', href: '/predictors/bitsat-predictor' },
-            { label: 'VITEEE College Predictor', href: '/predictors/viteee-predictor' },
+            cs('CG PET College Predictor'),
+            cs('COMEDK UGET College Predictor'),
+            { label: 'JEE MAIN College Predictor', href: '/predictors/jee-main-predictor', comingSoon: false },
+            { label: 'JEE Advanced College Predictor', href: '/predictors/predict-colleges', comingSoon: false },
+            cs('KCET College Predictor'),
+            cs('KEAM College Predictor'),
+            cs('MHT CET College Predictor'),
+            cs('MP BE College Predictor'),
+            cs('PTU BTech College Predictor'),
+            cs('JAC Chandigarh College Predictor'),
+            cs('GATE College Predictor'),
             viewAll('Engineering College Predictor →', '/predictors', false),
+          ],
+        },
+        {
+          links: [
+            cs('TNEA College Predictor'),
+            cs('WBJEE College Predictor'),
+            cs('AP EAMCET College Predictor'),
+            cs('TS EAMCET College Predictor'),
+            cs('BITSAT College Predictor'),
+            cs('IPU CET College Predictor'),
+            cs('OJEE College Predictor'),
+            cs('GUJCET College Predictor'),
+            cs('VITEEE College Predictor'),
+            cs('SRMJEEE College Predictor'),
+            cs('JAC Delhi College Predictor'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'College Reviews',
+      columns: [
+        {
+          links: [
+            cs('IIT Bombay Reviews'),
+            cs('IIT Delhi Reviews'),
+            cs('IIT Kanpur Reviews'),
+            cs('IIIT Hyderabad Reviews'),
+            cs('IIT Kharagpur Reviews'),
+            cs('NIT Trichy Reviews'),
+            cs('NIT Warangal Reviews'),
+            cs('IIT Madras Reviews'),
+            cs('BITS Pilani Reviews'),
+            cs('IIT Hyderabad Reviews'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Resources',
+      columns: [
+        {
+          links: [
+            cs('Ask a Question'),
+            cs('Discussions'),
+            cs('Engineering News'),
+            cs('Engineering Articles'),
+            cs('Apply to colleges'),
+            cs('Trends in BTech'),
+            cs('Trends in Engineering'),
           ],
         },
       ],
@@ -194,14 +507,71 @@ const medicalMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'Top Medical Colleges in India', href: '/tools/colleges?stream=Medicine' },
-            { label: 'Top Pharmacy Colleges in India', href: '/streams/pharmacy' },
-            { label: 'Top Medical Colleges in Karnataka', href: '/tools/colleges?search=Medical&state=Karnataka' },
-            { label: 'Top Medical Colleges in Bangalore', href: '/tools/colleges?search=Medical&city=Bangalore' },
-            { label: 'Top Dental Colleges in India', href: '/tools/colleges?search=Dental' },
-            { label: 'Top Medical Colleges in Maharashtra', href: '/tools/colleges?search=Medical&state=Maharashtra' },
-            { label: 'Top Medical Colleges in Mumbai', href: '/tools/colleges?search=Medical&city=Mumbai' },
-            { label: 'Top Medical Colleges in Delhi', href: '/tools/colleges?search=Medical&city=Delhi' },
+            cs('Top Medical Colleges in India'),
+            cs('Top Medical Colleges in Karnataka'),
+            cs('Top Pharmacy Colleges in India'),
+            cs('Top Medical Colleges in Bangalore'),
+            cs('Top Dental Colleges in India'),
+            cs('Top Medical Colleges in Maharashtra'),
+            cs('Top Medical Colleges in Mumbai'),
+            cs('Top Medical Colleges in Delhi'),
+            cs('Top Pharmacy Colleges in Maharashtra'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Courses',
+      columns: [
+        {
+          links: [
+            cs('MBBS'),
+            cs('MD'),
+            cs('BMLT'),
+            cs('MPT'),
+            cs('MPH'),
+            viewAll('All Medical Courses →', '/coming-soon'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Specializations',
+      columns: [
+        {
+          links: [
+            cs('Alternative Medicine'),
+            cs('Dental'),
+            cs('Dietetics & Nutrition'),
+            cs('Medicine'),
+            cs('Paramedical'),
+            cs('Pharmacy'),
+            cs('Physiotherapy'),
+            cs('Public Health & Management'),
+            viewAll('All Medical Specializations →', '/coming-soon'),
+          ],
+        },
+        {
+          links: [
+            cs('Clinical Psychology'),
+            cs('Clinical Research'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Exams',
+      columns: [
+        {
+          links: [
+            cs('NEET UG'),
+            cs('NEET PG'),
+            cs('NEET SS'),
+            cs('NEET MDS'),
+            cs('INI CET'),
+            cs('FMGE'),
+            cs('AIAPGET'),
+            viewAll('All Medicine Exams →', '/coming-soon'),
           ],
         },
       ],
@@ -211,14 +581,14 @@ const medicalMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'Medical Colleges in India', href: '/tools/colleges?stream=Medicine' },
-            { label: 'Medical Colleges in Delhi', href: '/tools/colleges?stream=Medicine&city=Delhi' },
-            { label: 'Medical Colleges in Bangalore', href: '/tools/colleges?stream=Medicine&city=Bangalore' },
-            { label: 'Medical Colleges in Chennai', href: '/tools/colleges?stream=Medicine&city=Chennai' },
-            { label: 'Medical Colleges in Hyderabad', href: '/tools/colleges?stream=Medicine&city=Hyderabad' },
-            { label: 'Medical Colleges in Mumbai', href: '/tools/colleges?stream=Medicine&city=Mumbai' },
-            { label: 'Medical Colleges in Kolkata', href: '/tools/colleges?stream=Medicine&city=Kolkata' },
-            { label: 'Medical Colleges in Pune', href: '/tools/colleges?stream=Medicine&city=Pune' },
+            cs('Medical Colleges in India'),
+            cs('Medical Colleges in Delhi'),
+            cs('Medical Colleges in Bangalore'),
+            cs('Medical Colleges in Chennai'),
+            cs('Medical Colleges in Hyderabad'),
+            cs('Medical Colleges in Mumbai'),
+            cs('Medical Colleges in Kolkata'),
+            cs('Medical Colleges in Pune'),
           ],
         },
       ],
@@ -228,9 +598,23 @@ const medicalMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'NEET College Predictor', href: '/predictors/neet-predictor' },
-            { label: 'AIIMS INI-CET Predictor', href: '/predictors/aiims-predictor' },
+            { label: 'NEET College Predictor', href: '/predictors/neet-predictor', comingSoon: false },
+            cs('NEET PG College Predictor'),
             viewAll('Medicine College Predictor →', '/predictors', false),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Resources',
+      columns: [
+        {
+          links: [
+            cs('Ask a Question'),
+            cs('Discussions'),
+            cs('Medical News'),
+            cs('Medical Articles'),
+            cs('Trends in Medicine & Health Sciences'),
           ],
         },
       ],
@@ -249,9 +633,91 @@ const designMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'Top Design Colleges in India', href: '/tools/colleges?stream=Design' },
-            { label: 'Top Design Colleges in Bangalore', href: '/tools/colleges?search=Design&city=Bangalore' },
-            { label: 'Top Design Colleges in Delhi/NCR', href: '/tools/colleges?search=Design&city=Delhi' },
+            cs('Top Fashion Designing Colleges in India'),
+            cs('Top Fashion Designing Colleges in Bangalore'),
+            cs('Top Fashion Designing Colleges in Delhi/NCR'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Specializations',
+      columns: [
+        {
+          links: [
+            cs('Fashion Designing'),
+            cs('Interior Design'),
+            cs('Graphic Design'),
+            cs('Jewellery Design'),
+            cs('Web Design'),
+            cs('Furniture Design'),
+            cs('Game Design'),
+            cs('Product Design'),
+            cs('Textile Design'),
+            cs('Visual Merchandising'),
+            cs('Ceramic & Glass Design'),
+            cs('Film & Video Design'),
+          ],
+        },
+        {
+          links: [
+            cs('UI / UX'),
+            cs('Footwear Design'),
+            cs('Automotive Design'),
+            cs('Communication Design'),
+            cs('Apparel Design'),
+            cs('Exhibition Design'),
+            cs('Information Design'),
+            cs('Knitwear Design'),
+            cs('Leather Design'),
+            cs('Toy Design'),
+            cs('Lifestyle Accessory Design'),
+            viewAll('All Design Specializations →', '/coming-soon'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Courses',
+      columns: [
+        {
+          links: [
+            cs('B.Des'),
+            cs('M.Des'),
+            cs('B.Des in Fashion Design'),
+            cs('B.Des in Interior Design'),
+            cs('B.Sc in Fashion Design'),
+            cs('B.Sc in Interior Design'),
+            viewAll('All Design Courses →', '/coming-soon'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Exams',
+      columns: [
+        {
+          links: [
+            hdr('Popular Exams'),
+            cs('WUD Aptitude Test'),
+            cs('Pearl Academy Entrance Exam'),
+            cs('CEED'),
+            cs('NID Entrance Exam'),
+            cs('NIFT Entrance Exam'),
+            cs('UCEED'),
+            viewAll('All Design Exams →', '/coming-soon'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'College Predictors',
+      columns: [
+        {
+          links: [
+            cs('NID College Predictor'),
+            cs('NIFT College Predictor'),
+            viewAll('Design College Predictor →', '/coming-soon'),
           ],
         },
       ],
@@ -261,14 +727,46 @@ const designMenu: MegaMenuItem = {
       columns: [
         {
           links: [
-            { label: 'Design Colleges in India', href: '/tools/colleges?stream=Design' },
-            { label: 'Design Colleges in Maharashtra', href: '/tools/colleges?stream=Design&state=Maharashtra' },
-            { label: 'Design Colleges in Delhi', href: '/tools/colleges?stream=Design&city=Delhi' },
-            { label: 'Design Colleges in Karnataka', href: '/tools/colleges?stream=Design&state=Karnataka' },
-            { label: 'Design Colleges in Pune', href: '/tools/colleges?stream=Design&city=Pune' },
-            { label: 'Design Colleges in Mumbai', href: '/tools/colleges?stream=Design&city=Mumbai' },
-            { label: 'Design Colleges in Bangalore', href: '/tools/colleges?stream=Design&city=Bangalore' },
-            { label: 'Design Colleges in Hyderabad', href: '/tools/colleges?stream=Design&city=Hyderabad' },
+            cs('Design Colleges in India'),
+            cs('Design Colleges in Maharashtra'),
+            cs('Design Colleges in Delhi'),
+            cs('Design Colleges in Karnataka'),
+            cs('Design Colleges in Punjab'),
+            cs('Design Colleges in Telangana'),
+            cs('Design Colleges in Gujarat'),
+            cs('Design Colleges in Chandigarh'),
+            cs('Design Colleges in Rajasthan'),
+            cs('Design Colleges in Madhya Pradesh'),
+            cs('Design Colleges in Uttar Pradesh'),
+            cs('Design Colleges in Tamil Nadu'),
+          ],
+        },
+        {
+          links: [
+            cs('Design Colleges in Pune'),
+            cs('Design Colleges in Mumbai'),
+            cs('Design Colleges in Bangalore'),
+            cs('Design Colleges in Hyderabad'),
+            cs('Design Colleges in Ahmedabad'),
+            cs('Design Colleges in Ludhiana'),
+            cs('Design Colleges in Jalandhar'),
+            cs('Design Colleges in Jaipur'),
+            cs('Design Colleges in Indore'),
+            cs('Design Colleges in Gurgaon'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Resources',
+      columns: [
+        {
+          links: [
+            cs('Ask a Question'),
+            cs('Discussions'),
+            cs('Design News'),
+            cs('Design Articles'),
+            cs('Trends in Design'),
           ],
         },
       ],
@@ -1246,23 +1744,213 @@ const studyAbroadMenu: MegaMenuItem = {
         {
           links: [
             hdr('Top Countries'),
-            { label: 'USA', href: '/tools/study-abroad' },
-            { label: 'UK', href: '/tools/study-abroad' },
-            { label: 'Canada', href: '/tools/study-abroad' },
-            { label: 'Australia', href: '/tools/study-abroad' },
-            { label: 'Germany', href: '/tools/study-abroad' },
-            { label: 'Ireland', href: '/tools/study-abroad' },
-            { label: 'France', href: '/tools/study-abroad' },
-            { label: 'Singapore', href: '/tools/study-abroad' },
-            { label: 'New Zealand', href: '/tools/study-abroad' },
-            { label: 'Japan', href: '/tools/study-abroad' },
+            { label: 'USA', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'UK', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'Canada', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'Australia', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'Germany', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'Ireland', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'France', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'Singapore', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'New Zealand', href: '/tools/study-abroad', comingSoon: false },
+            { label: 'Japan', href: '/tools/study-abroad', comingSoon: false },
             viewAll('View All Countries →', '/tools/study-abroad', false),
           ],
         },
         {
           links: [
-            hdr('International Colleges'),
-            { label: 'Browse International Colleges', href: '/tools/international-colleges' },
+            hdr('Top Universities'),
+            cs('Top Universities in USA'),
+            cs('Top Universities in UK'),
+            cs('Top Universities in Canada'),
+            cs('Top Universities in Australia'),
+            cs('Top Universities in Germany'),
+            cs('Top Universities in Ireland'),
+            cs('Top Universities in France'),
+            cs('Top Universities in Singapore'),
+            viewAll('Top Universities Abroad →', '/tools/international-colleges', false),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Exams',
+      columns: [
+        {
+          links: [
+            hdr('Language Exams'),
+            cs('IELTS'),
+            cs('TOEFL'),
+            cs('PTE'),
+            cs('DET'),
+            hdr('Aptitude Exams'),
+            cs('GRE'),
+            cs('GMAT'),
+            cs('SAT'),
+          ],
+        },
+        {
+          links: [
+            cs('Free IELTS Masterclass'),
+            cs('IELTS Preparation Resource'),
+            cs('IELTS Reading Test'),
+            cs('IELTS Writing Test'),
+            cs('IELTS Listening Test'),
+            cs('IELTS Speaking Test'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Popular Programs',
+      columns: [
+        {
+          links: [
+            hdr('Top MS Colleges'),
+            cs('MS in USA'),
+            cs('MS in UK'),
+            cs('MS in Canada'),
+            cs('MS in Australia'),
+            cs('MS in Germany'),
+            cs('MS in Ireland'),
+            viewAll('Explore MS Abroad →', '/coming-soon'),
+          ],
+        },
+        {
+          links: [
+            hdr('Top MBA Colleges'),
+            cs('MBA in USA'),
+            cs('MBA in UK'),
+            cs('MBA in Canada'),
+            cs('MBA in Australia'),
+            cs('MBA in Germany'),
+            cs('MBA in Ireland'),
+            viewAll('Explore MBA Abroad →', '/coming-soon'),
+          ],
+        },
+        {
+          links: [
+            hdr('Top BE/BTech Colleges'),
+            cs('BE/B.Tech in USA'),
+            cs('BE/B.Tech in UK'),
+            cs('BE/B.Tech in Canada'),
+            cs('BE/B.Tech in Australia'),
+            viewAll('Explore BE/B.Tech →', '/coming-soon'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Student Visas',
+      columns: [
+        {
+          links: [
+            cs('Student Visa Canada'),
+            cs('Student Visa USA'),
+            cs('Student Visa Australia'),
+            cs('Student Visa New Zealand'),
+            cs('Student Visa UK'),
+            cs('Student Visa Germany'),
+            cs('Student Visa France'),
+            cs('Student Visa Singapore'),
+            cs('Student Visa Ireland'),
+            cs('Student Visa Finland'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'SOP/LOR',
+      columns: [
+        {
+          links: [
+            hdr('SOP'),
+            cs('What is SOP?'),
+            cs('Common Mistakes in SOP'),
+            cs('Sample SOP for MBA'),
+            cs('Sample SOP for MS'),
+            cs('Sample SOP for Bachelors'),
+            cs('SOP for USA'),
+            cs('SOP for UK'),
+            cs('SOP for Canada'),
+          ],
+        },
+        {
+          links: [
+            hdr('LOR'),
+            cs('What is LOR?'),
+            cs('Common Mistakes in LOR'),
+            cs('Sample LOR for MBA'),
+            cs('Sample LOR for MS'),
+            cs('Sample LOR for Bachelors'),
+            cs('Sample LOR for PhD'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Scholarships',
+      columns: [
+        {
+          links: [
+            hdr('By Course'),
+            cs('Scholarships for Bachelors'),
+            cs('Scholarships for Masters'),
+          ],
+        },
+        {
+          links: [
+            hdr('By Country'),
+            cs('Scholarships for USA'),
+            cs('Scholarships for Canada'),
+            cs('Scholarships for Australia'),
+            cs('Scholarships for UK'),
+            cs('Scholarships for Germany'),
+            cs('Scholarships for Singapore'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Education Loan',
+      columns: [
+        {
+          links: [
+            hdr('Education Loan Guides'),
+            cs('Step by Step Guide'),
+            cs('Loan Eligibility Criteria'),
+            cs('Documents Required for Loan'),
+            cs('Student Loan Vs Self Finance'),
+            cs('Best Education Loan Providers'),
+            cs('Collateral for Education Loan'),
+          ],
+        },
+        {
+          links: [
+            hdr('Guide for Countries'),
+            cs('Education Loan for USA'),
+            cs('Education Loan for UK'),
+            cs('Education Loan for Canada'),
+            cs('Education Loan for Australia'),
+            cs('Education Loan for Germany'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Services',
+      columns: [
+        {
+          links: [
+            hdr('Top Overseas Education Consultants'),
+            cs('Consultants in Delhi'),
+            cs('Consultants in Mumbai'),
+            cs('Consultants in Pune'),
+            cs('Consultants in Kochi'),
+            cs('Consultants in Bangalore'),
+            cs('Consultants in Kerala'),
+            cs('Consultants in Chennai'),
+            cs('Consultants in Hyderabad'),
           ],
         },
       ],
@@ -1280,30 +1968,167 @@ const counselingMenu: MegaMenuItem = {
 };
 
 // ════════════════════════════════════════════════════════════
-//  8. ONLINE COURSES
+//  8. ONLINE COURSES (Shiksha Online)
 // ════════════════════════════════════════════════════════════
 const onlineCoursesMenu: MegaMenuItem = {
   title: 'Online Courses',
   subcategories: [
     {
-      title: 'Coming Soon',
+      title: 'Technology',
       directLink: '/coming-soon',
-      columns: [],
+      columns: [
+        {
+          links: [
+            hdr('Courses In Technology'),
+            cs('Big Data'),
+            cs('Cloud Technologies'),
+            cs('Cybersecurity'),
+            cs('Databases'),
+            cs('IT Services'),
+            cs('Networking and Hardware'),
+            cs('Operating System'),
+            cs('Programming'),
+            cs('QA and Testing'),
+            cs('Web Development'),
+            cs('Software Tools'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Data Science',
+      directLink: '/coming-soon',
+      columns: [
+        {
+          links: [
+            hdr('Courses In Data Science'),
+            cs('Data Science Basics'),
+            cs('Data Science for HealthCare'),
+            cs('Deep Learning'),
+            cs('Machine Learning'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Management',
+      directLink: '/coming-soon',
+      columns: [
+        {
+          links: [
+            hdr('Courses In Management'),
+            cs('Business Analytics'),
+            cs('Business Tools'),
+            cs('Communication'),
+            cs('Entrepreneurship'),
+            cs('Human Resources'),
+            cs('Logistics and Supply Chain'),
+            cs('Marketing'),
+            cs('Operations'),
+            cs('Product Management'),
+            cs('Strategy and Leadership'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Finance',
+      directLink: '/coming-soon',
+      columns: [
+        {
+          links: [
+            hdr('Courses'),
+            cs('Accounting'),
+            cs('Banking'),
+            cs('Investing'),
+            cs('Law'),
+            cs('Insurance'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Creativity & Design',
+      directLink: '/coming-soon',
+      columns: [
+        {
+          links: [
+            hdr('Courses'),
+            cs('Architecture'),
+            cs('Fashion'),
+            cs('Web Design'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Emerging Technologies',
+      directLink: '/coming-soon',
+      columns: [
+        {
+          links: [
+            hdr('Courses'),
+            cs('AR VR and Gaming'),
+            cs('BlockChain'),
+            cs('Electric Vehicles'),
+            cs('Internet of Things'),
+            cs('Robotics'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Healthcare',
+      directLink: '/coming-soon',
+      columns: [
+        {
+          links: [
+            hdr('Courses'),
+            cs('Fitness and Nutrition'),
+            cs('Healthcare Research'),
+            cs('Healthcare Management'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Personal Development',
+      directLink: '/coming-soon',
+      columns: [
+        {
+          links: [
+            hdr('Courses'),
+            cs('Career Growth'),
+            cs('Hobby And Passion'),
+            cs('Languages'),
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Degree Programs',
+      directLink: '/coming-soon',
+      columns: [
+        {
+          links: [
+            hdr('Courses'),
+            cs('Bachelors Program'),
+            cs('Masters Program'),
+          ],
+        },
+      ],
     },
   ],
 };
 
-// ──────────────────────────────────────────────────────────
-// Mega Menu Data — extracted from reference navigation HTML
-// ──────────────────────────────────────────────────────────
-
+// ════════════════════════════════════════════════════════════
+//  EXPORT ALL MENU DATA
+// ════════════════════════════════════════════════════════════
 export const megaMenuItems: MegaMenuItem[] = [
   mbaMenu,
   engineeringMenu,
   medicalMenu,
   designMenu,
   moreMenu,
-  // studyAbroadMenu,
   counselingMenu,
-  // onlineCoursesMenu,
 ];
