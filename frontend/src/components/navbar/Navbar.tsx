@@ -228,36 +228,25 @@ const Navbar = () => {
         {!isAdminMode && (
           <div className="hidden lg:flex items-center justify-center h-12">
             {megaMenuItems.map((item, idx) => (
-              item.directLink ? (
-                <div key={item.title} className="relative">
-                  <Link
-                    href={item.directLink}
-                    className="flex items-center gap-1 px-3 py-2 text-[12px] font-bold uppercase tracking-wider transition-colors text-slate-300 hover:text-white"
-                  >
-                    {item.title}
-                  </Link>
-                </div>
-              ) : (
-                <div
-                  key={item.title}
-                  className="relative"
-                  onMouseEnter={() => openMenu(idx)}
-                  onMouseLeave={scheduleClose}
+              <div
+                key={item.title}
+                className="relative"
+                onMouseEnter={() => openMenu(idx)}
+                onMouseLeave={scheduleClose}
+              >
+                <button
+                  className={`flex items-center gap-1 px-3 py-2 text-[12px] font-bold uppercase tracking-wider transition-colors ${activeMenu === idx
+                    ? 'text-primary'
+                    : 'text-slate-300 hover:text-white'
+                    }`}
                 >
-                  <button
-                    className={`flex items-center gap-1 px-3 py-2 text-[12px] font-bold uppercase tracking-wider transition-colors ${activeMenu === idx
-                      ? 'text-primary'
-                      : 'text-slate-300 hover:text-white'
+                  {item.title}
+                  <FaChevronDown
+                    className={`text-[8px] opacity-60 transition-transform duration-200 ${activeMenu === idx ? 'rotate-180' : ''
                       }`}
-                  >
-                    {item.title}
-                    <FaChevronDown
-                      className={`text-[8px] opacity-60 transition-transform duration-200 ${activeMenu === idx ? 'rotate-180' : ''
-                        }`}
-                    />
-                  </button>
-                </div>
-              )
+                  />
+                </button>
+              </div>
             ))}
           </div>
         )}
